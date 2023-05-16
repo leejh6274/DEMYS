@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file="../common/head.jsp" %>
 
@@ -247,7 +248,7 @@
                         			<td onclick="window.open('meetingbook_detail','회의록 상세','width=900px,height=480px,left=500px,top=300px');" style="text-align:start">${meetingBook.MB_TITLE}</td>
                         			<td><i class="fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
                         			<td>${meetingBook.MEMBER_NUM }</td>
-                        			<td>${meetingBook.MB_REGDATE }</td>
+                        			<td><fmt:formatDate value="${meetingBook.MB_REGDATE }" pattern="yyyy-MM-dd"/></td>
                      			</tr>
                         	</c:forEach>
                         </tbody>

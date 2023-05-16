@@ -1,5 +1,6 @@
 package com.ducks.demys.boot.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -23,6 +24,10 @@ public class TasksService {
 	public List<Tasks> getTasksListByMEMBER_NUM(int MEMBER_NUM){
 		return tasksRepository.getTasksListByMEMBER_NUM(MEMBER_NUM);
 	}
+	
+	public List<Tasks> getTasksListByTASKS_STATUS(int TASKS_STATUS){
+		return tasksRepository.getTasksListByTASKS_STATUS(TASKS_STATUS);
+	}
 
 	
 	public Tasks getTasksByTASKS_NUM(int TASKS_NUM) {
@@ -31,11 +36,18 @@ public class TasksService {
 	
 	public void registTasks(Tasks tasks) {
 		tasks.setTASKS_NUM(tasksRepository.selectTasksSequenceNextValue());
+		Date endDate=tasksRepository.changeDate(tasks.getSTRING_ENDDATE());
+		System.out.println(endDate);
+		tasks.setTASKS_ENDDATE(endDate);
 		tasksRepository.registTasks(tasks);
 	}
 	
 	public void modifyTasks(Tasks tasks) {
 		tasksRepository.modifyTasks(tasks);
+	}
+	
+	public void modifyTasksStatus(int TASKS_NUM, int TASKS_STATUS) {
+		tasksRepository.modifyTasksStatus(TASKS_NUM, TASKS_STATUS);
 	}
 	
 	public void removeTasks(int TASKS_NUM) {
