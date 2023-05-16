@@ -4,6 +4,9 @@
 
 <%@ include file="../common/head.jsp" %>
 
+
+
+
 <style>
 /* p-main-body 고정 수정X, border만 씌워서 작업!! */
 .p-main-body{
@@ -187,7 +190,7 @@
                <div style="display: flex;">
                   <div class="header-1-menu"><a href="require">프로젝트관리</a></div> |
                   <div class="header-1-menu"><a href="#">단위업무</a></div> |
-                  <div class="header-1-menu"><a href="#">이슈관리</a></div> |
+                  <div class="header-1-menu"><a href="issue">이슈관리</a></div> |
                   <div class="header-1-menu"><a href="#">예산수립</a></div> |
                   <div class="header-1-menu" style="font-weight:bold; font-size:20px;"><a href="meetingbook">회의록</a></div> |
                   <div class="header-1-menu"><a href="product">산출물관리 &nbsp;</a></div>
@@ -238,20 +241,13 @@
                      		</tr>
                       	</thead>
                       	<tbody style="height: 230px; overflow-y:auto; overflow-x:hidden;">
-                        	<c:forEach begin="0" end="10" step="1">
+                        	<c:forEach var="meetingBook" items="${meetingBookList }">
                      			<tr>
-                        			<td onclick="window.open('meetingbook_detail','회의록 상세','width=900px,height=450px,left=500px,top=300px');">1(${meetingbook.mb_num })</td>
-                        			<td onclick="window.open('meetingbook_detail','회의록 상세','width=900px,height=450px,left=500px,top=300px');" style="text-align:start">회의록 제목($meetingbook.mb_title)</td>
-                        			<td onclick="window.open('meetingbook_detail','회의록 상세','width=900px,height=450px,left=500px,top=300px');"><i class="fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
-                        			<td>이주헌</td>
-                        			<td>2023-05-12</td>
-                     			</tr>
-                     			<tr>
-                        			<td onclick="window.open('meetingbook_detail','회의록 상세','width=900px,height=450px,left=500px,top=300px');">1(${meetingbook.mb_num })</td>
-                        			<td onclick="window.open('meetingbook_detail','회의록 상세','width=900px,height=450px,left=500px,top=300px');" style="text-align:start">회의록 제목 2222($meetingbook.mb_title)</td>
-                        			<td onclick="window.open('meetingbook_detail','회의록 상세','width=900px,height=450px,left=500px,top=300px');"><i class="fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
-                        			<td>이주헌22</td>
-                        			<td>2023-05-12</td>
+                        			<td onclick="window.open('meetingbook_detail','회의록 상세','width=900px,height=480px,left=500px,top=300px');">${meetingBook.MB_NUM }</td>
+                        			<td onclick="window.open('meetingbook_detail','회의록 상세','width=900px,height=480px,left=500px,top=300px');" style="text-align:start">${meetingBook.MB_TITLE}</td>
+                        			<td><i class="fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
+                        			<td>${meetingBook.MEMBER_NUM }</td>
+                        			<td>${meetingBook.MB_REGDATE }</td>
                      			</tr>
                         	</c:forEach>
                         </tbody>

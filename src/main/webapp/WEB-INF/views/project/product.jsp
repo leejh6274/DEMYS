@@ -187,7 +187,7 @@
                <div style="display: flex;">
                   <div class="header-1-menu" ><a href="require">프로젝트관리</a></div> |
                   <div class="header-1-menu"><a href="#">단위업무</a></div> |
-                  <div class="header-1-menu"><a href="#">이슈관리</a></div> |
+                  <div class="header-1-menu"><a href="issue">이슈관리</a></div> |
                   <div class="header-1-menu"><a href="#">예산수립</a></div> |
                   <div class="header-1-menu"><a href="meetingbook">회의록</a></div> |
                   <div class="header-1-menu" style="font-weight:bold; font-size:20px;"><a href="product">산출물관리 &nbsp;</a></div>
@@ -243,17 +243,17 @@
                       	<tbody style="height: 230px; overflow-y:auto; overflow-x:hidden;">
                         	<c:forEach begin="0" end="6" step="1">
                      			<tr>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=450px,left=500px,top=300px');">1</td>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=450px,left=500px,top=300px');" style="text-align:start">2023년 5월 10일 시스템 시험 결과서</td>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=450px,left=500px,top=300px');"><i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
+                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=480px,left=500px,top=300px');">1</td>
+                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=480px,left=500px,top=300px');" style="text-align:start">2023년 5월 10일 시스템 시험 결과서</td>
+                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=480px,left=500px,top=300px');"><i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
                         			<td>선효구</td>
                         			<td>2023-05-10</td>
                         			<td><div class="rounded-lg w-12 text-white" style="margin:0 auto; background-color:#016fa0">채택</div></td>
                      			</tr>
                      			<tr>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=450px,left=500px,top=300px');">1</td>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=450px,left=500px,top=300px');" style="text-align:start">2023년 5월 11일 시스템 시험 결과서</td>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=450px,left=500px,top=300px');"><i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
+                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=480px,left=500px,top=300px');">1</td>
+                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=480px,left=500px,top=300px');" style="text-align:start">2023년 5월 11일 시스템 시험 결과서</td>
+                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=480px,left=500px,top=300px');"><i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
                         			<td>예다김</td>
                         			<td>2023-05-11</td>
                         			<td><div class="rounded-lg w-12 text-white" style="margin:0 auto; background-color:#dfdfdf">미채택</div></td>

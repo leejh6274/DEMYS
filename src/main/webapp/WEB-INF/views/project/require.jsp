@@ -187,7 +187,7 @@
                <div style="display: flex;">
                   <div class="header-1-menu" style="font-weight:bold; font-size:20px;"><a href="require">프로젝트관리</a></div> |
                   <div class="header-1-menu"><a href="#">단위업무</a></div> |
-                  <div class="header-1-menu"><a href="#">이슈관리</a></div> |
+                  <div class="header-1-menu"><a href="issue">이슈관리</a></div> |
                   <div class="header-1-menu"><a href="#">예산수립</a></div> |
                   <div class="header-1-menu"><a href="meetingbook">회의록</a></div> |
                   <div class="header-1-menu"><a href="product">산출물관리 &nbsp;</a></div>
@@ -248,10 +248,10 @@
                       	</thead>
                       	<tbody style="height: 230px; overflow-y:auto; overflow-x:hidden;">
                         	<c:forEach begin="0" end="10" step="1">
-                     			<tr onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');">
-                        			<td>1</td>
-                        			<td><i class="fa-solid fa-star" style="color:#FFD700;"></i></td>
-                        			<td>요구사항정의서_ver3</td>
+                     			<tr>
+                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');">1</td>
+                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');"><i class="fa-solid fa-star" style="color:#FFD700;"></i></td>
+                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');">요구사항정의서_ver3</td>
                         			<td><i class="fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
                         			<td>김이박</td>
                         			<td>2023-05-02</td>

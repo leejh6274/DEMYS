@@ -194,7 +194,7 @@
                <div style="display: flex;">
                   <div class="header-1-menu"><a href="require">프로젝트관리</a></div> |
                   <div class="header-1-menu"><a href="#">단위업무</a></div> |
-                  <div class="header-1-menu"><a href="#">이슈관리</a></div> |
+                  <div class="header-1-menu"><a href="issue">이슈관리</a></div> |
                   <div class="header-1-menu"><a href="#">예산수립</a></div> |
                   <div class="header-1-menu"><a href="meetingbook">회의록</a></div> |
                   <div class="header-1-menu" style="font-weight:bold; font-size:20px;"><a href="product">산출물관리 &nbsp;</a></div>
