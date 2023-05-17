@@ -235,7 +235,7 @@
                         <thead>
                         	<tr style="width:100%;">
                         		<th style="width:10%;">No</th>
-                        		<th style="width:50%;">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</th>
+                        		<th style="width:50%;">제&ensp;&ensp;&nbsp;&nbsp;목</th>
                         		<th style="width:5%;">첨&nbsp;부&nbsp;파&nbsp;일</th>
                         		<th style="width:15%;">작&nbsp;성&nbsp;자</th>
                         		<th style="width:10%;">등&nbsp;록&nbsp;일</th>
@@ -244,9 +244,9 @@
                       	<tbody style="height: 230px; overflow-y:auto; overflow-x:hidden;">
                         	<c:forEach var="meetingBook" items="${meetingBookList }">
                      			<tr>
-                        			<td onclick="window.open('meetingbook_detail','회의록 상세','width=900px,height=480px,left=500px,top=300px');">${meetingBook.MB_NUM }</td>
+                        			<td onclick="window.open('meetingbook_detail','회의록 상세','width=900px,height=480px,left=500px,top=300px');">${meetingBook.MB_NUM}</td>
                         			<td onclick="window.open('meetingbook_detail','회의록 상세','width=900px,height=480px,left=500px,top=300px');" style="text-align:start">${meetingBook.MB_TITLE}</td>
-                        			<td><i class="fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
+                        			<td><i class="fa-solid fa-paperclip text-2xl"></i></td>
                         			<td>${meetingBook.MEMBER_NUM }</td>
                         			<td><fmt:formatDate value="${meetingBook.MB_REGDATE }" pattern="yyyy-MM-dd"/></td>
                      			</tr>

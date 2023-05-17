@@ -32,6 +32,10 @@ public class ProductService {
 	public void modifyProduct(Product Product) {
 		productRepository.modifyProduct(Product);
 	}
+
+	public void changeStatusProduct(Product Product) {
+		productRepository.changeStatusProduct(Product);
+	}
 	
 	public void removeProduct(int PRODUCT_NUM) {
 		productRepository.removeProduct(PRODUCT_NUM);

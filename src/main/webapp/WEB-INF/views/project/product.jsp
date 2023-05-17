@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file="../common/head.jsp" %>
 
@@ -241,22 +242,21 @@
                      		</tr>
                       	</thead>
                       	<tbody style="height: 230px; overflow-y:auto; overflow-x:hidden;">
-                        	<c:forEach begin="0" end="6" step="1">
+                        	<c:forEach var="product" items="${productList }">
                      			<tr>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=480px,left=500px,top=300px');">1</td>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=480px,left=500px,top=300px');" style="text-align:start">2023년 5월 10일 시스템 시험 결과서</td>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=480px,left=500px,top=300px');"><i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
-                        			<td>선효구</td>
-                        			<td>2023-05-10</td>
-                        			<td><div class="rounded-lg w-12 text-white" style="margin:0 auto; background-color:#016fa0">채택</div></td>
-                     			</tr>
-                     			<tr>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=480px,left=500px,top=300px');">1</td>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=480px,left=500px,top=300px');" style="text-align:start">2023년 5월 11일 시스템 시험 결과서</td>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=480px,left=500px,top=300px');"><i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
-                        			<td>예다김</td>
-                        			<td>2023-05-11</td>
-                        			<td><div class="rounded-lg w-12 text-white" style="margin:0 auto; background-color:#dfdfdf">미채택</div></td>
+                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=480px,left=500px,top=300px');">${product.PRODUCT_NUM }</td>
+                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=480px,left=500px,top=300px');" style="text-align:start">${product.PRODUCT_TITLE }</td>
+                        			<td><i class="fa-sharp fa-solid fa-paperclip text-2xl"></i></td>
+                        			<td>${product.MEMBER_NUM }</td>
+                        			<td><fmt:formatDate value="${product.PRODUCT_REGDATE }" pattern="yyyy-MM-dd"/></td>
+                        			<td><div class="rounded-lg w-12 text-white" style="margin:0 auto; background-color:#dfdfdf">
+                        					<c:if test="${product.PRODUCT_STATUS eq '1'}">
+                        						<div class="rounded-lg w-12 text-white" style="margin:0 auto; background-color:#016fa0">채택</div>
+                        					</c:if>
+                        					<c:if test="${product.PRODUCT_STATUS eq '0'}">
+                        						<div class="rounded-lg w-12 text-white" style="margin:0 auto; background-color:#dfdfdf">미채택</div>
+                        					</c:if>
+                        				</div></td>
                      			</tr>
                         	</c:forEach>
                         	</tbody>

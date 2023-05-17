@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file="../common/head.jsp" %>
 
@@ -247,14 +248,30 @@
                      		</tr>
                       	</thead>
                       	<tbody style="height: 230px; overflow-y:auto; overflow-x:hidden;">
-                        	<c:forEach begin="0" end="10" step="1">
+                        	<c:forEach var="require" items="${requireList }">
                      			<tr>
-                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');">1</td>
-                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');"><i class="fa-solid fa-star" style="color:#FFD700;"></i></td>
-                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');">요구사항정의서_ver3</td>
+                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');">${require.REQUIRE.NUM }</td>
+                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');">
+                        				<c:if test="${require.REQUIRE_LEVEL eq '1'}">
+                        					<i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i>
+                        				</c:if>
+                        				<c:if test="${require.REQUIRE_LEVEL eq '2'}">
+                        					<i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i>
+                        				</c:if>
+                        				<c:if test="${require.REQUIRE_LEVEL eq '3'}">
+                        					<i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i>
+                        				</c:if>
+                        				<c:if test="${require.REQUIRE_LEVEL eq '4'}">
+                        					<i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i>
+                        				</c:if>
+                        				<c:if test="${require.REQUIRE_LEVEL eq '5'}">
+                        					<i class="fa-solid fa-star" style="color:#FFD700;"></i>
+                        				</c:if>
+                        			</td>
+                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');">${require.REQUIRE_TITLE }</td>
                         			<td><i class="fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
-                        			<td>김이박</td>
-                        			<td>2023-05-02</td>
+                        			<td>${require.MEMBER_NUM }</td>
+                        			<td><fmt:formatDate value="${require.REQUIRE_REGDATE }" pattern="yyyy-MM-dd"/></td>
                      			</tr>
                         	</c:forEach>
                         </tbody>

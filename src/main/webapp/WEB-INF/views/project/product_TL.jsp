@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <%@ include file="../common/head.jsp" %>
 
@@ -248,22 +250,14 @@
                      		</tr>
                       	</thead>
                       	<tbody style="height: 230px; overflow-y:auto; overflow-x:hidden;">
-                        	<c:forEach begin="0" end="6" step="1">
+                        	<c:forEach var="product_TL" items="${productList_TL }">
                      			<tr>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=800px,height=450px,left=500px,top=300px');">1</td>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=800px,height=450px,left=500px,top=300px');" style="text-align:start">2023년 5월 10일 시스템 시험 결과서</td>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=800px,height=450px,left=500px,top=300px');"><i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
-                        			<td>선효구</td>
-                        			<td>2023-05-10</td>
-                        			<td><button class="btn btn-outline">채&nbsp;&nbsp;택</button><button class="btn btn-outline">미채택</button></td>
-                     			</tr>
-                     			<tr>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=800px,height=450px,left=500px,top=300px');">1</td>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=800px,height=450px,left=500px,top=300px');" style="text-align:start">2023년 5월 11일 시스템 시험 결과서</td>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=800px,height=450px,left=500px,top=300px');"><i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
-                        			<td>예다김</td>
-                        			<td>2023-05-11</td>
-                        			<td><button class="btn btn-outline">채&nbsp;&nbsp;택</button><button class="btn btn-outline">미채택</button></td>
+                        			<td onclick="window.open('product_detail','산출물 상세','width=800px,height=450px,left=500px,top=300px');">${product_TL.PRODUCT_NUM }</td>
+                        			<td onclick="window.open('product_detail','산출물 상세','width=800px,height=450px,left=500px,top=300px');" style="text-align:start">${product_TL.PRODUCT_TITLE }</td>
+                        			<td><i class="fa-sharp fa-solid fa-paperclip text-2xl"></i></td>
+                        			<td>${product_TL.MEMBER_NUM }</td>
+                        			<td><fmt:formatDate value="${product_TL.PRODUCT_REGDATE }" pattern="yyyy-MM-dd"/></td>
+                        			<td><button id="approveBtn" class="btn btn-outline" onclick="javascript:status_on(${product_TL.PRODUCT_NUM});">채&nbsp;&nbsp;택</button><button class="btn btn-outline">미채택</button></td>
                      			</tr>
                         	</c:forEach>
                         	</tbody>
@@ -354,6 +348,32 @@
 				        $(this).siblings('.upload-name').val(filename);
 				    });
 				}); 
+			
+			function status_on(PRODUCT_NUM){
+				var product_NUM = PRODUCT_NUM;
+				var product_STATUS = 1;
+				
+				var data= {
+						
+						"product_NUM"=product_NUM,
+						"product_STATUS"=product_STATUS
+				}
+				
+				$.ajax({
+				      url:"<%=request.getContextPath()%>/project/PDstatusChange",
+				      type:"post",
+				      data:JSON.stringify(data),
+				      contentType:"application/json",
+				      success:function(){
+
+				         $('#approveBtn').style.backgroundColor = "blue";
+				         
+				      },
+				      error:function(error){
+				         alert("실패했습니다.");
+				      }
+				   });
+			}
 			
 			
 	</script>
