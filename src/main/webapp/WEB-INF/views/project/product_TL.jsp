@@ -257,7 +257,10 @@
                         			<td><i class="fa-sharp fa-solid fa-paperclip text-2xl"></i></td>
                         			<td>${product_TL.MEMBER_NUM }</td>
                         			<td><fmt:formatDate value="${product_TL.PRODUCT_REGDATE }" pattern="yyyy-MM-dd"/></td>
-                        			<td><button id="approveBtn" class="btn btn-outline" onclick="javascript:status_on(${product_TL.PRODUCT_NUM});">채&nbsp;&nbsp;택</button><button class="btn btn-outline">미채택</button></td>
+                        			<td>
+	                        			<button id="approveBtn" class="btn btn-outline" onclick="javascript:status_on(${product_TL.PRODUCT_NUM}, 1)">채&nbsp;&nbsp;택</button>
+	                        			<button id="approveBtn" class="btn btn-outline" onclick="javascript:status_on(${product_TL.PRODUCT_NUM}, 0)">미채택</button>
+                        			</td>
                      			</tr>
                         	</c:forEach>
                         	</tbody>
@@ -349,28 +352,34 @@
 				    });
 				}); 
 			
-			function status_on(PRODUCT_NUM){
-				var product_NUM = PRODUCT_NUM;
-				var product_STATUS = 1;
-				
-				var data= {
-						
-						"product_NUM"=product_NUM,
-						"product_STATUS"=product_STATUS
+			function status_on(PRODUCT_NUM, PRODUCT_STATUS){
+		
+				var data = {
+						product_num: PRODUCT_NUM,
+						product_status: PRODUCT_STATUS
 				}
 				
 				$.ajax({
 				      url:"<%=request.getContextPath()%>/project/PDstatusChange",
 				      type:"post",
-				      data:JSON.stringify(data),
-				      contentType:"application/json",
-				      success:function(){
-
-				         $('#approveBtn').style.backgroundColor = "blue";
-				         
+				      data: data,
+				      dataType: "json",
+				      success:function(result){
+				    	  console.log(result)
+				    	  
+				    	  if (result.status === 1) {
+				    		  $('#approveBtn').css('background-color', 'blue');
+				    		  
+	  	 					  	  
+				    	  } else {
+				    		  $('#approveBtn').css('background-color', 'red');
+						         
+				    	  }
+				    	  
+				    	 
 				      },
-				      error:function(error){
-				         alert("실패했습니다.");
+				      error: function(error){
+				    	 console.log(error)
 				      }
 				   });
 			}

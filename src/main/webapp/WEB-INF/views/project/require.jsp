@@ -240,8 +240,8 @@
                         <thead>
                         	<tr style="width:100%;">
                         		<th style="width:10%;">No</th>
-                        		<th style="width:10%;">중&nbsp;요&nbsp;도</th>
-                        		<th style="width:50%;">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</th>
+                        		<th style="width:15%; text-align:start" >중&nbsp;요&nbsp;도</th>
+                        		<th style="width:45%;">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</th>
                         		<th style="width:5%;">첨&nbsp;부&nbsp;파&nbsp;일</th>
                         		<th style="width:15%;">작&nbsp;성&nbsp;자</th>
                         		<th style="width:10%;">등&nbsp;록&nbsp;일</th>
@@ -250,8 +250,8 @@
                       	<tbody style="height: 230px; overflow-y:auto; overflow-x:hidden;">
                         	<c:forEach var="require" items="${requireList }">
                      			<tr>
-                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');">${require.REQUIRE.NUM }</td>
-                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');">
+                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');">${require.REQUIRE_NUM }</td>
+                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');" style="text-align:start">
                         				<c:if test="${require.REQUIRE_LEVEL eq '1'}">
                         					<i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i>
                         				</c:if>
@@ -268,7 +268,7 @@
                         					<i class="fa-solid fa-star" style="color:#FFD700;"></i>
                         				</c:if>
                         			</td>
-                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');">${require.REQUIRE_TITLE }</td>
+                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');" style="text-align:start">${require.REQUIRE_TITLE }</td>
                         			<td><i class="fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
                         			<td>${require.MEMBER_NUM }</td>
                         			<td><fmt:formatDate value="${require.REQUIRE_REGDATE }" pattern="yyyy-MM-dd"/></td>

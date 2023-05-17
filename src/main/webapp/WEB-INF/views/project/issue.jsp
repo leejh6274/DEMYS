@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file="../common/head.jsp" %>
 
@@ -421,24 +422,24 @@
 			
 			
 			
-			
+			<!-- 3중요 2보통 1낮음 -->
 			<!-- 칸반보드 -->
 
    			<div class="flex justify-evenly"  style="width: 100%; height: 90%;">
 	         	<div style="width: 32%; height: 95%; margin-top: 5px; background-color: #e7e7e7;">
 					<div class="title" style="margin: 5px; height: 5%;">
-						<span class="font-bold">&nbsp;&nbsp;중요</span>
+						<span class="font-bold">&nbsp;&nbsp;중요 ${issue.ISSUE_IMP eq '3' }</span>
 						<span style="font-weight: bolder">10</span>
 					</div>
 				<div class="content flex flex-col items-center" style="height: 95%; margin-left: 5px; overflow: auto;">
 			
-				<c:forEach begin="0" end="3" step="1"  >
+				<c:forEach var="issue" items="${issueList }"  >
 					<div class="card card-side bg-base-100 " style="width: 90%; height: 30%; margin: 5px;">
 						<div class="card-body card-shadow shadow-md" style="width: 97%; height: 95%; margin: 0; border-radius:15px;" onclick="window.open('issue_detail_TL','이슈 상세','width=1150px,height=730px,left=500px,top=150px');">
 							<div class="card-title flex " style="margin: 0;">
 								<div class="flex items-center" style="margin: 0;">
 									<div class="flex">
-										화면이슈
+										${issue.ISSUE_TITLE }
 									</div>
 									<div class="flex " style="position: relative; ">
 										<i class="fa-regular fa-comment" style="font-size: 23px; margin: 0;"></i>
@@ -446,14 +447,14 @@
 									</div>
 								</div>
 							</div>
-							<div style="font-size: 11px; text-color: gray;">정보통신 연구개발사업 (${issue.issue_title })</div>
-							<div style="font-size: 11px; text-color: gray;">2023.04.20(${issue.issue_regDate }) ~ 2023.04.25(${issue.issue_deadline }) </div>
+							<div style="font-size: 11px; text-color: gray;">${issue.ISSUE_CONTENT}</div>
+							<div style="font-size: 11px; text-color: gray;"><fmt:formatDate value="${issue.ISSUE_REGDATE }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${issue.ISSUE_DEADLINE }" pattern="yyyy-MM-dd"/></div>
 							<div class="flex items-center justify-between">
 								<div class="flex items-center">
 									<div>
 										<img class="w-9 rounded-full" src="/resource/img/abc.jpg">
 									</div>
-									<div>김원미&nbsp;&nbsp;</div>
+									<div>${issue.MEMBER_NUM }&nbsp;&nbsp;</div>
 								</div>
 								<div style="margin: 0; padding: 0; line-height:20px;">
 									<%-- <c:if test="${issue.issue_imp == '1'}">
@@ -480,7 +481,7 @@
          
         <div style="width: 32%; height: 95%; margin-top: 5px; background-color: #e7e7e7;">
 					<div class="title" style="margin: 5px; height: 5%;">
-						<span class="font-bold">&nbsp;&nbsp;보통</span>
+						<span class="font-bold">&nbsp;&nbsp;보통 ${issue.ISSUE_IMP eq '2' }</span>
 						<span style="font-weight: bolder">3</span>
 					</div>
 				<div class="content flex flex-col items-center" style="height: 95%; margin-left: 5px; overflow: auto;">
@@ -531,7 +532,7 @@
          
          <div style="width: 32%; height: 95%; margin-top: 5px; background-color: #e7e7e7;">
 					<div class="title" style="margin: 5px; height: 5%;">
-						<span class="font-bold">&nbsp;&nbsp;낮음</span>
+						<span class="font-bold">&nbsp;&nbsp;${issue.ISSUE_IMP eq '1' }</span>
 						<span style="font-weight: bolder">10</span>
 					</div>
 				<div class="content flex flex-col items-center" style="height: 95%; margin-left: 5px; overflow: auto;">
