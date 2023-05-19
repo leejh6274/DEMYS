@@ -211,10 +211,10 @@
                <div class="header-2-menu0">
                   <div class="p-body-header-2">
                      <div style="display:flex;margin-top:5px;height:25px;">
-                        |<div class="header-2-menu"><a href="#">분 석</a></div> |
-                        <div class="header-2-menu"><a href="#">설 계</a></div> |
-                        <div class="header-2-menu"><a href="#">구 현</a></div> |
-                        <div class="header-2-menu"><a href="#">시 험</a></div> |
+                        |<div class="header-2-menu"><a onclick="javascript:showList(1,1);" style="cursor:pointer; width:100%; text-align:center;">분 석</a></div> |          <!-- showList(PJ_NUM,1) -->
+                        <div class="header-2-menu"><a onclick="javascript:showList(1,2);" style="cursor:pointer; width:100%; text-align:center;">설 계</a></div> |
+                        <div class="header-2-menu"><a onclick="javascript:showList(1,3);" style="cursor:pointer; width:100%; text-align:center;">구 현</a></div> |
+                        <div class="header-2-menu"><a onclick="javascript:showList(1,4);" style="cursor:pointer; width:100%; text-align:center;">시 험</a></div> |
                      </div>
                   </div>
                </div>
@@ -249,13 +249,13 @@
                         		<th style="width:10%;">사&nbsp;용&nbsp;여&nbsp;부</th>
                      		</tr>
                       	</thead>
-                      	<tbody style="height: 230px; overflow-y:auto; overflow-x:hidden;">
+                      	<tbody id="PD-LIST" style="height: 230px; overflow-y:auto; overflow-x:hidden;">
                         	<c:forEach var="product_TL" items="${productList_TL }">
                      			<tr>
                         			<td onclick="window.open('product_detail','산출물 상세','width=800px,height=450px,left=500px,top=300px');">${product_TL.PRODUCT_NUM }</td>
                         			<td onclick="window.open('product_detail','산출물 상세','width=800px,height=450px,left=500px,top=300px');" style="text-align:start">${product_TL.PRODUCT_TITLE }</td>
                         			<td><i class="fa-sharp fa-solid fa-paperclip text-2xl"></i></td>
-                        			<td>${product_TL.MEMBER_NUM }</td>
+                        			<td>${product_TL.MEMBER_NAME }</td>
                         			<td><fmt:formatDate value="${product_TL.PRODUCT_REGDATE }" pattern="yyyy-MM-dd"/></td>
                         			<td>
 	                        			<button id="approveBtn" class="btn btn-outline" onclick="javascript:status_on(${product_TL.PRODUCT_NUM}, 1)">채&nbsp;&nbsp;택</button>
@@ -264,9 +264,6 @@
                      			</tr>
                         	</c:forEach>
                         	</tbody>
-                        	
-                        	
-                        	
                     	</table>
                 	</div>
              	</div>

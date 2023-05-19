@@ -217,14 +217,15 @@
                <div>
                   <div class="rq-title">
                   	<div class="flex" style="justify-content:space-between;">
-						<select class="w-24 h-8 mr-2 text-center" style="border:1px solid #aaaaaa;">
-	    					<option value="select" selected>선택</option>
-	    					<option value="title">제목</option>
-	    					<option value="writer">작성자</option>
-						</select>
-			
-						<input type="text" placeholder="검색어를 입력하세요." class="input input-bordered" style="width:200px; float:right; background-color:#e7e7e7; border-radius:0px; height:2rem;"/>
-						<button onclick=""><i class="fa-solid fa-magnifying-glass ml-2" style="font-size:25px; width:20px; color:#e7e7e7; line-height:30px;"></i></button>						
+						<form class="flex">
+  							<select name="searchKeywordTypeCode" data-value="${param.searchKeywordTypeCode}" id="" class="w-24 h-8 mr-1 text-center" style="border:1px solid #aaa;">
+								<option disabled="disabled">선택</option>
+								<option value="MB_TITLE">제목</option>
+								<option value="MEMBER_NAME">작성자</option>
+  							</select>
+  							<input name="searchKeyword" type="text" class="input input-bordered" style="width:200px; float:right; background-color:#e7e7e7; border-radius:0px; height:2rem;" placeholder="검색어를 입력하세요." maxlength="20" value="${param.searchKeyword}"/>
+  							<button type="submit"><i class="fa-solid fa-magnifying-glass ml-2" style="font-size:25px; width:20px; color:#e7e7e7; line-height:30px;"></i></button>
+  						</form>					
 					</div>
                      <div>
                         <button id="modal_opne_btn" class="rq-regi-bt btn btn-se">등록</button>
@@ -241,13 +242,13 @@
                         		<th style="width:10%;">등&nbsp;록&nbsp;일</th>
                      		</tr>
                       	</thead>
-                      	<tbody style="height: 230px; overflow-y:auto; overflow-x:hidden;">
-                        	<c:forEach var="meetingBook" items="${meetingBookList }">
+                      	<tbody style="height: 45px; overflow-y:auto; overflow-x:hidden;">
+                        	<c:forEach var="meetingBook" items="${meetingBookList}">
                      			<tr>
                         			<td onclick="window.open('meetingbook_detail','회의록 상세','width=900px,height=480px,left=500px,top=300px');">${meetingBook.MB_NUM}</td>
                         			<td onclick="window.open('meetingbook_detail','회의록 상세','width=900px,height=480px,left=500px,top=300px');" style="text-align:start">${meetingBook.MB_TITLE}</td>
                         			<td><i class="fa-solid fa-paperclip text-2xl"></i></td>
-                        			<td>${meetingBook.MEMBER_NUM }</td>
+                        			<td>${meetingBook.MEMBER_NAME }</td>
                         			<td><fmt:formatDate value="${meetingBook.MB_REGDATE }" pattern="yyyy-MM-dd"/></td>
                      			</tr>
                         	</c:forEach>

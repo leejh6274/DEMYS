@@ -19,6 +19,15 @@ public class RequireService {
 	public List<Require> getRequireListByPJ_NUM(int PJ_NUM){
 		return requireRepository.getRequireListByPJ_NUM(PJ_NUM);
 	}
+	
+	public List<Require> getSearchRequire(String searchKeywordTypeCode, String searchKeyword) {
+		
+		List<Require> require = requireRepository.getSearchRequire(searchKeywordTypeCode, searchKeyword);
+		
+		return require;
+	}
+	
+	
 
 	public Require getRequireByREQUIRE_NUM(int REQUIRE_NUM){
 		return requireRepository.getRequireByREQUIRE_NUM(REQUIRE_NUM);

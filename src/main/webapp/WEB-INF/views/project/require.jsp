@@ -222,14 +222,16 @@
                <div>
                   <div class="rq-title">
                   	<div class="flex" style="justify-content:space-between;">
-						<select class="w-24 h-8 mr-2 text-center" style="border:1px solid #aaaaaa;">
-	    					<option value="select" selected>선택</option>
-	    					<option value="title">제목</option>
-	    					<option value="writer">작성자</option>
-						</select>
-			
-						<input type="text" placeholder="검색어를 입력하세요." class="input input-bordered" style="width:200px; float:right; background-color:#e7e7e7; border-radius:0px; height:2rem;"/>
-						<button onclick=""><i class="fa-solid fa-magnifying-glass ml-2" style="font-size:25px; width:20px; color:#e7e7e7; line-height:30px;"></i></button>						
+                  		<form class="flex">
+  							<select name="searchKeywordTypeCode" data-value="${param.searchKeywordTypeCode}" id="" class="w-24 h-8 mr-1 text-center" style="border:1px solid #aaa;">
+								<option disabled="disabled">검색타입</option>
+								<option value="REQUIRE_TITLE">제목</option>
+								<option value="REQURE_DETAIL">내용</option>
+								<option value="REQUIRE_TITLE_DETAIL">제목 + 내용</option>  		
+  							</select>
+  							<input name="searchKeyword" type="text" class="input input-bordered" style="width:200px; float:right; background-color:#e7e7e7; border-radius:0px; height:2rem;" placeholder="검색어를 입력하세요." maxlength="20" value="${param.searchKeyword}"/>
+  							<button type="submit"><i class="fa-solid fa-magnifying-glass ml-2" style="font-size:25px; width:20px; color:#e7e7e7; line-height:30px;"></i></button>
+  						</form>
 					</div>
                      <div>
                         <button id="modal_opne_btn" class="rq-regi-bt btn btn-se">등록</button>
@@ -247,7 +249,7 @@
                         		<th style="width:10%;">등&nbsp;록&nbsp;일</th>
                      		</tr>
                       	</thead>
-                      	<tbody style="height: 230px; overflow-y:auto; overflow-x:hidden;">
+                      	<tbody style="height: 45px; overflow-y:auto; overflow-x:hidden;">
                         	<c:forEach var="require" items="${requireList }">
                      			<tr>
                         			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');">${require.REQUIRE_NUM }</td>
@@ -270,7 +272,7 @@
                         			</td>
                         			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');" style="text-align:start">${require.REQUIRE_TITLE }</td>
                         			<td><i class="fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
-                        			<td>${require.MEMBER_NUM }</td>
+                        			<td>${require.MEMBER_NAME }</td>	<!--  vo에 member_name추가 -->
                         			<td><fmt:formatDate value="${require.REQUIRE_REGDATE }" pattern="yyyy-MM-dd"/></td>
                      			</tr>
                         	</c:forEach>
@@ -363,11 +365,11 @@
 					-->
 					
 					<tr>
-	   					<td style="width:200px; font-weight:bold">
-							<div class="filebox bs3-primary w-full font-bold" style="margin:0 0; margin-top:-25px;">
-							<div class="flex">파일첨부</div>
-								<input class="upload-name" value="첨부파일을 등록하세요" disabled="disabled" style="color:#aaa; width:640px; float:right; margin-top:10px;">
-									<label for="ex_filename" style="margin-top:10px;">
+	   					<td style="width:200px; font-weight:bold;">
+							<div class="filebox bs3-primary w-full font-bold flex align-center" style="margin:0 0; margin-top:10px;">
+							<span class="flex items-center"style="white-space:nowrap">파일첨부</span>
+								<input class="upload-name" value="첨부파일을 등록하세요" disabled="disabled" style="color:#aaa; width:640px; float:right; margin-left:26px;">
+									<label for="ex_filename">
 										<i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl text-black mr-3 " ></i>							  
 									</label>
 								<input type="file" id="ex_filename" class="upload-hidden">

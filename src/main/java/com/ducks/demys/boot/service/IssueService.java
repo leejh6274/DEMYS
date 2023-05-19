@@ -24,6 +24,10 @@ public class IssueService {
 		return issueRepository.getIssueListByMEMBER_NUM(MEMBER_NUM);
 	}
 	
+	public List<Issue> getIssueListByPJ_NUM(int PJ_NUM){
+		return issueRepository.getIssueListByPJ_NUM(PJ_NUM);
+	}
+	
 	public Issue getIssueByISSUE_NUM(int ISSUE_NUM) {
 		return issueRepository.getIssueByISSUE_NUM(ISSUE_NUM);
 	}

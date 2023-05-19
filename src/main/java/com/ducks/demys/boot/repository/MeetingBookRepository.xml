@@ -4,9 +4,10 @@
 
 <mapper namespace="com.ducks.demys.boot.repository.MeetingBookRepository">
 	<select id="getMeetingBookListByPJ_NUM" resultType="MeetingBook">
-		SELECT *
-		FROM MEETINGBOOK
-		WHERE PJ_NUM=#{PJ_NUM}
+		SELECT h.*, m.MEMBER_NAME 
+		FROM MEETINGBOOK h, MEMBER m
+		WHERE h.MEMBER_NUM = m.MEMBER_NUM
+		and PJ_NUM=#{PJ_NUM}
 		ORDER BY MB_NUM DESC
 	</select>
 	<select id="getMeetingBookByMB_NUM" resultType="MeetingBook">
@@ -14,6 +15,39 @@
 		FROM MEETINGBOOK
 		WHERE MB_NUM=#{MB_NUM}
 	</select>
+	
+	
+	<select id="getSearchMeetingbook" resultType="MeetingBook">
+		SELECT e.*, m.MEMBER_NAME
+		FROM MEETINGBOOK e, MEMBER m
+		WHERE e.MEMBER_NUM = m.MEMBER_NUM
+		and PJ_NUM = #{PJ_NUM}
+		<if test="searchKeyword != ''">
+   			<choose>
+      			<when test="searchKeywordTypeCode == 'MB_TITLE'">
+					AND e.MB_TITLE LIKE '%'||#{searchKeyword}||'%'
+      			</when>
+      			<when test="searchKeywordTypeCode == 'MEMBER_NAME'">
+					AND m.MEMBER_NAME LIKE '%'||#{searchKeyword}||'%'
+     		 	</when>
+      			<otherwise>
+					AND (
+	        			e.MB_TITLE LIKE '%'||#{searchKeyword}||'%'
+	        			OR
+	        			m.MEMBER_NAME LIKE '%'||#{searchKeyword}||'%'
+	 				)
+      			</otherwise>
+   			</choose>
+		</if>
+		ORDER BY e.MB_NUM DESC
+		<!-- <if test="limitTake != -1">
+			LIMIT #{limitStart}, #{limitTake}
+		</if> -->
+	</select>
+	
+	
+	
+	
 	<select id="selectMeetingBookSequenceNextValue" resultType="int">
 		SELECT
 		MEETINGBOOK_seq.nextVal

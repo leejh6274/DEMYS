@@ -9,13 +9,14 @@
 		ORDER BY ISSUE_NUM DESC
 	</select>
 	<select id="getIssueListByPJ_NUM" resultType="Issue">
-		SELECT *
-		FROM ISSUE
-		WHERE PJ_NUM=#{PJ_NUM}
+		SELECT i.*, m.member_name
+		FROM ISSUE i, MEMBER m
+		WHERE PJ_NUM = #{PJ_NUM}
+		and i.member_num = m.member_num
 	</select>
 	<select id="getIssueListByMEMBER_NUM" resultType="Issue">
-		SELECT *
-		FROM ISSUE
+		SELECT i.*, m.member_name
+		FROM issue i, member m
 		WHERE MEMBER_NUM=#{MEMBER_NUM}
 	</select>
 	<select id="getIssueByISSUE_NUM" resultType="Issue">

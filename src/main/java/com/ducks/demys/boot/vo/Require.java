@@ -17,5 +17,5 @@ public class Require {
 	private int MEMBER_NUM;
 	private int PJ_NUM;
 	private int CT_NUM;
-
+	private String MEMBER_NAME;
 }

@@ -133,8 +133,8 @@ body {
    			<table style="width:100%;">
    					
 				<tr class="w-full">
-	   				<td class="font-bold" style="width:200px;">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목
-	   					<span style="border:1px solid #aaa; width:100%; border-radius:0px; margin-left: 1.5rem; padding:10px;">요구사항정의서임</span>
+	   				<td class="font-bold" style="width:100%;">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목
+	   					<span style="border:1px solid #aaa; width:640px; border-radius:0px; margin-left: 1.5rem;">요구사항정의서임</span>
 	   				</td>
 	   			</tr>
    					
@@ -150,7 +150,7 @@ body {
 	   						중 요 도
 		   					<select class="select" style="border-radius:0px; margin-left: 1.5rem; border:1px solid #aaa" disabled>
 								<option >선택</option>
-								<option value="" style="color:#FFD700;" selected>&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</option>
+								<option value="" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</option>
 								<option value="" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;</option>
 								<option value="" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;</option>
 								<option value="" style="color:#FFD700;">&#xf005;&#xf005;</option>
@@ -185,8 +185,8 @@ body {
 					-->
 					
 				<tr>
-	   				<td style="width:250px; font-weight:bold; display:flex; width:100%; margin-top:10px;"><div>파일첨부</div>
-						<div class="flex w-full items-center justify-between" style="height:48px; border:1px solid #aaa; width:100%;; margin-left:29px;" >&nbsp;&nbsp;요구사항정의서_ver.1557.hwp
+	   				<td style="width:250px; font-weight:bold; display:flex; width:100%; margin-top:10px; white-space: nowrap;"><div class="flex items-center">파일첨부</div>
+						<div class="flex w-full items-center justify-between" style="height:48px; border:1px solid #aaa; width:100%;; margin-left:26px;" >&nbsp;&nbsp;요구사항정의서_ver.1557.hwp
 							<span>
 								<i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl text-black mr-3 " ></i>
 							</span>

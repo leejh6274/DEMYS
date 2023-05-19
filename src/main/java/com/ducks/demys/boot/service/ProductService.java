@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ducks.demys.boot.repository.ProductRepository;
+import com.ducks.demys.boot.vo.MeetingBook;
 import com.ducks.demys.boot.vo.Product;
 
 @Service
@@ -16,8 +17,19 @@ public class ProductService {
 		this.productRepository= productRepository;
 	}
 	
-	public List<Product> getProductListByPJ_NUM(int PJ_NUM){
-		return productRepository.getProductListByPJ_NUM(PJ_NUM);
+	public List<Product> getProductListByPJ_NUM(int PJ_NUM, int PRODUCT_STEP){
+		return productRepository.getProductListByPJ_NUM(PJ_NUM, PRODUCT_STEP);
+	}
+	
+	public List<Product> getSearchProductList(int PJ_NUM, int PRODUCT_STEP, String searchKeywordTypeCode, String searchKeyword) {
+
+		List<Product> product = productRepository.getSearchProductList(PJ_NUM, PRODUCT_STEP, searchKeywordTypeCode, searchKeyword);
+
+		return product;
+	}
+	
+	public List<Product> getProductListByOnlyPJ_NUM(int PJ_NUM) {
+		return productRepository.getProductListByOnlyPJ_NUM(PJ_NUM);
 	}
 
 	public Product getProductByProduct_NUM(int PRODUCT_NUM){
@@ -40,4 +52,5 @@ public class ProductService {
 	public void removeProduct(int PRODUCT_NUM) {
 		productRepository.removeProduct(PRODUCT_NUM);
 	}
+
 }

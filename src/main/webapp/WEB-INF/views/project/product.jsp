@@ -186,12 +186,12 @@
            
             <div class="p-body-header-1">
                <div style="display: flex;">
-                  <div class="header-1-menu" ><a href="require">프로젝트관리</a></div> |
-                  <div class="header-1-menu"><a href="#">단위업무</a></div> |
-                  <div class="header-1-menu"><a href="issue">이슈관리</a></div> |
-                  <div class="header-1-menu"><a href="#">예산수립</a></div> |
-                  <div class="header-1-menu"><a href="meetingbook">회의록</a></div> |
-                  <div class="header-1-menu" style="font-weight:bold; font-size:20px;"><a href="product">산출물관리 &nbsp;</a></div>
+                  <div class="header-1-menu" ><a href="require" style="width:100%;">프로젝트관리</a></div> |
+                  <div class="header-1-menu"><a href="#" style="width:100%;">단위업무</a></div> |
+                  <div class="header-1-menu"><a href="issue" style="width:100%;">이슈관리</a></div> |
+                  <div class="header-1-menu"><a href="#" style="width:100%;">예산수립</a></div> |
+                  <div class="header-1-menu"><a href="meetingbook" style="width:100%;">회의록</a></div> |
+                  <div class="header-1-menu" style="font-weight:bold; font-size:20px;"><a onclick="javascript:showList(1,0,'','');" style="cursor:pointer; width:100%;">산출물관리 &nbsp;</a></div>
                </div>
             </div>
       </div> 
@@ -203,26 +203,45 @@
                <div class="header-2-menu0">
                   <div class="p-body-header-2">
                      <div style="display:flex;margin-top:5px;height:25px;">
-                        |<div class="header-2-menu"><a href="#">분 석</a></div> |
-                        <div class="header-2-menu"><a href="#">설 계</a></div> |
-                        <div class="header-2-menu"><a href="#">구 현</a></div> |
-                        <div class="header-2-menu"><a href="#">시 험</a></div> |
+                        |<div class="header-2-menu"><a onclick="javascript:showList(1,1,'','');" style="cursor:pointer; width:100%; text-align:center;">분 석</a></div> |          <!-- showList(PJ_NUM,1) -->
+                        <div class="header-2-menu"><a onclick="javascript:showList(1,2,'','');" style="cursor:pointer; width:100%; text-align:center;">설 계</a></div> |
+                        <div class="header-2-menu"><a onclick="javascript:showList(1,3,'','');" style="cursor:pointer; width:100%; text-align:center;">구 현</a></div> |
+                        <div class="header-2-menu"><a onclick="javascript:showList(1,4,'','');" style="cursor:pointer; width:100%; text-align:center;">시 험</a></div> |
                      </div>
                   </div>
                </div>
                
                 <div class="rq-title">
+                
+                
+                
+                
+                
                   	<div class="flex" style="justify-content:space-between;">
-						<select class="w-24 h-8 mr-2 text-center" style="border:1px solid #aaaaaa;">
+                  	
+                  	
+                  	
+                  		<form class="flex">
+  							<select id="searchKeywordTypeCode" name="searchKeywordTypeCode" data-value="${param.searchKeywordTypeCode}" id="" class="w-24 h-8 mr-1 text-center" style="border:1px solid #aaa;">
+								<option disabled="disabled">선택</option>
+								<option value="PRODUCT_TITLE">제목</option>
+								<option value="PRODUCT_CONTENT">내용</option>
+  							</select>
+  							<input id="searchKeyword" name="searchKeyword" type="text" class="input input-bordered" style="width:200px; float:right; background-color:#e7e7e7; border-radius:0px; height:2rem;" placeholder="검색어를 입력하세요." maxlength="20" value="${param.searchKeyword}"/>
+  							<button type="button" onclick="javascript:showList(1,3,$('#searchKeywordTypeCode').val(),$('#searchKeyword').val())"><i class="fa-solid fa-magnifying-glass ml-2" style="font-size:25px; width:20px; color:#e7e7e7; line-height:30px;"></i></button>
+  						</form>			               <!--   1,1,$('#searchKeywordTypeCode').val(),$('#searchKeyword').val()) 를 PJ_NUM, PRODUCT_STEP-->
+  						
+  						
+  						
+						<!-- <select class="w-24 h-8 mr-2 text-center" style="border:1px solid #aaaaaa;">
 	    					<option value="select" selected>선택</option>
 	    					<option value="title">제목</option>
 	    					<option value="writer">작성자</option>
 						</select>
 			
 						<input type="text" placeholder="검색어를 입력하세요." class="input input-bordered" style="width:200px; float:right; background-color:#e7e7e7; border-radius:0px; height:2rem;"/>
-						<button onclick=""><i class="fa-solid fa-magnifying-glass ml-2" style="font-size:25px; width:20px; color:#e7e7e7; line-height:30px;"></i></button>						
+						<button onclick=""><i class="fa-solid fa-magnifying-glass ml-2" style="font-size:25px; width:20px; color:#e7e7e7; line-height:30px;"></i></button> -->						
 					</div>
-					
              		<div>
                         <button id="modal_opne_btn" class="rq-regi-bt btn btn-se">등록</button>
                     </div>
@@ -241,24 +260,10 @@
                         		<th style="width:10%;">사&nbsp;용&nbsp;여&nbsp;부</th>
                      		</tr>
                       	</thead>
-                      	<tbody style="height: 230px; overflow-y:auto; overflow-x:hidden;">
-                        	<c:forEach var="product" items="${productList }">
-                     			<tr>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=480px,left=500px,top=300px');">${product.PRODUCT_NUM }</td>
-                        			<td onclick="window.open('product_detail','산출물 상세','width=900px,height=480px,left=500px,top=300px');" style="text-align:start">${product.PRODUCT_TITLE }</td>
-                        			<td><i class="fa-sharp fa-solid fa-paperclip text-2xl"></i></td>
-                        			<td>${product.MEMBER_NUM }</td>
-                        			<td><fmt:formatDate value="${product.PRODUCT_REGDATE }" pattern="yyyy-MM-dd"/></td>
-                        			<td><div class="rounded-lg w-12 text-white" style="margin:0 auto; background-color:#dfdfdf">
-                        					<c:if test="${product.PRODUCT_STATUS eq '1'}">
-                        						<div class="rounded-lg w-12 text-white" style="margin:0 auto; background-color:#016fa0">채택</div>
-                        					</c:if>
-                        					<c:if test="${product.PRODUCT_STATUS eq '0'}">
-                        						<div class="rounded-lg w-12 text-white" style="margin:0 auto; background-color:#dfdfdf">미채택</div>
-                        					</c:if>
-                        				</div></td>
-                     			</tr>
-                        	</c:forEach>
+                      	<tbody id="PD-LIST" style="height: 230px; overflow-y:auto; overflow-x:hidden;">
+                        	
+                        	
+                        	
                         	</tbody>
                     	</table>
                 	</div>
@@ -314,7 +319,7 @@
 	</div>
 </div>
 </div>
-
+<%@ include file="pdhandle.jsp" %>
 <script>
 			document.getElementById("modal_opne_btn").onclick = function() {
 				document.getElementById("modal1").style.display = "block";

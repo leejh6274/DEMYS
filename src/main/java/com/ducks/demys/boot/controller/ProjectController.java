@@ -1,9 +1,11 @@
 package com.ducks.demys.boot.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +18,7 @@ import com.ducks.demys.boot.service.RequireService;
 import com.ducks.demys.boot.vo.Issue;
 import com.ducks.demys.boot.vo.MeetingBook;
 import com.ducks.demys.boot.vo.Product;
+import com.ducks.demys.boot.vo.ProductForSearch;
 import com.ducks.demys.boot.vo.Require;
 
 
@@ -38,21 +41,56 @@ public class ProjectController {
 	}
 	
 	
+	/*
+	 * @RequestMapping("project/product") public String showproduct(Model model) {
+	 * List<Product> productList = productService.getProductListByPJ_NUM(1, 1); //1을
+	 * PJ_NUM으로, 위에 모델옆에 int PJ_NUM model.addAttribute("productList", productList);
+	 * 
+	 * return "project/product"; }
+	 */
 	 @RequestMapping("project/product") 
-	 public String showproduct(Model model) {
-		List<Product> productList = productService.getProductListByPJ_NUM(1); //1을 PJ_NUM으로, 위에 모델옆에 int PJ_NUM
-		model.addAttribute("productList", productList);
-		
-		return "project/product";
+	 public void showproduct() {
+		 
 	 }
-	  
+	 
+	 
 	 @RequestMapping("project/product_TL") 
-	 public String showproduct_TL(Model model) {
-		List<Product> productList_TL = productService.getProductListByPJ_NUM(1); //1을 PJ_NUM으로, 위에 모델옆에 int PJ_NUM
-		model.addAttribute("productList_TL", productList_TL);
-			
-		return "project/product_TL";
+	 public void showproduct_tl() {
+		 
 	 }
+
+		/*
+		 * @RequestMapping("project/product_TL") public String showproduct_TL(Model
+		 * model) { List<Product> productList_TL =
+		 * productService.getProductListByPJ_NUM(1, 1); //1을 PJ_NUM으로, 위에 모델옆에 intPJ_NUM
+		 * model.addAttribute("productList_TL", productList_TL);
+		 * 
+		 * return "project/product_TL"; }
+		 */
+	 
+	 @RequestMapping("project/productList") 
+	 @ResponseBody
+	 public List<Product> showproductList(@RequestBody ProductForSearch pd) {
+		 List<Product> productList=new ArrayList<Product>();
+		 int PJ_NUM = pd.getPJ_NUM();
+		 int PRODUCT_STEP = (int) pd.getPRODUCT_STEP();
+		 String searchType=pd.getSearchType();
+		 String keyword=pd.getKeyword();
+		 
+		 productList = productService.getProductListByOnlyPJ_NUM(PJ_NUM);
+		 
+		     //1을 PJ_NUM으로 바꿔
+		 if(PRODUCT_STEP > 0 ) {
+			 System.out.println("PRODUCT_STEP222 : " + PRODUCT_STEP);
+			 productList = productService.getSearchProductList(PJ_NUM, PRODUCT_STEP, searchType, keyword); //1을 PJ_NUM으로, 위에 모델옆에 int PJ_NUM
+		 }
+		 
+		 
+		 System.out.println("productList : " + productList);
+		 return productList;
+	 }
+	 
+		
 	 
 	 
 	 @RequestMapping("project/PDstatusChange")
@@ -76,11 +114,14 @@ public class ProjectController {
 	 }
 	 
 	 @RequestMapping("project/require") 
-	 public String showrequire(Model model) {
-		 List<Require> requireList = requireService.getRequireListByPJ_NUM(1); //1을 PJ_NUM으로, 위에 모델옆에 int PJ_NUM
+	 public String showrequire(Model model, @RequestParam(defaultValue = "REQUIRE_TITLE, REQUIRE_DETAIL") String searchKeywordTypeCode,
+				@RequestParam(defaultValue = "") String searchKeyword) {
+		List<Require> requireList = requireService.getSearchRequire(searchKeywordTypeCode, searchKeyword);
+		 
+//		List<Require> requireList = requireService.getRequireListByPJ_NUM(1); //1을 PJ_NUM으로, 위에 모델옆에 int PJ_NUM
 		model.addAttribute("requireList", requireList);
 				
-			return "project/require";
+		return "project/require";
 	 }
 	 
 	 @RequestMapping("project/require_detail") 
@@ -92,12 +133,15 @@ public class ProjectController {
 	 public void showrequire_modify() {
 	  
 	 }
-
 	
 	@RequestMapping("project/meetingbook")
-	public String showmeetingbook(Model model) {
-		List<MeetingBook> meetingBookList = meetingBookService.getMeetingBookListByPJ_NUM(1);  //1을 PJ_NUM으로, 위에 모델옆에 int PJ_NUM
+	public String showmeetingbook(Model model, @RequestParam(defaultValue = "") Object PJ_NUM, @RequestParam(defaultValue = "MB_TITLE, MEMBER_NAME") String searchKeywordTypeCode, @RequestParam(defaultValue = "") String searchKeyword) {
+		//List<MeetingBook> meetingBookListPJNUM = meetingBookService.getMeetingBookListByPJ_NUM(1); 
+		List<MeetingBook> meetingBookList = meetingBookService.getSearchMeetingbook(1, searchKeywordTypeCode, searchKeyword);
+		
+		//model.addAttribute("meetingBookListPJNUM", meetingBookListPJNUM);
 		model.addAttribute("meetingBookList", meetingBookList);
+
 		
 		return "project/meetingbook";
 	}
@@ -110,7 +154,7 @@ public class ProjectController {
 	 
 	 @RequestMapping("project/issue") 
 	 public String showissue(Model model) {
-		 List<Issue> issueList = issueService.getIssueListByMEMBER_NUM(1);  //member_num(1) 대신 loginedMember_num 같은거
+		 List<Issue> issueList = issueService.getIssueListByPJ_NUM(1);//pj_num넣기 레포지터리.xml 에 getIssueListByPJ_NUM 만들어서 여기 추가
 		 model.addAttribute("issueList", issueList);
 		 
 		 return "project/issue";
