@@ -253,7 +253,7 @@
                         <thead>
                         	<tr style="width:100%;">
                         		<th style="width:10%;">No</th>
-                        		<th style="width:50%; text-align:start;">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</th>
+                        		<th style="width:50%; text-align:center;">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</th>
                         		<th style="width:5%;">첨&nbsp;부&nbsp;파&nbsp;일</th>
                         		<th style="width:15%;">작&nbsp;성&nbsp;자</th>
                         		<th style="width:10%;">등&nbsp;록&nbsp;일</th>

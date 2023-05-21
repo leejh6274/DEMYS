@@ -252,8 +252,8 @@
                       	<tbody style="height: 45px; overflow-y:auto; overflow-x:hidden;">
                         	<c:forEach var="require" items="${requireList }">
                      			<tr>
-                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');">${require.REQUIRE_NUM }</td>
-                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');" style="text-align:start">
+                        			<td onclick="window.open('require_detail?REQUIRE_NUM=${require.REQUIRE_NUM }','요구사항 상세','width=900px,height=450px,left=500px,top=300px');" style="cursor:pointer;">${require.REQUIRE_NUM }</td>
+                        			<td onclick="window.open('require_detail?REQUIRE_NUM=${require.REQUIRE_NUM }','요구사항 상세','width=900px,height=450px,left=500px,top=300px');" style="text-align:start; cursor:pointer;">
                         				<c:if test="${require.REQUIRE_LEVEL eq '1'}">
                         					<i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i><i class="fa-solid fa-star" style="color:#FFD700;"></i>
                         				</c:if>
@@ -270,8 +270,8 @@
                         					<i class="fa-solid fa-star" style="color:#FFD700;"></i>
                         				</c:if>
                         			</td>
-                        			<td onclick="window.open('require_detail','요구사항 상세','width=900px,height=450px,left=500px,top=300px');" style="text-align:start">${require.REQUIRE_TITLE }</td>
-                        			<td><i class="fa-solid fa-paperclip fa-flip-vertical text-2xl"></i></td>
+                        			<td onclick="window.open('require_detail?REQUIRE_NUM=${require.REQUIRE_NUM }','요구사항 상세','width=900px,height=450px,left=500px,top=300px');" style="text-align:start; cursor:pointer;">${require.REQUIRE_TITLE }</td>
+                        			<td><i class="fa-solid fa-paperclip text-2xl"></i></td>
                         			<td>${require.MEMBER_NAME }</td>	<!--  vo에 member_name추가 -->
                         			<td><fmt:formatDate value="${require.REQUIRE_REGDATE }" pattern="yyyy-MM-dd"/></td>
                      			</tr>
@@ -304,6 +304,10 @@
 					<div class="navbar text-neutral-content" style="width: 100%; padding: 0px; min-height: 1rem; height: 30px; border-bottom:3px solid #016fa0;">
 						<div class="text-black mb-3" style="font-weight: bold; font-size: 1.5rem; ">
 							요구사항 등록
+							<input type="hidden" name="ctnum" value="1"/>
+							<input type="hidden" name="membernum" value="3" />
+							<input type="hidden" name="pjnum" value="1" />
+							<input type="hidden" name="membername" value="이주헌" />
 						</div>
 					</div>
 				</div>
@@ -314,7 +318,7 @@
    					
    						<tr class="w-full" style="width:100%;">
 	   						<td class="font-bold" style="width:200px;">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목
-	   							<input style="border:1px solid #aaa; width:640px; border-radius:0px; margin-left: 1.5rem;" type="text" placeholder="제목을 입력하세요." class="input input-bordered p-reg-input" />
+	   							<input style="border:1px solid #aaa; width:640px; border-radius:0px; margin-left: 1.5rem;" name="title" type="text" placeholder="제목을 입력하세요." class="input input-bordered p-reg-input" />
 	   						</td>
 	   					</tr>
    					
@@ -328,13 +332,13 @@
 	   						<td>
 	   							<div class="font-bold" style="padding: 10px 0;">
 	   								중 요 도
-		   							<select class="select" style="border-radius:0px; margin-left: 1.53rem; border:1px solid #aaa">
+		   							<select class="select" style="border-radius:0px; margin-left: 1.53rem; border:1px solid #aaa" name="level">
 									  <option disabled selected>선택</option>
-									  <option value="" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</option>
-									  <option value="" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;</option>
-									  <option value="" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;</option>
-									  <option value="" style="color:#FFD700;">&#xf005;&#xf005;</option>
-									  <option value="" style="color:#FFD700;">&#xf005;</option>
+									  <option value="1" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</option>
+									  <option value="2" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;</option>
+									  <option value="3" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;</option>
+									  <option value="4" style="color:#FFD700;">&#xf005;&#xf005;</option>
+									  <option value="5" style="color:#FFD700;">&#xf005;</option>
 									</select>
 	   							</div>
 	   						</td>
@@ -345,7 +349,7 @@
 					<tr>
 						<td class="flex font-bold" >
 							 내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용&nbsp;
-							<textarea class="textarea " name="product_content" id="content" class="form-control" style="height:150px; width:100%; margin-left: 1.5rem; resize:none; border:1px solid #aaa; border-radius:0px;" placeholder="내용을 작성하세요."></textarea>
+							<textarea class="textarea " name="detail" id="content" class="form-control" style="height:150px; width:100%; margin-left: 1.5rem; resize:none; border:1px solid #aaa; border-radius:0px;" placeholder="내용을 작성하세요."></textarea>
 						</td>
 					</tr>
 	   						<!-- <td>내&nbsp;&nbsp;&nbsp;용</td>
@@ -370,7 +374,7 @@
 							<span class="flex items-center"style="white-space:nowrap">파일첨부</span>
 								<input class="upload-name" value="첨부파일을 등록하세요" disabled="disabled" style="color:#aaa; width:640px; float:right; margin-left:26px;">
 									<label for="ex_filename">
-										<i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl text-black mr-3 " ></i>							  
+										<i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>							  
 									</label>
 								<input type="file" id="ex_filename" class="upload-hidden">
 							</div>
@@ -381,8 +385,8 @@
    				</div>
 
 				<div style="display:flex; justify-content:center;">
-					<button class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">저장</button>
-					<button id="modal_close_btn" class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px;">취소</button>
+					<button class="btn btn-se" onclick="regist_go();"style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">등 록</button>
+					<button id="modal_close_btn" class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px;">취 소</button>
 				</div>
 			</div>
 
@@ -391,8 +395,43 @@
 <!-- project/list.jsp 화면끝나는 태그 -->
 
 		<script>
+			function regist_go(){
+				var title = $("input[name=title]").val();
+				var level = $("select[name=level]").val();
+				var detail = $("textarea[name=detail]").val();
+				var ctnum = $("input[name=ctnum]").val();
+				var membernum = $("input[name=membernum]").val();
+				var pjnum = $("input[name=pjnum]").val();
+				
+				
+				var data={
+						"REQUIRE_TITLE":title,
+						"REQUIRE_LEVEL":level,
+						"REQUIRE_DETAIL":detail,
+						"CT_NUM":ctnum,
+						"MEMBER_NUM":membernum,
+						"PJ_NUM":pjnum
+				}
+				$.ajax({
+					url:"<%=request.getContextPath()%>/project/require_regist",
+					type:"post",
+					data:data,
+					success:function(){
+						alert("등록되었습니다.");
+						history.go();
+					},
+					error:function(){
+						alert('왜안됨?');
+					}
+				});
+			}
+			
+			
+			
 			document.getElementById("modal_opne_btn").onclick = function() {
-				document.getElementById("modal1").style.display = "block";
+			document.getElementById("modal1").style.display = "block";
+				
+				
 			}
 
 			document.getElementById("modal_close_btn").onclick = function() {
@@ -413,4 +452,5 @@
 				    });
 				}); 
 
+		
 		</script>

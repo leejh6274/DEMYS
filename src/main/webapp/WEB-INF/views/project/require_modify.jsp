@@ -168,6 +168,10 @@ body {
 			<div class="navbar text-neutral-content" style="width: 100%; padding: 0px; min-height: 1rem; height: 30px; border-bottom:3px solid #016fa0;">
 				<div class="text-black mb-3" style="font-weight: bold; font-size: 1.5rem; ">
 					요구사항 수정
+					<input type="hidden" name="ctnum" value="1"/>
+							<input type="hidden" name="membernum" value="3" />
+							<input type="hidden" name="pjnum" value="1" />
+							<input type="hidden" name="membername" value="이주헌" />
 				</div>
 			</div>
 		</div>
@@ -177,9 +181,9 @@ body {
    					<table style="width:100%;">
    					
    					
-   						<tr class="w-full flex">
-	   						<td class="font-bold flex flex-row" style="width:100%;"><div class="flex">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</div>
-	   							<input style="border:1px solid #aaa; width:100%; border-radius:0px; margin-left: 1.78rem;" type="text" class="input input-bordered p-reg-input" value="${require.require.title }"/>
+   						<tr class="w-full" style="width:100%;">
+	   						<td class="font-bold" style="width:200px;">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목
+	   							<input style="border:1px solid #aaa; width:640px; border-radius:0px; margin-left: 1.5rem;" name="title" type="text"  value="${require.REQUIRE_TITLE}" placeholder="제목을 입력하세요." class="input input-bordered p-reg-input" />
 	   						</td>
 	   					</tr>
    					
@@ -193,13 +197,13 @@ body {
 	   						<td>
 	   							<div class="font-bold" style="padding: 10px 0;">
 	   								중 요 도
-		   							<select class="select" style="border-radius:0px; margin-left: 1.53rem; border:1px solid #aaa">
+		   							<select class="select" style="border-radius:0px; margin-left: 1.53rem; border:1px solid #aaa" name="level">
 									  <option disabled selected>선택</option>
-									  <option value="" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</option>
-									  <option value="" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;</option>
-									  <option value="" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;</option>
-									  <option value="" style="color:#FFD700;">&#xf005;&#xf005;</option>
-									  <option value="" style="color:#FFD700;">&#xf005;</option>
+									  <option value="1" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</option>
+									  <option value="2" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;</option>
+									  <option value="3" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;</option>
+									  <option value="4" style="color:#FFD700;">&#xf005;&#xf005;</option>
+									  <option value="5" style="color:#FFD700;">&#xf005;</option>
 									</select>
 	   							</div>
 	   						</td>
@@ -210,7 +214,7 @@ body {
 					<tr>
 						<td class="flex font-bold" >
 							 내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용&nbsp;
-							<textarea class="textarea " name="product_content" id="content" class="form-control" style="height:150px; width:100%; margin-left: 1.47rem; resize:none; border:1px solid #aaa; border-radius:0px;">${require.require.detail }</textarea>
+							<textarea class="textarea " name="detail" id="content" class="form-control" style="height:150px; width:100%; margin-left: 1.5rem; resize:none; border:1px solid #aaa; border-radius:0px;">${require.REQUIRE_DETAIL }</textarea>
 						</td>
 					</tr>
 	   						<!-- <td>내&nbsp;&nbsp;&nbsp;용</td>
@@ -230,12 +234,12 @@ body {
 					-->
 					
 					<tr>
-	   					<td style="width:100%; font-weight:bold" class="flex flex-row">
-							<div class="w-28">파일첨부</div>
-							<div class="filebox bs3-primary w-full font-bold" style="margin:0 0;">
-								<input class="upload-name w-full" disabled="disabled" style="color:#aaa; float:right; margin-top:10px;">
-									<label for="ex_filename" style="margin-top:10px;">
-										<i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl text-black mr-3 " ></i>							  
+	   					<td style="width:200px; font-weight:bold;">
+							<div class="filebox bs3-primary w-full font-bold flex align-center" style="margin:0 0; margin-top:10px;">
+							<span class="flex items-center"style="white-space:nowrap">파일첨부</span>
+								<input class="upload-name" value="첨부파일을 등록하세요" disabled="disabled" style="color:#aaa; width:100%; float:right; margin-left:26px;">
+									<label for="ex_filename">
+										<i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>							  
 									</label>
 								<input type="file" id="ex_filename" class="upload-hidden">
 							</div>
@@ -246,7 +250,7 @@ body {
    				</div>
  
 		<div style="display:flex; justify-content:center; margin-top:-10px;">
-			<button class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">수 정</button>
+			<button class="btn btn-se" onclick="modify_go('${require.REQUIRE_NUM}');"style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">수 정</button>
 			<button class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">삭 제</button>
 			<button type="button" id="cancelBtn" onclick="window.close();" class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px;">닫 기</button>
 		</div>
@@ -254,7 +258,39 @@ body {
 	<div class="modal_layer"></div>
    <!-- /.content-wrapper -->
 	<script>
+
+	function modify_go(REQUIRE_NUM){
+		var title = $("input[name=title]").val();
+		var level = $("select[name=level]").val();
+		var detail = $("textarea[name=detail]").val();
+
 		
+		
+		var data={
+				"REQUIRE_TITLE":title,
+				"REQUIRE_LEVEL":level,
+				"REQUIRE_DETAIL":detail,
+				"REQUIRE_NUM":REQUIRE_NUM
+		}
+		
+		$.ajax({
+			url:"<%=request.getContextPath()%>/project/dorequire_modify",
+			type:"post",
+			data:data,
+			success:function(){
+				alert("수정이 완료되었습니다.");
+				window.opener.location.reload();
+				window.close();
+			},
+			error:function(){
+				alert('왜안됨?');
+			}
+		});
+	}	
+	
+	
+	
+	
 
 
 		$(document).ready(function(){

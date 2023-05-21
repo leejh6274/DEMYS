@@ -132,7 +132,7 @@ body {
    		<div class="flex flex-col card-body" style="padding-top:10px; padding-bottom:10px;">
 				
 					<!-- 제목 -->
-					<div class="flex w-25 items-center" style="height:48px; border:1px solid #aaaaaa;">&nbsp;&nbsp;	회의록 제목(${meetingbook.mb_title})</div>
+					<div class="flex w-25 items-center" style="height:48px; border:1px solid #aaaaaa;">&nbsp;&nbsp;	${meetingbook.MB_TITLE}</div>
 					
 					<!-- 분류, 날짜, 채택 -->
 					<div class="flex flex-row">
@@ -143,9 +143,9 @@ body {
 		   					<option value="r">구현</option>
 		   					<option value="t" selected>시험</option>
 						</select> -->
-						<div class="w-40 text-center inline-block" style="line-height:45px; height:48px; border:1px solid #aaaaaa;">이주헌(${member.member_name})</div>
+						<div class="w-40 text-center inline-block" style="line-height:45px; height:48px; border:1px solid #aaaaaa;">${member.member_name}</div>
 						<div class="flex w-full" style="height:48px; border:1px solid #aaaaaa; border-left:0px;">
-							<label for="icon" style="line-height:45px; width:100%;"><i class="fa-solid fa-calendar-days ml-3" style="color:#016fa0;"></i>&nbsp;&nbsp;&nbsp;2023.05.12(${meetingbook.mb_regdate })</label>
+							<label for="icon" style="line-height:45px; width:100%;"><i class="fa-solid fa-calendar-days ml-3" style="color:#016fa0;"></i>&nbsp;&nbsp;&nbsp;${meetingbook.MB_REGDATE }</label>
 						</div>
 						
 						<!-- <div class="flex justify-center items-center" style="height:48px; border:1px solid #aaaaaa; width:150px; font-weight:bolder">
@@ -154,11 +154,11 @@ body {
 					</div>
 					
 					<div style="width:100%; height:200px; border:1px solid #aaaaaa;">
-						&nbsp;&nbsp;회의 내용 나오는 곳.(${meetingbook.mb_content })
+						&nbsp;&nbsp;${meetingbook.MB_CONTENT }
 					</div>
 					
 					<!-- 첨부파일 -->
-					<div class="flex w-full items-center" style="height:48px; border:1px solid #aaaaaa; color:#dfdfdf; justify-content:space-between;">&nbsp;&nbsp;첨부파일이름.hwp(${mb_attach.mbat_filename })
+					<div class="flex w-full items-center" style="height:48px; border:1px solid #aaaaaa; color:#dfdfdf; justify-content:space-between;">&nbsp;&nbsp;첨부파일이름.hwp(${mb_attach.MBAT_FILENAME })
 						<span>
 							<i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl text-black mr-3 " ></i>
 						</span>

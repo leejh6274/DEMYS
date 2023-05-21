@@ -280,13 +280,14 @@
 					<div class="navbar text-neutral-content" style="width: 100%; padding: 0px; min-height: 1rem; height: 30px; border-bottom:3px solid #016fa0;">
 						<div class="text-black mb-3" style="font-weight: bold; font-size: 1.5rem; ">
 							회의록 등록
+							<input type="hidden" name="pjnum" value="1" />
 						</div>
 					</div>
 				</div>
 
 				<div class="container flex flex-col card-body" style="padding-top:10px; padding-bottom:10px;">
 					<div class="flex">
-						<input type="text" placeholder="제목을 입력하세요." class="input" style="border:1px solid #aaaaaa; border-radius:0px; width:600px; justify-content:space-between;">
+						<input type="text" name="mbtitle" placeholder="제목을 입력하세요." class="input" style="border:1px solid #aaaaaa; border-radius:0px; width:600px; justify-content:space-between;">
 						<!-- <select class="w-24 h-8 text-center" style="height:48px; border:1px solid #aaaaaa; border-left:0px;">
 			   				<option value="step" selected>개발 단계</option>
 		   					<option value="a">분&nbsp;&nbsp;석</option>
@@ -294,24 +295,25 @@
 		   					<option value="b">구&nbsp;&nbsp;현</option>
 		   					<option value="t">시&nbsp;&nbsp;험</option>
 						</select> -->
-						<div class="w-36 h-8 text-center" style="line-height:45px; height:48px; border:1px solid #aaa; border-left:0;">이주헌(${member.member_name })</div>
+						<div class="w-36 h-8 text-center" style="line-height:45px; height:48px; border:1px solid #aaa; border-left:0;">${member.MEMBER_NAME }</div>
+						<input type="hidden" name="membernum" value="3" />
 					</div>
 					
 					<!-- 내용 -->	
-					<textarea class="textarea" name="product_content" value="" id="content" class="form-control" style="height:250px;width:100%; resize:none; border:1px solid #aaaaaa; border-radius:0px;" placeholder="내용을 작성하세요."></textarea>
+					<textarea class="textarea" name="mbcontent" id="content" class="form-control" style="height:250px;width:100%; resize:none; border:1px solid #aaaaaa; border-radius:0px;" placeholder="내용을 작성하세요."></textarea>
 					
 					<!-- 첨부파일 -->
 					<div class="filebox bs3-primary w-full" style="margin:0 0">
 						<input class="upload-name" value="첨부파일을 등록하세요" disabled="disabled" style="color:#aaa;">
 							<label for="ex_filename">
-								<i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl text-black mr-3 " ></i>							  
+								<i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>							  
 							</label>
 						<input type="file" id="ex_filename" class="upload-hidden">
 					</div>
 				</div>
 
 				<div style="display:flex; justify-content:center;">
-					<button class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">저장</button>
+					<button onclick="regist_go();"class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">저장</button>
 					<button class="btn btn-se" id="modal_close_btn" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px;">취소</button>
 				</div>
 			</div>
@@ -321,6 +323,36 @@
 <!-- project/list.jsp 화면끝나는 태그 -->
 
 		<script>
+
+		function regist_go(){
+			var mbtitle = $("input[name=mbtitle]").val();
+			var mbcontent = $("textarea[name=mbcontent]").val();
+			var membernum = $("input[name=membernum]").val();
+			var pjnum = $("input[name=pjnum]").val();
+			
+			
+			var data={
+					"MB_TITLE":mbtitle,
+					"MB_CONTENT":mbcontent,
+					"MEMBER_NUM":membernum,
+					"PJ_NUM":pjnum
+			}
+			$.ajax({
+				url:"<%=request.getContextPath()%>/project/meetingbook_regist",
+				type:"post",
+				data:data,		
+				dataType:"json",
+				success:function(){
+					alert("등록되었습니다.");
+					location.reload();
+				},
+				error:function(){
+					alert('왜안됨');
+				}
+			});
+		}
+		
+		
 			document.getElementById("modal_opne_btn").onclick = function() {
 				document.getElementById("modal1").style.display = "block";
 			}

@@ -15,6 +15,7 @@ public class RequireService {
 	public RequireService(RequireRepository requireRepository) {
 		this.requireRepository= requireRepository;
 	}
+	
 
 	public List<Require> getRequireListByPJ_NUM(int PJ_NUM){
 		return requireRepository.getRequireListByPJ_NUM(PJ_NUM);
@@ -27,14 +28,15 @@ public class RequireService {
 		return require;
 	}
 	
-	
-
 	public Require getRequireByREQUIRE_NUM(int REQUIRE_NUM){
-		return requireRepository.getRequireByREQUIRE_NUM(REQUIRE_NUM);
+		
+		Require requireList = requireRepository.getRequireByREQUIRE_NUM(REQUIRE_NUM);
+		
+		return requireList;
 	}
 	
 	public void registRequire(Require require) {
-		require.setPJ_NUM(requireRepository.selectRequireSequenceNextValue());
+		require.setREQUIRE_NUM(requireRepository.selectRequireSequenceNextValue());
 		requireRepository.registRequire(require);
 	}
 	

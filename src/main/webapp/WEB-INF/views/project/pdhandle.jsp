@@ -43,6 +43,9 @@ function printData(productArr,target,templateObject){
 	target.append(html);
 }
 
+window.onload=function(){
+	showList(1,0,'','');
+}
 
 function showList(PJ_NUM,PRODUCT_STEP,searchType,keyword){
 	

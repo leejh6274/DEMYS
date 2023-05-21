@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <!DOCTYPE html>
 <html>
 <html lang="ko" class="light" data-theme="light">
@@ -134,7 +136,7 @@ body {
    					
 				<tr class="w-full">
 	   				<td class="font-bold" style="width:100%;">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목
-	   					<span style="border:1px solid #aaa; width:640px; border-radius:0px; margin-left: 1.5rem;">요구사항정의서임</span>
+	   					<span style="border:1px solid #aaa; width:640px; border-radius:0px; margin-left: 1.5rem;">${require.REQUIRE_TITLE }</span>
 	   				</td>
 	   			</tr>
    					
@@ -165,7 +167,7 @@ body {
 				<tr>
 					<td class="flex font-bold" >
 						내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용&nbsp;
-						<span style="height:150px; width:100%; margin-left: 1.5rem; resize:none; border:1px solid #aaa; border-radius:0px; padding:10px;">요구사항정의서_ver.1557 수정본입니다.</span>
+						<span style="height:150px; width:100%; margin-left: 1.5rem; resize:none; border:1px solid #aaa; border-radius:0px; padding:10px;">${require.REQUIRE_DETAIL }</span>
 					</td>
 				</tr>
 	   						<!-- <td>내&nbsp;&nbsp;&nbsp;용</td>
@@ -188,7 +190,7 @@ body {
 	   				<td style="width:250px; font-weight:bold; display:flex; width:100%; margin-top:10px; white-space: nowrap;"><div class="flex items-center">파일첨부</div>
 						<div class="flex w-full items-center justify-between" style="height:48px; border:1px solid #aaa; width:100%;; margin-left:26px;" >&nbsp;&nbsp;요구사항정의서_ver.1557.hwp
 							<span>
-								<i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl text-black mr-3 " ></i>
+								<i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>
 							</span>
 						</div>
 					</td>
@@ -198,8 +200,8 @@ body {
    		</div>
  
 		<div style="display:flex; justify-content:center; margin-top:-10px;">
-			<button class="btn btn-se" onclick="location.href='require_modify';" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">수 정</button>
-			<button class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">삭 제</button>
+			<button class="btn btn-se" onclick="location.href='require_modify?REQUIRE_NUM=${require.REQUIRE_NUM}'" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">수 정</button>
+			<button class="btn btn-se" onclick="location.href='require_delete?REQUIRE_NUM=${require.REQUIRE_NUM}'" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">삭 제</button>
 			<button type="button" id="cancelBtn" onclick="window.close();" class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px;">닫 기</button>
 		</div>
 	</div>
@@ -207,7 +209,40 @@ body {
    <!-- /.content-wrapper -->
 	<script>
 		
-
+	function modify_go(){
+		var title = $("input[name=title]").val();
+		var level = $("select[name=level]").val();
+		var detail = $("textarea[name=detail]").val();
+		var ctnum = $("input[name=ctnum]").val();
+		var membernum = $("input[name=membernum]").val();
+		var pjnum = $("input[name=pjnum]").val();
+		
+		
+		var data={
+				"REQUIRE_TITLE":title,
+				"REQUIRE_LEVEL":level,
+				"REQUIRE_DETAIL":detail,
+				"CT_NUM":ctnum,
+				"MEMBER_NUM":membernum,
+				"PJ_NUM":pjnum
+		}
+		$.ajax({
+			url:"<%=request.getContextPath()%>/project/require_modify",
+			type:"post",
+			data:data,		
+			dataType:"json",
+			success:function(){
+			
+			},
+			error:function(){
+				alert("수정이 완료되었습니다.");
+				location.reload();
+		
+			}
+		});
+	}	
+	
+	
 
 		$(document).ready(function(){
 	  		var fileTarget = $('.filebox .upload-hidden');

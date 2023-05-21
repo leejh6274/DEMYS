@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -81,12 +82,8 @@ public class ProjectController {
 		 
 		     //1을 PJ_NUM으로 바꿔
 		 if(PRODUCT_STEP > 0 ) {
-			 System.out.println("PRODUCT_STEP222 : " + PRODUCT_STEP);
 			 productList = productService.getSearchProductList(PJ_NUM, PRODUCT_STEP, searchType, keyword); //1을 PJ_NUM으로, 위에 모델옆에 int PJ_NUM
 		 }
-		 
-		 
-		 System.out.println("productList : " + productList);
 		 return productList;
 	 }
 	 
@@ -123,17 +120,63 @@ public class ProjectController {
 				
 		return "project/require";
 	 }
+	
+	  
+	@RequestMapping("project/require_regist")
+	@ResponseBody
+	 public void showprequire_regist(String REQUIRE_TITLE, int REQUIRE_LEVEL, String REQUIRE_DETAIL, int CT_NUM, int MEMBER_NUM, int PJ_NUM) {
+		
+		Require require = new Require();
+		
+		require.setREQUIRE_TITLE(REQUIRE_TITLE);
+		require.setREQUIRE_LEVEL(REQUIRE_LEVEL);
+		require.setREQUIRE_DETAIL(REQUIRE_DETAIL);
+		require.setCT_NUM(CT_NUM);
+		require.setMEMBER_NUM(MEMBER_NUM);
+		require.setPJ_NUM(1);
+
+		requireService.registRequire(require);
+	
+	 }
+	 
 	 
 	 @RequestMapping("project/require_detail") 
-	 public void showrequire_detail() {
-	 
+	 public void showrequire_detail(Model model, int REQUIRE_NUM) {
+		 Require require = requireService.getRequireByREQUIRE_NUM(REQUIRE_NUM);
+		 model.addAttribute("require", require);
 	 }
-	  
+	 
+	 
 	 @RequestMapping("project/require_modify") 
-	 public void showrequire_modify() {
-	  
+	 public void showrequire_modify(int REQUIRE_NUM, Model model) {
+		 Require require = requireService.getRequireByREQUIRE_NUM(REQUIRE_NUM);
+		 model.addAttribute("require",require);
+	 }
+	 
+	 
+	 @ResponseBody
+	 @PostMapping("project/dorequire_modify") 
+	 public void showrequire_modify(String REQUIRE_TITLE, int REQUIRE_LEVEL, String REQUIRE_DETAIL, int REQUIRE_NUM) {
+		System.out.println("REQUIRE_NUM:"+REQUIRE_NUM);
+		Require require = requireService.getRequireByREQUIRE_NUM(REQUIRE_NUM);
+				
+		require.setREQUIRE_TITLE(REQUIRE_TITLE);
+		require.setREQUIRE_LEVEL(REQUIRE_LEVEL);
+		require.setREQUIRE_DETAIL(REQUIRE_DETAIL);
+		
+
+		requireService.modifyRequire(require);
 	 }
 	
+	 @RequestMapping("project/require_delete")
+	  public String showrequire_delete(int REQUIRE_NUM) {
+		 
+		 requireService.removeRequire(REQUIRE_NUM);
+			
+		 return "project/remove_success";
+	 }
+	 
+	 
 	@RequestMapping("project/meetingbook")
 	public String showmeetingbook(Model model, @RequestParam(defaultValue = "") Object PJ_NUM, @RequestParam(defaultValue = "MB_TITLE, MEMBER_NAME") String searchKeywordTypeCode, @RequestParam(defaultValue = "") String searchKeyword) {
 		//List<MeetingBook> meetingBookListPJNUM = meetingBookService.getMeetingBookListByPJ_NUM(1); 
@@ -150,6 +193,18 @@ public class ProjectController {
 	 @RequestMapping("project/meetingbook_detail") 
 	 public void showmeetingbook_detail() {
 	 
+	 }
+	 
+	 @RequestMapping("project/meetingbook_regist") 
+	 public void showmeetingbook_regist(String MB_TITLE, String MB_CONTENT, int MEMBER_NUM, int PJ_NUM) {
+		 MeetingBook meetingBook = new MeetingBook();
+		 
+		 meetingBook.setMB_TITLE(MB_TITLE);
+		 meetingBook.setMB_CONTENT(MB_CONTENT);
+		 meetingBook.setMEMBER_NUM(MEMBER_NUM);
+		 meetingBook.setPJ_NUM(PJ_NUM);
+		 
+		 meetingBookService.registMeetingBook(meetingBook);
 	 }
 	 
 	 @RequestMapping("project/issue") 
