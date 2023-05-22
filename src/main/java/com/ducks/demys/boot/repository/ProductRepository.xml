@@ -17,7 +17,9 @@
 		FROM PRODUCT p, MEMBER m
 		WHERE p.MEMBER_NUM = m.MEMBER_NUM
 		and PJ_NUM=#{PJ_NUM}
-		and PRODUCT_STEP=#{PRODUCT_STEP}
+		<if test="PRODUCT_STEP != null and PRODUCT_STEP != '0'.toString()">
+			and PRODUCT_STEP like '%'||#{PRODUCT_STEP}||'%'
+		</if>  
 		<if test="searchKeyword != ''">
    			<choose>
       			<when test="searchKeywordTypeCode == 'PRODUCT_TITLE'">
@@ -47,9 +49,10 @@
 		ORDER BY PRODUCT_NUM DESC -->
 	</select>
 	<select id="getProductByPRODUCT_NUM" resultType="Product">
-		SELECT *
-		FROM PRODUCT
-		WHERE PRODUCT_NUM=#{PRODUCT_NUM}
+		SELECT p.*, m.MEMBER_NAME
+		FROM PRODUCT p, MEMBER m
+		WHERE p.MEMBER_NUM=m.MEMBER_NUM
+		and p.PRODUCT_NUM=#{PRODUCT_NUM}
 	</select>
 	<select id="selectProductSequenceNextValue" resultType="int">
 		SELECT
@@ -58,8 +61,8 @@
 	</select>
 	<insert id="registProduct">
 		INSERT INTO
-		PRODUCT(PRODUCT_STEP,PRODUCT_TITLE,PRODUCT_CONTENT,PRODUCT_STATUS,MEMBER_NUM,PJ_NUM)
-		VALUES(#{PRODUCT_STEP},#{PRODUCT_TITLE},#{PRODUCT_CONTENT},#{PRODUCT_STATUS},#{MEMBER_NUM},#{PJ_NUM})
+		PRODUCT(PRODUCT_NUM,PRODUCT_STEP,PRODUCT_TITLE,PRODUCT_CONTENT,PRODUCT_STATUS,MEMBER_NUM,PJ_NUM)
+		VALUES(#{PRODUCT_NUM},#{PRODUCT_STEP},#{PRODUCT_TITLE},#{PRODUCT_CONTENT},#{PRODUCT_STATUS},#{MEMBER_NUM},#{PJ_NUM})
 	</insert>
 	<update id="modifyProduct">
 		UPDATE PRODUCT

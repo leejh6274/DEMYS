@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <html lang="ko" class="light" data-theme="light">
@@ -132,7 +133,7 @@ body {
    		<div class="flex flex-col card-body" style="padding-top:10px; padding-bottom:10px;">
 				
 					<!-- 제목 -->
-					<div class="flex w-25 items-center" style="height:48px; border:1px solid #aaaaaa;">&nbsp;&nbsp;	${meetingbook.MB_TITLE}</div>
+					<div class="flex w-25 items-center" style="height:48px; border:1px solid #aaaaaa;">&nbsp;&nbsp;	${meetingBook.MB_TITLE}</div>
 					
 					<!-- 분류, 날짜, 채택 -->
 					<div class="flex flex-row">
@@ -143,9 +144,9 @@ body {
 		   					<option value="r">구현</option>
 		   					<option value="t" selected>시험</option>
 						</select> -->
-						<div class="w-40 text-center inline-block" style="line-height:45px; height:48px; border:1px solid #aaaaaa;">${member.member_name}</div>
+						<div class="w-40 text-center inline-block" style="line-height:45px; height:48px; border:1px solid #aaaaaa; text-align:start">&nbsp;&nbsp;&nbsp;${meetingBook.MEMBER_NAME }</div>
 						<div class="flex w-full" style="height:48px; border:1px solid #aaaaaa; border-left:0px;">
-							<label for="icon" style="line-height:45px; width:100%;"><i class="fa-solid fa-calendar-days ml-3" style="color:#016fa0;"></i>&nbsp;&nbsp;&nbsp;${meetingbook.MB_REGDATE }</label>
+							<label for="icon" style="line-height:45px; width:100%;"><i class="fa-solid fa-calendar-days ml-3" style="color:#016fa0;"></i>&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${meetingBook.MB_REGDATE }" pattern="yyyy-MM-dd"/></label>
 						</div>
 						
 						<!-- <div class="flex justify-center items-center" style="height:48px; border:1px solid #aaaaaa; width:150px; font-weight:bolder">
@@ -154,20 +155,20 @@ body {
 					</div>
 					
 					<div style="width:100%; height:200px; border:1px solid #aaaaaa;">
-						&nbsp;&nbsp;${meetingbook.MB_CONTENT }
+						&nbsp;&nbsp;${meetingBook.MB_CONTENT }
 					</div>
 					
 					<!-- 첨부파일 -->
 					<div class="flex w-full items-center" style="height:48px; border:1px solid #aaaaaa; color:#dfdfdf; justify-content:space-between;">&nbsp;&nbsp;첨부파일이름.hwp(${mb_attach.MBAT_FILENAME })
 						<span>
-							<i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl text-black mr-3 " ></i>
+							<i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>
 						</span>
 					</div>
 					
 				</div>
  
 		<div style="display:flex; justify-content:center; margin-top:10px;">
-			<button class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">수 정</button>
+			<button class="btn btn-se" onclick="location.href='meetingbook_modify?MB_NUM=${meetingBook.MB_NUM}'" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">수 정</button>
 			<button type="button" id="cancelBtn" onclick="window.close();" class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px;">닫 기</button>
 		</div>
 	</div>

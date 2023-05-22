@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <html lang="ko" class="light" data-theme="light">
@@ -124,7 +125,7 @@ body {
 		<div class="flex card-body" style="padding-bottom:0px;">
 			<div class="navbar text-neutral-content" style="width: 100%; padding: 0px; min-height: 1rem; height: 30px; border-bottom:3px solid #016fa0;">
 				<div class="text-black mb-3" style="font-weight: bold; font-size: 1.5rem; ">
-					산출물
+					산출물 수정
 				</div>
 			</div>
 		</div>
@@ -133,49 +134,43 @@ body {
    		<div class="flex flex-col card-body" style="padding-top:10px; padding-bottom:10px;">
 				
 					<!-- 제목 -->
-					<div class="flex w-25 items-center" style="height:48px; border:1px solid #aaaaaa;">&nbsp;&nbsp;${product.PRODUCT_TITLE }</div>
+					<input class="flex w-25 items-center" style="height:48px; border:1px solid #aaaaaa;" value="${product.PRODUCT_TITLE }" name="title"/>
+					<input type="hidden" name="status" value="${product.PRODUCT_STATUS }" />
+					<input type="hidden" name="pdnum" value="${product.PRODUCT_NUM }" />
+					<input type="hidden" name="pjnum" value="${product.PJ_NUM }" />
+					<input type="hidden" name="membernum" value="${product.MEMBER_NUM }" />
 					
 					<!-- 분류, 날짜, 채택 -->
 					<div class="flex flex-row">
-						<!-- <select class="w-24 h-8 text-center inline-block"  style="height:48px; border:1px solid #aaaaaa;" >
+						 <select class="w-24 h-8 text-center inline-block"  style="height:48px; border:1px solid #aaaaaa;" name="step" >
 			   				<option value="step" >개발 단계</option>
-		   					<option value="1">분석</option>
-		   					<option value="2">설계</option>
-		   					<option value="3">구현</option>
-		   					<option value="4" selected>시험</option>
-						</select> -->
-								<c:if test="${product.PRODUCT_STEP eq 1 }" > 
-									<div class="flex justify-center items-center" style="border-radius:0px; 1.5rem; border:1px solid #aaa; background-color:red; width:13%;">분석</div>
-								</c:if>
-								
-								<c:if test="${product.PRODUCT_STEP  eq 2 }">
-									<div class="flex justify-center items-center" style="border-radius:0px; 1.5rem; border:1px solid #aaa; background-color:blue; width:13%;">설계</div>
-								</c:if>
-								
-								<c:if test="${product.PRODUCT_STEP eq 3 }">
-									<div class="flex justify-center items-center" style="border-radius:0px; 1.5rem; border:1px solid #aaa; background-color:green; width:13%;">구현</div>
-								</c:if>
-								
-								<c:if test="${product.PRODUCT_STEP eq 4 }">
-									<div class="flex justify-center items-center" style="border-radius:0px; 1.5rem; border:1px solid #aaa; background-color:gold; width:13%;">시험</div>
-								</c:if>
-			
-							
-						<div class="flex w-full" style="height:48px; border:1px solid #aaaaaa; border-left:0px; border-right:0px;">
-							<label for="icon" style="line-height:50px; width:100%;"><i class="fa-solid fa-calendar-days ml-3" style="color:#016fa0;"></i>&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${product.PRODUCT_REGDATE }" pattern="yyyy-MM-dd"/></label>
+		   					<option value="1" ${product.PRODUCT_STEP eq '1' ? 'selected' : ""} >분석</option>
+		   					<option value="2" ${product.PRODUCT_STEP eq '2' ? 'selected' : ""} >설계</option>
+		   					<option value="3" ${product.PRODUCT_STEP eq '3' ? 'selected' : ""} >구현</option>
+		   					<option value="4" ${product.PRODUCT_STEP eq '4' ? 'selected' : ""} >시험</option>
+						</select> 
+					
+						<div class="flex w-full" style="height:48px; border:1px solid #aaaaaa; border-left:0px;">
+							<label for="icon" style="line-height:50px; width:100%;"><i class="fa-solid fa-calendar-days ml-3" style="color:#016fa0;"></i>&nbsp;&nbsp;&nbsp;
+							<fmt:formatDate value="${product.PRODUCT_REGDATE }" pattern="yyyy-MM-dd"/>
+							</label>
 						</div>
-						<select class="w-28 h-8 text-center inline-block"  style="height:48px; border:1px solid #aaaaaa;" disabled>
+						<!-- <select class="w-28 h-8 text-center inline-block"  style="height:48px; border:1px solid #aaaaaa;">
 		   					<option value="1" selected>채택</option>
 		   					<option value="0">미채택</option>
-						</select>
+						</select> -->
+						
+						<!-- <select class="w-28 h-8 text-center inline-block"  style="height:48px; border:1px solid #aaaaaa;">
+		   					<option value="1" selected>채택</option>
+		   					<option value="0">미채택</option>
+						</select> -->
+						
 						<!-- <div class="flex justify-center items-center" style="height:48px; border:1px solid #aaaaaa; width:150px; font-weight:bolder">
 					 		채택
 						</div> -->
 					</div>
 					
-					<div style="width:100%; height:200px; border:1px solid #aaaaaa;">
-						&nbsp;&nbsp;${product.PRODUCT_CONTENT }
-					</div>
+					<textarea style="width:100%; height:200px; border:1px solid #aaaaaa;" name="content">&nbsp;&nbsp;${product.PRODUCT_CONTENT }</textarea>
 					
 					<!-- 첨부파일 -->
 					<div class="flex w-full items-center" style="height:48px; border:1px solid #aaaaaa; color:#dfdfdf; justify-content:space-between;">&nbsp;&nbsp;시스템 시험 결과서 ver.1.hwp
@@ -187,7 +182,7 @@ body {
 				</div>
  
 		<div style="display:flex; justify-content:center; margin-top:10px;">
-			<button class="btn btn-se" onclick="location.href='product_modify?PRODUCT_NUM=${product.PRODUCT_NUM}'" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">수 정</button>
+			<button class="btn btn-se" onclick="modify_go('${product.PRODUCT_NUM}');" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">수 정</button>
 			<button type="button" id="cancelBtn" onclick="window.close();" class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px;">닫 기</button>
 		</div>
 	</div>
@@ -195,7 +190,40 @@ body {
    <!-- /.content-wrapper -->
 	<script>
 		
-
+	function modify_go(PRODUCT_NUM){
+		var title = $("input[name=title]").val();
+		var step = $("select[name=step]").val();
+		var content = $("textarea[name=content]").val();
+		var membernum = $("input[name=membernum]").val();
+		var pjnum = $("input[name=pjnum]").val();
+		var pdnum = $("input[name=pdnum]").val();
+		
+		
+		var data={
+				"PRODUCT_TITLE":title,
+				"PRODUCT_STEP":step,
+				"PRODUCT_CONTENT":content,
+				"MEMBER_NUM":membernum,
+				"PJ_NUM":pjnum,
+				"PRODUCT_NUM":pdnum
+		}
+		$.ajax({
+			url:"<%=request.getContextPath()%>/project/doproduct_modify",
+			type:"post",
+			data:data,
+			success:function(){
+				alert("수정이 완료되었습니다.");
+				window.opener.location.reload();
+				window.close();
+			},
+			error:function(){
+				alert('왜안됨?');
+			}
+		});
+	}
+	
+	
+	
 
 		$(document).ready(function(){
 	  		var fileTarget = $('.filebox .upload-hidden');

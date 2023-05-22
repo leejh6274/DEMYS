@@ -197,13 +197,21 @@ body {
 	   						<td>
 	   							<div class="font-bold" style="padding: 10px 0;">
 	   								중 요 도
-		   							<select class="select" style="border-radius:0px; margin-left: 1.53rem; border:1px solid #aaa" name="level">
+		   							<!-- <select class="select" style="border-radius:0px; margin-left: 1.53rem; border:1px solid #aaa" name="level">
 									  <option disabled selected>선택</option>
 									  <option value="1" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</option>
 									  <option value="2" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;</option>
 									  <option value="3" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;</option>
 									  <option value="4" style="color:#FFD700;">&#xf005;&#xf005;</option>
 									  <option value="5" style="color:#FFD700;">&#xf005;</option>
+									</select> -->
+									<select class="select" style="border-radius:0px; margin-left: 1.53rem; border:1px solid #aaa" name="level">
+									  <option value="${require.REQUIRE_LEVEL }" selected>선택</option>
+									  <option value="1" ${require.REQUIRE_LEVEL eq '1' ? 'selected' : "" } style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</option>
+									  <option value="2" ${require.REQUIRE_LEVEL eq '2' ? 'selected' : "" } style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;</option>
+									  <option value="3" ${require.REQUIRE_LEVEL eq '3' ? 'selected' : "" } style="color:#FFD700;">&#xf005;&#xf005;&#xf005;</option>
+									  <option value="4" ${require.REQUIRE_LEVEL eq '4' ? 'selected' : "" } style="color:#FFD700;">&#xf005;&#xf005;</option>
+									  <option value="5" ${require.REQUIRE_LEVEL eq '5' ? 'selected' : "" } style="color:#FFD700;">&#xf005;</option>
 									</select>
 	   							</div>
 	   						</td>
@@ -283,7 +291,7 @@ body {
 				window.close();
 			},
 			error:function(){
-				alert('왜안됨?');
+				alert('수정 내용을 확인하십시오.');
 			}
 		});
 	}	

@@ -307,7 +307,6 @@
 							<input type="hidden" name="ctnum" value="1"/>
 							<input type="hidden" name="membernum" value="3" />
 							<input type="hidden" name="pjnum" value="1" />
-							<input type="hidden" name="membername" value="이주헌" />
 						</div>
 					</div>
 				</div>
@@ -349,7 +348,7 @@
 					<tr>
 						<td class="flex font-bold" >
 							 내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용&nbsp;
-							<textarea class="textarea " name="detail" id="content" class="form-control" style="height:150px; width:100%; margin-left: 1.5rem; resize:none; border:1px solid #aaa; border-radius:0px;" placeholder="내용을 작성하세요."></textarea>
+							<textarea class="textarea" name="detail" id="content" class="form-control" style="height:150px; width:100%; margin-left: 1.5rem; resize:none; border:1px solid #aaa; border-radius:0px;" placeholder="내용을 작성하세요."></textarea>
 						</td>
 					</tr>
 	   						<!-- <td>내&nbsp;&nbsp;&nbsp;용</td>

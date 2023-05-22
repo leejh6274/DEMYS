@@ -13,9 +13,9 @@
 		<td>
 			<div class="rounded-lg w-12 text-white" style="margin:0 auto; background-color:#dfdfdf">
 				{{#if product_STATUS }}
-					<div class="rounded-lg w-12 text-white" style="margin:0 auto; background-color:#016fa0">채택</div>
+					<button id="approveBtn" class="btn btn-outline" onclick="javascript:status_on({{product_TL.PRODUCT_NUM}}, 1)">채&nbsp;&nbsp;택</button>
 				{{else }}
-					<div class="rounded-lg w-12 text-white" style="margin:0 auto; background-color:#dfdfdf">미채택</div>
+					<button id="approveBtn" class="btn btn-outline" onclick="javascript:status_on({{product_TL.PRODUCT_NUM}}, 0)">미채택</button>
 				{{/if }}
 			</div>
 		</td>
@@ -23,6 +23,7 @@
 {{/each }}
 </script>
 
+                        		
 <script>
 Handlebars.registerHelper({
 	"prettifyDate":function(timeValue){ //Handlbars에 날짜출력함수 등록
@@ -66,6 +67,38 @@ function showList(PJ_NUM,PRODUCT_STEP,searchType,keyword){
 			$('#gubunValue').val(PRODUCT_STEP);
 		}
 	});
+}
+
+function status_on(PRODUCT_NUM, PRODUCT_STATUS){
+	
+	var data = {
+			product_num: PRODUCT_NUM,
+			product_status: PRODUCT_STATUS
+	}
+	
+	$.ajax({
+	      url:"<%=request.getContextPath()%>/project/PDstatusChange",
+	      type:"post",
+	      data: data,
+	      dataType: "json",
+	      success:function(result){
+	    	  console.log(result)
+	    	  
+	    	  if (result.status === 1) {
+	    		  $('#approveBtn').css('background-color', 'blue');
+	    		  
+					  	  
+	    	  } else {
+	    		  $('#approveBtn').css('background-color', 'red');
+			         
+	    	  }
+	    	  
+	    	 
+	      },
+	      error: function(error){
+	    	 console.log(error)
+	      }
+	   });
 }
 
 /* window.onload=function(){

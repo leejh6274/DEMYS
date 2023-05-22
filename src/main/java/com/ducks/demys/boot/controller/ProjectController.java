@@ -72,6 +72,7 @@ public class ProjectController {
 	 @RequestMapping("project/productList") 
 	 @ResponseBody
 	 public List<Product> showproductList(@RequestBody ProductForSearch pd) {
+		 System.out.println(pd);
 		 List<Product> productList=new ArrayList<Product>();
 		 int PJ_NUM = pd.getPJ_NUM();
 		 int PRODUCT_STEP = (int) pd.getPRODUCT_STEP();
@@ -81,14 +82,9 @@ public class ProjectController {
 		 productList = productService.getProductListByOnlyPJ_NUM(PJ_NUM);
 		 
 		     //1을 PJ_NUM으로 바꿔
-		 if(PRODUCT_STEP > 0 ) {
 			 productList = productService.getSearchProductList(PJ_NUM, PRODUCT_STEP, searchType, keyword); //1을 PJ_NUM으로, 위에 모델옆에 int PJ_NUM
-		 }
 		 return productList;
 	 }
-	 
-		
-	 
 	 
 	 @RequestMapping("project/PDstatusChange")
 	 @ResponseBody
@@ -104,11 +100,60 @@ public class ProjectController {
 		 
 		 productService.changeStatusProduct(product);
 	 }
-	  
-	 @RequestMapping("project/product_detail") 
-	 public void showproduct_detail() {
 	 
+	 
+	 @RequestMapping("project/product_regist")
+	 @ResponseBody
+	 public void showproduct_regist(String PRODUCT_TITLE, int PRODUCT_STEP, String PRODUCT_CONTENT, int PRODUCT_STATUS, int MEMBER_NUM, int PJ_NUM) {
+		Product product = new Product();	
+		
+		product.setPRODUCT_TITLE(PRODUCT_TITLE);
+		product.setPRODUCT_STEP(PRODUCT_STEP);
+		product.setPRODUCT_CONTENT(PRODUCT_CONTENT);
+		product.setPRODUCT_STATUS(PRODUCT_STATUS);
+		product.setMEMBER_NUM(MEMBER_NUM);
+		product.setPJ_NUM(1);
+
+		productService.registProduct(product);
+		
 	 }
+		 
+	 @RequestMapping("project/product_detail") 
+	 public void showproduct_detail(Model model, int PRODUCT_NUM) {
+		 Product product = productService.getProductByProduct_NUM(PRODUCT_NUM);
+		 model.addAttribute("product", product);
+	 }
+	 
+	 @RequestMapping("project/product_modify") 
+	 public void showproduct_modify(int PRODUCT_NUM, Model model) {
+		 Product product = productService.getProductByProduct_NUM(PRODUCT_NUM);
+		 model.addAttribute("product", product);
+	 }
+	 
+	 @ResponseBody
+	 @PostMapping("project/doproduct_modify") 
+	 public void showdoproduct_modify(String PRODUCT_TITLE, int PRODUCT_STEP, String PRODUCT_CONTENT, int PRODUCT_NUM, int PJ_NUM, int MEMBER_NUM) {
+		
+		Product product = productService.getProductByProduct_NUM(PRODUCT_NUM);
+				
+		product.setPRODUCT_TITLE(PRODUCT_TITLE);
+		product.setPRODUCT_CONTENT(PRODUCT_CONTENT);
+		product.setPRODUCT_STEP(PRODUCT_STEP);
+		product.setMEMBER_NUM(MEMBER_NUM);
+		product.setPJ_NUM(PJ_NUM);
+		
+		productService.modifyProduct(product);
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 	 
 	 @RequestMapping("project/require") 
 	 public String showrequire(Model model, @RequestParam(defaultValue = "REQUIRE_TITLE, REQUIRE_DETAIL") String searchKeywordTypeCode,
@@ -124,7 +169,7 @@ public class ProjectController {
 	  
 	@RequestMapping("project/require_regist")
 	@ResponseBody
-	 public void showprequire_regist(String REQUIRE_TITLE, int REQUIRE_LEVEL, String REQUIRE_DETAIL, int CT_NUM, int MEMBER_NUM, int PJ_NUM) {
+	 public void showrequire_regist(String REQUIRE_TITLE, int REQUIRE_LEVEL, String REQUIRE_DETAIL, int CT_NUM, int MEMBER_NUM, int PJ_NUM) {
 		
 		Require require = new Require();
 		
@@ -157,7 +202,7 @@ public class ProjectController {
 	 @ResponseBody
 	 @PostMapping("project/dorequire_modify") 
 	 public void showrequire_modify(String REQUIRE_TITLE, int REQUIRE_LEVEL, String REQUIRE_DETAIL, int REQUIRE_NUM) {
-		System.out.println("REQUIRE_NUM:"+REQUIRE_NUM);
+		
 		Require require = requireService.getRequireByREQUIRE_NUM(REQUIRE_NUM);
 				
 		require.setREQUIRE_TITLE(REQUIRE_TITLE);
@@ -177,35 +222,79 @@ public class ProjectController {
 	 }
 	 
 	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 	@RequestMapping("project/meetingbook")
 	public String showmeetingbook(Model model, @RequestParam(defaultValue = "") Object PJ_NUM, @RequestParam(defaultValue = "MB_TITLE, MEMBER_NAME") String searchKeywordTypeCode, @RequestParam(defaultValue = "") String searchKeyword) {
-		//List<MeetingBook> meetingBookListPJNUM = meetingBookService.getMeetingBookListByPJ_NUM(1); 
 		List<MeetingBook> meetingBookList = meetingBookService.getSearchMeetingbook(1, searchKeywordTypeCode, searchKeyword);
 		
-		//model.addAttribute("meetingBookListPJNUM", meetingBookListPJNUM);
 		model.addAttribute("meetingBookList", meetingBookList);
-
 		
 		return "project/meetingbook";
 	}
 	
+	@ResponseBody
+	@RequestMapping("project/meetingbook_regist") 
+	public void showmeetingbook_regist(String MB_TITLE, String MB_CONTENT, int MEMBER_NUM, int PJ_NUM) {
+		MeetingBook meetingBook = new MeetingBook();
+		
+		meetingBook.setMB_TITLE(MB_TITLE);
+		meetingBook.setMB_CONTENT(MB_CONTENT);
+		meetingBook.setMEMBER_NUM(MEMBER_NUM);
+		meetingBook.setPJ_NUM(1);
+		
+		meetingBookService.registMeetingBook(meetingBook);
+	}
 
 	 @RequestMapping("project/meetingbook_detail") 
-	 public void showmeetingbook_detail() {
-	 
+	 public void showmeetingbook_detail(Model model, int MB_NUM) {
+		 MeetingBook meetingbook = meetingBookService.getMeetingBookByMB_NUM(MB_NUM);
+		 model.addAttribute(meetingbook);
 	 }
 	 
-	 @RequestMapping("project/meetingbook_regist") 
-	 public void showmeetingbook_regist(String MB_TITLE, String MB_CONTENT, int MEMBER_NUM, int PJ_NUM) {
-		 MeetingBook meetingBook = new MeetingBook();
-		 
-		 meetingBook.setMB_TITLE(MB_TITLE);
-		 meetingBook.setMB_CONTENT(MB_CONTENT);
-		 meetingBook.setMEMBER_NUM(MEMBER_NUM);
-		 meetingBook.setPJ_NUM(PJ_NUM);
-		 
-		 meetingBookService.registMeetingBook(meetingBook);
+	 @RequestMapping("project/meetingbook_modify") 
+	 public void showmeetingbook_modify(int MB_NUM, Model model) {
+		 MeetingBook meetingBook = meetingBookService.getMeetingBookByMB_NUM(MB_NUM);
+		 model.addAttribute("meetingBook",meetingBook);
 	 }
+	 
+	 
+	 @ResponseBody
+	 @PostMapping("project/domeetingbook_modify") 
+	 public String showdomeetingBook_modify(String MB_TITLE, String MB_CONTENT, int MB_NUM) {
+	
+		MeetingBook meetingBook = meetingBookService.getMeetingBookByMB_NUM(MB_NUM);
+				
+		meetingBook.setMB_TITLE(MB_TITLE);
+		meetingBook.setMB_CONTENT(MB_CONTENT);
+
+		meetingBookService.modifyMeetingBook(meetingBook);
+		
+		return "ss";
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 	 
 	 @RequestMapping("project/issue") 
 	 public String showissue(Model model) {

@@ -22,7 +22,7 @@ public class ProductService {
 	}
 	
 	public List<Product> getSearchProductList(int PJ_NUM, int PRODUCT_STEP, String searchKeywordTypeCode, String searchKeyword) {
-
+		
 		List<Product> product = productRepository.getSearchProductList(PJ_NUM, PRODUCT_STEP, searchKeywordTypeCode, searchKeyword);
 
 		return product;

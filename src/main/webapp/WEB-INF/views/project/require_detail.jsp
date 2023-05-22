@@ -151,12 +151,11 @@ body {
 	   					<div class="font-bold" style="padding-top: 20px; padding-bottom:10px;">
 	   						중 요 도
 		   					<select class="select" style="border-radius:0px; margin-left: 1.5rem; border:1px solid #aaa" disabled>
-								<option >선택</option>
-								<option value="" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</option>
-								<option value="" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;</option>
-								<option value="" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;</option>
-								<option value="" style="color:#FFD700;">&#xf005;&#xf005;</option>
-								<option value="" style="color:#FFD700;">&#xf005;</option>
+								<option selected="selected" style="color:#FFD700;">
+									<c:forEach begin="${require.REQUIRE_LEVEL }" end="5" step="1" >
+										&#xf005;
+									</c:forEach>
+								</option>
 							</select>
 	   					</div>
 	   				</td>
@@ -208,42 +207,7 @@ body {
 	<div class="modal_layer"></div>
    <!-- /.content-wrapper -->
 	<script>
-		
-	function modify_go(){
-		var title = $("input[name=title]").val();
-		var level = $("select[name=level]").val();
-		var detail = $("textarea[name=detail]").val();
-		var ctnum = $("input[name=ctnum]").val();
-		var membernum = $("input[name=membernum]").val();
-		var pjnum = $("input[name=pjnum]").val();
-		
-		
-		var data={
-				"REQUIRE_TITLE":title,
-				"REQUIRE_LEVEL":level,
-				"REQUIRE_DETAIL":detail,
-				"CT_NUM":ctnum,
-				"MEMBER_NUM":membernum,
-				"PJ_NUM":pjnum
-		}
-		$.ajax({
-			url:"<%=request.getContextPath()%>/project/require_modify",
-			type:"post",
-			data:data,		
-			dataType:"json",
-			success:function(){
-			
-			},
-			error:function(){
-				alert("수정이 완료되었습니다.");
-				location.reload();
-		
-			}
-		});
-	}	
 	
-	
-
 		$(document).ready(function(){
 	  		var fileTarget = $('.filebox .upload-hidden');
 

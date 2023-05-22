@@ -245,8 +245,8 @@
                       	<tbody style="height: 45px; overflow-y:auto; overflow-x:hidden;">
                         	<c:forEach var="meetingBook" items="${meetingBookList}">
                      			<tr>
-                        			<td onclick="window.open('meetingbook_detail','회의록 상세','width=900px,height=480px,left=500px,top=300px');">${meetingBook.MB_NUM}</td>
-                        			<td onclick="window.open('meetingbook_detail','회의록 상세','width=900px,height=480px,left=500px,top=300px');" style="text-align:start">${meetingBook.MB_TITLE}</td>
+                        			<td onclick="window.open('meetingbook_detail?MB_NUM=${meetingBook.MB_NUM}','회의록 상세','width=900px,height=480px,left=500px,top=300px');" style="cursor:pointer;">${meetingBook.MB_NUM}</td>
+                        			<td onclick="window.open('meetingbook_detail?MB_NUM=${meetingBook.MB_NUM}','회의록 상세','width=900px,height=480px,left=500px,top=300px');" style="text-align:start; cursor:pointer;">${meetingBook.MB_TITLE}</td>
                         			<td><i class="fa-solid fa-paperclip text-2xl"></i></td>
                         			<td>${meetingBook.MEMBER_NAME }</td>
                         			<td><fmt:formatDate value="${meetingBook.MB_REGDATE }" pattern="yyyy-MM-dd"/></td>
@@ -280,7 +280,8 @@
 					<div class="navbar text-neutral-content" style="width: 100%; padding: 0px; min-height: 1rem; height: 30px; border-bottom:3px solid #016fa0;">
 						<div class="text-black mb-3" style="font-weight: bold; font-size: 1.5rem; ">
 							회의록 등록
-							<input type="hidden" name="pjnum" value="1" />
+							<input type="hidden" name="pjnum" value="1" /> 
+							<input type="hidden" name="membernum" value="3" />
 						</div>
 					</div>
 				</div>
@@ -288,15 +289,8 @@
 				<div class="container flex flex-col card-body" style="padding-top:10px; padding-bottom:10px;">
 					<div class="flex">
 						<input type="text" name="mbtitle" placeholder="제목을 입력하세요." class="input" style="border:1px solid #aaaaaa; border-radius:0px; width:600px; justify-content:space-between;">
-						<!-- <select class="w-24 h-8 text-center" style="height:48px; border:1px solid #aaaaaa; border-left:0px;">
-			   				<option value="step" selected>개발 단계</option>
-		   					<option value="a">분&nbsp;&nbsp;석</option>
-		   					<option value="s">설&nbsp;&nbsp;계</option>
-		   					<option value="b">구&nbsp;&nbsp;현</option>
-		   					<option value="t">시&nbsp;&nbsp;험</option>
-						</select> -->
-						<div class="w-36 h-8 text-center" style="line-height:45px; height:48px; border:1px solid #aaa; border-left:0;">${member.MEMBER_NAME }</div>
-						<input type="hidden" name="membernum" value="3" />
+						
+						<div class="w-36 h-8 text-center" style="line-height:45px; height:48px; border:1px solid #aaa; border-left:0;">${meetingBook.MEMBER_NAME }</div>
 					</div>
 					
 					<!-- 내용 -->	
@@ -341,10 +335,9 @@
 				url:"<%=request.getContextPath()%>/project/meetingbook_regist",
 				type:"post",
 				data:data,		
-				dataType:"json",
 				success:function(){
 					alert("등록되었습니다.");
-					location.reload();
+					history.go();
 				},
 				error:function(){
 					alert('왜안됨');

@@ -13,7 +13,7 @@ public interface ProductRepository {
 	
 	public List<Product> getProductListByOnlyPJ_NUM(int PJ_NUM);
 	
-	public List<Product> getSearchProductList(int PJ_NUM,int PRODUCT_STEP, String searchKeywordTypeCode, String searchKeyword); //여차하면 위에 product_step잇는곳에다가 합쳐
+	public List<Product> getSearchProductList(int PJ_NUM,int PRODUCT_STEP, String searchKeywordTypeCode, String searchKeyword); 
 	
 	public Product getProductByPRODUCT_NUM(int PRODUCT_NUM);
 	
