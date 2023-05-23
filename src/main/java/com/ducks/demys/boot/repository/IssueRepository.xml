@@ -9,20 +9,22 @@
 		ORDER BY ISSUE_NUM DESC
 	</select>
 	<select id="getIssueListByPJ_NUM" resultType="Issue">
-		SELECT i.*, m.member_name
+		SELECT i.*, m.MEMBER_NAME
 		FROM ISSUE i, MEMBER m
 		WHERE PJ_NUM = #{PJ_NUM}
-		and i.member_num = m.member_num
+		and i.MEMBER_NUM = m.MEMBER_NUM
 	</select>
+
 	<select id="getIssueListByMEMBER_NUM" resultType="Issue">
-		SELECT i.*, m.member_name
-		FROM issue i, member m
+		SELECT i.*, m.MEMBER_NAME
+		FROM ISSUE i, MEMBER m
 		WHERE MEMBER_NUM=#{MEMBER_NUM}
 	</select>
 	<select id="getIssueByISSUE_NUM" resultType="Issue">
-		SELECT *
-		FROM ISSUE
-		WHERE ISSUE_NUM=#{ISSUE_NUM}
+		SELECT i.*, m.MEMBER_NAME
+		FROM ISSUE i, MEMBER m
+		WHERE i.MEMBER_NUM = m.MEMBER_NUM
+		and ISSUE_NUM=#{ISSUE_NUM}
 	</select>
 	<select id="selectIssueSequenceNextValue" resultType="int">
 		SELECT
@@ -31,8 +33,8 @@
 	</select>
 	<insert id="registIssue">
 		INSERT INTO
-		ISSUE(ISSUE_TITLE,ISSUE_CONTENT,ISSUE_IMP,ISSUE_STATUS,ISSUE_DEADLINE,ISSUE_ENDDATE,MEMBER_NUM,PJ_NUM)
-		VALUES(#{ISSUE_TITLE},#{ISSUE_CONTENT},#{ISSUE_IMP},#{ISSUE_STATUS},#{ISSUE_DEADLINE},#{ISSUE_ENDDATE},#{MEMBER_NUM},#{PJ_NUM})
+		ISSUE(ISSUE_NUM,ISSUE_TITLE,ISSUE_CONTENT,ISSUE_IMP,ISSUE_STATUS,ISSUE_REGDATE,ISSUE_DEADLINE,MEMBER_NUM,PJ_NUM)
+		VALUES(#{ISSUE_NUM},#{ISSUE_TITLE},#{ISSUE_CONTENT},#{ISSUE_IMP},#{ISSUE_STATUS},#{ISSUE_REGDATE},#{ISSUE_DEADLINE},#{MEMBER_NUM},#{PJ_NUM})
 	</insert>
 	<update id="modifyIssue">
 		UPDATE ISSUE

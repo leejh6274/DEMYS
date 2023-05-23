@@ -4,9 +4,11 @@ import java.util.Date;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class Member {
 	
 	private int MEMBER_NUM;
@@ -22,5 +24,6 @@ public class Member {
 	private int MEMBER_AUTHORITY;
 	private String MEMBER_DEP;
 	private int MEMBER_STATUS;
+	private int MEMBER_POSITION;
 	
 }

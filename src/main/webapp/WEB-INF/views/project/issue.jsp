@@ -429,22 +429,22 @@
 	         	<div style="width: 32%; height: 95%; margin-top: 5px; background-color: #e7e7e7;">
 					<div class="title" style="margin: 5px; height: 5%;">
 						<span class="font-bold">&nbsp;&nbsp;중요</span>
-						<span style="font-weight: bolder">SIZE</span>
+						<span style="font-weight: bolder">${issueList.size()}</span>
 					</div>
 				<div class="content flex flex-col items-center" style="height: 95%; margin-left: 5px; overflow: auto;">
 			
 				<c:forEach var="issue" items="${issueList }"  >
 				<c:if test="${issue.ISSUE_IMP == '3' }">
-					<div class="card card-side bg-base-100 " style="width: 90%; height: 30%; margin: 5px;">
-						<div class="card-body card-shadow shadow-md" style="width: 97%; height: 95%; margin: 0; border-radius:15px;" onclick="window.open('issue_detail_TL','이슈 상세','width=1150px,height=730px,left=500px,top=150px');">
-							<div class="card-title flex " style="margin: 0;">
-								<div class="flex items-center" style="margin: 0;">
-									<div class="flex">
-										${issue.ISSUE_TITLE}    <!-- issue.ISSUE_TITLE이긴한데 ISSUE_IMP가 3인 애들의 TITLE -->
+					<div class="card card-side" style="width: 90%; height: 30%; margin: 5px;">
+						<div class="card-body card-shadow shadow-md bg-base-100" style="width: 97%; height: 95%; margin: 0; border-radius:15px;" onclick="window.open('issue_detail?ISSUE_NUM=${issue.ISSUE_NUM}','이슈 상세','width=1150px,height=730px,left=500px,top=150px');">
+							<div class="card-title flex" style="margin: 0;">
+								<div class="flex items-center" style="margin: 0; width: 100%;">
+									<div class="whitespace-nowrap">
+										${issue.ISSUE_TITLE}
 									</div>
-									<div class="flex " style="position: relative; ">
-										<i class="fa-regular fa-comment" style="font-size: 23px; margin: 0;"></i>
-										<div style="z-index: 1; bottom: 1%; left:8%; position: absolute; margin: 0; font-size: 15px; font-weight: bolder; color: red;">&nbsp;2()</div>
+									<div class="flex" style="position: relative; width: 100%;">
+										<i class="fa-regular fa-comment" style="font-size: 23px; margin: 0; margin-left: auto;"></i>
+										<div style="z-index: 1; bottom: -5%; left:80%; position: absolute; margin: 0; font-size: 15px; font-weight: bolder; color: red;">&nbsp;4</div>
 									</div>
 								</div>
 							</div>
@@ -471,13 +471,13 @@
                            			</c:if> --%>
 									
 										<c:if test="${issue.ISSUE_STATUS == '1'}">
-											<div class="badge badge-success gap-2" style="font-size: 12px; margin: 0;">진행중</div>
+											<div class="badge badge-success gap-2" style="font-size: 12px; margin: 0; background-color:blue;">진행중</div>
 										</c:if>
 										<c:if test="${issue.ISSUE_STATUS == '2'}">
 											<div class="badge badge-success gap-2" style="font-size: 12px; margin: 0;">완료</div>
 										</c:if>
 										<c:if test="${issue.ISSUE_STATUS == '3'}">
-											<div class="badge badge-success gap-2" style="font-size: 12px; margin: 0;">중지</div>
+											<div class="badge badge-success gap-2" style="font-size: 12px; margin: 0; background-color:orange;">중지</div>
 										</c:if>
 									
 								</div>
@@ -494,22 +494,22 @@
         <div style="width: 32%; height: 95%; margin-top: 5px; background-color: #e7e7e7;">
 					<div class="title" style="margin: 5px; height: 5%;">
 						<span class="font-bold">&nbsp;&nbsp;보통</span>
-						<span style="font-weight: bolder">SIZE</span>
+						<span style="font-weight: bolder">${issueList.size()}</span>
 					</div>
 				<div class="content flex flex-col items-center" style="height: 95%; margin-left: 5px; overflow: auto;">
 			
 				<c:forEach var="issue" items="${issueList }" >
 					<c:if test="${issue.ISSUE_IMP == '2' }">
-					<div class="card card-side bg-base-100 " style="width: 90%; height: 30%; margin: 5px;">
-						<div class="card-body card-shadow shadow-md" style="width: 97%; height: 95%; margin: 0; border-radius:15px;" onclick="window.open('issue_detail_TL','이슈 상세','width=1150px,height=730px,left=500px,top=150px');">
-							<div class="card-title flex " style="margin: 0;">
-								<div class="flex items-center" style="margin: 0;">
-									<div class="flex">
+					<div class="card card-side" style="width: 90%; height: 30%; margin: 5px;">
+						<div class="card-body card-shadow shadow-md bg-base-100 " style="width: 97%; height: 95%; margin: 0; border-radius:15px;" onclick="window.open('issue_detail?ISSUE_NUM=${issue.ISSUE_NUM}','이슈 상세','width=1150px,height=730px,left=500px,top=150px');">
+							<div class="card-title flex" style="margin: 0;">
+								<div class="flex items-center" style="margin: 0; width: 100%;">
+									<div class="whitespace-nowrap">
 										${issue.ISSUE_TITLE}
 									</div>
-									<div class="flex " style="position: relative; ">
-										<i class="fa-regular fa-comment" style="font-size: 23px; margin: 0;"></i>
-										<div style="z-index: 1; bottom: 1%; left:8%; position: absolute; margin: 0; font-size: 15px; font-weight: bolder; color: red;">&nbsp;4</div>
+									<div class="flex" style="position: relative; width: 100%;">
+										<i class="fa-regular fa-comment" style="font-size: 23px; margin: 0; margin-left: auto;"></i>
+										<div style="z-index: 1; bottom: -5%; left:80%; position: absolute; margin: 0; font-size: 15px; font-weight: bolder; color: red;">&nbsp;4</div>
 									</div>
 								</div>
 							</div>
@@ -534,17 +534,17 @@
                            			<c:if test="${issue.issue_imp == '3'}">
                               			<div class="badge badge-md badge-success" >중지</div>
                            			</c:if> --%>
-									<div class="badge badge-success gap-2" style="font-size: 12px; margin: 0;">
+									
 										<c:if test="${issue.ISSUE_STATUS == '1'}">
-											<div class="badge badge-success gap-2" style="font-size: 12px; margin: 0;">진행중</div>
+											<div class="badge badge-success gap-2" style="font-size: 12px; margin: 0; background-color:blue;">진행중</div>
 										</c:if>
 										<c:if test="${issue.ISSUE_STATUS == '2'}">
 											<div class="badge badge-success gap-2" style="font-size: 12px; margin: 0;">완료</div>
 										</c:if>
 										<c:if test="${issue.ISSUE_STATUS == '3'}">
-											<div class="badge badge-success gap-2" style="font-size: 12px; margin: 0;">중지</div>
+											<div class="badge badge-success gap-2" style="font-size: 12px; margin: 0; background-color:orange;">중지</div>
 										</c:if>
-									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -557,22 +557,22 @@
          <div style="width: 32%; height: 95%; margin-top: 5px; background-color: #e7e7e7;">
 					<div class="title" style="margin: 5px; height: 5%;">
 						<span class="font-bold">&nbsp;&nbsp;낮음</span>
-						<span style="font-weight: bolder">SIZE</span>
+						<span style="font-weight: bolder">${issueList.size()}</span>
 					</div>
 				<div class="content flex flex-col items-center" style="height: 95%; margin-left: 5px; overflow: auto;">
 			
 				<c:forEach var="issue" items="${issueList }" >
 					<c:if test="${issue.ISSUE_IMP == '1' }">
-					<div class="card card-side bg-base-100 " style="width: 90%; height: 30%; margin: 5px;">
-						<div class="card-body card-shadow shadow-md" style="width: 97%; height: 95%; margin: 0; border-radius:15px;" onclick="window.open('issue_detail_TL','이슈 상세','width=1150px,height=730px,left=500px,top=150px');">
-							<div class="card-title flex " style="margin: 0;">
-								<div class="flex items-center" style="margin: 0;">
-									<div class="flex">
+					<div class="card card-side" style="width: 90%; height: 30%; margin: 5px;">
+						<div class="card-body card-shadow shadow-md bg-base-100" style="width: 97%; height: 95%; margin: 0; border-radius:15px;" onclick="window.open('issue_detail?ISSUE_NUM=${issue.ISSUE_NUM}','이슈 상세','width=1150px,height=730px,left=500px,top=150px');">
+							<div class="card-title flex" style="margin: 0;">
+								<div class="flex items-center" style="margin: 0; width: 100%;">
+									<div class="whitespace-nowrap">
 										${issue.ISSUE_TITLE}
 									</div>
-									<div class="flex " style="position: relative; ">
-										<i class="fa-regular fa-comment" style="font-size: 23px; margin: 0;"></i>
-										<div style="z-index: 1; bottom: 1%; left:8%; position: absolute; margin: 0; font-size: 15px; font-weight: bolder; color: red;">&nbsp;2</div>
+									<div class="flex" style="position: relative; width: 100%;">
+										<i class="fa-regular fa-comment" style="font-size: 23px; margin: 0; margin-left: auto;"></i>
+										<div style="z-index: 1; bottom: -5%; left:80%; position: absolute; margin: 0; font-size: 15px; font-weight: bolder; color: red;">&nbsp;4</div>
 									</div>
 								</div>
 							</div>
@@ -597,17 +597,15 @@
                            			<c:if test="${issue.issue_imp == '3'}">
                               			<div class="badge badge-md badge-success" >중지</div>
                            			</c:if> --%>
-									<div class="badge badge-success gap-2" style="font-size: 12px; margin: 0;">
-										<c:if test="${issue.ISSUE_STATUS == '1'}">
-											<div class="badge badge-success gap-2" style="font-size: 12px; margin: 0;">진행중</div>
+									<c:if test="${issue.ISSUE_STATUS == '1'}">
+											<div class="badge badge-success gap-2" style="font-size: 12px; margin: 0; background-color:blue;">진행중</div>
 										</c:if>
 										<c:if test="${issue.ISSUE_STATUS == '2'}">
 											<div class="badge badge-success gap-2" style="font-size: 12px; margin: 0;">완료</div>
 										</c:if>
 										<c:if test="${issue.ISSUE_STATUS == '3'}">
-											<div class="badge badge-success gap-2" style="font-size: 12px; margin: 0;">중지</div>
+											<div class="badge badge-success gap-2" style="font-size: 12px; margin: 0; background-color:orange;">중지</div>
 										</c:if>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -629,6 +627,11 @@
 					<div class="navbar text-neutral-content" style="width: 100%; padding: 0px; min-height: 1rem; height: 30px; border-bottom:3px solid #016fa0;">
 						<div class="text-black mb-3" style="font-weight: bold; font-size: 1.5rem; ">
 							이슈 등록
+							<input type="hidden" name="issuestatus" value="1"/>
+							<%-- <input type="hidden" name="issueenddate" value="${issue.ISSUE_ENDDATE }" /> --%>
+							<input type="hidden" name="membernum" value="3" />     <%-- ${issue.MEMBER_NUM} --%>
+							<input type="hidden" name="pjnum" value="8" />
+							<%-- <input type="hidden" name="issuenum" value="${issue.ISSUE_NUM }"/> --%>
 						</div>
 					</div>
 				</div>
@@ -636,26 +639,26 @@
 				<div class="container flex flex-col card-body" style="padding-top:10px; padding-bottom:10px;">
 					<div class="flex">
 						
-						<select class="w-24 h-8 text-center pr-2" style="height:48px; border:1px solid #aaaaaa; border-right:0px;">
-			   				<option value="step" selected>중요도</option>
-		   					<option value="a">중&nbsp;&nbsp;요</option>
-		   					<option value="s">보&nbsp;&nbsp;통</option>
-		   					<option value="b">낮&nbsp;&nbsp;음</option>
+						<select class="w-24 h-8 text-center pr-2" style="height:48px; border:1px solid #aaaaaa; border-right:0px;" name="issueimp">
+			   				<option value="imp" selected>중요도</option>
+		   					<option value="3">중&nbsp;&nbsp;요</option>
+		   					<option value="2">보&nbsp;&nbsp;통</option>
+		   					<option value="1">낮&nbsp;&nbsp;음</option>
 						</select>
-						<input type="text" placeholder="제목을 입력하세요." class="input" style="border:1px solid #aaaaaa; border-radius:0px; width:638px; justify-content:space-between;">
+						<input type="text" name="issuetitle" placeholder="제목을 입력하세요." class="input" style="border:1px solid #aaaaaa; border-radius:0px; width:638px; justify-content:space-between;">
 					</div>
 					
 					<div class="flex justify-center">
-						<div class="flex items-center justify-center" style="border:1px solid #aaaaaa; border-radius:0px; width:150px; border-right:0">이주헌(${member.member_name })</div>
+						<div class="flex items-center justify-center" style="border:1px solid #aaaaaa; border-radius:0px; width:150px; border-right:0">이주헌<%-- ${issue.MEMBER_NAME } --%></div>
 						
-						<input type="date" class="input" style="border:1px solid #aaaaaa; border-radius:0px; width:350px; justify-content:space-between; border-right:0;">
+						<input type="date" class="input" name="issueregdate" style="border:1px solid #aaaaaa; border-radius:0px; width:350px; justify-content:space-between; border-right:0;">
 						<div class="flex justify-center" style="border:1px solid #aaaaaa; border-left:0; border-right:0; font-size:1.5rem; line-height:40px;">~</div>
-						<input type="date" class="input" style="border:1px solid #aaaaaa; border-radius:0px; width:350px; justify-content:space-between; border-left:0;">
+						<input type="date" class="input" name="issuedeadline" style="border:1px solid #aaaaaa; border-radius:0px; width:350px; justify-content:space-between; border-left:0;">
 					</div>
 					
 					
 					<!-- 내용 -->	
-					<textarea class="textarea" name="product_content" value="" id="content" class="form-control" style="height:150px;width:100%; resize:none; border:1px solid #aaaaaa; border-radius:0px;" placeholder="내용을 작성하세요."></textarea>
+					<textarea class="textarea" name="issuecontent" id="content" class="form-control" style="height:150px;width:100%; resize:none; border:1px solid #aaaaaa; border-radius:0px;" placeholder="내용을 작성하세요."></textarea>
 					
 					<!-- 첨부파일 -->
 					<div class="filebox bs3-primary w-full" style="margin:0 0">
@@ -675,7 +678,7 @@
 				</div>
 
 				<div style="display:flex; justify-content:center;">
-					<button class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">저 장</button>
+					<button class="btn btn-se" onclick="regist_go();" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">저 장</button>
 					<button class="btn btn-se" id="modal_close_btn" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px;">취 소</button>
 				</div>
 			</div>
@@ -702,26 +705,16 @@
             
             
             	<div class="p-modal-serach flex items-center" style="background-color:#e7e7e7; margin:0;">
-               <select class="select-bordered p-cts-select" style="border:1px solid #aaa; margin:0 auto; width:400px; align-items:center;">
+               <select class="select-bordered p-cts-select" style="border:1px solid #aaa; margin:0 auto; width:400px; align-items:center;" onchange="showMember_Dep(this.value);">
                     <option disabled selected>선 택</option>
-                    <option>개발 1팀</option>
-                    <option>개발 2팀</option>
-                    <option>개발 3팀</option>
-                    <option>개발 4팀</option>
-                    <option>개발 5팀</option>
+                    <option value="개발1팀">개발 1팀</option>
+                    <option value="개발2팀">개발 2팀</option>
                </select>
                </div>
            
             <div class="cts-serch-list " style="height:220px; padding:0px;">
-               <table border="1">
-                  <c:forEach begin="0" end="5" step="1" >
-                     <tr style="border-top:0px;">
-                        <td><input type="radio" name="member_num" value="${issue_tag.member_num }" checked>&nbsp;&nbsp;권오상</td>
-                     </tr>
-                     <tr style="border-top:0px;">
-                     <td><input type="radio" name="member_num" value="${issue_tag.member_num }" checked>&nbsp;&nbsp;김원미</td>
-                  		</tr>
-                  </c:forEach>
+               <table border="1" id="deplist">
+
                </table>
             </div>
             <div class="p-regi-modal-bts">
@@ -737,14 +730,63 @@
 // 참여인력조회 모달창.js
 
 </script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>    
+<script type="text/x-handlebars-template"  id="member-dep-template" >
+{{#each .}}
+     	<tr style="border-top:0px;">
+        	<td><input type="checkbox" name="member_num" value="{{member_NUM}}">&nbsp;&nbsp;{{member_NAME}}</td>
+        </tr>
+{{/each }}
+
+</script>
+
+
+<script>
+function printData(productArr,target,templateObject){
+	var template=Handlebars.compile(templateObject.html());
+	var html = template(productArr);	
 	
-	
-	
-	
-	
-	
-	
-	
+	target.append(html);
+}
+
+<%-- function showMember_Dep(MEMBER_DEP){
+	$("#deplist").append('');
+	var data={
+			"MEMBER_DEP":MEMBER_DEP
+	}
+ 
+	$.ajax({
+		url:"<%=request.getContextPath()%>/project/issue_memberDepList",
+		type:"post",
+		data:data,
+		success:function(data){
+			alert(data.MEMBER_NAME);
+			printData(data,$('#deplist'),$('#member-dep-template'));
+			
+		}
+	});
+} --%>
+
+function showMember_Dep(MEMBER_DEP){
+ 
+	$.ajax({
+		url:"<%=request.getContextPath()%>/project/issue_memberDepList?MEMBER_DEP="+MEMBER_DEP,
+		type:"get",
+		success:function(data){
+			console.log(data);
+			let template = Handlebars.compile($("#member-dep-template").html());
+			let html = template(data);
+			$('#deplist tr').remove();
+			$('#deplist').append(html);
+			
+		}
+	});
+}
+
+
+
+
+</script>
 	
 	
 
@@ -757,6 +799,44 @@
 
 		<script>
 			//등록모달
+			function regist_go(){
+			var issuetitle = $("input[name=issuetitle]").val();
+			var issuecontent = $("textarea[name=issuecontent]").val();
+			var issueimp = $("select[name=issueimp]").val();
+			var issuestatus = $("input[name=issuestatus]").val();
+			var issueregdate = $("input[name=issueregdate]").val();
+			var issuedeadline = $("input[name=issuedeadline]").val();
+			var membernum = $("input[name=membernum]").val();
+			var pjnum = $("input[name=pjnum]").val();
+		
+			
+			
+			var data={
+					"ISSUE_TITLE":issuetitle,
+					"ISSUE_CONTENT":issuecontent,
+					"ISSUE_IMP":issueimp,
+					"ISSUE_STATUS":issuestatus,
+					"ISSUE_REGDATE":issueregdate,
+					"ISSUE_DEADLINE":issuedeadline,
+					"MEMBER_NUM":membernum,
+					"PJ_NUM":pjnum,
+		
+			}
+			$.ajax({
+				url:"<%=request.getContextPath()%>/project/issue_regist",
+				type:"post",
+				data:data,		
+				success:function(){
+					alert("등록되었습니다.");
+					history.go();
+				},
+				error:function(){
+					alert('왜안됨');
+				}
+			});
+		}
+			
+			
 			document.getElementById("modal_opne_btn").onclick = function() {
 				document.getElementById("modal1").style.display = "block";
 			}

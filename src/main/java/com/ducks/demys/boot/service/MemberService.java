@@ -20,6 +20,10 @@ public class MemberService {
 		return memberRepository.getMemberList();
 	}
 	
+	public List<Member> getMemberByMEMBER_DEP(String MEMBER_DEP){
+		return memberRepository.getMemberByMEMBER_DEP(MEMBER_DEP);
+	}
+	
 	public Member getMemberByMEMBER_NUM(int MEMBER_NUM) {
 		return memberRepository.getMemberByMEMBER_NUM(MEMBER_NUM);
 	}

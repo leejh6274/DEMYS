@@ -11,6 +11,13 @@
 		FROM MEMBER 
 		WHERE MEMBER_NUM=#{MEMBER_NUM}
 	</select>
+	
+	<select id="getMemberByMEMBER_DEP" resultType="Member">
+		SELECT * 
+		FROM MEMBER 
+		WHERE MEMBER_DEP=#{MEMBER_DEP}
+	</select>
+	
 	<select id="getMemberByMEMBER_ID" resultType="Member">
 		SELECT * 
 		FROM MEMBER 

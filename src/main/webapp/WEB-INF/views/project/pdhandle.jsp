@@ -5,8 +5,8 @@
 <script type="text/x-handlebars-template"  id="product-list-template" >
 {{#each .}}
 	<tr class="productcard">
-		<td onclick="window.open('product_detail?PRODUCT_NUM={{product_NUM}}','산출물 상세','width=900px,height=480px,left=500px,top=300px');">{{product_NUM }}</td>
-		<td onclick="window.open('product_detail?PRODUCT_NUM={{product_NUM}}','산출물 상세','width=900px,height=480px,left=500px,top=300px');" style="text-align:start">{{product_TITLE }}</td>
+		<td onclick="window.open('product_detail?PRODUCT_NUM={{product_NUM}}','산출물 상세','width=900px,height=480px,left=500px,top=300px');" style="cursor:pointer;">{{product_NUM }}</td>
+		<td onclick="window.open('product_detail?PRODUCT_NUM={{product_NUM}}','산출물 상세','width=900px,height=480px,left=500px,top=300px');" style="text-align:start; cursor:pointer;">{{product_TITLE }}</td>
 		<td><i class="fa-sharp fa-solid fa-paperclip text-2xl"></i></td>
 		<td>{{member_NAME }}</td>
 		<td>{{prettifyDate product_REGDATE }}</td>
@@ -55,7 +55,7 @@ function showList(PJ_NUM,PRODUCT_STEP,searchType,keyword){
 			"searchType":searchType,
 			"keyword":keyword
 	}
-	console.log(data);
+
 	$.ajax({
 		url:"<%=request.getContextPath()%>/project/productList",
 		type:"post",

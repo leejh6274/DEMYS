@@ -1,8 +1,10 @@
 package com.ducks.demys.boot.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,10 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ducks.demys.boot.service.IssueReplyService;
 import com.ducks.demys.boot.service.IssueService;
 import com.ducks.demys.boot.service.MeetingBookService;
+import com.ducks.demys.boot.service.MemberService;
 import com.ducks.demys.boot.service.ProductService;
 import com.ducks.demys.boot.service.RequireService;
 import com.ducks.demys.boot.vo.Issue;
+import com.ducks.demys.boot.vo.IssueReply;
 import com.ducks.demys.boot.vo.MeetingBook;
+import com.ducks.demys.boot.vo.Member;
 import com.ducks.demys.boot.vo.Product;
 import com.ducks.demys.boot.vo.ProductForSearch;
 import com.ducks.demys.boot.vo.Require;
@@ -31,7 +36,10 @@ public class ProjectController {
 	private ProductService productService;
 	private RequireService requireService;
 	private IssueService issueService;
-	
+	@Autowired
+	private IssueReplyService issueReplyService;
+	@Autowired
+	private MemberService memberService;
 	
 	public ProjectController(MeetingBookService meetingBookService, ProductService productService, RequireService requireService, IssueService issueService, IssueReplyService issueReplyService) {
 		this.meetingBookService = meetingBookService;
@@ -42,13 +50,7 @@ public class ProjectController {
 	}
 	
 	
-	/*
-	 * @RequestMapping("project/product") public String showproduct(Model model) {
-	 * List<Product> productList = productService.getProductListByPJ_NUM(1, 1); //1을
-	 * PJ_NUM으로, 위에 모델옆에 int PJ_NUM model.addAttribute("productList", productList);
-	 * 
-	 * return "project/product"; }
-	 */
+
 	 @RequestMapping("project/product") 
 	 public void showproduct() {
 		 
@@ -56,18 +58,11 @@ public class ProjectController {
 	 
 	 
 	 @RequestMapping("project/product_TL") 
-	 public void showproduct_tl() {
+	 public void showproductTM() {
 		 
 	 }
 
-		/*
-		 * @RequestMapping("project/product_TL") public String showproduct_TL(Model
-		 * model) { List<Product> productList_TL =
-		 * productService.getProductListByPJ_NUM(1, 1); //1을 PJ_NUM으로, 위에 모델옆에 intPJ_NUM
-		 * model.addAttribute("productList_TL", productList_TL);
-		 * 
-		 * return "project/product_TL"; }
-		 */
+	
 	 
 	 @RequestMapping("project/productList") 
 	 @ResponseBody
@@ -268,7 +263,7 @@ public class ProjectController {
 	 
 	 @ResponseBody
 	 @PostMapping("project/domeetingbook_modify") 
-	 public String showdomeetingBook_modify(String MB_TITLE, String MB_CONTENT, int MB_NUM) {
+	 public void showdomeetingBook_modify(String MB_TITLE, String MB_CONTENT, int MB_NUM) {
 	
 		MeetingBook meetingBook = meetingBookService.getMeetingBookByMB_NUM(MB_NUM);
 				
@@ -277,31 +272,32 @@ public class ProjectController {
 
 		meetingBookService.modifyMeetingBook(meetingBook);
 		
-		return "ss";
+
 	 }
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
 	 
 	 @RequestMapping("project/issue") 
 	 public String showissue(Model model) {
-		 List<Issue> issueList = issueService.getIssueListByPJ_NUM(1);//pj_num넣기 레포지터리.xml 에 getIssueListByPJ_NUM 만들어서 여기 추가
+		 List<Issue> issueList = issueService.getIssueListByPJ_NUM(8);
 		 model.addAttribute("issueList", issueList);
 		 
 		 return "project/issue";
+		 
+	 }
+	 
+	 
+	  @ResponseBody
+	  @RequestMapping("project/issue_memberDepList") 
+	  public List<Member> showissue_memberDepList(@RequestParam String MEMBER_DEP) {
+		  
+		 System.out.println("LIST" + MEMBER_DEP);
+		  List<Member> memberdeplist = memberService.getMemberByMEMBER_DEP(MEMBER_DEP);
+		  System.out.println(memberdeplist);
+		  return memberdeplist;
+		  
+	  }
+	  
+	 @RequestMapping("project/issue_TL") 
+	 public void showissue_TL() {
 		 
 	 }
 	 
@@ -311,10 +307,31 @@ public class ProjectController {
 	  }
 	  
 	  @RequestMapping("project/issue_detail") 
-	  public void showissue_detail() {
-	  
+	  public void showissue_detail(Model model, int ISSUE_NUM) {
+		Issue issue  = issueService.getIssueByISSUE_NUM(ISSUE_NUM);
+		List<IssueReply> replyList = issueReplyService.getIssueReplyListByISSUE_NUM(ISSUE_NUM);
+		
+		model.addAttribute("issue",issue);
+		model.addAttribute("replyList", replyList);
 	  }
 	 
-	
+	   @ResponseBody
+	   @RequestMapping("project/issue_regist") 
+	   public void showissue_regist( String ISSUE_TITLE, String ISSUE_CONTENT, int ISSUE_IMP, int ISSUE_STATUS, Date ISSUE_REGDATE, Date ISSUE_DEADLINE, int MEMBER_NUM, int PJ_NUM) {
+		
+		Issue  issue = new Issue();
+		
+		issue.setISSUE_TITLE(ISSUE_TITLE);
+		issue.setISSUE_CONTENT(ISSUE_CONTENT);
+		issue.setISSUE_IMP(ISSUE_IMP);
+		issue.setISSUE_STATUS(1);
+		issue.setISSUE_REGDATE(ISSUE_REGDATE);
+		issue.setISSUE_DEADLINE(ISSUE_DEADLINE);
+		issue.setMEMBER_NUM(3);
+		issue.setPJ_NUM(8);
+			
+		issueService.registIssue(issue);
+			
+		}
 
 }

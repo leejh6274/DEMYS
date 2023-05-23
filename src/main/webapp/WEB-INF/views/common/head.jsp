@@ -137,25 +137,51 @@
                               
                         </ul>
                   </div>
-                  <h3 class="text-black text-right ml-2 mr-1">김미영 팀장</h3>
-                  <div class="dropdown dropdown-end">
+                 <c:if test="${not empty member.MEMBER_ID}">
+              <li style="margin: 0 auto;color:black;list-style-type: none;">
+                <span>
+                  ${member.MEMBER_NAME}
+                  <c:choose>
+                    <c:when test="${member.MEMBER_POSITION eq 1}">
+                      사원
+                    </c:when>
+                    <c:when test="${member.MEMBER_POSITION eq 2}">
+                      선임
+                    </c:when>
+                    <c:when test="${member.MEMBER_POSITION eq 3}">
+                      책임
+                    </c:when>
+                  </c:choose>
+                </span>
+              </li>
+            </c:if>
+            
+            <c:if test="${empty member.MEMBER_ID}">
+              <li>
+                <a href="/member/login" class="text-black text-right ml-2 mr-1">
+                  <span>로그인</span>
+                </a>
+              </li>
+            </c:if>
+            <div class="dropdown dropdown-end">
                         <label tabindex="0" class="btn btn-top btn-circle avatar">
                               <div class="w-10 rounded-full">
-                                    <img src="/resource/img/imja.jpg" />
+                                    <div class="manPicture " data-id="${member.MEMBER_ID }" style="width:40px;height:40px;display:block;margin:0 auto;"></div>
                               </div>
                         </label>
                         <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
                               style="color: black;">
                               <li>
-                                    <a href="#" class="justify-between btn-drop"> MyPage </a>
+                                    <a href="#" class="justify-between"> MyPage </a>
                               </li>
                               <li>
-                                    <a href="#" class="btn-drop">Logout</a>
-                              </li>
+                            <a href="/member/logout" > Logout </a>
+                       </li>
                         </ul>
                   </div>
             </div>
       </div>
+
       <div class="flex" style="background-color: #153A66;">
             <div class="navbar text-neutral-content" style="width:18%; border-right: 2px solid #f7f7f7;">
                   <a class="btn btn-ghost normal-case text-xl">사이드바</a>

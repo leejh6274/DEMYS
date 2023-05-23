@@ -135,8 +135,11 @@ body {
    			<table style="width:100%;">
    					
 				<tr class="w-full">
-	   				<td class="font-bold" style="width:100%;">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목
-	   					<span style="border:1px solid #aaa; width:640px; border-radius:0px; margin-left: 1.5rem;">${require.REQUIRE_TITLE }</span>
+	   				<td style="width:250px; font-weight:bold; display:flex; width:100%; margin-top:10px; white-space: nowrap;">
+	   				<div class="flex items-center">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</div>
+						<div class="flex w-full items-center justify-between" style="height:48px; border:1px solid #aaa; width:100%;; margin-left:29px;" >&nbsp;&nbsp;${require.REQUIRE_TITLE }
+						</div>
+	   				
 	   				</td>
 	   			</tr>
    					
@@ -186,7 +189,8 @@ body {
 					-->
 					
 				<tr>
-	   				<td style="width:250px; font-weight:bold; display:flex; width:100%; margin-top:10px; white-space: nowrap;"><div class="flex items-center">파일첨부</div>
+	   				<td style="width:250px; font-weight:bold; display:flex; width:100%; margin-top:10px; white-space: nowrap;">
+	   					<div class="flex items-center">파일첨부</div>
 						<div class="flex w-full items-center justify-between" style="height:48px; border:1px solid #aaa; width:100%;; margin-left:26px;" >&nbsp;&nbsp;요구사항정의서_ver.1557.hwp
 							<span>
 								<i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>
