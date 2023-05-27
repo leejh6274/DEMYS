@@ -178,6 +178,8 @@ function updateAndClose() {
 	      "confirmPassword": confirmPassword,
 	      "VERTIFICATION_CODE": VERTIFICATION_CODE
 	    },
+	    type:"POST",
+	    url:"/member/doNewPw",
 	    success: function () {
 	      alert("비밀번호 수정이 완료되었습니다.");
 	      window.close(); 

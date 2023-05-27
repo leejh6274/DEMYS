@@ -122,7 +122,7 @@ body {
 	<div class="main">	
 		<div class="main-box">	
 			<div class="main-title">업체 정보 상세</div>
-			<form role="form" class="form-horizontal" action="/contacts/modify" method="post" id="modifyForm">	
+			<form role="form" class="form-horizontal" action="/contacts/modify" method="post" id="ConModifyForm">	
 				<input type="hidden" class="input input-bordered w-full"  id="CT_NUM" name="CT_NUM" readonly value="${contacts.CT_NUM }"/>
 				<div class="form-group">
       				<label style="font-weight: bold;">업체명</label>
@@ -211,7 +211,7 @@ body {
 
 function modify_go() {
     // 폼 전송
-    document.getElementById("modifyForm").submit();
+    document.getElementById("ConModifyForm").submit();
 }
 
 

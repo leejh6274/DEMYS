@@ -88,8 +88,8 @@ public class MemberService {
 	public void sendEmail(Member member, String div) throws MessagingException {
         String host = "smtp.naver.com";
         int port = 587;
-        String username = "본인 아이디";
-        String password = "본인 비밀번호";
+        String username = "아이디";
+        String password = "비밀번호";
         String fromEmail = "dnjsal7461@naver.com";
         String fromName = "DEMYS";
         String subject = "";
@@ -166,6 +166,16 @@ public class MemberService {
 
 	public Member findByPassword(String newAuthority, String authority_code) {
 		return memberRepository.findByPassword(newAuthority, authority_code);
+	}
+
+	public List<Member> getMemberListSearch(String searchType, String keyword){
+		List<Member> memberList = memberRepository.getMemberListSearch(searchType, keyword);
+		
+		return memberList;
+	}
+
+	public List<Member> getMemberByMEMBER_DEP(String MEMBER_DEP){
+		return memberRepository.getMemberByMEMBER_DEP(MEMBER_DEP);
 	}
 
 }
