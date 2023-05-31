@@ -66,7 +66,8 @@
 }
 .hr-list-cont:hover{
    background-color: #F0F8FF;
-    border: 3px solid #B7DDFF;
+    box-sizing: border-box;
+    outline: 4px solid #B7DDFF;
 }
 .hr-img{
    width:40%;
@@ -76,5 +77,4 @@
    border-top-left-radius:8px;
    border-bottom-left-radius:8px;
 }
-
 

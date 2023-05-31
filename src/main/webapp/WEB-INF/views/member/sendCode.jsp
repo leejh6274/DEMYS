@@ -128,7 +128,7 @@ body {
         			<div class="input-group-prepend">
         				<input type="hidden" placeholder="인증번호 입력" class="input input-bordered"  id="VERTIFICATION_CODE" name="VERTIFICATION_CODE" value="${VERTIFICATION_CODE }"/>
             			<input type="hidden" placeholder="아이디" class="input input-bordered"  id="MEMBER_ID" name="MEMBER_ID" value="${MEMBER_ID }"/>
-        				<input type="text" placeholder="인증번호 입력" class="input input-bordered"  id="enteredCode" name="enteredCode" />
+        				<input type="text" placeholder="인증번호 입력" class="input input-bordered" autocomplete="off"  id="enteredCode" name="enteredCode" />
         				<button type="submit" id="findBtn" class="btn btn-se" style="margin-right: 10px;">인 증</button>
  					</div>     			
       			</div>

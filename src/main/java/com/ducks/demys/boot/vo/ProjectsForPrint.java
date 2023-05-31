@@ -28,7 +28,7 @@ public class ProjectsForPrint {
 	
 	private String MEMBER_NAME;
 	private String CT_NAME;
-	private Double SUM_PERCENT;
+	private int SUM_PERCENT;
 	private int ISSUE_COUNT;
 	
 	private String SORT;

@@ -1,26 +1,13 @@
 @charset "UTF-8";
 
 
-.header-2-menu0{
-	width:95%;
-	border-bottom:2px solid #797979;
-	margin:0 auto;
-}
-.header-2-menu{
-	width:150px;
-	display:flex;
-}
-.header-2-menu:hover{
-	font-weight:bold;
-	font-size:18px;
-}
+
+
 /* 예산등록화면 */
 .bud_body{
-	width:95%;
 	height:720px;
 	border:2px solid #797979;
 	margin:0 auto;
-	margin-top:20px;
 }
 .bud_title{
 	background-color:#153A66;
@@ -108,7 +95,7 @@
 /* 예상매출액 */
 .bud_exp{
 	border:1px solid #AAAAAA;
-	width:22%;
+	width:23%;
 	height:360px;
 	display:flex;
 	flex-direction:column;
@@ -126,7 +113,7 @@
 }
 .progress {
 	width: 180px;
-	height: 100px;
+	height: 90px;
 	margin: 50px auto;
 	position: relative;
 	overflow: hidden;
@@ -214,6 +201,12 @@
 	background-color: #153A66; 
 	color: white; 
 	border-radius: 8px;
+}
+.ok-bt:hover{
+	background-color:#126014;	
+}
+.stop-bt:hover{
+	background-color:#8E0011;	
 }
 .bud-bt:hover, .bud-bt-1:hover{
 	background-color:#11263F;

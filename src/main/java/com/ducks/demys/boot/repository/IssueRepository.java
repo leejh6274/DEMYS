@@ -17,6 +17,8 @@ public interface IssueRepository {
 	
 	public List<Issue> getIssueListByMEMBER_NUM(int MEMBER_NUM);
 	
+	public List<Issue> getIssueListForBottomDashboard(int MYISSUE, String SORT);
+	
 	public Issue getIssueByISSUE_NUM(int ISSUE_NUM);
 	
 	public int selectIssueSequenceNextValue();

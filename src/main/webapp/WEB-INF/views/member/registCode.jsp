@@ -137,8 +137,8 @@ body {
 				<div class="main-content">계정등록을 위해 인사과 코드를 입력해주세요.</div>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="hidden" placeholder="인사과권한" class="input input-bordered"  id="authority_code" name="authority_code" value="1234" />
-        				<input type="password" placeholder="코드를 입력해주세요." class="input input-bordered"  id="newAuthority" name="newAuthority" />
+        				<input type="hidden" placeholder="인사과권한" class="input input-bordered" autocomplete="off"   id="authority_code" name="authority_code" value="1234" />
+        				<input type="password" placeholder="코드를 입력해주세요." class="input input-bordered" autocomplete="off"  id="newAuthority" name="newAuthority" />
         				
 					</div>	  			
  				</div>   

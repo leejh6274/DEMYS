@@ -130,7 +130,7 @@ body {
 		</div>
 	<div class="main">	
 		<div class="main-box">	
-			<form action="/member/doNewPw" method="POST" id="updataPw">
+			<form action="/member/doNewPw" method="post" id="updataPw">
 			<div class="main-title"><i class="fa-solid fa-gear"></i></div>
 				<input type="hidden" id="VERTIFICATION_CODE" name="VERTIFICATION_CODE" value="${VERTIFICATION_CODE}">
 				<div class="form-group">
@@ -161,30 +161,29 @@ body {
 
 
 <script>
-
 function updateAndClose() {
 	  var newPassword = $("#newPassword").val();
 	  var confirmPassword = $("#confirmPassword").val();
 	  var VERTIFICATION_CODE = $("#VERTIFICATION_CODE").val();
-
 	  if (newPassword !== confirmPassword) {
 	    alert("새 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 	    return;
 	  }
-
+	  var data= {
+	      "newpassword": newPassword,
+	      "confirmpassword": confirmPassword,
+	      "vertification_CODE": VERTIFICATION_CODE
+	    }
 	  $.ajax({
-	    data: {
-	      "newPassword": newPassword,
-	      "confirmPassword": confirmPassword,
-	      "VERTIFICATION_CODE": VERTIFICATION_CODE
-	    },
+	    url:"<%=request.getContextPath()%>/member/doNewPw",
 	    type:"POST",
-	    url:"/member/doNewPw",
-	    success: function () {
+	    data:JSON.stringify(data),
+	    contentType:"application/json",
+	    success: function (data) {
 	      alert("비밀번호 수정이 완료되었습니다.");
-	      window.close(); 
+	      window.close();
 	      window.opener.location.reload();
-	      window.opener.location.href = "/member/login"; 
+	      window.opener.location.href = "/member/login";
 	    },
 	    error: function () {
 	      alert("비밀번호 수정 중에 오류가 발생했습니다. 다시 시도해주세요.");
@@ -192,6 +191,7 @@ function updateAndClose() {
 	    }
 	  });
 	}
+
 	
 function CloseWindow(parentURL){
 	

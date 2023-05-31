@@ -116,14 +116,14 @@
                
                <div class="filebox bs3-primary" style="margin:0 0;width:30%;margin-right:0;">
                   <div style="position:relative;width:35%;display:flex;left:20%;">
-                     <img src="/resource/img/a.jpg" style="border:5px solid #153A66; width:110px; height:100px; border-radius:50%;margin:10px;"/>
+                    <div class="manPicture" data-id="${member.MEMBER_ID }" style="border: 5px solid #153A66; width: 100px; height: 100px; border-radius: 50%; margin: 20px; margin-left: 10px;" ></div>
                      <label  for="ex_filename"  style="position:absolute; top:50%;">
                      <i class="fa-solid fa-pencil" style="text-align:center;font-size:15px;border:5px solid #153A66; width:35px; height:35px; line-height:30px; border-radius:50%;background-color:white; "></i>
                                               
                      </label>
                   </div>
                   <!-- <input name="MEMBER_PIC" type="file" id="ex_filename" class="upload-hidden"> -->
-                  <input name="MEMBER_PIC" id="MEMBER_PIC" type="hidden" value="${member.MEMBER_PIC }" >
+                  
                </div>
                
             
@@ -395,13 +395,13 @@ if (member.MEMBER_POSITION === 1) {
     authorityInfo.innerHTML = '책임';
 }
 
-window.onload=function(){
+<%-- window.onload=function(){
     MemberPictureThumb('<%=request.getContextPath()%>');
  }
  
  
 function MemberPictureThumb(contextPath){
-     for(var target of document.querySelectorAll('.myPic2')){   
+     for(var target of document.querySelectorAll('.manPicture')){   
         var id = target.getAttribute('data-id');
         
         target.style.backgroundImage="url('"+contextPath+"/member/getPicture?MEMBER_ID="+id+"')";            
@@ -410,7 +410,7 @@ function MemberPictureThumb(contextPath){
         target.style.backgroundSize="cover";
      }
   }
-
+ --%>
 
 
 

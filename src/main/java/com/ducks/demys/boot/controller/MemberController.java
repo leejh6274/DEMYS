@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -212,10 +213,11 @@ public class MemberController {
 
    @PostMapping("/member/doNewPw")
    @ResponseBody
-   public String doNewPw(@RequestParam("newPassword") String newPassword,
-         @RequestParam("confirmPassword") String confirmPassword,
-         @RequestParam("VERTIFICATION_CODE") String VERTIFICATION_CODE, HttpServletResponse response) {
+   public String doNewPw(@RequestBody Member member, HttpServletResponse response) {
 	   
+	   String newPassword=member.getNEWPASSWORD();
+	   String confirmPassword=member.getCONFIRMPASSWORD();
+	   String VERTIFICATION_CODE=member.getVERTIFICATION_CODE();
       if (!newPassword.equals(confirmPassword)) {
 
          return "member/newPw?VERTIFICATION_CODE=" + VERTIFICATION_CODE;
@@ -227,8 +229,12 @@ public class MemberController {
       }
 
       memberService.updatePassword(VERTIFICATION_CODE, newPassword);
+      try {
+         response.sendRedirect("/member/login");
+      } catch (IOException e) {
 
-
+         e.printStackTrace();
+      }
 
       return null;
    }

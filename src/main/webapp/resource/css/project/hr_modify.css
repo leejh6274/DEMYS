@@ -1,29 +1,29 @@
  @charset "UTF-8";
 
-오프윈도우 헤더
+/* 오프윈도우 헤더 */
 .openWindow-head{
-	width: 100%; 
-	padding: 0px; 
-	min-height: 1rem; 
-	height: 50px;
+   width: 100%; 
+   padding: 0px; 
+   min-height: 1rem; 
+   height: 50px;
 }
 .openWindow-head-1{
-	font-weight: bold; 
-	font-size: 1rem; 
-	margin-right: auto;
-	color:white;
+   font-weight: bold; 
+   font-size: 1rem; 
+   margin-right: auto;
+   color:white;
 }
 
-오픈윈도우 구현
+/* 오픈윈도우 구현 */
 .hr-modify-conts{
-	padding:10px;
+   padding:10px;
 }
 .hr-modify-title{
-	border-bottom:4px solid #016FA0;	
-	width: 100%;
-	font-weight:bold;;
-	font-size:22px;
-	padding:5px;
+   border-bottom:4px solid #016FA0;   
+   width: 100%;
+   font-weight:bold;;
+   font-size:22px;
+   padding:5px;
 }
 .hr-modi-cont{
     border: 2px solid #AAAAAA;
@@ -33,9 +33,9 @@
     width: 100%;
 }
 .hr-modi-conts{
-	display:flex;
-	flex-direction:column;
-	width:65%;
+   display:flex;
+   flex-direction:column;
+   width:65%;
 }
 .hr-modi-conts>div{
     display: flex;
@@ -46,28 +46,28 @@
     padding: 17px 8px;
 }
 .hr-icon{
-	border: 1px solid #AAAA;
-	width:35%;
-	height:100%;
-	display: flex;
+   border: 1px solid #AAAA;
+   width:35%;
+   height:100%;
+   display: flex;
     align-items: center;
     justify-content: space-around;
-    padding: 37.5px 0;
+    padding: 35.5px 0;
 }
-버튼
+/* 버튼 */
 .p-regi-modal-bts{
-	display: flex; 
-	justify-content: center;
+   display: flex; 
+   justify-content: center;
 }
 .p-regi-modal-bt{
-	font-size: 20px; 
-	width: 100px; 
-	height: 40px; 
-	background-color: #153A66; 
-	color: white; 
-	border-radius: 8px;
-	margin:0 5px;
+   font-size: 20px; 
+   width: 100px; 
+   height: 40px; 
+   background-color: #153A66; 
+   color: white; 
+   border-radius: 8px;
+   margin:0 5px;
 }
 .p-regi-modal-bt:hover{
-	background-color:#11263F;
+   background-color:#11263F;
 }

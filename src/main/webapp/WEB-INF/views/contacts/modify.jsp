@@ -128,7 +128,7 @@ body {
                   <label style="font-weight: bold;">업체명</label>
                <div class="input-group">
                  <div class="input-group-prepend">
-                    <input type="text" class="input input-bordered w-full"  id="CT_NAME" name="CT_NAME" style="background-color:#e7e7e7;" readonly value="${contacts.CT_NAME }"/>
+                    <input type="text" class="input input-bordered w-full"  id="CT_NAME" name="CT_NAME" autocomplete="off" style="background-color:#e7e7e7;" readonly value="${contacts.CT_NAME }"/>
                 </div>              
                </div>
                <div class="flex justify-between">
@@ -137,7 +137,7 @@ body {
              </div>              
                <div class="input-group">
                  <div class="input-group-prepend2">
-                    <input type="text"  placeholder="대표자명을 입력하세요." class="input input-bordered w-full"  id="CT_CEO" name="CT_CEO" value="${contacts.CT_CEO }"/>
+                    <input type="text"  placeholder="대표자명을 입력하세요." class="input input-bordered w-full" autocomplete="off"  id="CT_CEO" name="CT_CEO" value="${contacts.CT_CEO }"/>
                 </div>
                 <div class="input-group-prepend3">
                     <select class="select select-bordered w-full" name="CT_TYPE" id="CT_TYPE">
@@ -163,9 +163,9 @@ body {
                       <option value="054" ${phoneNumber1 == '054' ? 'selected' : ''}>054</option>
                   </select>
                      <label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-                     <input style="width:34%;" type="text" class="input input-bordered float-left" id="ct_tel2" name="phoneNumber2" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ phoneNumber2}"/> 
+                     <input style="width:34%;" type="text" class="input input-bordered float-left" id="ct_tel2" name="phoneNumber2" autocomplete="off" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ phoneNumber2}"/> 
                      <label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-                     <input style="width:34%;" type="text" class="input input-bordered float-right" id="ct_tel3" name="phoneNumber3" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ phoneNumber3}"/>
+                     <input style="width:34%;" type="text" class="input input-bordered float-right" id="ct_tel3" name="phoneNumber3" autocomplete="off" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ phoneNumber3}"/>
                  </div>
              </div>
          </div>
@@ -173,7 +173,7 @@ body {
                <label style="font-weight: bold;">이메일</label>
                   <div class="form-box" style="display:flex;">
                      <div class="input-group-sm w-full flex">
-                        <input name="CT_EMAIL" type="text" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" class="input input-bordered w-full" id="inputEmail" value="${contacts.CT_EMAIL }" onchange="email_check()">
+                        <input name="CT_EMAIL" type="text" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" autocomplete="off" class="input input-bordered w-full" id="inputEmail" value="${contacts.CT_EMAIL }" onchange="email_check()">
                      </div>
                   </div>
                </div>
@@ -181,11 +181,11 @@ body {
                <label style="font-weight: bold;">팩스번호</label>
                   <div class="form-box" style="display:flex;">
                      <div class="input-group-sm">
-                        <input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="ct_fax1" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ct_fax1 }"/> 
+                        <input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="ct_fax1" autocomplete="off" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ct_fax1 }"/> 
                            <label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-                        <input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="ct_fax2" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ct_fax2 }"/> 
+                        <input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="ct_fax2" autocomplete="off" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ct_fax2 }"/> 
                            <label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-                        <input style="width:30%;" type="text" class="input input-bordered float-right" id="CT_FAX" name="ct_fax3" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ct_fax3 }"/>
+                        <input style="width:30%;" type="text" class="input input-bordered float-right" id="CT_FAX" name="ct_fax3" autocomplete="off" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ct_fax3 }"/>
                         </div>
                      </div>
                   </div>
@@ -194,7 +194,7 @@ body {
                    </div>              
                         <div class="input-group">
                           <div class="input-group-prepend2">
-                             <input type="text" id="sample6_postcode" class="input input-bordered w-full" name="postcode" value="${postcode }"/>
+                             <input type="text" id="sample6_postcode" class="input input-bordered w-full" name="postcode" autocomplete="off" value="${postcode }"/>
                          </div>
                          <div class="input-group-prepend3">
                              <button type="button" class="btn btn-se" onclick="sample6_execDaumPostcode();">우편번호 찾기</button>
@@ -202,21 +202,21 @@ body {
                         </div>
                      <div class="input-group">
                        <div class="input-group-prepend">
-                          <input type="text"  id="sample6_address" class="input input-bordered w-full"  name="address" value="${address }"/>
+                          <input type="text"  id="sample6_address" class="input input-bordered w-full" autocomplete="off" name="address" value="${address }"/>
                       </div>              
                      </div>
                      <div class="input-group">
                        <div class="input-group-prepend">
-                          <input type="text"  id="sample6_detailAddress"  class="input input-bordered w-full"  name="detailAddress" value="${detailAddress }"/>
+                          <input type="text"  id="sample6_detailAddress"  class="input input-bordered w-full" autocomplete="off" name="detailAddress" value="${detailAddress }"/>
                       </div>
                       <div class="input-group-prepend">
-                          <input type="text" id="sample6_extraAddress" class="input input-bordered w-full"  name="extraAddress" value="${extraAddress }"/>
+                          <input type="text" id="sample6_extraAddress" class="input input-bordered w-full" autocomplete="off" name="extraAddress" value="${extraAddress }"/>
                       </div>                 
                      </div>
                      <label style="font-weight: bold;">담당자명</label>
                      <div class="input-group">
                        <div class="input-group-prepend">
-                          <input type="text" class="input input-bordered w-full" name="CT_MANAGER" value="${contacts.CT_MANAGER }"/>
+                          <input type="text" class="input input-bordered w-full" name="CT_MANAGER" autocomplete="off" value="${contacts.CT_MANAGER }"/>
                       </div>              
                      </div>
                     <div class="form-group row">
@@ -230,9 +230,9 @@ body {
                                <option value="070" ${ct_mg_tel1 == '070' ? 'selected' : ''}>070</option>
                         </select> 
                            <label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-                        <input style="width:34%;" type="text" class="input input-bordered float-left"  id="CT_MG_TEL" name="ct_mg_tel2" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ct_mg_tel2}"/> 
+                        <input style="width:34%;" type="text" class="input input-bordered float-left"  id="CT_MG_TEL" name="ct_mg_tel2" autocomplete="off" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ct_mg_tel2}"/> 
                            <label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-                        <input style="width:34%;" type="text" class="input input-bordered float-right"  id="CT_MG_TEL" name="ct_mg_tel3" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ct_mg_tel3}"/>
+                        <input style="width:34%;" type="text" class="input input-bordered float-right"  id="CT_MG_TEL" name="ct_mg_tel3" autocomplete="off" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ct_mg_tel3}"/>
                         </div>
                      </div>
                   </div>

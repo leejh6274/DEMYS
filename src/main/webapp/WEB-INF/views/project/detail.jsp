@@ -9,6 +9,12 @@
 <link rel="stylesheet" href="/resource/css/project/contacts_regist_modal.css" />
 <link rel="stylesheet" href="/resource/css/project/contacts_modal.css" />
 
+<!-- kendo -->
+<script src="//kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
+<link rel="stylesheet" href="//kendo.cdn.telerik.com/2015.3.930/styles/kendo.common.min.css" />
+<link rel="stylesheet" href="//kendo.cdn.telerik.com/2015.3.930/styles/kendo.metro.min.css" />
+<!-- kendo -->
+
 
 <div class="p-body-header">
            <div class="p-main-title">
@@ -32,11 +38,16 @@
             <div class="p-body-header-1">
                <div style="display: flex;">
                   <div class="header-1-menu"><a onclick="PJ_IMP_go();" href="#">프로젝트</a></div> |
-                  <div class="header-1-menu"><a onclick="UNITWORK_go()" href="#">단위업무</a></div> |
-                  <div class="header-1-menu"><a href="#">이슈관리</a></div> |
-                  <div class="header-1-menu"><a onclick="BUDGET_go();">예산수립</a></div> |
-                  <div class="header-1-menu"><a onclick="MEETINGBOOK_go();" >회의록</a></div> |
-                  <div class="header-1-menu"><a onclick="javascript:showList(${projects.PJ_NUM},0,'','');">산출물관리 &nbsp;</a></div>
+              <c:if test="${member.MEMBER_AUTHORITY == 2}">
+                <div class="header-1-menu"><a onclick="UNITWORK_gogo()" href="#">단위업무</a></div> |
+              </c:if>
+              <c:if test="${member.MEMBER_AUTHORITY == 3}">
+                <div class="header-1-menu"><a onclick="UNITWORK_go()" href="#">단위업무</a></div> |
+              </c:if>
+                  <div class="header-1-menu"><a onclick="ISSUE_go()" style="cursor:pointer;">이슈관리</a></div> |
+                  <div class="header-1-menu"><a onclick="BUDGET_go();" style="cursor:pointer;">예산수립</a></div> |
+                  <div class="header-1-menu"><a onclick="MEETINGBOOK_go();" style="cursor:pointer;">회의록</a></div> |
+                  <div class="header-1-menu"><a onclick="PRODUCT_TL_go();" style="cursor:pointer;">산출물관리 &nbsp;</a></div>
                </div>
             </div>
       </div> 
@@ -61,7 +72,9 @@
                   <div class="p-info-detail">
                      <div class="p-info-detail-title">
                         <span style="font-weight:bold;">프로젝트 정보</span>
-                        <button id="P_modify" style="display:block;" class="p-info-detail-bt" onclick="P_MODIFY();">수정</button>
+                        <c:if test="${member.MEMBER_AUTHORITY == 3 }">
+                           <button id="P_modify" style="display:block;" class="p-info-detail-bt" onclick="P_MODIFY();">수정</button>
+                           </c:if>
                         <div id=Pj_modify style="width: 215px; display:none;justify-content: space-between;">
                            <button id="Pj_modify_go"  class="p-info-detail-bt" onclick="PJ_MODIFY_go();">수정하기</button>
                            <button id="Pj_modify_fail" class="p-info-detail-bt" onclick="PJ_MODIFY_fail();">취소하기</button>
@@ -176,6 +189,29 @@
    <!-- project/phead.jsp (t-body) 화면 끝나는 태그 -->
 <!-- ----------------------------리스트 이동-------------------------------------- -->
 <script>
+var header1MenuItems = document.querySelectorAll('.header-1-menu');
+
+header1MenuItems.forEach(function (menuItem) {
+   menuItem.addEventListener('click', function () {
+      header1MenuItems.forEach(function (item) {
+         item.classList.remove('bold-menu');
+      });
+      menuItem.classList.add('bold-menu');
+   });
+});
+
+var header2MenuItems = document.querySelectorAll('.header-2-menu');
+
+header2MenuItems.forEach(function (menuItem) {
+   menuItem.addEventListener('click', function () {
+      header2MenuItems.forEach(function (item) {
+         item.classList.remove('bold-menu');
+      });
+      menuItem.classList.add('bold-menu');
+   });
+});
+
+
    var PJ_NUM = $('input[name="PJ_NUM"]').val();
 //프로젝트 정보로 이동
 function PJ_IMP_go(){
@@ -192,6 +228,7 @@ function pjhrList_go(){
       success: function(data){
          //alert("참여인력리스트");
          $("#project_BODY").html(data);
+         MemberPictureThumb('<%=request.getContextPath()%>');
       },
       error: function (xhr, status, error) {
             // AJAX 요청이 실패했을 때 실행할 코드
@@ -214,10 +251,26 @@ function PJ_Require_go(){
         }
    });
 }
-// 단위업무
+//단위업무(팀장)
 function UNITWORK_go(){
    $.ajax({
       url:"unitwork_go?PJ_NUM="+PJ_NUM,
+      type:"get",
+      dataType:"text",
+      success:function(data){
+         $("#p-main-bodys").html(data);
+      },
+      error: function (xhr, status, error) {
+            // AJAX 요청이 실패했을 때 실행할 코드
+            console.log(error);
+        }
+   });
+}
+
+// 단위업무(팀원)
+function UNITWORK_gogo(){
+   $.ajax({
+      url:"unitwork_gogo?PJ_NUM="+PJ_NUM,
       type:"get",
       dataType:"text",
       success:function(data){
@@ -253,6 +306,79 @@ function MEETINGBOOK_go(){
       dataType:"text",
       success:function(data){
          $("#p-main-bodys").html(data);
+      },
+      error: function (xhr, status, error) {
+            // AJAX 요청이 실패했을 때 실행할 코드
+            console.log(error);
+        }
+   });
+}
+
+//산출물관리로 이동
+function PRODUCT_go(){
+   $.ajax({
+      url:"product_go?PJ_NUM="+PJ_NUM,
+      type:"get",
+      dataType:"text",
+      success:function(data){
+         $(".p-body-cont").html(data);
+      },
+      error: function (xhr, status, error) {
+            // AJAX 요청이 실패했을 때 실행할 코드
+            console.log(error);
+        }
+   });
+}
+
+//팀장 산출물관리로 이동
+function PRODUCT_TL_go(){
+   var gubunAu = '${member.MEMBER_AUTHORITY}';
+   if(gubunAu == 1){
+      PRODUCT_go();
+      return;
+   }
+   $.ajax({
+      url:"product_TL_go?PJ_NUM="+PJ_NUM,
+      type:"get",
+      dataType:"text",
+      success:function(data){
+         $(".p-body-cont").html(data);
+      },
+      error: function (xhr, status, error) {
+            // AJAX 요청이 실패했을 때 실행할 코드
+            console.log(error);
+        }
+   });
+}
+
+var ISSUE_NUM=${ISSUE_NUM};
+if(ISSUE_NUM!=null&&ISSUE_NUM!=0){
+   ISSUE_go_fromDashBoard(ISSUE_NUM);
+}
+
+function ISSUE_go_fromDashBoard(ISSUE_NUM){
+      $.ajax({
+            url:"issue_go?PJ_NUM="+PJ_NUM+"&ISSUE_NUM="+ISSUE_NUM,
+            type:"get",
+            dataType:"text",
+            success:function(data){
+               $(".p-main-body").html(data);
+            },
+            error: function (xhr, status, error) {
+                  // AJAX 요청이 실패했을 때 실행할 코드
+                  console.log(error);
+            }
+      });
+}
+
+//이슈관리로 이동
+function ISSUE_go(){
+   $.ajax({
+      url:"issue_go?PJ_NUM="+PJ_NUM,
+      type:"get",
+      dataType:"text",
+      success:function(data){
+         $(".p-main-body").html(data);
       },
       error: function (xhr, status, error) {
             // AJAX 요청이 실패했을 때 실행할 코드

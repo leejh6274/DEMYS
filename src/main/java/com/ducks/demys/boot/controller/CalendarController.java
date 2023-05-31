@@ -2,7 +2,6 @@ package com.ducks.demys.boot.controller;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,14 +38,28 @@ public class CalendarController {
    @ResponseBody
    public List<Calendar> getCalendar(int MEMBER_NUM) {
       Member member = memberService.getMemberByMEMBER_NUM(MEMBER_NUM);
+
       List<Calendar> calendar = calendarService.getCalendarList(MEMBER_NUM);
+
       return calendar;
    }
+   
+   @RequestMapping("/calendar/getCalendardetail")
+   @ResponseBody
+   public List<Calendar> getCalendardetail(@RequestParam("SC_NUM") int SC_NUM) {
+      
+      List<Calendar> calendar = calendarService.getCalendardetail(SC_NUM);
+            
+      return calendar;
+   }
+   
+      
          
    @PostMapping("/calendar/registCalendar")
    public String registCalendar(Calendar sc) {
        Calendar regsc = sc;
        calendarService.registCalendar(regsc);
+
 
        // 적절한 응답을 반환
        return "redirect:/calendar/calendar";
@@ -64,7 +77,17 @@ public class CalendarController {
       Member member = memberService.getMemberByMEMBER_NUM(MEMBER_NUM);
       List<Projects> projectList = projectsService.getPJCalList(MEMBER_NUM);
       model.addAttribute("projectList",projectList);
+      
        return projectList;
+   }
+   
+   
+   
+   @RequestMapping("/calendar/modifyCalendar")
+   @ResponseBody
+   public void modifyCalendar(@RequestBody Calendar sc) {
+       calendarService.modifyCalendar(sc);
+  
    }
    
 }

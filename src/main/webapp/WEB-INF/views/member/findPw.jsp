@@ -138,7 +138,7 @@ body {
       			<label class="findPw-name">아이디</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="anjdal92" class="input input-bordered" onkeyup="checkReg(event)" id="MEMBER_ID" name="MEMBER_ID" required  />
+        				<input type="text" placeholder="anjdal92" class="input input-bordered" autocomplete="off"  onkeyup="checkReg(event)" id="MEMBER_ID" name="MEMBER_ID" required  />
  					</div>     			
       			</div>
       			</div>
@@ -146,7 +146,7 @@ body {
       			<label class="findPw-name">이메일</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="anjdal92@naver.com" class="input input-bordered" onkeyup="checkReg(event)" id="MEMBER_EMAIL" name="MEMBER_EMAIL" required />
+        				<input type="text" placeholder="anjdal92@naver.com" class="input input-bordered" autocomplete="off"  onkeyup="checkReg(event)" id="MEMBER_EMAIL" name="MEMBER_EMAIL" required />
  					</div>     			
       			</div>
 				</div>

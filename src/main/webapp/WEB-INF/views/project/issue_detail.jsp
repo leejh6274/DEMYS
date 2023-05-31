@@ -120,155 +120,188 @@ body {
 
 </style>
 <body>
-	<div class="regist_content">
-		<div class="flex card-body" style="padding-bottom:0px;">
-			<div class="navbar text-neutral-content" style="width: 100%; padding: 0px; min-height: 1rem; height: 30px; border-bottom:3px solid #016fa0;">
-				<div class="text-black mb-3" style="font-weight: bold; font-size: 1.5rem; ">
-					이슈
-				</div>
-			</div>
-		</div>
+   <div class="regist_content">
+      <div class="flex card-body" style="padding-bottom:0px;">
+         <div class="navbar text-neutral-content" style="width: 100%; padding: 0px; min-height: 1rem; height: 30px; border-bottom:3px solid #016fa0;">
+            <div class="text-black mb-3" style="font-weight: bold; font-size: 1.5rem; ">
+               이슈
+            </div>
+         </div>
+      </div>
    
    
-   		<div class="flex flex-row card-body" style="padding-top:10px; padding-bottom:10px;display: flex;flex-direction: row; justify-content:space-between;">
-				<div class="flex flex-col">
-					<!-- 제목 -->
-					<div class="flex flex-row">
-						<c:if test="${issue.ISSUE_IMP eq 3 }">
-							<div class="flex items-center font-bold justify-center" style="width:100px; height:49px; border:1px solid #aaaaaa; border-right:0">중요</div> <!-- 1:낮음 2:보통 3:중요 -->
-						</c:if>
-						<c:if test="${issue.ISSUE_IMP eq 2 }">
-							<div class="flex items-center font-bold justify-center" style="width:100px; height:49px; border:1px solid #aaaaaa; border-right:0">보통</div> <!-- 1:낮음 2:보통 3:중요 -->
-						</c:if>
-						<c:if test="${issue.ISSUE_IMP eq 1 }">
-							<div class="flex items-center font-bold justify-center" style="width:100px; height:49px; border:1px solid #aaaaaa; border-right:0">낮음</div> <!-- 1:낮음 2:보통 3:중요 -->
-						</c:if>
-					<div class="flex items-center" style="width:550px; height:49px; border:1px solid #aaaaaa;">&nbsp;&nbsp;${issue.ISSUE_TITLE}</div>
-					</div>
-					<!-- 분류, 날짜, 채택 -->
-					<div class="flex flex-row">
-						<!-- <select class="w-24 h-8 text-center inline-block"  style="height:48px; border:1px solid #aaaaaa;" disabled>
-			   				<option value="step" >개발 단계</option>
-		   					<option value="a">분석</option>
-		   					<option value="d">설계</option>
-		   					<option value="r">구현</option>
-		   					<option value="t" selected>시험</option>
-						</select> -->
-						<div class="text-center inline-block" style="width:160px; line-height:45px; height:48px; border:1px solid #aaaaaa;">${issue.MEMBER_NAME }</div>
-						<div class="flex justify-center">
-						<div class="flex items-center justify-center" style="border:1px solid #aaaaaa; border-radius:0px; width:236px; border-right:0;"><fmt:formatDate value="${issue.ISSUE_REGDATE }" pattern="yyyy-MM-dd"/></div>
-							<div class="flex justify-center" style="border:1px solid #aaaaaa; border-left:0; border-right:0; font-size:1.6rem; line-height:40px;">~</div>
-						<div class="flex items-center justify-center" style="border:1px solid #aaaaaa; border-radius:0px; width:236px; border-left:0;"><fmt:formatDate value="${issue.ISSUE_DEADLINE }" pattern="yyyy-MM-dd"/></div>
-					</div>
-						
-						<!-- <div class="flex justify-center items-center" style="height:48px; border:1px solid #aaaaaa; width:150px; font-weight:bolder">
-					 		채택
-						</div> -->
-					</div>
-					
-					<div style="width:650px; height:400px; border:1px solid #aaaaaa;">
-						&nbsp;&nbsp;${issue.ISSUE_CONTENT }
-					</div>
-					
-					
-					<!-- 첨부파일 -->
-						<div class="flex items-center" style="width:650px; height:49px; border:1px solid #aaaaaa; color:#dfdfdf; justify-content:space-between;">&nbsp;&nbsp;첨부파일이름.hwp(${mb_attach.mbat_filename })
-							<span>
-								<i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl text-black mr-3 " ></i>
-							</span>
-						</div>
-						<div class="flex items-center" style="width:650px; height:49px; border:1px solid #aaaaaa; justify-content:space-between;">&nbsp;&nbsp;김원미, 권오상, 이주헌(${issue_tag.member_num })
-							<span>
-								<i class="fa-solid fa-tag text-2xl text-black mr-3 " ></i>
-							</span>
-						</div>
-					
-					
-					</div>
-					
-					<%-- <div class="flex flex-col">
-					
-						<div class="flex flex-row" style="width:400px; height:30px; border:1px solid #aaaaaa; border-bottom:0px;">
-							<div class="flex flex-row" style="border-bottom:0">
-								<div class="flex">
-									<img class="w-9 rounded-full" src="/resource/img/abc.jpg">
-								</div>
-								<div class="flex">권오상&nbsp;&nbsp;</div>
-							</div>
-						</div>
-						<div class="flex" style="width:400px; height:100px; border:1px solid #aaaaaa; border-top:0px;">수정했습니다. 이메일 확인 바람.(${issuere_content} )</div>
-					</div> --%>
-					
-					<div style="width:400px;">
-						<div style="width: 100%; height: 400px; border: 1px solid #aaa; background-color: white; margin-bottom:96px;">
-							<div class="title" style="height: 5%;"></div>
-							<div class="content flex flex-col items-start" style="height:90%; margin-left: 5px; overflow: auto; ">
-								<c:forEach var="reply" items="${replyList}"  >
-									<div class="bg-base-100 pb-3" style="width: 95%; height: 115px; margin: 5px; border-bottom:1px solid #aaa">
-										<div class="" style="width: 97%; height: 50%; margin: 0;">
-											<div class="card-title flex justify-between pb-5" style="margin: 0;">
-												<div class="flex">
-													<div>
-														<img class="w-7 rounded-full mr-2" src="/resource/img/imja.jpg" style="line-height:30px;">
-													</div>
-													<div style="font-size:14px;">${reply.MEMBER_NAME }&nbsp;&nbsp;</div>
-												</div>
-											</div>
-											<div style="font-size: 14px; text-color: gray;">${reply.ISSUERE_CONTENT }</div>
-											<div style="display:flex; justify-content:flex-end; margin-top:10px;">
-											<c:if test="${member.MEMBER_NUM eq reply.MEMBER_NUM}">
-												<button class="btn btn-se w-12 h-5 rounded" style="font-size: 8px; height: 20px; border-radius: 8px; margin-right: 5px; width:40px; padding:0;">수 정</button>
-												<button class="btn btn-se w-12 h-5 rounded" style="font-size: 8px; height: 20px; border-radius: 8px; width:40px; padding:0;">삭 제</button>
-											</c:if>
-											</div>
-										</div>
-									</div>
-								</c:forEach>
-							</div>
-							
-						</div>
-							<div class="flex flex-row">
-								<div><i class="fa-solid fa-check ml-3 mr-3 text-xl"></i><span>댓글 작성</span></div>
-							</div>
-						<div class="flex flex-row" style="height:70px; margin-top:5px;">
-							<div class="flex flex-row">
-								<textarea class="form-control" style="width:360px; height:70px; border:1px solid #aaa; resize:none; border-radius:0px;" placeholder="내용을 작성하세요."></textarea>
-							</div>
-							<div class="flex flex-row">
-								<button class="btn btn-se" style="font-size: 12px; width: 40px; height: 70px; border-radius: 0 3px 3px 0; margin-right: 10px; padding:0;">등 록</button>
-							</div>
-						</div>
-					</div>
-					
-			</div>
+         <div class="flex flex-row card-body" style="padding-top:10px; padding-bottom:10px;display: flex;flex-direction: row; justify-content:space-between;">
+            <div class="flex flex-col">
+               <!-- 제목 -->
+               <div class="flex flex-row">
+                  <c:if test="${issue.ISSUE_IMP eq 3 }">
+                     <div class="flex items-center font-bold justify-center" style="width:100px; height:49px; border:1px solid #aaaaaa; border-right:0">중요</div> <!-- 1:낮음 2:보통 3:중요 -->
+                  </c:if>
+                  <c:if test="${issue.ISSUE_IMP eq 2 }">
+                     <div class="flex items-center font-bold justify-center" style="width:100px; height:49px; border:1px solid #aaaaaa; border-right:0">보통</div> <!-- 1:낮음 2:보통 3:중요 -->
+                  </c:if>
+                  <c:if test="${issue.ISSUE_IMP eq 1 }">
+                     <div class="flex items-center font-bold justify-center" style="width:100px; height:49px; border:1px solid #aaaaaa; border-right:0">낮음</div> <!-- 1:낮음 2:보통 3:중요 -->
+                  </c:if>
+               <div class="flex items-center" style="width:550px; height:49px; border:1px solid #aaaaaa;">&nbsp;&nbsp;${issue.ISSUE_TITLE}</div>
+               </div>
+               <!-- 분류, 날짜, 채택 -->
+               <div class="flex flex-row">
+                  <!-- <select class="w-24 h-8 text-center inline-block"  style="height:48px; border:1px solid #aaaaaa;" disabled>
+                        <option value="step" >개발 단계</option>
+                        <option value="a">분석</option>
+                        <option value="d">설계</option>
+                        <option value="r">구현</option>
+                        <option value="t" selected>시험</option>
+                  </select> -->
+                  <div class="text-center inline-block" style="width:160px; line-height:45px; height:48px; border:1px solid #aaaaaa;">${issue.MEMBER_NAME }</div>
+                  <div class="flex justify-center">
+                  <div class="flex items-center justify-center" style="border:1px solid #aaaaaa; border-radius:0px; width:236px; border-right:0;"><fmt:formatDate value="${issue.ISSUE_REGDATE }" pattern="yyyy-MM-dd"/></div>
+                     <div class="flex justify-center" style="border:1px solid #aaaaaa; border-left:0; border-right:0; font-size:1.6rem; line-height:40px;">~</div>
+                  <div class="flex items-center justify-center" style="border:1px solid #aaaaaa; border-radius:0px; width:236px; border-left:0;"><fmt:formatDate value="${issue.ISSUE_DEADLINE }" pattern="yyyy-MM-dd"/></div>
+               </div>
+                  
+                  <!-- <div class="flex justify-center items-center" style="height:48px; border:1px solid #aaaaaa; width:150px; font-weight:bolder">
+                      채택
+                  </div> -->
+               </div>
+               
+               <div style="width:650px; height:400px; border:1px solid #aaaaaa;">
+                  <br/>&nbsp;&nbsp;${issue.ISSUE_CONTENT }
+               </div>
+               
+               
+               <!-- 첨부파일 -->
+                  <div class="flex items-center" style="width:650px; height:49px; border:1px solid #aaaaaa; color:#dfdfdf; justify-content:space-between;">&nbsp;&nbsp;첨부파일이름.hwp(${mb_attach.mbat_filename })
+                     <span>
+                        <i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl text-black mr-3 " ></i>
+                     </span>
+                  </div>
+                  <div class="flex items-center" style="width:650px; height:49px; border:1px solid #aaaaaa; justify-content:space-between;">&nbsp;&nbsp;김원미, 권오상, 이주헌(${issue_tag.member_num })
+                     <span>
+                        <i class="fa-solid fa-tag text-2xl text-black mr-3 " ></i>
+                     </span>
+                  </div>
+               
+               
+               </div>
+               
+               
+               
+               <div style="width:400px;">
+                  <div style="width: 100%; height: 400px; border: 1px solid #aaa; background-color: white; margin-bottom:96px;">
+                     <div class="title" style="height: 5%;"></div>
+                     <div class="content flex flex-col items-start" style="height:90%; margin-left: 5px; overflow: auto; ">
+                         <c:forEach var="reply" items="${replyList}"  >
+                           <div class="bg-base-100 pb-3" style="width: 95%; height: 115px; margin: 5px; border-bottom:1px solid #aaa">
+                              <div class="" style="width: 97%; height: 50%; margin: 0;">
+                                 <div class="card-title flex justify-between pb-5" style="margin: 0;">
+                                    <div class="flex">
+                                       <div>
+                                          <div class="manPicture" style="width:25px;height:25px;display:block;margin:0 auto;border-radius:50%;" data-id="${reply.MEMBER_ID }"></div>
+                                       </div>
+                                       <div style="font-size:14px;">${reply.MEMBER_NAME }&nbsp;&nbsp;</div>
+                                       <div style="font-size:14px; color:#aaa; float:right;"><fmt:formatDate value="${reply.ISSUERE_REGDATE }" pattern="yyyy-MM-dd  hh:mm"/></div>
+                                    </div>
+                                 </div>
+                                 <div style="font-size: 14px; text-color: gray;">${reply.ISSUERE_CONTENT }</div>
+                                 <div style="display:flex; justify-content:flex-end; margin-top:10px;">
+                                 <c:if test="${member.MEMBER_NUM eq reply.MEMBER_NUM}">
+                                    <button class="btn btn-se w-12 h-5 rounded" style="font-size: 8px; height: 20px; border-radius: 8px; margin-right: 5px; width:40px; padding:0;">수 정</button>
+                                    <button class="btn btn-se w-12 h-5 rounded" style="font-size: 8px; height: 20px; border-radius: 8px; width:40px; padding:0;" onclick="location.href='issue_reply_delete?ISSUERE_NUM=${reply.ISSUERE_NUM}'">삭 제</button>
+                                 </c:if>
+                                 </div>
+                              </div>
+                           </div>
+                        </c:forEach> 
+                     </div>
+                     
+                  </div>
+    
+                  
+                     <div class="flex flex-row">
+                        <div><i class="fa-solid fa-check ml-3 mr-3 text-xl"></i><span>댓글 작성</span></div>
+                     </div>
+                  <div class="flex flex-row" style="height:70px; margin-top:5px;">
+                     <div class="flex flex-row">
+                        <textarea class="form-control" style="width:360px; height:70px; border:1px solid #aaa; resize:none; border-radius:0px;" placeholder="내용을 작성하세요." id="reply_content"></textarea>
+                     </div>
+                     <div class="flex flex-row">
+                        <button class="btn btn-se" style="font-size: 12px; width: 40px; height: 70px; border-radius: 0 3px 3px 0; margin-right: 10px; padding:0;" onclick="replyRegist_go();">등 록</button>
+                     </div>
+                  </div> 
+               </div>
+               
+         </div>
  
-		<div style="display:flex; justify-content:center; margin-top:20px; margin-bottom:15px;">
-			<button class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">수 정</button>
-		</div>
-	</div>
-	<div class="modal_layer"></div>
+      <div style="display:flex; justify-content:center; margin-top:20px; margin-bottom:15px;">
+         <button class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">수 정</button>
+      </div>
+   </div>
+   <div class="modal_layer"></div>
    <!-- /.content-wrapper -->
-	<script>
-		
+   <%@ include file="issue_replyhd.jsp" %>
+   
+   <script>
+      
 
+      /* function remove_go() {
+          var ISSUERE_NUM = getISSUERE_NUM();
+          if (confirm('업체를 삭제하시겠습니까?')) {
+            $.ajax({
+              url: '/project/issue_reply_delete',
+              method: 'post',
+              data: {ISSUERE_NUM: ISSUERE_NUM},
+              success: function(response) {
+                 window.opener.location.reload(); // 새로고침
+                  window.opener.location.href = '/project/issue_detail'; // 이동
+                  
+              },
+              error: function(error) {
+                console.error('삭제 작업 중 오류가 발생했습니다.');
+              }
+            });
+          }
+        } */
 
-		$(document).ready(function(){
-	  		var fileTarget = $('.filebox .upload-hidden');
+   
+   
+   
 
-	    	fileTarget.on('change', function(){
-	        	if(window.FileReader){
-	            	var filename = $(this)[0].files[0].name;
-	        	} else {
-	            	var filename = $(this).val().split('/').pop().split('\\').pop();
-	        	}
+      $(document).ready(function(){
+           var fileTarget = $('.filebox .upload-hidden');
 
-	        	$(this).siblings('.upload-name').val(filename);
-	   	 	});
-		}); 
+          fileTarget.on('change', function(){
+              if(window.FileReader){
+                  var filename = $(this)[0].files[0].name;
+              } else {
+                  var filename = $(this).val().split('/').pop().split('\\').pop();
+              }
 
+              $(this).siblings('.upload-name').val(filename);
+             });
+      }); 
+
+        window.onload=function(){
+          	MemberPictureThumb('<%=request.getContextPath()%>');
+          }
+          
+          
+        function MemberPictureThumb(contextPath){
+        	   for(var target of document.querySelectorAll('.manPicture')){   
+        	      var id = target.getAttribute('data-id');
+        	      
+        	      target.style.backgroundImage="url('"+contextPath+"/member/getPicture?MEMBER_ID="+id+"')";            
+        	      target.style.backgroundPosition="center";
+        	      target.style.backgroundRepeat="no-repeat";
+        	      target.style.backgroundSize="cover";
+        	   }
+        	}
+        
    </script>
-</body>
+   
 
+</body>
 
 
 

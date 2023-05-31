@@ -14,9 +14,10 @@
                <!-- 참여인력 정보 -->
                <div id="hrList_new">
                <input type="hidden" name="PJ_NUM" value="${projects.PJ_NUM}" />
-                  <div class="hr-info">
-                     <div class="info-title">
-                        <button id="pjhr_Regibt" class="hr-regist-bt" onclick="PJHR_REGIST_go('${projects.PJ_NUM}');">참여인력 추가</button>
+                  <div class="info-title">
+                        <c:if test="${member.MEMBER_AUTHORITY == 3 }">
+                           <button id="pjhr_Regibt" class="hr-regist-bt" onclick="PJHR_REGIST_go('${projects.PJ_NUM}');">참여인력 추가</button>
+                        </c:if>
                      </div>
                      <div class="flex w-full mx-2.5">
                         <span style="font-weight:bold;">총 참여인력 &nbsp;</span>
@@ -24,14 +25,14 @@
                         
                    </div>
                      <div class="hr-list">
-                        <c:forEach var="pjhrList" items="${pjhrList }">
+                        <c:forEach var="pjhrList" items="${pjhrList }" varStatus="status">
                         <div class="td-wrapper hr-list-cont shadow-lg" onclick="javascript:OpenWindow('hr_detail?PJHR_NUM=${pjhrList.PJHR_NUM}&PJ_NUM=${projects.PJ_NUM }','참여인원상세',600,500);">
                            <div class="hr-img"> 
-                                 <div class="manPicture" data-id="${pjhrList.MEMBER_ID }" style="width:150px;height:180px;display:block;margin:0 auto;"></div>
+                                 <div class="manPicture" data-id="${pjhrList.MEMBER_ID }" style="width:150px;height:180px;display:block;margin:0 auto;border-radius:5%;"></div>
                            </div>
-                           <div class="w-3/5 px-2.5">
+                           <div class="w-3/5 px-2.5" >
                               <input type="hidden" value="${pjhrList.PJHR_NUM }" name="PJHR_NUM" />
-                              <div class="font-bold">No. ${pjhrList.MEMBER_NUM }</div>
+                             <%--  <div class="font-bold">No. ${status.index+1}</div> --%>
                               <div>✔ ${pjhrList.MEMBER_NAME }</div>
                               <div>✔ ${pjhrList.PJHR_WORK }</div>
                               <div>✔ ${pjhrList.PJHR_DETAIL }</div>
@@ -42,24 +43,7 @@
                   </div>
                   <!-- 참여인력 끝나는 태그 -->
                </div>
-<script>
-window.onload=function(){
-    MemberPictureThumb('<%=request.getContextPath()%>');
- }
- 
- 
-function MemberPictureThumb(contextPath){
-     for(var target of document.querySelectorAll('.manPicture')){   
-        var id = target.getAttribute('data-id');
-        
-        target.style.backgroundImage="url('"+contextPath+"/member/getPicture?MEMBER_ID="+id+"')";            
-        target.style.backgroundPosition="center";
-        target.style.backgroundRepeat="no-repeat";
-        target.style.backgroundSize="cover";
-     }
-  }
 
-</script>
 
 <!--  --><!-- 모달창-참여인력 추가(등록) 화면  -->
 <div id="modal_hr">
@@ -246,7 +230,6 @@ function searchPJHR_NAME(){
             }
             addMemberId.append(input_mnum);
             addMemberId.append(input_mname);
-            
             table.find('tr>td:first-child').each(function(){
                if($(this).text() == MEMBER_NAME){
                   $(this).parent('tr').css('background-color', "#e7e7e7e7");
@@ -293,6 +276,9 @@ function PJHR_list_go(){
             
             var input_mnum = '<input id="m_num" type="hidden" value="' + MEMBER_NUM + '" />';
             var input_mname = '<input id="m_name" type="hidden" value="' + MEMBER_NAME + '" />';
+            
+           
+            
             
              var addMemberId = $('.add_member_id');
 

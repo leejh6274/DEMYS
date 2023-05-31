@@ -115,29 +115,24 @@ Handlebars.registerHelper({
 
 <script>
 
-function printData(taskArr,target,templateObject){
-	var template=Handlebars.compile(templateObject.html());
-	var html = template(taskArr);
-	var nullHtml = '';
-	
-	if(taskArr[0] == null || taskArr[0].tasks_STATUS==1){		
+function printData(dataMap,templateObject){
+	var template=Handlebars.compile(templateObject.html());	
 		$('.todocard').remove();
-	}
-	else if(taskArr[0] == null || taskArr[0].tasks_STATUS==2){		
 		$('.inprogresscard').remove();
-	}
-	else if(taskArr[0] == null || taskArr[0].tasks_STATUS==3){		
 		$('.donecard').remove();
-	}
-	target.append(nullHtml);
-	target.append(html);
+	var todohtml = template(dataMap.todoList);
+	var inprogresshtml = template(dataMap.inprogressList);
+	var donehtml = template(dataMap.doneList);
+
+	$('#todo-list').html(todohtml);
+	$('#inprogress-list').html(inprogresshtml);
+	$('#done-list').html(donehtml);
 }
 
 function showTaskList(){
 	$.getJSON('<%=request.getContextPath()%>/tasks/cardlist',function(data){
-		printData(data.todoList,$('#todo-list'),$('#taskcard-template'));
-		printData(data.inprogressList,$('#inprogress-list'),$('#taskcard-template'));
-		printData(data.doneList,$('#done-list'),$('#taskcard-template'));
+		printData(data,$('#taskcard-template'));
+
 		MemberPictureThumb('<%=request.getContextPath()%>');
 		console.log(data)
 	});
@@ -185,6 +180,13 @@ function regOpen(TASK_STATUS) {
 
 
 function regClose() {
+	
+	$('#reg_tasks_CONTENT').val("");
+	$('#reg_tasks_IMP').val("");
+	$('#reg_tasks_ENDDATE_date').val("");
+	$('#reg_tasks_ENDDATE_time').val("18:00");
+	$('#reg_tasks_SHARE').prop("checked", false);
+	$('#reg_tasks_STATUS').val("");
    var modalPop = $('.reg_modal_wrap');
    var modalBg = $('.reg_modal_bg');
 
@@ -194,6 +196,13 @@ function regClose() {
 }
  
 function modClose() {
+	$('#mod_tasks_NUM').val("");
+	$('#mod_tasks_CONTENT').val("");
+	$('#mod_tasks_IMP').val("");
+	$('#mod_tasks_ENDDATE_date').val("");
+	$('#mod_tasks_ENDDATE_time').val("");
+	$('#mod_tasks_SHARE').prop("checked", false);
+	$('#mod_tasks_STATUS').val("");
 	   var modalPop = $('.mod_modal_wrap');
 	   var modalBg = $('.mod_modal_bg');
 
@@ -205,15 +214,10 @@ function reg_go(){
 	var tasks_CONTENT=$('#reg_tasks_CONTENT').val();
 	var tasks_IMP=parseInt($('#reg_tasks_IMP').val());
 	var tasks_ENDDATE=$('#reg_tasks_ENDDATE_date').val()+" "+$('#reg_tasks_ENDDATE_time').val()+":00";
-	var tasks_SHARE=$('#reg_tasks_SHARE').val();
+	var tasks_SHARE=$('#reg_tasks_SHARE').is(":checked") ? 1 : 0;
 	var tasks_STATUS=parseInt($('#reg_tasks_STATUS').val());
-	var member_NUM=3;
+	var member_NUM=parseInt($('#reg_member_NUM').val());
 	
-	if(tasks_SHARE=="on"){
-		tasks_SHARE=1;
-	}else{
-		tasks_SHARE=0;
-	}
 	var task={
 			"tasks_CONTENT":tasks_CONTENT,
 			"tasks_IMP":tasks_IMP,
@@ -232,8 +236,8 @@ function reg_go(){
 			$('#reg_tasks_CONTENT').val("");
 			$('#reg_tasks_IMP').val("");
 			$('#reg_tasks_ENDDATE_date').val("");
-			$('#reg_tasks_ENDDATE_time').val("");
-			$('#reg_tasks_SHARE').val("");
+			$('#reg_tasks_ENDDATE_time').val("18:00");
+			$('#reg_tasks_SHARE').prop("checked", false);
 			$('#reg_tasks_STATUS').val("");
 
 			var modalPop = $('.reg_modal_wrap');
@@ -295,7 +299,7 @@ function mod_go() {
 	var tasks_ENDDATE = $('#mod_tasks_ENDDATE_date').val() + " " + $('#mod_tasks_ENDDATE_time').val();
 	var tasks_SHARE = $('#mod_tasks_SHARE').is(":checked") ? 1 : 0;
 	var tasks_STATUS = parseInt($('#mod_tasks_STATUS').val());
-	var member_NUM = 3;
+	var member_NUM = parseInt($('#mod_member_NUM').val());
 
 	var data = {
 		"tasks_NUM": parseInt(tasks_NUM),
@@ -319,7 +323,7 @@ function mod_go() {
 			$('#mod_tasks_IMP').val("");
 			$('#mod_tasks_ENDDATE_date').val("");
 			$('#mod_tasks_ENDDATE_time').val("");
-			$('#mod_tasks_SHARE').val("");
+			$('#mod_tasks_SHARE').prop("checked", false);
 			$('#mod_tasks_STATUS').val("");
 
 			var modalPop = $('.mod_modal_wrap');

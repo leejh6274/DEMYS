@@ -18,9 +18,13 @@ public class CalendarService {
 
    public List<Calendar> getCalendarList(int MEMBER_NUM) {
       int sq = calendarRepository.selectCalendarSequenceNextValue();
-      
       return calendarRepository.getCalendarList(MEMBER_NUM);
     }
+   
+   public List<Calendar> getCalendardetail(int SC_NUM) {
+      
+      return calendarRepository.getCalendardetail(SC_NUM);
+   }
    
     public void registCalendar(Calendar sc) {
        sc.setSC_NUM(calendarRepository.selectCalendarSequenceNextValue());
@@ -35,5 +39,15 @@ public class CalendarService {
    public List<Calendar> getModal_PJList(int MEMBER_NUM) {
       return calendarRepository.getModal_PJList(MEMBER_NUM);
     }
+   public void modifyCalendar(Calendar sc) {
+
+       calendarRepository.modifyCalendar(sc);
+       
+   }
+
+
+
+
+
    
 }

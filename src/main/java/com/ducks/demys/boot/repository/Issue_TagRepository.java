@@ -9,11 +9,13 @@ import com.ducks.demys.boot.vo.Issue_Tag;
 @Mapper
 public interface Issue_TagRepository {
 
+	public List<Issue_Tag> getIssue_TagList();
+	
 	public List<Issue_Tag> getIssue_TagListByPJ_NUM(int PJ_NUM);
 	
 	public List<Issue_Tag> getIssue_TagListByMEMBER_NUM(int MEMBER_NUM);
-	
-	public Issue_Tag getIssue_TagByISSUETAG_NUM(int ISSUETAG_NUM);
+		   
+	public List<Issue_Tag> getIssue_TagByListISSUE_NUM(int ISSUE_NUM);
 
 	public int selectIssue_TagSequenceNextValue();
 	

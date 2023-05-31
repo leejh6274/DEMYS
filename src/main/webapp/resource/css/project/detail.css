@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.bold-menu {
+   font-weight: bold;
+}
+
 .p-body-cont{
    width:100%;
    height:inherit;

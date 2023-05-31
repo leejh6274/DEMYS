@@ -8,7 +8,7 @@ import lombok.Setter;
 public class Issue_Tag {
 	
 	private int ISSUETAG_NUM;
-	private int PJ_NUM;
+	private String MEMBER_NAME;
 	private int MEMBER_NUM;
 
 }

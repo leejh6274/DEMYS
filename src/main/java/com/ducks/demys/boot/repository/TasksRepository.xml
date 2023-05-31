@@ -4,11 +4,11 @@
 
 <mapper namespace="com.ducks.demys.boot.repository.TasksRepository">
 	<select id="getTasksListByMEMBER_NUM" resultType="Tasks">
-		SELECT *
-		FROM TASKS
-		WHERE MEMBER_NUM=#{MEMBER_NUM}
-		ORDER BY TASKS_NUM DESC
-	</select>
+        SELECT *
+        FROM TASKS
+        WHERE MEMBER_NUM=#{MEMBER_NUM}
+        ORDER BY TASKS_ENDDATE ASC
+    </select>
 	<select id="getTasksListByTASKS_STATUS" resultType="Tasks">
 		SELECT *
 		FROM TASKS

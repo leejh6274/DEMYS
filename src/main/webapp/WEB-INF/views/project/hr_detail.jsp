@@ -32,6 +32,7 @@ body {
 <link rel="stylesheet" href="/resource/css/project/hr_detail.css" />
 
 <body>
+
 <!-- 참여인력 상세  -->
 
 <div class="hr_detail">
@@ -41,52 +42,55 @@ body {
               </div>
         </div>
 
-		<div class="hr-detail-conts">
-			<div class="hr-detail-title">
-				<span>참여인력 상세</span>
-			</div>
-			<div class="hr-detail-cont">
-				<div class="td-wrapper hr-detail-cont-0">
-					<div class="hr-img">
-						<!-- <i class="fa-regular fa-file-image" style="font-size:210px;"></i> -->
-						<div>${pjhr.MEMBER_PIC }</div>
-					</div>
-					<div class="hr-detail_1">
-						<div class="font-bold">No. ${pjhr.MEMBER_NUM }</div>
-						<div>✔ ${pjhr.MEMBER_NAME }</div>
-						<div>✔  ${pjhr.PJHR_WORK }</div>
-						<div class="w-auto h-24 ml-7 mr-2">${pjhr.PJHR_DETAIL }</div>
-					</div>
-				</div>
-			</div>
-			
-			<div class="p-regi-modal-bts">
+      <div class="hr-detail-conts">
+         <div class="hr-detail-title">
+            <span>참여인력 상세</span>
+         </div>
+         <div class="hr-detail-cont">
+            <div class="td-wrapper hr-detail-cont-0">
+               <div class="hr-img">
+                  <!-- <i class="fa-regular fa-file-image" style="font-size:210px;"></i> -->
+                  <div class="manPicture" data-id="${pjhr.MEMBER_ID }" style="width:180px;height:215px;display:block;margin:0 auto;"></div>
+                  
+               </div>
+               <div class="hr-detail_1">
+                  <div class="font-bold">No. ${pjhr.MEMBER_NUM }</div>
+                  <div>✔ ${pjhr.MEMBER_NAME }</div>
+                  <div>✔  ${pjhr.PJHR_WORK }</div>
+                  <div class="w-auto h-24 ml-7 mr-2">${pjhr.PJHR_DETAIL }</div>
+               </div>
+            </div>
+         </div>
+         
+         <div class="p-regi-modal-bts">
+                 <c:if test="${member.MEMBER_AUTHORITY == 3 }">
                   <button onclick="location.href='hr_modify?PJHR_NUM=${pjhr.PJHR_NUM}&PJ_NUM=${pjhr.PJ_NUM }';" class="p-regi-modal-bt">수정</button>
                   <button class="p-regi-modal-bt" onclick="PJHR_REMOVE_go('${pjhr.PJHR_NUM}');">삭제</button>
+               </c:if>
                   <button onclick="Closewin();" class="p-regi-modal-bt">취소</button>
             </div>
-		</div>
-    	<div class="modal_layer"></div>
+      </div>
+       <div class="modal_layer"></div>
 </div>
 
 
 <script>
 function PJHR_REMOVE_go(PJHR_PK){
-	var PJHR_NUM = PJHR_PK;
-	var data = {"PJHR_NUM":parseInt(PJHR_NUM)}
-	$.ajax({
-		url:"pjhr_Remove",
-		type:"post",
-		data:data,
-		success:function(){
-			alert("삭제가 완료되었습니다.");
-			opener.parent.pjhrList_go();
-			window.close();
-		},
-		error:function(){
-			alert("서버상에 오류로 삭제되지 못하였습니다.");
-     	}
-	});
+   var PJHR_NUM = PJHR_PK;
+   var data = {"PJHR_NUM":parseInt(PJHR_NUM)}
+   $.ajax({
+      url:"pjhr_Remove",
+      type:"post",
+      data:data,
+      success:function(){
+         alert("삭제가 완료되었습니다.");
+         opener.parent.pjhrList_go();
+         window.close();
+      },
+      error:function(){
+         alert("서버상에 오류로 삭제되지 못하였습니다.");
+        }
+   });
 }
 
 </script>
@@ -95,17 +99,25 @@ function PJHR_REMOVE_go(PJHR_PK){
 
 
 
+<script>
 
-
-
+window.onload=function(){
+     MemberPictureThumb('<%=request.getContextPath()%>');
+  }
+  
+  
+function MemberPictureThumb(contextPath){
+      for(var target of document.querySelectorAll('.manPicture')){   
+         var id = target.getAttribute('data-id');
+         
+         target.style.backgroundImage="url('"+contextPath+"/member/getPicture?MEMBER_ID="+id+"')";            
+         target.style.backgroundPosition="center";
+         target.style.backgroundRepeat="no-repeat";
+         target.style.backgroundSize="cover";
+      }
+   }
+</script>
 <script src="/resource/js/common.js" defer="defer"></script> 
-
-
 </body>
 
-
-
-
-
-
-
+</html>

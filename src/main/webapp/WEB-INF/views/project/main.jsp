@@ -30,10 +30,17 @@
    <div class="p-sidbar">
 	<div class="p-bt">
          <div class="p-regist">
-            <button class="p-rg-bt" onclick="pjregist_go();">
-               <i class="fa-regular fa-square-plus"></i>
-               프로젝트등록
-            </button>
+            <c:if test="${member.MEMBER_AUTHORITY==3 }">
+	            <button class="p-rg-bt" onclick="pjregist_go();">
+	               <i class="fa-regular fa-square-plus"></i>
+	               프로젝트등록
+	            </button>
+	         </c:if>
+	         <c:if test="${member.MEMBER_AUTHORITY!=3 }">
+	            <button class="p-rg-bt">
+	               프로젝트 목록
+	            </button>
+	         </c:if>
             <div class="p-inend">
                <button class="p-inpro">진행중 </button>
                <button class="p-end">완료 </button>
@@ -132,6 +139,26 @@ function pj_detail(PJ_NUM){
    });
 }
 
+function pj_detailForIssue(PJ_NUM,ISSUE_NUM){
+//  alert(pjnum);
+
+  $.ajax({
+     url: "detail?PJ_NUM="+PJ_NUM+"&ISSUE_NUM="+ISSUE_NUM,
+     type: "get",
+     dataType: "text",
+     success: function(data){
+        //alert(pjnum);
+        $(".pjbody").html(data);
+        $(".p-body").css('background-color', "white");
+        $(".p-list-box").css('border',"1px solid #797979");
+         $(".p-list-box[data-pj-num='" + PJ_NUM + "']").css('border',"4px solid #1ECAF0");
+     },
+     error: function (xhr, status, error) {
+           // AJAX 요청이 실패했을 때 실행할 코드
+           console.log(error);
+       }
+  });
+}
 </script>
 
 <script>
@@ -151,14 +178,33 @@ function pjregist_go(){
 }
 
 window.onload=function(){
-	   if(${PJ_NUM}!=null&&${PJ_NUM}!=""){
-	      pj_detail('${PJ_NUM}');
-	      history.pushState(null,null,'main');
+    if(${PJ_NUM}!=null&&${PJ_NUM}!=""){
+      if(${ISSUE_NUM}!=null&&${ISSUE_NUM}!=""){
+       pj_detailForIssue('${PJ_NUM}','${ISSUE_NUM}');
+          history.pushState(null,null,'main');
+      }else{           
+          pj_detail('${PJ_NUM}');
+          history.pushState(null,null,'main');
+      }
+    }
+  	MemberPictureThumb('<%=request.getContextPath()%>');
+ }
+
+
+
+
+  
+  
+function MemberPictureThumb(contextPath){
+	   for(var target of document.querySelectorAll('.manPicture')){   
+	      var id = target.getAttribute('data-id');
+	      
+	      target.style.backgroundImage="url('"+contextPath+"/member/getPicture?MEMBER_ID="+id+"')";            
+	      target.style.backgroundPosition="center";
+	      target.style.backgroundRepeat="no-repeat";
+	      target.style.backgroundSize="cover";
 	   }
-	      MemberPictureThumb('<%=request.getContextPath()%>');
 	}
-
-
 </script>
 
 

@@ -188,7 +188,7 @@
                   <div class="text-black mb-3" style="font-weight: bold; font-size: 1.5rem; ">
                      회의록 등록
                      
-                     <input type="hidden" name="membernum" value="3" />
+                     <input type="hidden" name="membernum" value="${member.MEMBER_NUM }" />
                   </div>
                </div>
             </div>
@@ -198,7 +198,7 @@
                <input type="hidden" id="pjNum" name="pjnum" value="" /> 
                   <input type="text" name="mbtitle" placeholder="제목을 입력하세요." class="input" style="border:1px solid #aaaaaa; border-radius:0px; width:600px; justify-content:space-between;">
                   
-                  <div class="w-36 h-8 text-center" style="line-height:45px; height:48px; border:1px solid #aaa; border-left:0;">${meetingBook.MEMBER_NAME }</div>
+                  <div class="w-36 h-8 text-center" style="line-height:45px; height:48px; border:1px solid #aaa; border-left:0;">${member.MEMBER_NAME }</div>
                </div>
                
                <!-- 내용 -->   
@@ -231,6 +231,16 @@
          var mbcontent = $("textarea[name=mbcontent]").val();
          var membernum = $("input[name=membernum]").val();
          var pjnum = $("input[name=pjnum]").val();
+         
+         if (!mbtitle) {
+              alert("제목을 확인하세요.");
+              return;
+          }
+
+          if (!mbcontent) {
+              alert("내용을 확인하세요.");
+              return;
+          }
          
          
          var data={

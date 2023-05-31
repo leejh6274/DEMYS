@@ -16,12 +16,12 @@ public class NotificationService {
 		this.notificationRepository= notificationRepository;
 	}
 	
-	public List<Notification> getNotificationList(int DELSTATUS) {
-		return notificationRepository.getNotificationList(0);
+	public List<Notification> getNotificationList(String MEMBER_ID, int DELSTATUS) {
+		return notificationRepository.getNotificationList(MEMBER_ID,DELSTATUS);
 	}
 	
-	public int getNotificationCount() {
-		return notificationRepository.getNotificationCount();
+	public int getNotificationCount(String MEMBER_ID, int DELSTATUS) {
+		return notificationRepository.getNotificationCount(MEMBER_ID,DELSTATUS);
 		
 	}
 	

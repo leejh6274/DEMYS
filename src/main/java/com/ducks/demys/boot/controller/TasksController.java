@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ducks.demys.boot.service.MemberService;
 import com.ducks.demys.boot.service.TasksService;
+import com.ducks.demys.boot.vo.Member;
 import com.ducks.demys.boot.vo.Tasks;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class TasksController {
@@ -33,8 +36,8 @@ public class TasksController {
 	
 	@RequestMapping("/tasks/cardlist")
 	@ResponseBody
-	public Map<String, Object> showCardList(){
-		int loginUserId=3;
+	public Map<String, Object> showCardList(HttpSession session){
+		int loginUserId=((Member)session.getAttribute("member")).getMEMBER_NUM();
 		List<Tasks> taskList=tasksService.getTasksListByMEMBER_NUM(loginUserId);
 		List<Tasks> todoList=new ArrayList<Tasks>();
 		List<Tasks> inprogressList=new ArrayList<Tasks>();

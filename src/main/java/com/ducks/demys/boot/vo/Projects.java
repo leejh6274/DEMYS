@@ -26,9 +26,10 @@ public class Projects {
    private int PJ_PRICE;
    private int MEMBER_NUM;
    private int CT_NUM;
-   private Double SUM_PERCENT;
+   private int SUM_PERCENT;
    private String CT_NAME;
    private String MEMBER_NAME;
    private int ISSUE_COUNT;
    private int DDAY;
+   private int BUDGET_STATUS;
 }

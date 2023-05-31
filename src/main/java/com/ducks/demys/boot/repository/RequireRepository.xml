@@ -3,34 +3,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ducks.demys.boot.repository.RequireRepository">
-
-	<sql id="requiresearch">
-      <if test="searchType == 'rt'.toString()">
-         and REQUIRE_TITLE like '%'||#{keyword}||'%'         
-      </if>
-      <if test="searchType == 'rd'.toString()">
-         and REQUIRE_DETAIL like '%'||#{keyword}||'%'         
-      </if>         
-   </sql>
-
-	<select id="getSearchRequire" resultType="Require">
-      SELECT r.*, m.MEMBER_NAME
-         FROM REQUIRE r, MEMBER m
-        WHERE r.MEMBER_NUM = m.MEMBER_NUM
-        AND r.PJ_NUM = #{PJ_NUM}
-      <include refid="requiresearch"/>
-      ORDER BY r.REQUIRE_NUM DESC
-   </select>
-	
-	 <select id="selectSearchRequireListCount" resultType="Integer">
-      SELECT
-      COUNT(*) 
-      FROM REQUIRE
-      WHERE REQUIRE_NUM IS NOT NULL
-      <include refid="requiresearch" />
-      ORDER BY REQUIRE_NUM DESC
-   </select>
-
    <select id="getRequireListByPJ_NUM" resultType="Require">
       SELECT r.*, m.*
       FROM REQUIRE r, MEMBER m
@@ -43,7 +15,7 @@
       WHERE REQUIRE_NUM=#{REQUIRE_NUM}
    </select>
    <!-- 수정 -->
-  <!--  <select id="getSearchRequire" resultType="Require">
+   <select id="getSearchRequire" resultType="Require">
       SELECT r.*, m.MEMBER_NAME
       FROM REQUIRE r, MEMBER m
       WHERE r.MEMBER_NUM = m.MEMBER_NUM
@@ -66,10 +38,10 @@
             </choose>
       </if>
       ORDER BY r.REQUIRE_NUM DESC
-      <if test="limitTake != -1">
+      <!-- <if test="limitTake != -1">
          LIMIT #{limitStart}, #{limitTake}
-      </if>
-   </select> -->
+      </if> -->
+   </select>
    <!-- 수정 -->
    
    <select id="selectRequireSequenceNextValue" resultType="int">

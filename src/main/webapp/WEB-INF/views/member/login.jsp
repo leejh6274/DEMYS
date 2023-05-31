@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>DEMYS</title>
+<link rel="shortcut icon" type="image/x-icon" href="resource/img/favicon.ico"/>
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -145,13 +146,13 @@ html,body{
                <div class="form-control">
                     <label class="input-group input-group-sm">
                       <span class="input-card">ID :</span>
-                      <input type="text" class="id-box" name="MEMBER_ID"  value=""/>
+                      <input type="text" class="id-box" name="MEMBER_ID" autocomplete="off" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');" value=""/>
                     </label>
                </div>
                <div class="form-control">
                  <label class="input-group input-group-sm">
                    <span class="input-card">PW :</span>
-                   <input type="password" class="id-box" name="MEMBER_PW" value="" />
+                   <input type="password" class="id-box" name="MEMBER_PW" autocomplete="off" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');"  value="" />
                  </label>
                </div>
             </div>

@@ -129,7 +129,7 @@ body {
       				<label style="font-weight: bold;">업체명</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="업체명 입력" class="input input-bordered w-full"  id="CT_NAME" name="CT_NAME" />
+        				<input type="text" placeholder="업체명 입력" class="input input-bordered w-full" autocomplete="off"  id="CT_NAME" name="CT_NAME" />
  					</div>     			
       			</div>
       			<div class="flex justify-between">
@@ -138,7 +138,7 @@ body {
  				</div>     			
       			<div class="input-group">
         			<div class="input-group-prepend2">
-        				<input type="text"  placeholder="대표자명을 입력하세요." class="input input-bordered w-full"  id="CT_CEO" name="CT_CEO"/>
+        				<input type="text"  placeholder="대표자명을 입력하세요." class="input input-bordered w-full" autocomplete="off"  id="CT_CEO" name="CT_CEO"/>
  					</div>
  					<div class="input-group-prepend3">
         				<select class="select select-bordered w-full" name="CT_TYPE" id="CT_TYPE">
@@ -163,9 +163,9 @@ body {
 									    <option value="054">054</option>
 								</select> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="ct_tel" name="phoneNumber2" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/> 
+								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="ct_tel" name="phoneNumber2" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" autocomplete="off"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" type="text" class="input input-bordered float-right"  id="ct_tel" name="phoneNumber3" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/>
+								<input style="width:34%;" type="text" class="input input-bordered float-right"  id="ct_tel" name="phoneNumber3" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" autocomplete="off"/>
 								</div>
 							</div>
 						</div>
@@ -173,7 +173,7 @@ body {
 					<label style="font-weight: bold;">이메일</label>
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm w-full flex">
-								<input name="CT_EMAIL" type="text" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" class="input input-bordered w-full" id="inputEmail" onchange="email_check()"
+								<input name="CT_EMAIL" type="text" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" autocomplete="off" class="input input-bordered w-full" id="inputEmail" onchange="email_check()"
 									 placeholder=" 이메일을 입력해주세요.">
 							</div>
 						</div>
@@ -182,11 +182,11 @@ body {
 					<label style="font-weight: bold;">팩스번호</label>
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm">
-								<input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="ct_fax1"/> 
+								<input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="ct_fax1" autocomplete="off"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="ct_fax2" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/> 
+								<input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="ct_fax2" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" autocomplete="off"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:30%;" type="text" class="input input-bordered float-right" id="CT_FAX" name="ct_fax3" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/>
+								<input style="width:30%;" type="text" class="input input-bordered float-right" id="CT_FAX" name="ct_fax3" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" autocomplete="off"/>
 								</div>
 							</div>
 						</div>
@@ -195,7 +195,7 @@ body {
 			 			</div>     			
 			      			<div class="input-group">
 			        			<div class="input-group-prepend2">
-			        				<input type="text" id="sample6_postcode" placeholder="우편번호가 나오겠지여" class="input input-bordered w-full" name="postcode" value=""/>
+			        				<input type="text" id="sample6_postcode" placeholder="우편번호" class="input input-bordered w-full" autocomplete="off" name="postcode" value=""/>
 			 					</div>
 			 					<div class="input-group-prepend3">
 			        				<button type="button" class="btn btn-se" onclick="sample6_execDaumPostcode();">우편번호 찾기</button>
@@ -203,21 +203,21 @@ body {
       						</div>
       					<div class="input-group">
         					<div class="input-group-prepend">
-        						<input type="text"  id="sample6_address" placeholder="주소가 나오고" class="input input-bordered w-full"  name="address" value=""/>
+        						<input type="text"  id="sample6_address" placeholder="주소" class="input input-bordered w-full"  autocomplete="off" name="address" value=""/>
  							</div>     			
       					</div>
       					<div class="input-group">
         					<div class="input-group-prepend">
-        						<input type="text"  id="sample6_detailAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="detailAddress" value=""/>
+        						<input type="text"  id="sample6_detailAddress" placeholder="상세주소" class="input input-bordered w-full" autocomplete="off" name="detailAddress" value=""/>
  							</div>
  							<div class="input-group-prepend">
-        						<input type="text" id="sample6_extraAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="extraAddress" value=""/>
+        						<input type="text" id="sample6_extraAddress" placeholder="상세주소" class="input input-bordered w-full" autocomplete="off" name="extraAddress" value=""/>
  							</div>        			
       					</div>
       					<label style="font-weight: bold;">담당자명</label>
       					<div class="input-group">
         					<div class="input-group-prepend">
-        						<input type="text" placeholder="Type here" class="input input-bordered w-full"  id="CT_MANAGER" name="CT_MANAGER"/>
+        						<input type="text" placeholder="담당자를 입력해주세요." class="input input-bordered w-full" autocomplete="off" id="CT_MANAGER" name="CT_MANAGER"/>
  							</div>     			
       					</div>
       					<div class="form-group row">
@@ -231,9 +231,9 @@ body {
 										<option value="010">070</option>
 								</select> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="CT_MG_TEL" name="ct_mg_tel2" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/> 
+								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="CT_MG_TEL" name="ct_mg_tel2" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" autocomplete="off"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" type="text" class="input input-bordered float-right"  id="CT_MG_TEL" name="ct_mg_tel3" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/>
+								<input style="width:34%;" type="text" class="input input-bordered float-right"  id="CT_MG_TEL" name="ct_mg_tel3" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" autocomplete="off"/>
 								</div>
 							</div>
 						</div>

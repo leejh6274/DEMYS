@@ -131,8 +131,8 @@ body {
 						<div class="form-group" style="display:flex;">
       						<label for="inputId" class="label-box">아이디</label>
 							<div class="input-group2 input-group-sm" style="width:75.5%;">
-								<input name="MEMBER_ID" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" type="text" class="form-control" id="inputId"
-									onkeyPress="id_check_onKey();" placeholder="   13글자 영문자,숫자 조합" maxlength ="20" style="width:74.5%;margin-left:auto;"> 
+								<input name="MEMBER_ID"  autocomplete="off"  onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" type="text" class="form-control" id="inputId"
+									onkeyPress="id_check_onKey();" placeholder="   8글자 이상 영문자,숫자 조합" maxlength ="20" style="width:74.5%;margin-left:auto;"> 
 									<span class="input-group-append-sm">
 									<button type="button" onclick="idCheck_go();" class="btn btn-se btn-sm btn-append">중복확인</button>
 								</span>
@@ -141,35 +141,35 @@ body {
 						<div class="form-group" style="display:flex;">
       						<label class="label-box">비밀번호</label>
 							<div class="input-group2 input-group-sm" style="width:75%;">
-								<input name="MEMBER_PW"  type="password" class="form-control" id="inputPassword"
-									 placeholder="   20글자 영문자,숫자,특수문자 조합" maxlength ="20" onchange="javascript:pw_length_check()" style="width:100%;"> 
+								<input name="MEMBER_PW"  autocomplete="off"  type="password" class="form-control" id="inputPassword"
+									 placeholder="   영문자,숫자,특수문자 조합" maxlength ="20" onchange="javascript:pw_length_check()" style="width:100%;"> 
 							</div>
 						</div>
 						<div class="form-group" style="display:flex;">
       						<label class="label-box">비밀번호 확인</label>
 							<div class="input-group2 input-group-sm" style="width:75%;">
-								<input name="MEMBER_PWCK"  type="password" class="form-control" id="inputPasswordCK" maxlength="20" onchange="javascript:pw_check()"
+								<input name="MEMBER_PWCK" autocomplete="off"  type="password" class="form-control" id="inputPasswordCK" maxlength="20" onchange="javascript:pw_check()"
 									 placeholder="   비밀번호 확인" style="width:100%;"> 
 							</div>
 						</div>
 						<div class="form-group" style="display:flex;">
       						<label class="label-box">이름</label>
 							<div class="input-group2 input-group-sm" style="width:75%;">
-								<input name="MEMBER_NAME"  type="text" class="form-control" id="inputName" maxlength="6" onchange="name_check()"
+								<input name="MEMBER_NAME" autocomplete="off"  type="text" class="form-control" id="inputName" maxlength="6" onchange="name_check()"
 									 placeholder="   이름" style="width:100%;">
 							</div>
 						</div>
 						<div class="form-group" style="display:flex;">
       						<label class="label-box">휴대폰 번호</label>
 							<div class="input-group2 input-group-sm" style="width:75%;">
-								<input name="MEMBER_PHONE"  type="text" class="form-control" id="inputPhone" maxlength="11" onchange="phone_check()" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"
+								<input name="MEMBER_PHONE" autocomplete="off"  type="text" class="form-control" id="inputPhone" maxlength="11" onchange="phone_check()" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"
 									 placeholder="   '-'없이 입력해주세요." style="width:100%;">
 							</div>
 						</div>
 						<div class="form-group" style="display:flex;">
       						<label class="label-box">이메일</label>
 							<div class="input-group2 input-group-sm" style="width:75%;">
-								<input name="MEMBER_EMAIL" type="text" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" class="form-control" id="inputEmail" onchange="email_check()"
+								<input name="MEMBER_EMAIL" autocomplete="off"  type="text" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" class="form-control" id="inputEmail" onchange="email_check()"
 									 placeholder="   이메일을 입력해주세요." style="width:100%;">
 							</div>
 						</div>
@@ -187,17 +187,17 @@ body {
 						<div class="form-group" style="display:flex;">
       						<label class="label-box">직책</label>
 							<div class="input-group2 input-group-sm" style="width:75%;">
-								<select class="select form-control select-sm w-full" id="inputPosition" name="MEMBER_POSITION" onchange="position_check()">
+								<select class="select form-control select-sm w-full" id="inputAuthority" name="MEMBER_AUTHORITY" onchange="authority_check()">
 									<option disabled selected value="">전체</option>
 									<option value=1>팀원</option>
-									<option value=2>팀장</option>
+									<option value=3>팀장</option>
 								 </select>
 							</div>
 						</div>
 						<div class="form-group" style="display:flex;">
       						<label class="label-box">직급</label>
 							<div class="input-group2 input-group-sm" style="width:75%;">
-								<select class="select form-control select-sm w-full" id="inputAuthority" name="MEMBER_AUTHORITY" onchange="authority_check()">
+								<select class="select form-control select-sm w-full" id="inputPosition" name="MEMBER_POSITION" onchange="position_check()">
 									<option disabled selected>전체</option>
 									<option value=1>사원</option>
 									<option value=2>선임</option>
@@ -208,7 +208,7 @@ body {
 						<div class="card-footer" style="">
 							<div class="row" style="display:flex;flex-direction:row;justify-content:center;margin-top:35px;">
 								<div class="" style="margin-right:10px;">
-									<button type="submit" id="registBtn" onclick="regist_go();" class="btn btn-se">등&nbsp;&nbsp;록</button>
+									<button type="submit" id="registBtn" onclick="regist_go(); return false;" class="btn btn-se">등&nbsp;&nbsp;록</button>
 								</div>
 								<div class="" style="margin-left:10px;">
 									<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-se">취&nbsp;&nbsp;소</button>

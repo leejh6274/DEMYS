@@ -34,26 +34,26 @@
 }
 /* 모달헤더 */
 .modal-head{
-	width: 100%; 
-	padding: 0px; 
-	min-height: 1rem; 
-	height: 50px;
+   width: 100%; 
+   padding: 0px; 
+   min-height: 1rem; 
+   height: 50px;
 }
 .modal-head-0{
-	font-weight: bold; 
-	font-size: 1rem; 
-	margin-right: auto;
+   font-weight: bold; 
+   font-size: 1rem; 
+   margin-right: auto;
 }
 /* 모달 화면구현 */
 .cts-view{
-	padding:10px;
+   padding:10px;
 }
 .hr-title{
-	border-bottom:4px solid #016FA0;	
-	width: 100%;
-	font-weight:bold;;
-	font-size:22px;
-	padding:5px;
+   border-bottom:4px solid #016FA0;   
+   width: 100%;
+   font-weight:bold;;
+   font-size:22px;
+   padding:5px;
 }
 .hr-regi-detail{
 
@@ -66,9 +66,9 @@
     width: 100%;
 }
 .hr-regi-conts{
-	display:flex;
-	flex-direction:column;
-	width:65%;
+   display:flex;
+   flex-direction:column;
+   width:65%;
 }
 .hr-regi-conts>div{
     display: flex;
@@ -79,10 +79,10 @@
     padding: 14px 8px;
 }
 .hr-icon{
-	border: 1px solid #AAAA;
-	width:35%;
-	height:100%;
-	display: flex;
+   border: 1px solid #AAAA;
+   width:35%;
+   height:100%;
+   display: flex;
     align-items: center;
     justify-content: space-around;
     padding: 38px 0;
@@ -91,16 +91,15 @@
 
 /* 모달 버튼 */
 .p-regi-modal-bts{
-	display: flex; 
-	justify-content: center;
+   display: flex; 
+   justify-content: center;
 }
 .p-regi-modal-bt{
-	font-size: 20px; 
-	width: 100px; 
-	height: 40px; 
-	background-color: #153A66; 
-	color: white; 
-	border-radius: 8px;
-	margin:0 5px;
+   font-size: 20px; 
+   width: 100px; 
+   height: 40px; 
+   background-color: #153A66; 
+   color: white; 
+   border-radius: 8px;
+   margin:0 5px;
 }
-

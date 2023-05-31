@@ -47,7 +47,7 @@
                   <br/>
                   <table style="width:90%; table-layout: fixed;">
                      <c:forEach var="issue" items="${issueList }" begin="0" end="4" step="1">
-                        <tr>
+                        <tr style="cursor:pointer;" onclick="location.href='project/main?PJ_NUM=${issue.PJ_NUM}&ISSUE_NUM=${issue.ISSUE_NUM }'">
                            <td style="display:flex;width:30px;">
                               <i class="fa-regular fa-message fa-flip-horizontal" style="font-size:23px;position:relative;"></i>
                               <div style="z-index:-1; position:absolute; line-height:17px; font-weight:bolder; color:red;">&nbsp;${issue.ISSUEREPLY_COUNT }</div>
@@ -72,7 +72,7 @@
                &nbsp;&nbsp;<a onclick="javascript:projecting_go(${member.MEMBER_NUM},0,'');"><span style="cursor:pointer; margin:5px; border-right: 2px solid gray; font-size:15px;">진행현황&nbsp;&nbsp;</span></a>
             </c:if>   
                
-               <a href="#"><span style="font-size:15px; margin:5px;">이슈현황</span></a>
+               <a onclick="javascript:issueing_go(0,'end')"><span style="cursor:pointer; font-size:15px; margin:5px;">이슈현황</span></a>
             </div>
             <div class="flex justify-end items-center">
                     <c:if test="${member.MEMBER_AUTHORITY==3 }">

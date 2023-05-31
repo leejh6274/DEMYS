@@ -73,8 +73,8 @@
 
 			<div class="shadow-xl shadow-black rounded-lg" style="width: 30%; height: 98.5%; margin-top: 5px; background-color:white;">
 				<div class="title flex justify-around items-center" style="height: 10%;">
-					<div style="color:navy; font-size:1.5rem; font-weight:bolder;">&nbsp;&nbsp;TO DO </div>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-sm" onclick="javascript:regOpen(1);" data-toggle="modal" data-target="#modifyModal" style="background-color:navy; color:white; font-size:1rem;">十 추가</button>
+					<div style="color:#153A66; font-size:1.5rem; font-weight:bolder;">&nbsp;&nbsp;TO DO </div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-sm" onclick="javascript:regOpen(1);" data-toggle="modal" data-target="#modifyModal" style="background-color:#153A66; color:white; font-size:1rem;">十 추가</button>
 				</div>
 				<div id="todo-list" class="content flex flex-col items-center" style="width:98%; height: 89%; margin-top:5px; margin-left: 10px; overflow: auto;">
 					
@@ -87,8 +87,8 @@
 			
 			<div class="shadow-xl shadow-black rounded-lg" style="width: 30%; height: 98.5%; margin-top: 5px; background-color:white;">
 				<div class="title flex justify-around items-center" style="height: 10%;">
-					<div style="color:navy; font-size:1.5rem; font-weight:bolder;">&nbsp;&nbsp;IN PROGRESS </div>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-sm" onclick="javascript:regOpen(2);" style="background-color:navy; color:white; font-size:1rem;">十 추가</button>
+					<div style="color:#153A66; font-size:1.5rem; font-weight:bolder;">&nbsp;&nbsp;IN PROGRESS </div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-sm" onclick="javascript:regOpen(2);" style="background-color:#153A66; color:white; font-size:1rem;">十 추가</button>
 				</div>
 				<div id="inprogress-list" class="content flex flex-col items-center" style="width:98%; height: 89%; margin-top:5px; margin-left: 10px; overflow: auto;">
 					
@@ -102,8 +102,8 @@
 			
 			<div class="shadow-xl shadow-black rounded-lg" style="width: 30%; height: 98.5%; margin-top: 5px; background-color:white;">
 				<div class="title flex justify-around items-center" style="height: 10%;">
-					<div style="color:navy; font-size:1.5rem; font-weight:bolder;">&nbsp;&nbsp;DONE </div>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-sm" onclick="javascript:regOpen(3);" style="background-color:navy; color:white; font-size:1rem;">十 추가</button>
+					<div style="color:#153A66; font-size:1.5rem; font-weight:bolder;">&nbsp;&nbsp;DONE </div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-sm" onclick="javascript:regOpen(3);" style="background-color:#153A66; color:white; font-size:1rem;">十 추가</button>
 				</div>
 				<div id="done-list" class="content flex flex-col items-center" style="width:98%; height: 89%; margin-top:5px; margin-left: 10px; overflow: auto;">
 					
@@ -129,6 +129,7 @@
 			<div class="modal-title flex justify-center mb-3">
 				<span style="font-size:2rem;">개인업무 등록</span>
 			</div>
+			<input id="reg_member_NUM" type="hidden" name="MEMBER_NUM" value="${member.MEMBER_NUM }"/>
 			<input id="reg_tasks_STATUS" type="hidden" name="tasks_STATUS" />
 			<hr/>
 			<div class="mt-3 ml-3">내용</div>
@@ -148,7 +149,7 @@
 				</div>
 			</div>
 			<div class="task-modal-share flex justify-center">
-				캘린더에 표시 :&nbsp;<input id="reg_tasks_SHARE" name="tasks_SHARE" type="checkbox" class="checkbox checkbox-error" />
+				캘린더에 표시 :&nbsp;<input id="reg_tasks_SHARE" name="tasks_SHARE" type="checkbox" class="checkbox checkbox-error" value="on"/>
 			</div>
 		</div>
 		<div class="modal-footer flex justify-center">
@@ -172,6 +173,7 @@
 			<div class="modal-title flex justify-center mb-3">
 				<span style="font-size:2rem;">개인업무 수정</span>
 			</div>
+			<input id="mod_member_NUM" type="hidden" name="tasks_NUM" value="${member.MEMBER_NUM }"/>
 			<input id="mod_tasks_NUM" type="hidden" name="tasks_NUM" />
 			<input id="mod_tasks_STATUS" type="hidden" name="tasks_STATUS" />
 			<hr/>

@@ -10,9 +10,9 @@ import com.ducks.demys.boot.vo.Notification;
 @Mapper
 public interface NotificationRepository {
 
-	public List<Notification> getNotificationList(int DELSTATUS);
+	public List<Notification> getNotificationList(String MEMBER_ID, int DELSTATUS);
 	
-	public int getNotificationCount();
+	public int getNotificationCount(String MEMBER_ID, int DELSTATUS);
 	
 	public int selectNotificationSequenceNextValue();
 

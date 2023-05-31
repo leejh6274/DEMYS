@@ -40,4 +40,6 @@ public interface ProjectsRepository {
 	public void modifyPJ(Projects project);
 	
 	public void removePJ(int PJ_NUM);
+	
+	public void modifyPJBudget(Projects projects);
 }

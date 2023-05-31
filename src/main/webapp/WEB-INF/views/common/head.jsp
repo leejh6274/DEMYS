@@ -5,9 +5,11 @@
 <html lang="ko" class="light" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<title>DashBoard</title>
+<title>DEMYS</title>
+<link rel="shortcut icon" type="image/x-icon" href="resource/img/favicon.ico">
 <!-- 제이쿼리 불러오기 -->
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>    
 
 <!-- 테일윈드 불러오기 -->
 <!-- 노말라이즈, 라이브러리까지 한번에 해결 -->
@@ -55,90 +57,33 @@
 }
 </style>
 <body>
-      <div class="navbar text-neutral-content bg-white">
-         <a href="/main">
-            <img style="width:160px; height:55px;" src="/resource/img/logo.jpg" alt="" />
-         </a>
+       <div class="navbar text-neutral-content bg-white">
+            <a href="/main">
+                  <img style="width: 160px; height: 55px;" src="/resource/img/logo.jpg" alt="" />
+            </a>
             <div class="flex-1"></div>
             <c:if test="${not empty member.MEMBER_ID}">
-            <div class="flex-none"><div class="dropdown dropdown-end">
-                        <button tabindex="0" class="btn btn-top btn-circle">
+            <div class="flex-none">
+                  <div class="dropdown dropdown-end" id="notificationContainer">
+                        <button tabindex="0" class="btn btn-top btn-circle" id="notificationButton" onclick="NOTILIST_go();">
                               <div class="indicator">
                                     <svg style="color: black;" xmlns="http://www.w3.org/2000/svg" class="h-6 w6" fill="none" viewBox="0 0 24 24"
                                           stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                                    <span class="badge badge-xs badge-primary indicator-item"></span>
+                                    <span class="badge badge-xs badge-primary indicator-item" id="notificationCount"></span>
                               </div>
                         </button>
-                        <ul tabindex="0" class="flex menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-                              style="color:black; width:505px; height:450px; align-items:center;">
-                              <span class="text-center mb-2 text-white" style="margin-right:10px; opacity:70%; font-weight:bold; font-size:1.2rem; width:490px; height:40px; border-radius:13px; background-color:#016FA0; line-height:40px;">Notification</span>
-                              <li style="width:480px;">
-                                    <div class="alramBoard m-1" style="border-radius:5px;">
-                                    <div style="width:50px; height:50px; border-radius:50%; background-color:#adf549; margin-right:8px;">
-                                       <i class="fa-regular fa-calendar" style="color:white; line-height:50px; margin-left:13px; font-size:1.7rem;"></i>
-                                    </div>
-                                    <span>
-                                       <h5>캘린더</h5>
-                                       <p>캘린더가 등록되었습니다.</p>
-                                    </span>
-                                    </div>
-                              </li>
-                                    <div style="width:450px; height:1px; background-color:#e3e3e3;"></div>
-                              <li style="width:480px;">
-                                    <div class="alramBoard m-1" style="border-radius:5px;">
-                                    <div style="width:50px; height:50px; border-radius:50%; background-color:#fc7e7e; margin-right:8px;">
-                                       <i class="fa-solid fa-circle-exclamation" style="color:white; line-height:50px; margin-left:12px; font-size:1.7rem;"></i>
-                                    </div>
-                                    <span>
-                                       <h5>이슈</h5>
-                                       <p>이슈가 등록되었습니다.</p>
-                                    </span>
-                                    </div>
-                              </li>
-                                    <div style="width:450px; height:1px; background-color:#e3e3e3;"></div>
-                              <li style="width:480px;">
-                                    <div class="alramBoard m-1" style="border-radius:5px;">
-                                    <div style="width:50px; height:50px; border-radius:50%; background-color:#66dcff; margin-right:8px;">
-                                       <i class="fa-regular fa-comment-dots" style="color:white; line-height:50px; margin-left:12px; font-size:1.7rem;"></i>
-                                    </div>
-                                    <span>
-                                       <h5>이슈댓글</h5>
-                                       <p>이슈댓글이 등록되었습니다.</p>
-                                    </span>
-                                    </div>
-                              </li>
-                                    <div style="width:450px; height:1px; background-color:#e3e3e3;"></div>
-                              
-                              <li style="width:480px;">
-                                    <div class="alramBoard m-1" style="border-radius:5px;">
-                                    <div style="width:50px; height:50px; border-radius:50%; background-color:#adf549; margin-right:8px;">
-                                       <i class="fa-regular fa-calendar" style="color:white; line-height:50px; margin-left:13px; font-size:1.7rem;"></i>
-                                    </div>
-                                    <span>
-                                       <h5>캘린더</h5>
-                                       <p>캘린더가 등록되었습니다.</p>
-                                    </span>
-                                    </div>
-                              </li>
-                                    <div style="width:450px; height:1px; background-color:#e3e3e3;"></div>
-                              
-                              <li style="width:480px;">
-                                    <div class="alramBoard m-1" style="border-radius:5px;">
-                                    <div style="width:50px; height:50px; border-radius:50%; background-color:#fc7e7e; margin-right:8px;">
-                                       <i class="fa-solid fa-circle-exclamation" style="color:white; line-height:50px; margin-left:12px; font-size:1.7rem;"></i>
-                                    </div>
-                                    <span>
-                                       <h5>이슈</h5>
-                                       <p>이슈가 등록되었습니다.</p>
-                                    </span>
-                                    </div>
-                              </li>
-                              
-                        </ul>
+               				<div class="dropdown dropdown-end" id="notificationContainer" >
+							    <div tabindex="0" class="flex menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52" style="color: black; width: 505px; height: 450px; align-items: center; border:1px solid black;">
+							       <span  class="text-center mb-2 text-white" style=" opacity: 70%; font-weight: bold; font-size: 1.2rem; width: 490px; height: 40px; border-radius: 13px; background-color: #016FA0; line-height: 40px;">Notification</span>
+									<div id="notificationList">
+									<!-- list들어오는 공간 -->
+									</div>
+							    </div>
+							</div> 
+                        </div>
                   </div>
-                 
 			  <li style="margin: 0 auto;color:black;list-style-type: none;">
 				    <span>
 				      ${member.MEMBER_NAME}
@@ -172,12 +117,7 @@
                         </ul>
                   </div>
 				</c:if>
-		
-				
             </div>
-      </div>
-
-
       <div class="flex" style="background-color: #153A66;">
             <div class="navbar text-neutral-content" style="width:18%; border-right: 2px solid #f7f7f7;">
                   <a class="btn btn-ghost normal-case text-xl"></a>
@@ -232,7 +172,79 @@ function MemberPictureThumb(contextPath){
 	      target.style.backgroundSize="cover";
 	   }
 	}
-</script> 
-      
-      
-      
+</script>
+
+<script>
+ $(document).ready(function() {
+    updateNotificationCount();
+    setInterval(updateNotificationCount, 300000);
+
+    updateNotificationList();
+    setInterval(updateNotificationList, 300000);
+  });
+
+  function updateNotificationCount() {
+    $.ajax({
+      url: '/notification/noti_count',
+      type: 'GET',
+      success: function(data) {
+        $('#notificationCount').text(data);
+      },
+      error: function() {
+        console.log('알림 개수를 가져오는 도중 오류가 발생했습니다.');
+      }
+    });
+  }
+
+function NOTILIST_go() {
+	var notificationList = $('#notificationList');
+	  $.ajax({
+	    url: "<%=request.getContextPath() %>/notification/noti_list_go",
+	    type: "post",
+	    dataType: "json",
+	    success: function (data) {
+	      var notiList = data.notificationList;
+	      var notiListCount = data.notiListCount;
+	      notificationList.empty();
+
+	      var notificationItem; // 알림 항목을 담을 변수
+
+	      for (var i = 0; i < notiListCount; i++) {
+	        var noti = notiList[i];
+	        notificationItem = $('<li id="listADDP" class="flex" style="width:480px;"></li>'); // 알림 항목 생성
+	        var alramBoard = $('<div class="alramBoard m-1" style="border-radius:5px;"></div>'); // 알림 보드 생성
+	        var iconContainer = $('<div style="width:50px; height:50px; border-radius:50%;margin-right:8px;"></div>'); // 아이콘 컨테이너 생성
+	        var icon = $('<i class="fa-solid fa-circle-exclamation" style="color:white; line-height:50px; margin-left:12px; font-size:1.7rem;"></i>'); // 아이콘 생성
+	        var contentContainer = $('<span></span>'); // 내용 컨테이너 생성
+	        var noti_add_type = $('<h5>' + noti.noti_TYPE + '</h5>').css('color', 'black');
+	        var noti_add_content = $('<p>' + noti.noti_CONTENT + '</p>').css('color', 'black');
+
+	        if (noti.noti_TYPE === "이슈") {
+	          icon = $('<i class="fa-solid fa-circle-exclamation" style="color:white; line-height:50px; margin-left:12px; font-size:1.7rem;"></i>'); // 이슈 아이콘
+	          iconContainer.css("background-color", "#fc7e7e"); // 이슈인 경우 빨간색 배경색 설정
+	        } else if (noti.noti_TYPE === "댓글") {
+	          icon = $('<i class="fa-regular fa-comment-dots" style="color:white; line-height:50px; margin-left:12px; font-size:1.7rem;"></i>'); // 댓글 아이콘
+	          iconContainer.css("background-color", "#7e9cfc"); // 댓글인 경우 파란색 배경색 설정ㄹ
+	        }
+
+	        iconContainer.append(icon);
+	        contentContainer.append(noti_add_type);
+	        contentContainer.append(noti_add_content);
+	        alramBoard.append(iconContainer);
+	        alramBoard.append(contentContainer);
+	        notificationItem.append(alramBoard);
+	        notificationList.append(notificationItem);
+
+	        if (i < notiListCount - 1) {
+	          var divider = $('<div style="width:470px; height:1px; background-color:#e3e3e3;margin-left:5px;"></div>');
+	          notificationList.append(divider);
+	        }
+	      }
+	    },
+	    error: function () {
+	      console.log('error');
+	    }
+	  });
+	}
+</script>
+

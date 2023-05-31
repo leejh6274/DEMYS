@@ -17,5 +17,9 @@ public class Budget_Detail {
 	private Date BUDDT_REGDATE;
 	private Date BUDDT_UPDATEDATE;
 	private int BUD_NUM;
+	
+	private int BUDDT_TOTAL=0;
+	private int PLUS_COST=0;
+	private int PJ_NUM;
 
 }

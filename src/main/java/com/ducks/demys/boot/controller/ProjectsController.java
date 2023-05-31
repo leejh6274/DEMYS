@@ -69,28 +69,32 @@ public class ProjectsController {
 	}
 
 	@RequestMapping("project/main")
-	   public String pjctList(Model model,  @ModelAttribute SearchCriteria cri, @RequestParam(defaultValue ="0")int PJ_NUM) {
-	      if (cri.getPage() < 1) cri.setPage(1);
-	      if (cri.getPerPageNum() < 1) cri.setPerPageNum(5);
-	      
-	       Map<String, Object> dataMap = projectsService.getPJList(cri); 
-	       model.addAttribute("dataMap", dataMap);
-	       model.addAttribute("PJ_NUM", PJ_NUM);
-	      return "project/main";
-	   }
+	public String pjctList(Model model, @ModelAttribute SearchCriteria cri,
+			@RequestParam(defaultValue = "0") int PJ_NUM,@RequestParam(defaultValue = "0") int ISSUE_NUM) {
+		if (cri.getPage() < 1)
+			cri.setPage(1);
+		if (cri.getPerPageNum() < 1)
+			cri.setPerPageNum(5);
+
+		Map<String, Object> dataMap = projectsService.getPJList(cri);
+		model.addAttribute("dataMap", dataMap);
+		model.addAttribute("PJ_NUM", PJ_NUM);
+		model.addAttribute("ISSUE_NUM", ISSUE_NUM);
+		return "project/main";
+	}
 
 	@RequestMapping("project/detail")
-	public String pjctDetail(Model model, int PJ_NUM) {
-		Projects projects = projectsService.getPJByPJ_NUM(PJ_NUM);
+	   public String pjctDetail(Model model, int PJ_NUM, @RequestParam(defaultValue = "0") int ISSUE_NUM) {
+	      Projects projects = projectsService.getPJByPJ_NUM(PJ_NUM);
 
-		List<Pjct> pjctList = pjctService.getContactsPjctList(PJ_NUM);
-		int pjctListCount = pjctService.getContactsPjctListCount(PJ_NUM);
-		model.addAttribute("projects", projects);
-		model.addAttribute("pjctList", pjctList);
-		model.addAttribute("pjctListCount", pjctListCount);
-
-		return "project/detail";
-	}
+	      List<Pjct> pjctList = pjctService.getContactsPjctList(PJ_NUM);
+	      int pjctListCount = pjctService.getContactsPjctListCount(PJ_NUM);
+	      model.addAttribute("projects", projects);
+	      model.addAttribute("pjctList", pjctList);
+	      model.addAttribute("pjctListCount", pjctListCount);
+	      model.addAttribute("ISSUE_NUM",ISSUE_NUM);
+	      return "project/detail";
+	   }
 
 	@RequestMapping("project/PjModifyDo")
 	@ResponseBody
@@ -241,12 +245,18 @@ public class ProjectsController {
 	}
 
 	// 주헌
-	@RequestMapping("project/product")
-	public void showproduct() {
+	@RequestMapping("project/product_go")
+	public String showproduct(Model model, int PJ_NUM) {
+		model.addAttribute("PJ_NUM", PJ_NUM);
+
+		return "project/product";
 	}
 
-	@RequestMapping("project/product_TL")
-	public void showproductTM() {
+	@RequestMapping("project/product_TL_go")
+	public String showproductTL(Model model, int PJ_NUM) {
+		model.addAttribute("PJ_NUM", PJ_NUM);
+
+		return "project/product_TL";
 	}
 
 	@RequestMapping("project/productList")
@@ -258,8 +268,9 @@ public class ProjectsController {
 		String searchType = pd.getSearchType();
 		String keyword = pd.getKeyword();
 
-		productList = productService.getProductListByOnlyPJ_NUM(PJ_NUM);
-		productList = productService.getSearchProductList(PJ_NUM, PRODUCT_STEP, searchType, keyword);
+		// 1을 PJ_NUM으로 바꿔
+		productList = productService.getSearchProductList(PJ_NUM, PRODUCT_STEP, searchType, keyword); // 1을 PJ_NUM으로, 위에
+																										// 모델옆에 int
 		return productList;
 	}
 
@@ -321,18 +332,19 @@ public class ProjectsController {
 		productService.modifyProduct(product);
 	}
 
-    @RequestMapping("project/require_go") 
-    public String showrequire(Model model, @RequestParam(defaultValue = "REQUIRE_TITLE, REQUIRE_DETAIL") String searchKeywordTypeCode,
-            @RequestParam(defaultValue = "") String searchKeyword, int PJ_NUM) {
-      
-      List<Require> requireList = requireService.getSearchRequire(searchKeywordTypeCode, searchKeyword,PJ_NUM);
-       
-      model.addAttribute("requireList", requireList);
-      model.addAttribute("PJ_NUM", PJ_NUM);
-            
-      return "project/require";
-    }
-    
+	@RequestMapping("project/require_go")
+	public String showrequire(Model model,
+			@RequestParam(defaultValue = "REQUIRE_TITLE, REQUIRE_DETAIL") String searchKeywordTypeCode,
+			@RequestParam(defaultValue = "") String searchKeyword, int PJ_NUM) {
+
+		List<Require> requireList = requireService.getSearchRequire(searchKeywordTypeCode, searchKeyword, PJ_NUM);
+
+		model.addAttribute("requireList", requireList);
+		model.addAttribute("PJ_NUM", PJ_NUM);
+
+		return "project/require";
+	}
+
 	@RequestMapping("project/require_regist")
 	@ResponseBody
 	public void showrequire_regist(String REQUIRE_TITLE, int REQUIRE_LEVEL, String REQUIRE_DETAIL, int CT_NUM,
@@ -381,15 +393,18 @@ public class ProjectsController {
 		return "project/remove_success";
 	}
 
-	 @RequestMapping("project/meetingbook_go")
-	   public String showmeetingbook(Model model, @RequestParam(defaultValue = "") Object PJ_NUM, @RequestParam(defaultValue = "MB_TITLE, MEMBER_NAME") String searchKeywordTypeCode, @RequestParam(defaultValue = "") String searchKeyword) {
-	      List<MeetingBook> meetingBookList = meetingBookService.getSearchMeetingbook(PJ_NUM, searchKeywordTypeCode, searchKeyword);
-	      
-	      model.addAttribute("meetingBookList", meetingBookList);
-	      model.addAttribute("PJ_NUM",PJ_NUM);
-	      
-	      return "project/meetingbook";
-	   }
+	@RequestMapping("project/meetingbook_go")
+	public String showmeetingbook(Model model, @RequestParam(defaultValue = "") Object PJ_NUM,
+			@RequestParam(defaultValue = "MB_TITLE, MEMBER_NAME") String searchKeywordTypeCode,
+			@RequestParam(defaultValue = "") String searchKeyword) {
+		List<MeetingBook> meetingBookList = meetingBookService.getSearchMeetingbook(PJ_NUM, searchKeywordTypeCode,
+				searchKeyword);
+
+		model.addAttribute("meetingBookList", meetingBookList);
+		model.addAttribute("PJ_NUM", PJ_NUM);
+
+		return "project/meetingbook";
+	}
 
 	@ResponseBody
 	@RequestMapping("project/meetingbook_regist")
@@ -429,62 +444,73 @@ public class ProjectsController {
 
 	}
 
-	@RequestMapping("project/issue")
-	public String showissue(Model model) {
-		List<Issue> issueList = issueService.getIssueListByPJ_NUM(8);
-		model.addAttribute("issueList", issueList);
+	@RequestMapping("project/issue_go")
+    public String showissue(Model model, int PJ_NUM, @RequestParam(defaultValue="0") int ISSUE_NUM) {
+       List<Issue> issueList = issueService.getIssueListByPJ_NUM(PJ_NUM);
+       
+       if(issueList != null && issueList.size() > 0) {
+          for(Issue issue:issueList ) {
+             issue.setISSUEREPLY_COUNT(issueReplyService.gethowmanyreply(issue.getISSUE_NUM()));
+             }
+       }
+       
+       model.addAttribute("issueList", issueList);
+       model.addAttribute("PJ_NUM", PJ_NUM);
+       model.addAttribute("ISSUE_NUMM", ISSUE_NUM);
 
-		return "project/issue";
+       return "project/issue";
 
-	}
+    }
 
-	@ResponseBody
-	@RequestMapping("project/issue_memberDepList")
-	public List<Member> showissue_memberDepList(@RequestParam String MEMBER_DEP) {
+	   @RequestMapping("project/issue_memberDepList")
+	   @ResponseBody
+	   public List<Member> showissue_memberDepList(@RequestParam String MEMBER_DEP) {
 
-		List<Member> memberdeplist = memberService.getMemberByMEMBER_DEP(MEMBER_DEP);
+	      List<Member> memberdeplist = memberService.getMemberByMEMBER_DEP(MEMBER_DEP);
 
-		return memberdeplist;
+	      return memberdeplist;
 
-	}
+	   }
 
-	@RequestMapping("project/issue_TL")
-	public void showissue_TL() {
+	   @RequestMapping("project/issue_TL")
+	   public void showissue_TL() {
 
-	}
+	   }
 
-	@RequestMapping("project/issue_detail_TL")
-	public void showissue_detail_TL() {
+	   @RequestMapping("project/issue_detail_TL")
+	   public void showissue_detail_TL() {
 
-	}
+	   }
 
-	@RequestMapping("project/issue_detail")
-	public void showissue_detail(Model model, int ISSUE_NUM) {
-		Issue issue = issueService.getIssueByISSUE_NUM(ISSUE_NUM);
-		List<IssueReply> replyList = issueReplyService.getIssueReplyListByISSUE_NUM(ISSUE_NUM);
+	   @RequestMapping("project/issue_detail")
+	   public void showissue_detail(Model model, int ISSUE_NUM) {
+	      Issue issue = issueService.getIssueByISSUE_NUM(ISSUE_NUM);
+	      List<IssueReply> replyList = issueReplyService.getIssueReplyListByISSUE_NUM(ISSUE_NUM);
+	      model.addAttribute("issue", issue);
+	      model.addAttribute("replyList", replyList);
+	   }
 
-		model.addAttribute("issue", issue);
-		model.addAttribute("replyList", replyList);
-	}
+	   @RequestMapping("project/issue_regist")
+	   @ResponseBody
+	   public void showissue_regist(@RequestBody Issue issue) {
+	      
+	      issueService.registIssue(issue);
 
-	@ResponseBody
-	@RequestMapping("project/issue_regist")
-	public void showissue_regist(String ISSUE_TITLE, String ISSUE_CONTENT, int ISSUE_IMP, int ISSUE_STATUS,
-			Date ISSUE_REGDATE, Date ISSUE_DEADLINE, int MEMBER_NUM, int PJ_NUM) {
+	   }
+	   
+	   @RequestMapping("project/issue_reply_go")
+	   @ResponseBody
+	   public void showissue_reply(Model model, @RequestBody IssueReply issuereply) {
+	      
+	      issueReplyService.registIssueReply(issuereply);
 
-		Issue issue = new Issue();
+	   }
+	   
+	   @RequestMapping("project/issue_reply_delete")
+	   public String showissue_reply_delete(int ISSUERE_NUM) {
+	      issueReplyService.removeIssueReply(ISSUERE_NUM);
 
-		issue.setISSUE_TITLE(ISSUE_TITLE);
-		issue.setISSUE_CONTENT(ISSUE_CONTENT);
-		issue.setISSUE_IMP(ISSUE_IMP);
-		issue.setISSUE_STATUS(1);
-		issue.setISSUE_REGDATE(ISSUE_REGDATE);
-		issue.setISSUE_DEADLINE(ISSUE_DEADLINE);
-		issue.setMEMBER_NUM(3);
-		issue.setPJ_NUM(8);
-
-		issueService.registIssue(issue);
-
-	}
+	      return "project/reply_remove_success";
+	   }
 
 }

@@ -17,17 +17,18 @@ import com.ducks.demys.boot.vo.ProjectsForPrint;
 
 @Service
 public class ProjectsService {
-	
+
 	private ProjectsRepository projectsRepository;
-	   private IssueRepository issueRepository;
-	   private MemberRepository memberRepository;
-	   
-    public ProjectsService(ProjectsRepository projectsRepository, IssueRepository issueRepository, MemberRepository memberRepository) {
-      this.projectsRepository= projectsRepository;
-      this.issueRepository = issueRepository;
-      this.memberRepository = memberRepository;
-    }
-	
+	private IssueRepository issueRepository;
+	private MemberRepository memberRepository;
+
+	public ProjectsService(ProjectsRepository projectsRepository, IssueRepository issueRepository,
+			MemberRepository memberRepository) {
+		this.projectsRepository = projectsRepository;
+		this.issueRepository = issueRepository;
+		this.memberRepository = memberRepository;
+	}
+
 	public Map<String, Object> getPJList(SearchCriteria cri) {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 
@@ -39,7 +40,7 @@ public class ProjectsService {
 		dataMap.put("projects", projectsList);
 
 		int totalCount = projectsRepository.getPJListCount(cri);
-		
+
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(totalCount);
@@ -47,49 +48,53 @@ public class ProjectsService {
 
 		return dataMap;
 	}
-	
-	public List<ProjectsForPrint> getPJListForDashboard(int MEMBER_NUM, int PJ_IMP, String SORT){
-	      Member member=memberRepository.getMemberByMEMBER_NUM(MEMBER_NUM);
-	      if(member==null || member.getMEMBER_AUTHORITY()==3) {
-	         return projectsRepository.getPJListForTMDashboard(MEMBER_NUM, PJ_IMP, SORT);
-	      }else {
-	         return projectsRepository.getPJListForOtherDashboard(MEMBER_NUM, PJ_IMP, SORT);
-	      }
-	   }
-	
+
+	public List<ProjectsForPrint> getPJListForDashboard(int MEMBER_NUM, int PJ_IMP, String SORT) {
+		Member member = memberRepository.getMemberByMEMBER_NUM(MEMBER_NUM);
+		if (member == null || member.getMEMBER_AUTHORITY() == 3) {
+			return projectsRepository.getPJListForTMDashboard(MEMBER_NUM, PJ_IMP, SORT);
+		} else {
+			return projectsRepository.getPJListForOtherDashboard(MEMBER_NUM, PJ_IMP, SORT);
+		}
+	}
+
 //	public List<Projects> getPJListByMEMBER_NUM(int MEMBER_NUM){
 //		return projectsRepository.getPJListByMEMBER_NUM(MEMBER_NUM);
 //	}
 
-	public List<Projects> getPJListOrderByPJ_ENDDATE(){
+	public List<Projects> getPJListOrderByPJ_ENDDATE() {
 		return projectsRepository.getPJListOrderByPJ_ENDDATE();
 	}
-	
-	public List<Projects> getPJCalList(int MEMBER_NUM){
+
+	public List<Projects> getPJCalList(int MEMBER_NUM) {
 		return projectsRepository.getPJCalList(MEMBER_NUM);
 	}
-	
+
 	public int getPJListCount() {
 		return projectsRepository.getPJListCount();
 	}
-	
+
 	public int getPJListSTATUSCount(int PJ_STATUS) {
 		return projectsRepository.getPJListSTATUSCount(PJ_STATUS);
 	}
 
-	public Projects getPJByPJ_NUM(int PJ_NUM){
+	public Projects getPJByPJ_NUM(int PJ_NUM) {
 		return projectsRepository.getPJByPJ_NUM(PJ_NUM);
 	}
-	
+
 	public void registPJ(Projects project) {
 		project.setPJ_NUM(projectsRepository.selectPJSequenceNextValue());
 		projectsRepository.registPJ(project);
 	}
-	
+
 	public void modifyPJ(Projects project) {
 		projectsRepository.modifyPJ(project);
 	}
-	
+
+	public void modifyPJBudget(Projects projects) {
+		projectsRepository.modifyPJBudget(projects);
+	}
+
 	public void removePJ(int PJ_NUM) {
 		projectsRepository.removePJ(PJ_NUM);
 	}

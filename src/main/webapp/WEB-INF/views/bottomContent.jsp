@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>   
-<script src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
-<script src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
 <script type="text/x-handlebars-template"  id="projecting-template" >
 
 <div class="pj-list">
@@ -39,48 +37,222 @@
 
 </script>
 
+<script type="text/x-handlebars-template"  id="issueing-template" >
+<div id="issueTmp" class="flex justify-around" style="width: 100%; height: 100%;">
+<div style="width: 32%; height: 100%; border: 1px solid gray; margin-top: 5px; background-color: #e7e7e7;">
+      <div class="title" style="margin: 5px; height: 5%;">
+         <span>&nbsp;&nbsp;중요 </span>
+         <span style="font-weight: bolder">{{Imp3ListCount}} </span>
+      </div>
+      <div class="content flex flex-col items-start" style="height: 90%; margin-left: 5px; overflow: auto;">
+         {{#each Imp3List}}
+            <div class="card card-side bg-base-100 shadow-xl" style="width: 90%; height: 30%; margin: 5px;cursor:pointer;" onclick="location.href='project/main?PJ_NUM={{pj_NUM}}&ISSUE_NUM={{issue_NUM }}'">
+               <figure style="background-color: red; width: 3%; height: 100%;"></figure>
+               <div class="card-body" style="width: 97%; height: 100%; margin: 0;">
+                  <div class="card-title flex justify-between" style="margin: 0;">
+                     <div class="flex items-start" style="margin: 0;">
+                        <i class="fa-solid fa-flag" style="color: red;"></i>
+                        {{issue_TITLE}}
+                        <div class="flex" style="position: relative;">
+                           <i class="fa-regular fa-message" style="font-size: 23px; margin: 0;"></i>
+                           <div style="z-index: 1; bottom: 1%; position: absolute; margin: 0; font-size: 15px; font-weight: bolder; color: red;">&nbsp;{{issuereply_COUNT}}</div>
+                        </div>
+                     </div>
+                     <div style="margin: 0; padding: 0;">
+                        <div class="badge badge-success gap-2" style="font-size: 12px; margin: 0; {{dpnoneIng issue_STATUS}}">진행중</div>
+                        <div class="badge badge-info gap-2" style="font-size: 12px; margin: 0; {{dpnoneFinish issue_STATUS}}">완료</div>
+                        <div class="badge badge-warning gap-2" style="font-size: 12px; margin: 0; {{dpnoneStop issue_STATUS}}">중지</div>
+                     </div>
+                  </div>
+                  <div style="font-size: 11px; text-color: gray;">{{ct_NAME}} | {{pj_NAME}}</div>
+                  <div class="flex">
+                    <div class="w-8 rounded-full">
+                        <div class="manPicture" style="width:25px;height:25px;display:block;margin:0 auto;border-radius:50%;" data-id={{member_ID }}></div>
+                     </div>
+                     <div>{{member_NAME}}&nbsp;&nbsp;</div>
+                     <div class="badge badge-outline badge-error gap-2" style="font-weight: bolder; font-size: 12px; margin: 0;">{{prettifyDate issue_DEADLINE}}</div>
+                  </div>
+                  <div class="flex">
+                     {{#each tagList}}
+                        <div class="w-12 h-5 rounded" style="font-weight: bolder; font-size: 12px; border: 1px solid gray; background-color: #e7e7e7; text-align: center;">{{member_NAME}}</div>&nbsp;
+                     {{/each}}
+                  </div>
+               </div>
+            </div>
+         {{/each}}
+      </div>
+   </div>
+   
+   <div style="width: 32%; height: 100%; border: 1px solid gray; margin-top: 5px; background-color: #e7e7e7;">
+      <div class="title" style="margin: 5px; height: 5%;">
+         <span>&nbsp;&nbsp;보통 </span>
+         <span style="font-weight: bolder">{{Imp2ListCount}} </span>
+      </div>
+      <div class="content flex flex-col items-start" style="height: 90%; margin-left: 5px; overflow: auto;">
+         {{#each Imp2List}}
+            <div class="card card-side bg-base-100 shadow-xl" style="width: 90%; height: 30%; margin: 5px; cursor:pointer;" onclick="location.href='project/main?PJ_NUM={{pj_NUM}}&ISSUE_NUM={{issue_NUM }}'">
+               <figure style="background-color: orange; width: 3%; height: 100%;"></figure>
+               <div class="card-body" style="width: 97%; height: 100%; margin: 0;">
+                  <div class="card-title flex justify-between" style="margin: 0;">
+                     <div class="flex items-start" style="margin: 0;">
+                        <i class="fa-solid fa-flag" style="color: red;"></i>
+                        {{issue_TITLE}}
+                        <div class="flex" style="position: relative;">
+                           <i class="fa-regular fa-message" style="font-size: 23px; margin: 0;"></i>
+                           <div style="z-index: 1; bottom: 1%; position: absolute; margin: 0; font-size: 15px; font-weight: bolder; color: red;">&nbsp;{{issuereply_COUNT}}</div>
+                        </div>
+                     </div>
+                     <div style="margin: 0; padding: 0;">
+                        <div class="badge badge-success gap-2" style="font-size: 12px; margin: 0; {{dpnoneIng issue_STATUS}}">진행중</div>
+                        <div class="badge badge-info gap-2" style="font-size: 12px; margin: 0; {{dpnoneFinish issue_STATUS}}">완료</div>
+                        <div class="badge badge-warning gap-2" style="font-size: 12px; margin: 0; {{dpnoneStop issue_STATUS}}">중지</div>
+                     </div>
+                  </div>
+                  <div style="font-size: 11px; text-color: gray;">{{ct_NAME}} | {{pj_NAME}}</div>
+                  <div class="flex">
+                     <div class="w-8 rounded-full">
+                        <div class="manPicture" style="width:25px;height:25px;display:block;margin:0 auto;border-radius:50%;" data-id={{member_ID }}></div>
+                     </div>
+                     <div>{{member_NAME}}&nbsp;&nbsp;</div>
+                     <div class="badge badge-outline badge-error gap-2" style="font-weight: bolder; font-size: 12px; margin: 0;">{{prettifyDate issue_DEADLINE}}</div>
+                  </div>
+                  <div class="flex">
+                     {{#each tagList}}
+                        <div class="w-12 h-5 rounded" style="font-weight: bolder; font-size: 12px; border: 1px solid gray; background-color: #e7e7e7; text-align: center;">{{member_NAME}}</div>&nbsp;
+                     {{/each}}
+                  </div>
+               </div>
+            </div>
+         {{/each}}
+      </div>
+   </div>
+
+   <div style="width: 32%; height: 100%; border: 1px solid gray; margin-top: 5px; background-color: #e7e7e7;">
+      <div class="title" style="margin: 5px; height: 5%;">
+         <span>&nbsp;&nbsp;낮음 </span>
+         <span style="font-weight: bolder">{{Imp1ListCount}}</span>
+      </div>
+      <div class="content flex flex-col items-start" style="height: 90%; margin-left: 5px; overflow: auto;">
+         {{#each Imp1List}}
+            <div class="card card-side bg-base-100 shadow-xl" style="width: 90%; height: 30%; margin: 5px; cursor:pointer;" onclick="location.href='project/main?PJ_NUM={{pj_NUM}}&ISSUE_NUM={{issue_NUM }}'">
+               <figure style="background-color: gold; width: 3%; height: 100%;"></figure>
+               <div class="card-body" style="width: 97%; height: 100%; margin: 0;">
+                  <div class="card-title flex justify-between" style="margin: 0;">
+                     <div class="flex items-start" style="margin: 0;">
+                        <i class="fa-solid fa-flag" style="color: red;"></i>
+                        {{issue_TITLE}}
+                        <div class="flex" style="position: relative;">
+                           <i class="fa-regular fa-message" style="font-size: 23px; margin: 0;"></i>
+                           <div style="z-index: 1; bottom: 1%; position: absolute; margin: 0; font-size: 15px; font-weight: bolder; color: red;">&nbsp;{{issuereply_COUNT}}</div>
+                        </div>
+                     </div>
+                     <div style="margin: 0; padding: 0;">
+                        <div class="badge badge-success gap-2" style="font-size: 12px; margin: 0; {{dpnoneIng issue_STATUS}}">진행중</div>
+                        <div class="badge badge-info gap-2" style="font-size: 12px; margin: 0; {{dpnoneFinish issue_STATUS}}">완료</div>
+                        <div class="badge badge-warning gap-2" style="font-size: 12px; margin: 0; {{dpnoneStop issue_STATUS}}">중지</div>
+                     </div>
+                  </div>
+                  <div style="font-size: 11px; text-color: gray;">{{ct_NAME}} | {{pj_NAME}}</div>
+                  <div class="flex">
+                    <div class="w-8 rounded-full">
+                        <div class="manPicture" style="width:25px;height:25px;display:block;margin:0 auto;border-radius:50%;" data-id={{member_ID }}></div>
+                     </div>
+                     <div>{{member_NAME}}&nbsp;&nbsp;</div>
+                     <div class="badge badge-outline badge-error gap-2" style="font-weight: bolder; font-size: 12px; margin: 0;">{{prettifyDate issue_DEADLINE}}</div>
+                  </div>
+                  <div class="flex">
+                     {{#each tagList}}
+                        <div class="w-12 h-5 rounded" style="font-weight: bolder; font-size: 12px; border: 1px solid gray; background-color: #e7e7e7; text-align: center;">{{member_NAME}}</div>&nbsp;
+                     {{/each}}
+                  </div>
+               </div>
+            </div>
+         {{/each}}
+      </div>
+   </div>
+</div>
+</script>
 
 <script>
 Handlebars.registerHelper({
-   "prettifyDate":function(timeValue){ //Handlbars에 날짜출력함수 등록
+   "prettifyDate":function(timeValue){ 
       var dateObj=new Date(timeValue);
       var year=dateObj.getFullYear();
       var month=dateObj.getMonth()+1;
       var date=dateObj.getDate();
       return year+"."+month+"."+date;
    },
-   "chartHeader":function(){
-      var today=new Date();
-      var minusfive = today.getMonth()-4;
-      var month=[];
-      for(var i=0;i<12;i++){
-         if(minusfive<1){
-            month[i]=minusfive+12;
-         }else if(minusfive>12){
-            month[i]=minusfive-12;
-         }else{
-            month[i]=minusfive;
-         }
-         minusfive++;
-      }
-      return month[0];
+   "monthDate":function(timeValue){ 
+      var dateObj=new Date(timeValue);
+      var month=dateObj.getMonth()+1;
+      var date=dateObj.getDate();
+      return month+"."+date;
+   },
+   "dpnoneIng":function(ISSUE_STATUS){
+      if(ISSUE_STATUS==1) return "";
+      else return "display:none;";
+   },
+   "dpnoneFinish":function(ISSUE_STATUS){
+      if(ISSUE_STATUS==2) return "";
+      else return "display:none;";
+   },
+   "dpnoneStop":function(ISSUE_STATUS){
+      if(ISSUE_STATUS==3)   return "";
+      else return "display:none;";
    }
-   
 });
 
 </script>
 
 <script>
 function printData(projectArr,target,templateObject){
+
    var template=Handlebars.compile(templateObject.html());
    var html = template(projectArr);
+   $('#issueTmp').remove();
    $('.pj-list').remove();
    target.append(html);
 }
 
+function printIssue(issueArr,target,templateObject){
+   console.log(templateObject);
+   var template=Handlebars.compile(templateObject.html());
+   var html = template(issueArr);
+   $('.pj-list').remove();
+   $('#issueTmp').remove();
+   target.append(html);
+}
+
+function issueing_go(MYISSUE,SORT){
+   
+   var data={
+         "myissue":MYISSUE,
+         "sort":SORT
+      }
+   
+   $.ajax({
+      url:"<%=request.getContextPath()%>/issueing",
+      type:"post",
+      data:JSON.stringify(data),
+      contentType:"application/json",
+      success:function(data){
+         showIssueingList(data);
+         MemberPictureThumb('<%=request.getContextPath()%>');
+      },
+      error:function(error){
+         alert("실패했습니다.");
+      }
+   });
+}
+
+function showIssueingList(data){
+   printIssue(data,$('#bottomListContent'),$('#issueing-template'));
+}
+
+
+
 function showProjectingList(data){
    printData(data,$('#bottomListContent'),$('#projecting-template'));
-   
 }
 
 
@@ -98,7 +270,6 @@ function projecting_go(MEMBER_NUM,PJ_IMP,SORT){
       data:JSON.stringify(data),
       contentType:"application/json",
       success:function(data){
-         console.log(data);
          showProjectingList(data);
          MemberPictureThumb('<%=request.getContextPath()%>');
       },
@@ -116,130 +287,4 @@ function pjarea_go(){
    var SORT = $('#orderby').val();
    projecting_go(MEMBER_NUM,PJ_IMP,SORT);
 }
-</script>
-
-<script>
-const dataSource = {
-        chart: {
-          dateformat: "mm/dd/yyyy",
-          theme: "fusion",
-          canvasborderalpha: "40",
-          ganttlinealpha: "50"
-        },
-        tasks: {
-          color: "#5D62B5",
-          task: [
-            {
-              start: "03/07/2018",
-              end: "03/17/2018"
-            },
-            {
-              start: "03/14/2018",
-              end: "03/28/2018"
-            },
-            {
-              start: "03/15/2018",
-              end: "03/31/2018"
-            },
-            {
-              start: "04/02/2018",
-              end: "04/12/2018"
-            },
-            {
-              start: "04/12/2018",
-              end: "04/30/2018"
-            },
-            {
-              start: "04/20/2018",
-              end: "05/06/2018"
-            },
-            {
-              start: "04/30/2018",
-              end: "05/10/2018"
-            },
-            {
-              start: "04/30/2018",
-              end: "05/25/2018"
-            },
-            {
-              start: "05/04/2018",
-              end: "06/05/2018"
-            }
-          ]
-        },
-        processes: {
-          headertext: "프로젝트명",
-          headeralign: "left",
-          fontsize: "14",
-          isbold: "0",
-          align: "left",
-          process: [
-            {
-              label: "",
-            },
-            {
-              label: "Source venue options"
-            },
-            {
-              label: "Finalize speaker reach out list"
-            },
-            {
-              label: "Compose sponsorship strategy"
-            },
-            {
-              label: "Reach out to sponsors"
-            },
-            {
-              label: "Create social media campaign"
-            },
-            {
-              label: "Reach out to blogs for backlinks"
-            },
-            {
-              label: "Optimize SEO ranking"
-            },
-            {
-              label: "Publish event lead up vlog series"
-            }
-          ]
-        },
-        categories: [
-          {
-            category: [
-              {
-                start: "03/05/2018",
-                end: "03/31/2018",
-                label: "March"
-              },
-              {
-                start: "04/01/2018",
-                end: "04/30/2018",
-                label: "April"
-              },
-              {
-                start: "05/01/2018",
-                end: "05/31/2018",
-                label: "May"
-              },
-              {
-                start: "06/01/2018",
-                end: "06/10/2018",
-                label: "June"
-              }
-            ]
-          }
-        ]
-      };
-
-      FusionCharts.ready(function() {
-        var myChart = new FusionCharts({
-          type: "gantt",
-          renderAt: "chart-container",
-          width: "100%",
-          height: "100%",
-          dataFormat: "json",
-          dataSource
-        }).render();
-      });
-
 </script>
