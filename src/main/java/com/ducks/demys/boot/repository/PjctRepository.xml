@@ -3,6 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ducks.demys.boot.repository.PjctRepository">
+<<<<<<< HEAD
 	
 	<select id="getContactsPjctList" resultType="Pjct">
 		SELECT * 
@@ -13,12 +14,15 @@
         ORDER BY PJCT_NUM
 	</select>
 	
+=======
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 	<select id="getPjctListByPJ_NUM" resultType="Pjct">
 		SELECT *
 		FROM PJCT
 		WHERE PJ_NUM=#{PJ_NUM}
 		ORDER BY PJCT_NUM DESC
 	</select>
+<<<<<<< HEAD
 	
 	<select id="getContactsPjctListCount" resultType="int">
 		SELECT COUNT(*)
@@ -29,24 +33,33 @@
         ORDER BY PJCT_NUM
 	</select>
 	
+=======
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 	<select id="getPjctListByCT_NUM" resultType="Pjct">
 		SELECT *
 		FROM PJCT
 		WHERE CT_NUM=#{CT_NUM}
 		ORDER BY PJCT_NUM DESC
 	</select>
+<<<<<<< HEAD
 	
+=======
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 	<select id="getPjctByPjct_NUM" resultType="Pjct">
 		SELECT *
 		FROM PJCT
 		WHERE PJCT_NUM=#{PJCT_NUM}
 	</select>
+<<<<<<< HEAD
 	
+=======
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 	<select id="selectPjctSequenceNextValue" resultType="int">
 		SELECT
 		PJCT_seq.nextVal
 		FROM DUAL
 	</select>
+<<<<<<< HEAD
 	
 	<delete id="removePjct">
 		DELETE
@@ -60,11 +73,26 @@
 		VALUES(#{PJCT_NUM},#{CT_NUM},#{PJ_NUM},#{CT_TYPE})
 	</insert>
 	
+=======
+	<insert id="registPjct">
+		INSERT INTO
+		PJCT(CT_NUM,PJ_NUM,PJCT_TYPE)
+		VALUES(#{CT_NUM},#{PJ_NUM},#{PJCT_TYPE})
+	</insert>
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 	<update id="modifyPjct">
 		UPDATE PJCT
 		SET
 		CT_NUM=#{CT_NUM},PJ_NUM=#{PJ_NUM},PJCT_TYPE=#{PJCT_TYPE}
 		WHERE PJCT_NUM=#{PJCT_NUM}
 	</update>
+<<<<<<< HEAD
 	
+=======
+	<delete id="removePjct">
+		DELETE
+		FROM PJCT
+		WHERE PJCT_NUM=#{PJCT_NUM}
+	</delete>
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 </mapper>

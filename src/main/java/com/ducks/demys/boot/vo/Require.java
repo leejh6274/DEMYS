@@ -18,5 +18,8 @@ public class Require {
 	private int PJ_NUM;
 	private int CT_NUM;
 	private String MEMBER_NAME;
+<<<<<<< HEAD
 
+=======
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 }

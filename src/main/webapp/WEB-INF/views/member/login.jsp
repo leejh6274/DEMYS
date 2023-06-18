@@ -4,8 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<<<<<<< HEAD
 <title>DEMYS</title>
 <link rel="shortcut icon" type="image/x-icon" href="../resource/img/favicon.ico">
+=======
+<title>Insert title here</title>
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -133,7 +137,11 @@ html,body{
        <img src="/resource/img/back.png" style="width:190vh;height:1066px;"/>
    </div>
 <div class="content-box" style="border:5px solid #153A66;"> 
+<<<<<<< HEAD
 	<form class="table-box-type-1" method="post"  action="/member/doLogin">
+=======
+   <form class="table-box-type-1" method="post"  action="/member/doLogin">
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
       <div class="demys">
          <span>DEMYS PMS</span>
       </div>
@@ -146,13 +154,21 @@ html,body{
                <div class="form-control">
                     <label class="input-group input-group-sm">
                       <span class="input-card">ID :</span>
+<<<<<<< HEAD
                       <input type="text" class="id-box" name="MEMBER_ID" autocomplete="off" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');" value=""/>
+=======
+                      <input type="text" class="id-box" name="MEMBER_ID"  value=""/>
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
                     </label>
                </div>
                <div class="form-control">
                  <label class="input-group input-group-sm">
                    <span class="input-card">PW :</span>
+<<<<<<< HEAD
                    <input type="password" class="id-box" name="MEMBER_PW" autocomplete="off" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');"  value="" />
+=======
+                   <input type="password" class="id-box" name="MEMBER_PW" value="" />
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
                  </label>
                </div>
             </div>
@@ -163,6 +179,7 @@ html,body{
       </div>
       </form>
       <div class="error">
+<<<<<<< HEAD
 	     <c:if test="${not empty error}">
         <p>${error}</p>
 	    </c:if>
@@ -173,6 +190,18 @@ html,body{
 	        <p>${invalidPassword}</p>
 	    </c:if>
 	   </div>
+=======
+        <c:if test="${not empty error}">
+        <p>${error}</p>
+       </c:if>
+       <c:if test="${not empty invalidId}">
+           <p>${invalidId}</p>
+       </c:if>
+       <c:if test="${not empty invalidPassword}">
+           <p>${invalidPassword}</p>
+       </c:if>
+      </div>
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
       <div>
          <div id="button-group" class="mt-5">
            <button id="registBtn" class="font-demys" onclick="OpenWindow('registCode','인사과코드',400,350);">계정등록</button>&nbsp;&nbsp;
@@ -189,6 +218,7 @@ html,body{
 
  
 <script>
+<<<<<<< HEAD
 	function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
 		winleft = (screen.width - WinWidth) / 2;
 		wintop = (screen.height - WinHeight) / 2;
@@ -204,6 +234,23 @@ html,body{
 		window.opener.location.reload(true);		
 		window.close();
 	}
+=======
+   function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
+      winleft = (screen.width - WinWidth) / 2;
+      wintop = (screen.height - WinHeight) / 2;
+      var win = window.open(UrlStr , WinTitle , "scrollbars=yes,width="+ WinWidth  
+                        +",height="+ WinHeight +",top="+ wintop +",left=" 
+                        + winleft +",resizable=yes"  );
+      win.focus() ; 
+}
+
+   //팝업창 닫기
+   function CloseWindow(parentURL){
+      
+      window.opener.location.reload(true);      
+      window.close();
+   }
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
  </script>
 
 </body>

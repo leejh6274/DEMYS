@@ -5,6 +5,7 @@
 <mapper namespace="com.ducks.demys.boot.repository.PjhrRepository">
 	<select id="getPjhrListByPJ_NUM" resultType="Pjhr">
 		SELECT *
+<<<<<<< HEAD
 		FROM PJHR PH
 		INNER JOIN PROJECTS P ON P.PJ_NUM = PH.PJ_NUM
 		INNER JOIN MEMBER M ON M.MEMBER_NUM = PH.MEMBER_NUM
@@ -14,10 +15,18 @@
 	</select>
 	
 <!-- 	<select id="getPjhrListByMEMBER_NUM" resultType="Pjhr">
+=======
+		FROM PJHR
+		WHERE PJ_NUM=#{PJ_NUM}
+		ORDER BY PJHR_NUM DESC
+	</select>
+	<select id="getPjhrListByMEMBER_NUM" resultType="Pjhr">
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 		SELECT *
 		FROM PJHR
 		WHERE MEMBER_NUM=#{MEMBER_NUM}
 		ORDER BY PJHR_NUM DESC
+<<<<<<< HEAD
 	</select> -->
 	
 	<select id="getPjhrListByPJ_NUMCount" resultType="int">
@@ -37,11 +46,20 @@
 		WHERE PJHR_NUM=#{PJHR_NUM}
 	</select>
 	
+=======
+	</select>
+	<select id="getPjhrByPJHR_NUM" resultType="Pjhr">
+		SELECT *
+		FROM PJHR
+		WHERE PJHR_NUM=#{PJHR_NUM}
+	</select>
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 	<select id="selectPjhrSequenceNextValue" resultType="int">
 		SELECT
 		PJHR_seq.nextVal
 		FROM DUAL
 	</select>
+<<<<<<< HEAD
 	
 	<update id="modifyPjhr">
 		UPDATE PJHR
@@ -50,15 +68,31 @@
 		WHERE PJHR_NUM=#{PJHR_NUM}
 	</update>
 	
+=======
+	<insert id="registPjhr">
+		INSERT INTO
+		PJHR(PJHR_WORK,PJHR_DETAIL,PJ_NUM,MEMBER_NUM)
+		VALUES(#{PJHR_WORK},#{PJHR_DETAIL},#{PJ_NUM},#{MEMBER_NUM})
+	</insert>
+	<update id="modifyPjhr">
+		UPDATE PJHR
+		SET
+		PJHR_WORK=#{PJHR_WORK},PJHR_DETAIL=#{PJHR_DETAIL},PJ_NUM=#{PJ_NUM},MEMBER_NUM=#{MEMBER_NUM}
+		WHERE PJHR_NUM=#{PJHR_NUM}
+	</update>
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 	<delete id="removePjhr">
 		DELETE
 		FROM PJHR
 		WHERE PJHR_NUM=#{PJHR_NUM}
 	</delete>
+<<<<<<< HEAD
 	
 	<insert id="registPjhr">
 		INSERT INTO
 		PJHR(PJHR_NUM,PJHR_WORK,PJHR_DETAIL,PJ_NUM,MEMBER_NUM)
 		VALUES(#{PJHR_NUM},#{PJHR_WORK},#{PJHR_DETAIL},#{PJ_NUM},#{MEMBER_NUM})
 	</insert>
+=======
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 </mapper>

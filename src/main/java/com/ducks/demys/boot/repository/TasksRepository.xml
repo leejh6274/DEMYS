@@ -4,11 +4,19 @@
 
 <mapper namespace="com.ducks.demys.boot.repository.TasksRepository">
 	<select id="getTasksListByMEMBER_NUM" resultType="Tasks">
+<<<<<<< HEAD
         SELECT *
         FROM TASKS
         WHERE MEMBER_NUM=#{MEMBER_NUM}
         ORDER BY TASKS_ENDDATE ASC
     </select>
+=======
+		SELECT *
+		FROM TASKS
+		WHERE MEMBER_NUM=#{MEMBER_NUM}
+		ORDER BY TASKS_NUM DESC
+	</select>
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 	<select id="getTasksListByTASKS_STATUS" resultType="Tasks">
 		SELECT *
 		FROM TASKS
@@ -30,6 +38,7 @@
 		TASKS_seq.nextVal
 		FROM DUAL
 	</select>
+<<<<<<< HEAD
 
 	<update id="registTasks">
 		INSERT INTO 
@@ -40,6 +49,22 @@
 		UPDATE TASKS
 		SET
 		TASKS_CONTENT=#{TASKS_CONTENT},TASKS_IMP=#{TASKS_IMP},TASKS_ENDDATE=TO_DATE(#{STRING_ENDDATE}, 'YYYY-MM-DD HH24:MI:SS'),TASKS_SHARE=#{TASKS_SHARE},MEMBER_NUM=#{MEMBER_NUM}
+=======
+	<select id="changeDate" resultType="Date">
+		SELECT
+		TO_DATE('#{STRING_ENDDATE}', 'YYYY-MM-DD HH24:MI:SS')
+	  	FROM dual
+	</select>
+	<insert id="registTasks">
+		INSERT INTO
+		TASKS(TASKS_CONTENT,TASKS_STATUS,TASKS_IMP,TASKS_ENDDATE,TASKS_SHARE,MEMBER_NUM)
+		VALUES(#{TASKS_CONTENT},#{TASKS_STATUS},#{TASKS_IMP},#{TASKS_ENDDATE},#{TASKS_SHARE},#{MEMBER_NUM})
+	</insert>
+	<update id="modifyTasks">
+		UPDATE TASKS
+		SET
+		TASKS_CONTENT=#{TASKS_CONTENT},TASKS_IMP=#{TASKS_IMP},TASKS_ENDDATE=#{TASKS_ENDDATE},TASKS_SHARE=#{TASKS_SHARE},MEMBER_NUM=#{MEMBER_NUM}
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 		WHERE TASKS_NUM=#{TASKS_NUM}
 	</update>
 	<update id="modifyTasksStatus">
@@ -48,12 +73,15 @@
 		TASKS_STATUS=#{TASKS_STATUS}
 		WHERE TASKS_NUM=#{TASKS_NUM}
 	</update>
+<<<<<<< HEAD
 	<update id="modifyTasksShare">
 		UPDATE TASKS
 		SET
 		TASKS_SHARE=#{TASKS_SHARE}
 		WHERE TASKS_NUM=#{TASKS_NUM}
 	</update>
+=======
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 	<delete id="removeTasks">
 		DELETE
 		FROM TASKS
