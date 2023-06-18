@@ -102,7 +102,7 @@
 		<option value="m" ${cri.searchType=='m' ? 'selected':"" }>담당자</option>
       </select>
     </div>
-    <input class="input input-bordered w-full max-w-xs" type="text" name="keyword" id="keyword" placeholder="검색어를 입력하세요." value="${cri.keyword }"/>
+    <input class="input input-bordered w-full max-w-xs" type="text" name="keyword" id="keyword" placeholder="검색어를 입력하세요." autocomplete="off" value="${cri.keyword }"/>
     <span class="input-group-apspend">
       <button class="btn btn-se" type="button" id="searchBtn" data-card-widget="search" onclick="list_go(1);">
         <i class="fa fa-fw fa-search"></i>

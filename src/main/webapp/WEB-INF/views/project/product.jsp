@@ -198,7 +198,7 @@
                <div class="filebox bs3-primary w-full" style="margin:0 0">
                   <input class="upload-name" value="첨부파일을 등록하세요" disabled="disabled" style="color:#aaa;">
                      <label for="ex_filename">
-                        <i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl text-black mr-3 " ></i>                       
+                        <i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>                       
                      </label>
                   <input type="file" id="ex_filename" class="upload-hidden">
                </div>

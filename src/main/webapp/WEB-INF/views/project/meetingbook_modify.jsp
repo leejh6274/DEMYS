@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
-<html>
 <html lang="ko" class="light" data-theme="light">
 <head>
 <meta charset="UTF-8">
@@ -143,7 +142,7 @@
 
             <div class="container flex flex-col card-body" style="padding-top:10px; padding-bottom:10px; max-width:1000px;">
                <div class="flex">
-                  <input type="text" name="mbtitle" placeholder="제목을 입력하세요." class="input" style="border:1px solid #aaaaaa; border-radius:0px; width:600px; justify-content:space-between;" value="${meetingBook.MB_TITLE}">
+                  <input type="text" name="mbtitle" placeholder="제목을 입력하세요." class="input" style="border:1px solid #aaaaaa; border-radius:0px; width:100%; justify-content:space-between;" value="${meetingBook.MB_TITLE}">
                   
                   <div class="w-36 h-8 text-center" style="line-height:45px; height:48px; border:1px solid #aaa; border-left:0;">${meetingBook.MEMBER_NAME }</div>
                </div>   

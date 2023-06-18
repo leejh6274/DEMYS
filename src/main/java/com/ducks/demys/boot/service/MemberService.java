@@ -88,8 +88,8 @@ public class MemberService {
 	public void sendEmail(Member member, String div) throws MessagingException {
         String host = "smtp.naver.com";
         int port = 587;
-        String username = "dnjsal7461";
-        String password = "an";
+        String username = "아이디";
+        String password = "비밀번호";
         String fromEmail = "dnjsal7461@naver.com";
         String fromName = "DEMYS";
         String subject = "";

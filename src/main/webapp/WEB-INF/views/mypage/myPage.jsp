@@ -113,7 +113,7 @@
                   <div class="row" style="display: flex;">
                         <!-- 프로필 사진 -->
                         <div class="col-sm-6 grid-rows-1" style="margin-left:40px;">
-                              <div class="manPicture" data-id="${member.MEMBER_ID }" style="border: 5px solid #153A66; width: 180px; height: 160px; border-radius: 50%; margin: 20px; margin-left: 10px;" ></div>
+                              <div class="manPicture" data-id="${member.MEMBER_ID }" style="border: 2px solid #153A66; width: 180px; height: 180px; border-radius: 50%; margin: 10px;" ></div>
                         </div>
                         <div style="margin: 10px;">
 

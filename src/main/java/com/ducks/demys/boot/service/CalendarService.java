@@ -17,11 +17,10 @@ public class CalendarService {
    }
 
    public List<Calendar> getCalendarList(int MEMBER_NUM) {
-      int sq = calendarRepository.selectCalendarSequenceNextValue();
       return calendarRepository.getCalendarList(MEMBER_NUM);
     }
    
-   public List<Calendar> getCalendardetail(int SC_NUM) {
+   public Calendar getCalendardetail(int SC_NUM) {
       
       return calendarRepository.getCalendardetail(SC_NUM);
    }

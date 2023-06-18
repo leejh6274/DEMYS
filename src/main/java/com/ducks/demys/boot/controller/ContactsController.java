@@ -175,7 +175,7 @@ public class ContactsController {
 
 		String fullAddress = "";
 		if (!address.isEmpty() && !detailAddress.isEmpty() && !extraAddress.isEmpty()) {
-			fullAddress = postcode + " " + address + " " + detailAddress + " " + extraAddress;
+			fullAddress = "(" + postcode + ") " + address + " " + detailAddress + " " + extraAddress;
 		}
 
 		String phoneNumber = "";

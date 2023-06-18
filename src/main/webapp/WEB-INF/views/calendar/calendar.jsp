@@ -56,6 +56,7 @@
          
          <form id="ScheduleForm">
          <input type="hidden" class="MEMBER_NUM" name="MEMBER_NUM" id="MEMBER_NUM" value=${member.MEMBER_NUM } />
+         
          <input type="hidden" class="BACKGROUNDCOLOR" name="BACKGROUNDCOLOR" id="BACKGROUNDCOLOR" value=${calendar.BACKGROUNDCOLOR } />
          <input type="hidden" class="TEXTCOLOR" name="TEXTCOLOR" id="TEXTCOLOR" value=${calendar.TEXTCOLOR } />
          <input type="hidden" class="BORDERCOLOR" name="BORDERCOLOR" id="BORDERCOLOR" value=${calendar.BORDERCOLOR } />
@@ -63,8 +64,8 @@
          <div class="p-modal-serach regist_calendar">
                <div class="col-xs-12" style="width:100%;">
                         <label class="mo_sc_name" for="mo_sc_name" style="font-weight:bold;float:left;width:30%;">일정명</label>
-                        <input class="inputModal" style="float:left;width:50%;border:1px solid #ccc;" type="text" name="SC_NAME" id="SC_NAME" required="required" />
-                  </div>
+                        <input class="inputModal" style="float:left;width:50%;border:1px solid #ccc;" autocomplete="off" type="text" name="SC_NAME" id="SC_NAME" required="required" />
+                  </div> 
          </div>
          <div class="p-modal-serach regist_calendar">
                <div class="time" style="width:100%;">
@@ -84,6 +85,7 @@
          </div>
          <div class="p-modal-serach regist_calendar">
                <div class="col-xs-12" style="width:100%;">
+               <input type="hidden" class="PJ_NUM" name="PJ_NUM" id="PJ_NUM" value=${calendar.PJ_NUM } />
                         <label class="col-xs-4" for="sc_STATUS" style="font-weight:bold;float:left;width:30%;">구분</label>
                         <select class="sc_STATUS" name="SC_STATUS" id="SC_STATUS" style="float:left;width:50%;border:1px solid #ccc;">
                               <option value=""  style="color: #D25565;">선택</option>
@@ -127,7 +129,7 @@
             <div class="p-modal-serach regist_calendar">
                <div class="col-xs-12" style="width:100%;">
                         <label class="col-xs-4" for="sc_PLACE" style="font-weight:bold;float:left;width:30%;">장소</label>
-                        <input class="inputModal" type="text" name="SC_PLACE" id="SC_PLACE" style="float:left;width:50%;border:1px solid #ccc;" />
+                        <input class="inputModal" type="text" autocomplete="off" name="SC_PLACE" id="SC_PLACE" style="float:left;width:50%;border:1px solid #ccc;" />
                   </div>
          </div>
          <div class="p-modal-serach regist_calendar">
@@ -139,7 +141,7 @@
       </div>
          
          <div class="p-regi-modal-bts">
-                  <button class="p-regi-modal-bt" type="button" onclick="addSchedule();">등록</button>
+                  <button class="p-regi-modal-bt" type="button"  onclick="addSchedule();">등록</button>
                   <button id="modal_close_btn2" class="p-regi-modal-bt" onclick="CLOSE_MODAL();">취소</button>
                   <!-- MEMBER NUM, NAME값 받을 공간 -->
                   <div class="add_member_id" ></div>
@@ -232,7 +234,7 @@
                <div class="time" style="width:100%;">
                         <div>
                            <label class="mo_sc_stdate" for="mo_sc_stdate" style="font-weight:bold;float:left;width:30%;">시작일자</label>
-                              <input readonly value="${calendar.START }" style="float:left;width:50%;border:1px solid #ccc;" id="start" name="start" type="text"  />
+                              <input readonly value="${calendar.START }" style="float:left;width:50%;border:1px solid #ccc;" id="start" name="start"  />
                         </div>
                   </div>
          </div>
@@ -240,13 +242,13 @@
                <div class="time" style="width:100%;">
                         <div>
                               <label class="mo_sc_stdate" for="mo_sc_stdate" style="font-weight:bold;float:left;width:30%;">종료일자</label>
-                              <input readonly value="${calendar.END }" style="float:left;width:50%;border:1px solid #ccc;" id="end" name="end" type="text"  />
+                              <input readonly value="${calendar.END }" style="float:left;width:50%;border:1px solid #ccc;" id="end" name="end"  />
                         </div>
                   </div>
          </div>
               <!-- 프로젝트 선택 시 프로젝트 조회 버튼 -->
       
-        <div class="p-modal_modi-serach modi_calendar">
+        <div class="p-modal_modi-serach modi_calendar" id="pj_name_hide">
           <div style="width:100%;">
             <div>
               <label class="col-xs-4" for="PJ_NAME" style="font-weight:bold;float:left;width:30%;">프로젝트명</label>
@@ -327,18 +329,19 @@
          <form id="modi_ScheduleForm">
          <input type="hidden" class="MEMBER_NUM" name="MEMBER_NUM" id="MODMEMBER_NUM" value=${member.MEMBER_NUM } />
          <input type="hidden" class="SC_NUM" name="SC_NUM" id="MODSC_NUM" value=${calendar.SC_NUM } />
+         <input type="hidden" class="PJ_NUM" name="PJ_NUM" id="MODPJ_NUM" value=${calendar.PJ_NUM } />
          <div style="margin-top:10px;"> 
          <div class="p-Modify_modal-serach Modify_calendar">
                <div class="col-xs-12" style="width:100%;">
                         <label class="mo_sc_name" for="mo_sc_name" style="font-weight:bold;float:left;width:30%;">일정명</label>
-                        <input class="inputModal" style="float:left;width:50%;border:1px solid #ccc;" type="text" name="SC_NAME" id="MODSC_NAME" required="required" />
+                        <input class="inputModal" style="float:left;width:50%;border:1px solid #ccc;" autocomplete="off" type="text" name="SC_NAME" id="MODSC_NAME" required="required" />
                   </div>
          </div>
          <div class="p-Modify_modal-serach Modify_calendar">
                <div class="time" style="width:100%;">
                         <div>
                            <label class="mo_sc_stdate" for="mo_sc_stdate" style="font-weight:bold;float:left;width:30%;">시작일자</label>
-                              <input  style="float:left;width:50%;border:1px solid #ccc;" id="MODSTART" name="START" placeholder="시작일을 선택하세요" type="date" />
+                              <input  style="float:left;width:50%;border:1px solid #ccc;" id="MODSTART" name="START" placeholder="시작일을 선택하세요" class="timeSelector" />
                         </div>
                   </div>
          </div>
@@ -346,7 +349,7 @@
                <div class="time" style="width:100%;">
                         <div>
                               <label class="mo_sc_stdate" for="mo_sc_stdate" style="font-weight:bold;float:left;width:30%;">종료일자</label>
-                              <input style="float:left;width:50%;border:1px solid #ccc;" id="MODEND" name="END"placeholder="종료일을 선택하세요" type="date" />
+                              <input style="float:left;width:50%;border:1px solid #ccc;" id="MODEND" name="END"placeholder="종료일을 선택하세요" class="timeSelector" />
                         </div>
                   </div>
          </div>
@@ -395,13 +398,13 @@
             <div class="p-Modify_modal-serach Modify_calendar">
                <div class="col-xs-12" style="width:100%;">
                         <label class="col-xs-4" for="sc_PLACE" style="font-weight:bold;float:left;width:30%;">장소</label>
-                        <input class="inputModal" type="text" name="SC_PLACE" id="MODSC_PLACE" style="float:left;width:50%;border:1px solid #ccc;" />
+                        <input class="inputModal" type="text" autocomplete="off" name="SC_PLACE" id="MODSC_PLACE" style="float:left;width:50%;border:1px solid #ccc;" />
                   </div>
          </div>
          <div class="p-Modify_modal-serach Modify_calendar">
                <div class="col-xs-12" style="width:100%;">
                         <label class="col-xs-4" for="SC_CONTENT" style="font-weight:bold;float:left;width:30%;">내용</label>
-                        <textarea rows="4" cols="50" class="textarea textarea-bordered" name="SC_CONTENT" id="MODSC_CONTENT" style="float:left;width:50%;border:1px solid #ccc;"></textarea>
+                        <textarea rows="4" cols="50" autocomplete="off" class="textarea textarea-bordered" name="SC_CONTENT" id="MODSC_CONTENT" style="float:left;width:50%;border:1px solid #ccc;"></textarea>
                   </div>
          </div>
       </div>
@@ -467,20 +470,50 @@
 
 
 <script>
+//등록폼에서 날짜 유효성체크하기
+function validateDate() {
+   var startDate = new Date($('#START').val());
+   var endDate = new Date($('#END').val());
 
-//프로젝트 옵션 선택 이벤트 핸들러(등록모달)
+   if (startDate > endDate) {
+      alert('시작일자가 종료일자보다 늦습니다.');
+      $('#END').val(''); // 종료일자 입력 필드를 비움
+      $('#END').focus(); // 종료일자 입력 필드로 포커스 이동
+   }
+}
+
+// 시작일자와 종료일자 입력 필드의 값 변경 시 유효성 체크 실행
+$('#START, #END').on('change', function() {
+   validateDate();
+});
+
+
+//프로젝트 옵션 선택 이벤트 핸들러 (등록모달)
 document.getElementById("SC_STATUS").addEventListener("change", function() {
   var selectedOption = this.value; // 선택된 옵션 값 가져오기
   var projectSearchContainer = document.querySelector(".p-modal-search.regist_calendar");
-
+  var PJ_NUMInput = document.getElementById("PJ_NUM");
+  
   if (selectedOption === "1") {
     // 프로젝트 옵션을 선택한 경우 프로젝트 입력란 표시
     projectSearchContainer.style.display = "block";
   } else {
     // 다른 옵션을 선택한 경우 프로젝트 입력란 숨김
     projectSearchContainer.style.display = "none";
+    // PJ_NUM 값을 정수형 0으로 초기화
+    PJ_NUMInput.value = 0;
   }
-}); 
+});
+
+//개인업무 선택 시 PJ_NUM 값을 정수형으로 변환
+$('#SC_STATUS').change(function() {
+  var selectedValue = $(this).val();
+  if (selectedValue === '2') {
+    var PJ_NUM = parseInt($('#PJ_NUM').val());
+    // 변환된 PJ_NUM 값을 사용하여 원하는 동작 수행
+    // 예: 다른 필드 업데이트, AJAX 요청 등
+  }
+});
 //프로젝트 옵션 선택 이벤트 핸들러(수정모달)
 document.getElementById("MODI_SC_STATUS").addEventListener("change", function() {
   var selectedOption = this.value; // 선택된 옵션 값 가져오기
@@ -512,7 +545,8 @@ function open_detailModal() {
       $(".modimodal_calendar").css('display', "none");
    }
 
-   function modiSchedule() {
+//일정수정 모달열기
+function modiSchedule() {
     $(".Modify_modal_calendar").css('display',"block");
       
       var sc_NAME =  $('#sc_NAME').val();
@@ -535,8 +569,6 @@ function open_detailModal() {
      
      var pj_NAME =  $('#pj_NAME').val();
      $('#MODPJ_NAME').val(pj_NAME);
-     
-  
      
    }
    function CLOSE_modi_MODAL(){
@@ -616,14 +648,14 @@ var SC_PK="";
                       success: function(data) {
                         // AJAX 요청이 성공했을 때 실행되는 콜백 함수
                        // alert('성공');  // 응답 데이터를 콘솔에 출력
-                        var detail_sc_NAME = data[0].sc_NAME;  // 응답 데이터에서 원하는 속성 값 가져오기
-                        var detail_START = data[0].sc_STARTDATE;  
-                        var detail_END = data[0].sc_ENDDATE;  
-                        var detail_sc_TYPE = data[0].sc_TYPE;  
-                        var detail_sc_IMP = data[0].sc_IMP;  //중요도
-                        var detail_sc_PLACE = data[0].sc_PLACE;  
-                        var detail_sc_CONTENT = data[0].sc_CONTENT;  
-                        var detail_pj_NAME = data[0].pj_NUM;  
+                        var detail_sc_NAME = data.sc_NAME;  // 응답 데이터에서 원하는 속성 값 가져오기
+                        var detail_START = data.start;  
+                        var detail_END = data.end;  
+                        var detail_sc_TYPE = data.sc_TYPE;  
+                        var detail_sc_IMP = data.sc_IMP;  //중요도
+                        var detail_sc_PLACE = data.sc_PLACE;  
+                        var detail_sc_CONTENT = data.sc_CONTENT;  
+                        var detail_pj_NAME = data.pj_NUM;  
                         
                         // 가져온 값으로 input의 value 설정
                         $('#sc_NAME').val(detail_sc_NAME);
@@ -640,17 +672,23 @@ var SC_PK="";
                            $('#pj_NAME').val(detail_pj_NAME);
                            $('#pj_NAME').show();
                         }
-                     
+
                      //프로젝트 num대신 name이 나오도록하기
-                        var pjNumInfo = document.getElementById('pj_NUM');
-                        var pjNameInfo = document.getElementById('pj_NAME');
-                        pjNumInfo.value = calendar.PJ_NUM;
-                        if (calendar.PJ_NUM === 0) {
-                           pjNameInfo.value = 'MTQ 프로젝트 관리 사업';
-                        } else {
-                           pjNameInfo.value = '더존비즈온 프로젝트 관리 사업';
+                        if (detail_pj_NAME !== null) {
+                      if (detail_pj_NAME === 1) {
+                          $('#pj_NAME').val('MTQ 프로젝트 관리 사업');
+                          $('#pj_NAME').show();
+                      } else if (detail_pj_NAME === 2) {
+                          $('#pj_NAME').val('더존비즈온 프로젝트 관리 사업');
+                          $('#pj_NAME').show();
+                      }
+                  }
+                        
+                     
+                        if (detail_pj_NAME === 0) {
+                            $('#pj_name_hide').hide();
                         }
-      
+                     
                      // 중요도 값에 따라 텍스트 설정
                         var scImpInfo = document.getElementById('sc_IMP');
                         scImpInfo.value = detail_sc_IMP;
@@ -661,11 +699,7 @@ var SC_PK="";
                         } else if (detail_sc_IMP === 3) {
                            scImpInfo.value = '높음';
                         }
-                        
-                        
-                        
-
-                       
+                                              
                       },
                       error: function(xhr, status, error) {
                         // AJAX 요청이 실패했을 때 실행되는 콜백 함수
@@ -751,7 +785,7 @@ function searchPJ(){
               let html = template(projectList);
               table.append(html);
               table.find('tr').click(function () {
-                  var PJ_NUM = $(this).data('calendar-num');
+                 var PJ_NUM = parseInt($(this).data('calendar-num'));
                   var PJ_NAME = $(this).find('td:first-child').text();
 
                   var input_pjnum = '<input id="pj_num" type="hidden" value="' + PJ_NUM + '" />';
@@ -776,9 +810,13 @@ function searchPJ(){
                   // 선택된 값이 input 요소에 들어가도록 처리
                   $("#PJ_NAME").val(PJ_NAME);
                   $("#PJ_NAME").attr("data-pj-num", PJ_NUM);
+                  $("#PJ_NUM").val(PJ_NUM);
+                  $("#PJ_NUM").attr("data-pj-num", PJ_NUM);
                   
                   $("#MODPJ_NAME").val(PJ_NAME);
                   $("#MODPJ_NAME").attr("data-pj-num", PJ_NUM);
+                  $("#MODPJ_NUM").val(PJ_NUM);
+                  $("#MODPJ_NUM").attr("data-pj-num", PJ_NUM);
                   
                   
                   
@@ -799,6 +837,7 @@ function CLOSE_mODAL(){
 //1번모달에서 나머지 정보 입력후 최종 등록
 function addSchedule() {
    var MEMBER_NUM = $('input[name="MEMBER_NUM"]').val();
+   var PJ_NUM = parseInt($('input[name="PJ_NUM"]').val());
       var jobForm = $('#ScheduleForm');
    
 
@@ -826,6 +865,8 @@ function modi_Schedule() {
        var SC_IMP = parseInt($('#MODSC_IMP').val());
        var SC_PLACE = $('#MODSC_PLACE').val();
        var SC_CONTENT = $('#MODSC_CONTENT').val();
+       
+       
        
        var data = {
            "member_NUM": MEMBER_NUM,

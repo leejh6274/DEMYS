@@ -13,7 +13,7 @@ public interface CalendarRepository {
 
    public List<Calendar> getModal_PJList(int MEMBER_NUM);
    
-   public List<Calendar> getCalendardetail(int SC_NUM);
+   public Calendar getCalendardetail(int SC_NUM);
 
    public void registGo(Calendar sc);
 

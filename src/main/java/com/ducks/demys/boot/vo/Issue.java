@@ -20,6 +20,7 @@ public class Issue {
    private Date ISSUE_REGDATE;
    private String STRING_REGDATE;
    private Date ISSUE_UPDATEDATE;
+   private String STRING_UPDATEDATE;
    private Date ISSUE_DEADLINE;
    private String STRING_DEADLINE;
    private Date ISSUE_ENDDATE;
@@ -32,7 +33,7 @@ public class Issue {
    private int MYISSUE;
    private String SORT;
    private String MEMBER_ID;
-
+   private String memberList;
    private List<Issue_Tag> tagList;
    
 

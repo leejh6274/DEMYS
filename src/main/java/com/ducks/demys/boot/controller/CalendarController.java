@@ -1,5 +1,7 @@
 package com.ducks.demys.boot.controller;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -46,11 +48,17 @@ public class CalendarController {
    
    @RequestMapping("/calendar/getCalendardetail")
    @ResponseBody
-   public List<Calendar> getCalendardetail(@RequestParam("SC_NUM") int SC_NUM) {
-      
-      List<Calendar> calendar = calendarService.getCalendardetail(SC_NUM);
-            
-      return calendar;
+   public Calendar getCalendardetail(@RequestParam("SC_NUM") int SC_NUM) {
+         
+         Calendar calendar = calendarService.getCalendardetail(SC_NUM);
+         SimpleDateFormat dspformatter = new  SimpleDateFormat("yyyy-MM-dd HH:mm");
+         Timestamp startDate = calendar.getSC_STARTDATE();
+         Timestamp endDate = calendar.getSC_ENDDATE();
+         String stringStartDate = dspformatter.format(startDate);
+         String stringEndDate = dspformatter.format(endDate);
+         calendar.setSTART(stringStartDate);
+         calendar.setEND(stringEndDate);
+         return calendar;
    }
    
       

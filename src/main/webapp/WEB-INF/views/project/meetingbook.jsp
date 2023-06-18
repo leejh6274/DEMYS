@@ -136,7 +136,7 @@
                     </form>               
                </div>
                      <div>
-                        <button id="modal_opne_btn" onclick="openModal(${meetingBook.PJ_NUM });"class="rq-regi-bt btn btn-se">등록</button>
+                        <button id="modal_opne_btn" onclick="openModal(${meetingBook.PJ_NUM });"class="rq-regi-bt btn btn-se">등&nbsp;&nbsp;록</button>
                         <input type="hidden" name="pjnum" value="${PJ_NUM }" /> 
                         
                      </div>
@@ -155,8 +155,8 @@
                          <tbody style="height: 45px; overflow-y:auto; overflow-x:hidden;">
                            <c:forEach var="meetingBook" items="${meetingBookList}">
                               <tr>
-                                 <td onclick="window.open('meetingbook_detail?MB_NUM=${meetingBook.MB_NUM}','회의록 상세','width=900px,height=480px,left=500px,top=300px');" style="cursor:pointer;">${meetingBook.MB_NUM}</td>
-                                 <td onclick="window.open('meetingbook_detail?MB_NUM=${meetingBook.MB_NUM}','회의록 상세','width=900px,height=480px,left=500px,top=300px');" style="text-align:start; cursor:pointer;">${meetingBook.MB_TITLE}</td>
+                                 <td onclick="window.open('meetingbook_detail?MB_NUM=${meetingBook.MB_NUM}','회의록 상세','width=900px,height=510px,left=500px,top=300px');" style="cursor:pointer;">${meetingBook.MB_NUM}</td>
+                                 <td onclick="window.open('meetingbook_detail?MB_NUM=${meetingBook.MB_NUM}','회의록 상세','width=900px,height=510px,left=500px,top=300px');" style="text-align:start; cursor:pointer;">${meetingBook.MB_TITLE}</td>
                                  <td><i class="fa-solid fa-paperclip text-2xl"></i></td>
                                  <td>${meetingBook.MEMBER_NAME }</td>
                                  <td><fmt:formatDate value="${meetingBook.MB_REGDATE }" pattern="yyyy-MM-dd"/></td>

@@ -62,11 +62,11 @@
             <div class="hr-regi-detail">
                <div class="td-wrapper hr-regi-cont">
                   <div class="hr-icon">
-                     <i class="fa-regular fa-file-image" style="font-size:210px;"></i>
+                   	<div id="addManPicture"class="manPicture" data-id="" style="width:100%;height:100%;display:block;margin:0 auto;"></div>
                   </div>
                   <div class="hr-regi-conts">
                      <div>✔ &nbsp;
-                        <input id="m_names" name="PJHR_NAME" type="text" disabled placeholder="이름을 입력하세요." class="input w-full h-9" />
+                        <input id="m_names" name="PJHR_NAME" type="text" disabled placeholder="이름을 입력하세요." autocomplete="off" class="input w-full h-9" />
                         <button id="modal_opne_btn_hr_2" class="p-regi-modal-bt" onclick="searchPJHR_NAME();">조회</button>
                      </div>
                      <div>✔ &nbsp; 
@@ -84,7 +84,7 @@
                         </div>
                      </div>
                      <div class="font-bold">✔ 세부사항</div>
-                     <div>&nbsp;<input type="text" name="PJHR_DETAIL" placeholder="  세부사항을 입력하세요." class="input w-full h-16" /></div>
+                     <div>&nbsp;<input type="text" name="PJHR_DETAIL" placeholder="  세부사항을 입력하세요."  autocomplete="off" class="input w-full h-16" /></div>
                      <input type="hidden" value="${pjhr.PJ_NUM }" name="PJ_NUM" />
                      <!-- MEMBER_NUM -->
                         <input id="m_number" type="hidden" name="MEMBER_NUM" value=""/>
@@ -175,7 +175,7 @@ function PJHR_REGI(){
                     <%-- <option value="mp" ${searchType=='mp' ? "selected":"" }>직급</option> --%>
                </select>
                <div class="p-modal-searchbar key_member">
-                  <input name="keyword" type="text" placeholder="검색어를 입력하세요." class="input input-bordered p-modal-searchbar-input" value="${keyword }"/>
+                  <input name="keyword" type="text" placeholder="검색어를 입력하세요." autocomplete="off" class="input input-bordered p-modal-searchbar-input" value="${keyword }"/>
                   <i onclick="PJHR_list_go();" class="fa-solid fa-magnifying-glass" style="font-size:30px;width:15%;display:flex;align-items: center;justify-content: space-around;"></i>
                </div>
             </div>
@@ -210,19 +210,21 @@ function searchPJHR_NAME(){
          var table = $('#memberList_view');
          table.empty();
          //console.log(data);
+
          for(var i=0 ; i<memberList.length; i++ ){
             var member = memberList[i];
-            var row = '<tr data-member-num ="'+ member.member_NUM +'"> <td>' + member.member_NAME + '</td><td>' + member.member_DEP + '</td></tr>';
+            var row = '<tr data-member-num ="'+ member.member_NUM +'" data-member-id="'+ member.member_ID+ '"> <td>' + member.member_NAME + '</td><td>' + member.member_DEP + '</td></tr>';
             table.append(row);
          }
          
          table.find('tr').click(function(){
             var MEMBER_NAME = $(this).find('td:first-child').text();
             var MEMBER_NUM = $(this).data('member-num');
-            
+            var MEMBER_ID = $(this).data('member-id');
             var input_mnum = '<input id="m_num" type="hidden" value="' + MEMBER_NUM + '" />';
             var input_mname = '<input id="m_name" type="hidden" value="' + MEMBER_NAME + '" />';
-            
+            $('#addManPicture').attr('data-id',MEMBER_ID);
+            MemberPictureThumb('<%=request.getContextPath()%>');
              var addMemberId = $('.add_member_id');
 
             if (addMemberId.length) {

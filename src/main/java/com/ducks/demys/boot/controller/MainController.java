@@ -49,7 +49,7 @@ public class MainController {
          int delay = projectsService.getPJListSTATUSCount(2);
          int success = projectsService.getPJListSTATUSCount(3);
          int fail = projectsService.getPJListSTATUSCount(4);
-         int total=projectsService.getPJListCount();
+         int total=projectsService.getPJListCountForDashboard();
          
          List<Projects> pjList=projectsService.getPJListOrderByPJ_ENDDATE();
          

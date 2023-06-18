@@ -215,26 +215,26 @@ public class MemberController {
    @ResponseBody
    public String doNewPw(@RequestBody Member member, HttpServletResponse response) {
 	   
-	   String newPassword=member.getNEWPASSWORD();
+	   String MEMBER_PW=member.getNEWPASSWORD();
 	   String confirmPassword=member.getCONFIRMPASSWORD();
 	   String VERTIFICATION_CODE=member.getVERTIFICATION_CODE();
-      if (!newPassword.equals(confirmPassword)) {
+      if (!MEMBER_PW.equals(confirmPassword)) {
 
          return "member/newPw?VERTIFICATION_CODE=" + VERTIFICATION_CODE;
       }
 
-      if (!verifyNewPassword(newPassword)) {
+      if (!verifyNewPassword(MEMBER_PW)) {
 
          return "member/newPw?VERTIFICATION_CODE=" + VERTIFICATION_CODE;
       }
 
-      memberService.updatePassword(VERTIFICATION_CODE, newPassword);
-      try {
-         response.sendRedirect("/member/login");
-      } catch (IOException e) {
-
-         e.printStackTrace();
-      }
+      memberService.updatePassword(VERTIFICATION_CODE, MEMBER_PW);
+//      try {
+//         response.sendRedirect("/member/login");
+//      } catch (IOException e) {
+//
+//         e.printStackTrace();
+//      }
 
       return null;
    }

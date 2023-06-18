@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="/resource/css/project/contacts_modal.css" />
 
 <!-- kendo -->
+<script src="//kendo.cdn.telerik.com/2015.3.930/js/jquery.min.js"></script>
+<script src="//kendo.cdn.telerik.com/2015.3.930/js/jszip.min.js"></script>
 <script src="//kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
 <link rel="stylesheet" href="//kendo.cdn.telerik.com/2015.3.930/styles/kendo.common.min.css" />
 <link rel="stylesheet" href="//kendo.cdn.telerik.com/2015.3.930/styles/kendo.metro.min.css" />
@@ -32,7 +34,9 @@
                </c:choose>
                   <span class="p-main-title-sty">${projects.PJ_NAME }</span>
               </div>
-               <div class="p-main-reg-date"></div>
+               <div class="p-main-reg-date">
+                     <span >▶ 등록일 : <fmt:formatDate value="${projects.PJ_REGDATE }" pattern="yyyy-MM-dd"/></span>
+               </div>
            </div>
            
             <div class="p-body-header-1">
@@ -73,11 +77,11 @@
                      <div class="p-info-detail-title">
                         <span style="font-weight:bold;">프로젝트 정보</span>
                         <c:if test="${member.MEMBER_AUTHORITY == 3 }">
-                           <button id="P_modify" style="display:block;" class="p-info-detail-bt" onclick="P_MODIFY();">수정</button>
+                           <button id="P_modify" style="display:block;" class="p-info-detail-bt" onclick="P_MODIFY();">수&nbsp;&nbsp;정</button>
                            </c:if>
                         <div id=Pj_modify style="width: 215px; display:none;justify-content: space-between;">
-                           <button id="Pj_modify_go"  class="p-info-detail-bt" onclick="PJ_MODIFY_go();">수정하기</button>
-                           <button id="Pj_modify_fail" class="p-info-detail-bt" onclick="PJ_MODIFY_fail();">취소하기</button>
+                           <button id="Pj_modify_go"  class="p-info-detail-bt" onclick="PJ_MODIFY_go();">수&nbsp;&nbsp;정</button>
+                           <button id="Pj_modify_fail" class="p-info-detail-bt" onclick="PJ_MODIFY_fail();">취&nbsp;&nbsp;소</button>
                         </div>
                      </div>
                      <div class="p-detail-table">
@@ -102,7 +106,7 @@
                               <td class="td-ct-name">${projects.CT_NAME }</td>
                            </tr>
                            <tr>
-                              <td>프로젝트 매니저</td>
+                              <td>프로젝트 리더</td>
                               <td class="td-m-name">${projects.MEMBER_NAME }</td>
                            </tr>
                            <tr class="td-pj-type">
@@ -143,7 +147,7 @@
                            <span style="font-weight:bold;color:blue;">${pjctListCount }</span>
                         </div>
                         <div>
-                           <button id="modal_opne_btn_Cts_1" class="p-info-detail-bt" onclick="ct_Regi();">등록</button>
+                           <button id="modal_opne_btn_Cts_1" class="p-info-detail-bt" onclick="ct_Regi();">등&nbsp;&nbsp;록</button>
                         </div>
                      </div>
                      <div class="p-cts-list">
@@ -333,7 +337,7 @@ function PRODUCT_go(){
 //팀장 산출물관리로 이동
 function PRODUCT_TL_go(){
    var gubunAu = '${member.MEMBER_AUTHORITY}';
-   if(gubunAu == 1){
+   if(gubunAu != 3){
       PRODUCT_go();
       return;
    }
@@ -379,6 +383,7 @@ function ISSUE_go(){
       dataType:"text",
       success:function(data){
          $(".p-main-body").html(data);
+      MemberPictureThumb('<%=request.getContextPath()%>');
       },
       error: function (xhr, status, error) {
             // AJAX 요청이 실패했을 때 실행할 코드
@@ -411,9 +416,9 @@ function ISSUE_go(){
             <div class="cts-title-sub">* 거래처정보를 입력하세요.</div>
             <div class="cts-modal-search_1">
                <div class="cts-title-sub">거래처명</div>
-               <input id="ct-serch-name" class="cts-name" placeholder="거래처명을 조회하세요." disabled></input>
+               <input id="ct-serch-name" class="cts-name" placeholder="거래처명을 조회하세요." autocomplete="off" disabled></input>
             
-                     <button id="modal_opne_btn1" class="p-regi-modal-bt" onclick="searchCONTACTS();">찾기</button>
+                     <button id="modal_opne_btn1" class="p-regi-modal-bt" onclick="searchCONTACTS();">검색</button>
             </div>
             <div class="p-regi-modal-bts">
                      <button class="p-regi-modal-bt" onclick="PJCT_REGIST();">등록</button>
@@ -449,7 +454,7 @@ function ISSUE_go(){
                     <option value="cc" ${searchType=='cc' ? "selected":"" }>대표자명</option>
                </select>
                <div class="p-modal-searchbar contacts-modal-searchbar">
-                  <input name="keyword" type="text" placeholder="검색어를 입력하세요." class="input input-bordered p-modal-searchbar-input" value="${keyword }"/>
+                  <input name="keyword" type="text" placeholder="검색어를 입력하세요." autocomplete="off" class="input input-bordered p-modal-searchbar-input" value="${keyword }"/>
                   <i onclick="contacts_list_go();" class="fa-solid fa-magnifying-glass" style="font-size:30px;width:15%;display:flex;align-items: center;justify-content: space-around;"></i>
                </div>
             </div>
@@ -651,17 +656,17 @@ function CLOSE_MODAL_CT(){
 
       <div class="cts-view">
          <div class="cts-title">
-            <span>프로젝트 매니저</span>
+            <span>프로젝트 리더</span>
          </div>
-         <div class="cts-title-sub">* 프로젝트 매니저를 선택하세요.</div>
+         <div class="cts-title-sub">* 프로젝트 리더를 선택하세요.</div>
          <div class="p-modal-serach select_member">
             <select class="select select-bordered p-cts-select select_member" name="searchType" id="searchType">
                  <option disabled selected>선택 </option>
-                 <option value="mn" ${searchType=='mn' ? "selected":"" }>매니저명</option>
+                 <option value="mn" ${searchType=='mn' ? "selected":"" }>리더명</option>
                  <option value="md" ${searchType=='md' ? "selected":"" }>담당부서</option>
             </select>
             <div class="p-modal-searchbar key_member">
-               <input name="keyword" type="text" placeholder="검색어를 입력하세요." class="input input-bordered p-modal-searchbar-input" value="${keyword }"/>
+               <input name="keyword" type="text" placeholder="검색어를 입력하세요." autocomplete="off" class="input input-bordered p-modal-searchbar-input" value="${keyword }"/>
                <i onclick="member_list_go();" class="fa-solid fa-magnifying-glass" style="font-size:30px;width:15%;display:flex;align-items: center;justify-content: space-around;"></i>
             </div>
          </div>
@@ -717,7 +722,7 @@ document.getElementById("modal_close_btn_Cts_1").onclick = function() {
                     <option value="cc" ${searchType=='cc' ? "selected":"" }>대표자명</option>
                </select>
                <div class="p-modal-searchbar contacts-modal-searchbar">
-                  <input name="keyword" type="text" placeholder="검색어를 입력하세요." class="input input-bordered p-modal-searchbar-input" value="${keyword }"/>
+                  <input name="keyword" type="text" placeholder="검색어를 입력하세요." autocomplete="off" class="input input-bordered p-modal-searchbar-input" value="${keyword }"/>
                   <i onclick="ctPJ_list_go();" class="fa-solid fa-magnifying-glass" style="font-size:30px;width:15%;display:flex;align-items: center;justify-content: space-around;"></i>
                </div>
             </div>
@@ -889,7 +894,7 @@ function P_MODIFY(){
    var table_modify = $('#table_Pj_Detail tr td:last-child');
    table_modify.empty();
    
-   var input_pjName = '<input name="PJ_NAME" class="modify_css1" type="text" value="'+PJ_NAME+'" />';
+   var input_pjName = '<input name="PJ_NAME" autocomplete="off" class="modify_css1" type="text" value="'+PJ_NAME+'" />';
    $(".td-pj-name").append(input_pjName);
    
     //var input_pjStart = '<input name="PJ_STARTDATE" class="" type="date"/>';
@@ -901,7 +906,7 @@ function P_MODIFY(){
    
    var input_mName = '<input name="MEMBER_NAME" class="modify_css0 sh-btts" id="m_names" disabled type="text" value="'+MEMBER_NAME+'" />';
    $(".td-m-name").append(input_mName);
-   $(".td-m-name").append('<button class="p-info-sh-bt" onclick="searchMEMBER_NAME();">찾기</button>');
+   $(".td-m-name").append('<button class="p-info-sh-bt" onclick="searchMEMBER_NAME();">검색</button>');
    
    
    
@@ -909,7 +914,7 @@ function P_MODIFY(){
    
    var input_ctName = '<input name="CT_NAME" class="modify_css0 sh-btts" id="c_names" disabled type="value" value="'+CT_NAME+'" />'
    $(".td-ct-name").append(input_ctName);
-   $(".td-ct-name").append('<button class="p-info-sh-bt" onclick="searchCONTACTSPJ_NAME();">찾기</button>');
+   $(".td-ct-name").append('<button class="p-info-sh-bt" onclick="searchCONTACTSPJ_NAME();">검색</button>');
    
    
    
@@ -919,7 +924,7 @@ function P_MODIFY(){
    $(".td-pj-content").append(input_pjContent);
    
    
-   var input_pjGit = '<input name="PJ_GIT" class="modify_css1" type="text" value="'+PJ_GIT+'" />';
+   var input_pjGit = '<input name="PJ_GIT" class="modify_css1" autocomplete="off" type="text" value="'+PJ_GIT+'" />';
    $(".td-pj-git").append(input_pjGit);
    
 
