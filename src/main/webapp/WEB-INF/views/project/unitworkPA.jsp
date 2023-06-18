@@ -148,7 +148,7 @@ html {
                                           <b>프로젝트 <br/> 진행률</b>
                                     </span>
                                     <span style="font-size: 20px; color: #046fc7;text-align:center;">
-                                          <b>26%</b>
+                                          <b>37.5%</b>
                                     </span>
                               </span>
                         </div>
@@ -166,7 +166,7 @@ html {
                   </c:forEach>
                         <div class="complete-con">
                               <div class="conainer flex chart-green">
-                                    <div class="circle_percent" data-percent=42>
+                                    <div class="circle_percent" data-percent=30>
                                           <div class="circle_inner">
                                                 <div class="round_per round1"></div>
                                           </div>
@@ -175,7 +175,6 @@ html {
                                           <p class="desc progress-title">
                                                 <b>완료</b>
                                           </p>
-                                          <p class="desc progress-count">건수</p>
                                           <c:set var="average" value="${(count > 0) ? (sum / count) : 0}" />
                                          <p class="desc progress-percent">진행률: ${Math.ceil(average * 100)}%</p>
 
@@ -194,7 +193,7 @@ html {
                   </c:forEach>
                         <div class="inProgress-con">
                               <div class="conainer flex chart-blue">
-                                    <div class="circle_percent" data-percent=40>
+                                    <div class="circle_percent" data-percent=30>
                                           <div class="circle_inner">
                                                 <div class="round_per round2"></div>
                                           </div>
@@ -203,7 +202,6 @@ html {
                                           <p class="desc progress-title">
                                                 <b>진행중</b>
                                           </p>
-                                          <p class="desc progress-count">건수</p>
                               <c:set var="average" value="${(count > 0) ? (sum / count) : 0}" />
                                       <p class="desc progress-percent">진행률: ${Math.ceil(average * 100)}%</p>
 
@@ -221,7 +219,7 @@ html {
                   </c:forEach>
                         <div class="inProgress-con">
                               <div class="conainer flex chart-yellow">
-                                    <div class="circle_percent" data-percent=47>
+                                    <div class="circle_percent" data-percent=45>
                                           <div class="circle_inner">
                                                 <div class="round_per round2"></div>
                                           </div>
@@ -230,7 +228,6 @@ html {
                                           <p class="desc progress-title">
                                                 <b>보류</b>
                                           </p>
-                                          <p class="desc progress-count">건수</p>
                               <c:set var="average" value="${(count > 0) ? (sum / count) : 0}" />
                                        <p class="desc progress-percent">진행률: ${Math.ceil(average * 100)}%</p>
 
@@ -248,16 +245,15 @@ html {
                   </c:forEach>
                         <div class="inProgress-con">
                               <div class="conainer flex chart-red">
-                                    <div class="circle_percent" data-percent=47>
+                                    <div class="circle_percent" data-percent=45>
                                           <div class="circle_inner">
                                                 <div class="round_per round2"></div>
                                           </div>
                                     </div>
                                     <div>
                                           <p class="desc progress-title">
-                                                <b>진행중</b>
+                                                <b>지연</b>
                                           </p>
-                                          <p class="desc progress-count">건수</p>
                               <c:set var="average" value="${(count > 0) ? (sum / count) : 0}" />
                                       <p class="desc progress-percent">진행률: ${Math.ceil(average * 100)}%</p>
 
@@ -446,7 +442,6 @@ html {
             {field : "start",title : "시작일",format : "{0:yyyy-MM-dd}",width : 130,editable : true}, 
             {field : "end",title : "종료일",format : "{0:yyyy-MM-dd}",width : 130,editable : true}, 
             {field : "percentComplete",title : "진행률",format : "{0:0.##%}",width : 65,editable : true},
-            {field: "status",title: "상태",width: 70,editable: true}, 
             {field : "note",title : "비고",width : 300,editable : true} 
             ],
             height: 628,

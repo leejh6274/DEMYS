@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>DEMYS</title>
-<link rel="shortcut icon" type="image/x-icon" href="resource/img/favicon.ico"/>
+<link rel="shortcut icon" type="image/x-icon" href="../resource/img/favicon.ico">
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 

@@ -4,7 +4,6 @@
 
 
 <!DOCTYPE html>
-<html>
 <html lang="ko" class="light" data-theme="light">
 <head>
 <meta charset="UTF-8">
@@ -191,7 +190,7 @@ body {
             <tr>
                   <td style="width:250px; font-weight:bold; display:flex; width:100%; margin-top:10px; white-space: nowrap;">
                      <div class="flex items-center">파일첨부</div>
-                  <div class="flex w-full items-center justify-between" style="height:48px; border:1px solid #aaa; width:100%;; margin-left:26px;" >&nbsp;&nbsp;요구사항정의서_ver.1557.hwp
+                  <div class="flex w-full items-center justify-between" style="height:48px; border:1px solid #aaa; width:100%;; margin-left:26px; cursor:pointer;" onclick="window.location='<%=request.getContextPath()%>/resource/submitFile/${require.REQUIRE_TITLE }.xlsx'">&nbsp;&nbsp;${require.REQUIRE_TITLE }.xlsx
                      <span>
                         <i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>
                      </span>
@@ -203,8 +202,10 @@ body {
          </div>
  
       <div style="display:flex; justify-content:center; margin-top:-10px;">
+      <c:if test="${member.MEMBER_NUM eq require.MEMBER_NUM}">
          <button class="btn btn-se" onclick="location.href='require_modify?REQUIRE_NUM=${require.REQUIRE_NUM}'" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">수 정</button>
          <button class="btn btn-se" onclick="location.href='require_delete?REQUIRE_NUM=${require.REQUIRE_NUM}'" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">삭 제</button>
+      </c:if>
          <button type="button" id="cancelBtn" onclick="window.close();" class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px;">닫 기</button>
       </div>
    </div>
@@ -228,7 +229,6 @@ body {
 
    </script>
 </body>
-
 
 
 

@@ -104,6 +104,7 @@
       GROUP BY PJ2.PJ_NUM, PJ2.PJ_NAME, PJ2.PJ_STARTDATE, PJ2.PJ_ENDDATE, PJ2.PJ_REGDATE, PJ2.PJ_UPDATEDATE, 
         PJ2.PJ_IMP, PJ2.PJ_CONTENT, PJ2.PJ_STATUS, PJ2.PJ_TYPE, PJ2.PJ_FIELD, PJ2.MEMBER_NUM, PJ2.PJ_PRICE, 
         PJ2.CT_NUM, PJ2.PJ_GIT, PJ2.BUDGET_STATUS
+        order by pj2.pj_enddate asc
    </select>
 	
 	<select id="getPJList" resultType="Projects">
@@ -139,6 +140,10 @@
 		INNER JOIN member M ON P.MEMBER_NUM = M.MEMBER_NUM
 		WHERE PJ_NUM IS NOT NULL
 		<include refid="search" />
+	</select>
+	<select id="getPJListCountForDashboard" resultType="int">
+		SELECT count(*)
+		FROM projects P
 	</select>
 	
 	<select id="getPJListSTATUSCount" resultType="int">
@@ -193,4 +198,42 @@
 		FROM PROJECTS
 		WHERE PJ_NUM=#{PJ_NUM}
 	</delete>
+	
+	<sql id="search2">
+      <if test="cri.searchType == 'pn'.toString()">
+         and PJ_NAME like '%'||#{cri.keyword}||'%'
+      </if>
+      <if test="cri.searchType == 'cn'.toString()">
+         and CT_NAME like '%'||#{cri.keyword}||'%'
+      </if>
+   </sql>
+
+<select id="getPJTeamList" resultType="Projects">
+      select*
+      from(
+         SELECT rownum as rnum, PJListResult.*
+         FROM(
+            SELECT P.*, C.CT_NAME, M.MEMBER_NAME
+            FROM projects P
+            INNER JOIN contacts C ON P.CT_NUM = C.CT_NUM
+            INNER JOIN member M ON P.MEMBER_NUM = M.MEMBER_NUM
+            INNER JOIN pjhr PH ON P.PJ_NUM = PH.PJ_NUM
+            WHERE PH.MEMBER_NUM = #{MEMBER_NUM}
+                
+            ORDER BY P.PJ_REGDATE DESC
+         ) PJListResult
+      <![CDATA[
+         WHERE rownum <= #{cri.endRow}
+      ) WHERE rnum > #{cri.startRow}
+      ]]>
+   </select> 
+   <select id="getPJTeamListCount" resultType="int">
+      SELECT count(*)
+      FROM projects P
+      INNER JOIN contacts C ON P.CT_NUM = C.CT_NUM
+      INNER JOIN member M ON P.MEMBER_NUM = M.MEMBER_NUM
+      INNER JOIN pjhr PH ON P.PJ_NUM = PH.PJ_NUM
+      WHERE PH.MEMBER_NUM = #{MEMBER_NUM}
+      <include refid="search2" />
+   </select>
 </mapper>

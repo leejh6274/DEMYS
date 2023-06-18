@@ -30,7 +30,7 @@
    					<table style="width:100%;">
 	   					<tr>
 	   						<td>프로젝트명</td>
-	   						<td><input type="text" name="PJ_NAME" placeholder="프로젝트명을 입력하세요." class="input input-bordered p-reg-input" /></td>
+	   						<td><input type="text" name="PJ_NAME" placeholder="프로젝트명을 입력하세요." autocomplete="off" class="input input-bordered p-reg-input" /></td>
 	   					</tr>
 	   					<tr>
 	   						<td>프로젝트 기간</td>
@@ -46,7 +46,7 @@
 	   					</tr>
 	   					<tr>
 	   						<td>프로젝트 내용</td>
-	   						<td><input type="text" name="PJ_CONTENT" placeholder="프로젝트내용을 입력하세요." class="input input-bordered p-reg-input" /></td>
+	   						<td><input type="text" name="PJ_CONTENT" placeholder="프로젝트내용을 입력하세요." class="input input-bordered p-reg-input" autocomplete="off"/></td>
 	   					</tr>
 	   					<tr>
 	   						<td>프로젝트 중요도</td>
@@ -76,29 +76,29 @@
 	   					</tr>
 	   					<tr>
 	   						<td>예상매출액</td>
-	   						<td><input type="text" name="PJ_PRICE" placeholder="예상매출액을 입력하세요." class="input input-bordered p-reg-input" /></td>
+	   						<td><input type="text" name="PJ_PRICE" placeholder="예상매출액을 입력하세요." class="input input-bordered p-reg-input"  autocomplete="off"/></td>
 	   					</tr>
 	   					<tr >
 	   						<td>업체명</td>
-	   						<td><input id="c_names" type="text"  disabled placeholder="업체명을 입력하세요." class="input input-bordered p-reg-input" /></td>
-	   						<td><div ><button id="modal_opne_btn1" class="p-type-bt-0" onclick="javascript:searchCONTACTS_NAME();"> 찾기 </button></div> </td>
+	   						<td><input id="c_names" type="text"  disabled placeholder="업체명을 입력하세요." class="input input-bordered p-reg-input" autocomplete="off"/></td>
+	   						<td><div ><button id="modal_opne_btn1" class="p-type-bt-0" onclick="javascript:searchCONTACTS_NAME();"> 검색 </button></div> </td>
 	   					</tr>
 	   					<tr>
-	   						<td>프로젝트 매니저</td>
-	   						<td><input id="m_names" type="text"  disabled placeholder="프로젝트매니저를 입력하세요." class="input input-bordered p-reg-input" /></td>
-	   						<td><div ><button id="modal_opne_btn2" class="p-type-bt-0" onclick="javascript:searchMEMBER_NAME();"> 찾기 </button></div> </td>
+	   						<td>프로젝트 리더</td>
+	   						<td><input id="m_names" type="text"  disabled placeholder="프로젝트리더를 입력하세요." class="input input-bordered p-reg-input" autocomplete="off"/></td>
+	   						<td><div ><button id="modal_opne_btn2" class="p-type-bt-0" onclick="javascript:searchMEMBER_NAME();"> 검색 </button></div> </td>
 	   					</tr>
 	   					<tr>
 	   						<td class="p-git">
 	   							<span>깃 주소</span>
 	   							<div class="form-control ml-20">
 								  <label class="label cursor-pointer">
-								    <input type="checkbox" checked="checked" class="checkbox checkbox-primary git_check" onclick="javascript:GIT_CHECK();"/>
+								    <input type="checkbox" checked="checked" class="checkbox checkbox-primary git_check" autocomplete="off" onclick="javascript:GIT_CHECK();"/>
 								    <span class="label-text ml-2">미 정</span> 
 								  </label>
 								</div>
 	   						</td>
-	   						<td><input type="text" name="PJ_GIT"  disabled placeholder="깃주소를 입력하세요." class="input input-bordered p-reg-input git_add" /></td>
+	   						<td><input type="text" name="PJ_GIT"  disabled placeholder="깃주소를 입력하세요." autocomplete="off" class="input input-bordered p-reg-input git_add" /></td>
 	   					</tr>
 	   				</table>
 	   				<!-- MEMBER_NUM, CONTACTS_NUM  -->
@@ -140,7 +140,6 @@ function PJREGIST_go(){
     var MEMBER_NUM = $("input[name=MEMBER_NUM]").val();
     var PJ_GIT = $("input[name=PJ_GIT]").val();
     var PJ_TYPE = $("input[name=PJ_TYPE]").val();
-    alert(PJ_TYPE);
     
     var data={
           "pj_NAME":PJ_NAME,
@@ -194,7 +193,7 @@ function PJREGIST_go(){
 						  <option value="cc" ${searchType=='cc' ? "selected":"" }>대표자명</option>
 					</select>
 					<div class="p-modal-searchbar contacts-modal-searchbar">
-						<input name="keyword" type="text" placeholder="검색어를 입력하세요." class="input input-bordered p-modal-searchbar-input" value="${keyword }"/>
+						<input name="keyword" type="text" placeholder="검색어를 입력하세요." autocomplete="off" class="input input-bordered p-modal-searchbar-input" value="${keyword }"/>
 						<i onclick="contacts_list_go();" class="fa-solid fa-magnifying-glass" style="font-size:30px;width:15%;display:flex;align-items: center;justify-content: space-around;"></i>
 					</div>
 				</div>
@@ -351,17 +350,17 @@ function CLOSE_MODAL_CT(){
 
 		<div class="cts-view">
 			<div class="cts-title">
-				<span>프로젝트 매니저</span>
+				<span>프로젝트 리더</span>
 			</div>
-			<div class="cts-title-sub">* 담당매니저를 선택하세요.</div>
+			<div class="cts-title-sub">* 프로젝트 리더를 선택하세요.</div>
 			<div class="p-modal-serach select_member">
 				<select class="select select-bordered p-cts-select select_member" name="searchType" id="searchType">
 					  <option disabled selected>선택 </option>
-					  <option value="mn" ${searchType=='mn' ? "selected":"" }>매니저명</option>
+					  <option value="mn" ${searchType=='mn' ? "selected":"" }>리더명</option>
 					  <option value="md" ${searchType=='md' ? "selected":"" }>담당부서</option>
 				</select>
 				<div class="p-modal-searchbar key_member">
-					<input name="keyword" type="text" placeholder="검색어를 입력하세요." class="input input-bordered p-modal-searchbar-input" value="${keyword }"/>
+					<input name="keyword" type="text" placeholder="검색어를 입력하세요." autocomplete="off" class="input input-bordered p-modal-searchbar-input" value="${keyword }"/>
 					<i onclick="member_list_go();" class="fa-solid fa-magnifying-glass" style="font-size:30px;width:15%;display:flex;align-items: center;justify-content: space-around;"></i>
 				</div>
 			</div>

@@ -167,20 +167,23 @@
       <div id="modal1">
       
       
-         <!-- 제목, 개발단계 -->
+        <!-- 제목, 개발단계 -->
          <div class="modal_content">
             <div class="flex card-body" style="padding-bottom:0px;">
                <div class="navbar text-neutral-content" style="width: 100%; padding: 0px; min-height: 1rem; height: 30px; border-bottom:3px solid #016fa0;">
                   <div class="text-black mb-3" style="font-weight: bold; font-size: 1.5rem; ">
                      산출물 등록
+                     <input type="hidden" name="status" value="0" />
+                     <input type="hidden" name="pjnum" value="${PJ_NUM }" />   <%-- 나중에 value="${projects.pj_num }" --%>
+                     <input type="hidden" name="membernum" value="${member.MEMBER_NUM }" />    <!-- loginedUser -->
                   </div>
                </div>
             </div>
 
             <div class="container flex flex-col card-body" style="padding-top:10px; padding-bottom:10px;">
                <div class="flex">
-                  <input type="text" placeholder="제목을 입력하세요." class="input" style="border:1px solid #aaaaaa; border-radius:0px; width:638px; justify-content:space-between;">
-                  <select class="w-24 h-8 text-center" style="height:48px; border:1px solid #aaaaaa; border-left:0px;">
+                  <input type="text" placeholder="제목을 입력하세요." class="input" name="title" style="border:1px solid #aaaaaa; border-radius:0px; width:638px; justify-content:space-between;">
+                  <select class="w-24 h-8 text-center" style="height:48px; border:1px solid #aaaaaa; border-left:0px;" name="step">
                         <option value="step" selected>개발 단계</option>
                         <option value="1">분&nbsp;&nbsp;석</option>
                         <option value="2">설&nbsp;&nbsp;계</option>
@@ -190,20 +193,20 @@
                </div>
                
                <!-- 내용 -->   
-               <textarea class="textarea" name="product_content" value="" id="content" class="form-control" style="height:250px;width:100%; resize:none; border:1px solid #aaaaaa; border-radius:0px;" placeholder="내용을 작성하세요."></textarea>
+               <textarea class="textarea" name="content" id="content" class="form-control" style="height:250px;width:100%; resize:none; border:1px solid #aaaaaa; border-radius:0px;" placeholder="내용을 작성하세요."></textarea>
                
                <!-- 첨부파일 -->
                <div class="filebox bs3-primary w-full" style="margin:0 0">
                   <input class="upload-name" value="첨부파일을 등록하세요" disabled="disabled" style="color:#aaa;">
                      <label for="ex_filename">
-                        <i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl text-black mr-3 " ></i>                       
+                        <i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>                       
                      </label>
                   <input type="file" id="ex_filename" class="upload-hidden">
                </div>
             </div>
 
             <div style="display:flex; justify-content:center;">
-               <button class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">저장</button>
+               <button class="btn btn-se" onclick="regist_go();" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">저장</button>
                <button class="btn btn-se" id="modal_close_btn" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px;">취소</button>
             </div>
          </div>
@@ -216,36 +219,37 @@
 
 <script>
 
-         function regist_go(){
-            var title = $("input[name=title]").val();
-            var step = $("select[name=step]").val();
-            var content = $("textarea[name=content]").val();
-            var status = $("input[name=status]").val();
-            var membernum = $("input[name=membernum]").val();
-            var pjnum = $("input[name=pjnum]").val();
-            
-            
-            var data={
-                  "PRODUCT_TITLE":title,
-                  "PRODUCT_STEP":step,
-                  "PRODUCT_CONTENT":content,
-                  "PRODUCT_STATUS":status,
-                  "MEMBER_NUM":membernum,
-                  "PJ_NUM":pjnum
-            }
-            $.ajax({
-               url:"<%=request.getContextPath()%>/project/product_regist",
-               type:"post",
-               data:data,
-               success:function(){
-                  alert("등록되었습니다.");
-                  PRODUCT_go();
-               },
-               error:function(){
-                  alert('등록에 실패하였습니다.');
-               }
-            });
-         }
+      function regist_go(){
+          var title = $("input[name=title]").val();
+          var step = $("select[name=step]").val();
+          var content = $("textarea[name=content]").val();
+          var status = $("input[name=status]").val();
+          var membernum = $("input[name=membernum]").val();
+          var pjnum = $("input[name=pjnum]").val();
+          
+          
+          var data={
+                "PRODUCT_TITLE":title,
+                "PRODUCT_STEP":step,
+                "PRODUCT_CONTENT":content,
+                "PRODUCT_STATUS":status,
+                "MEMBER_NUM":membernum,
+                "PJ_NUM":pjnum
+          }
+          $.ajax({
+             url:"<%=request.getContextPath()%>/project/product_regist",
+             type:"post",
+             data:data,
+             success:function(){
+                alert("등록되었습니다.");
+                PRODUCT_go();
+             },
+             error:function(){
+                alert('등록에 실패하였습니다.');
+             }
+          });
+       }
+
 
 
 
@@ -278,7 +282,12 @@
                 });
             }); 
          
+         
+         
+         
+         
          function status_on(PRODUCT_NUM, PRODUCT_STATUS){
+            console.log("테스트 : " + PRODUCT_NUM + "__" + PRODUCT_STATUS);
       
             var data = {
                   product_num: PRODUCT_NUM,
@@ -289,23 +298,20 @@
                   url:"<%=request.getContextPath()%>/project/PDstatusChange",
                   type:"post",
                   data: data,
-                  dataType: "json",
-                  success:function(result){
-                     console.log(result)
-                     
-                     if (result.status == 1) {
-                        $('#approveBtn').css('background-color', 'blue');
+                  dataType: "text",
+                  success:function(data){
                         
-                               
+                     if (PRODUCT_STATUS == 1) {
+                        $('#approveBtn1'+PRODUCT_NUM).css( 'background-color', '#016FA0' ).css( 'color', 'white' );
+                        $('#approveBtn2'+PRODUCT_NUM).css('background-color', '').css( 'color', 'black' );
                      } else {
-                        $('#approveBtn').css('background-color', 'red');
+                       $('#approveBtn1'+PRODUCT_NUM).css('background-color', '').css( 'color', 'black' );
+                       $('#approveBtn2'+PRODUCT_NUM).css( 'background-color', '#016FA0' ).css( 'color', 'white' );
                            
                      }
-                     
-                    
                   },
                   error: function(error){
-                    console.log(error)
+                    console.log(error);
                   }
                });
          }

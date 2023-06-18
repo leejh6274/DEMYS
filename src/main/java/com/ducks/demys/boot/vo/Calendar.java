@@ -1,6 +1,7 @@
 package com.ducks.demys.boot.vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,9 +17,9 @@ public class Calendar {
    private String SC_CONTENT;
    private int SC_IMP;
    private String SC_TYPE;
-   private Date SC_STARTDATE;
+   private Timestamp SC_STARTDATE;
    private String START;
-   private Date SC_ENDDATE;
+   private Timestamp SC_ENDDATE;
    private String END;
    private Date SC_REGDATE;
    private Date SC_UPDATEDATE;

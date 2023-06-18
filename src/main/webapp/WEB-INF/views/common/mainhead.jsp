@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>DEMYS</title>
-<link rel="shortcut icon" type="image/x-icon" href="resource/img/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="../resource/img/favicon.ico">
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -21,8 +21,7 @@
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 
-<!-- 사이트 공통 JS -->
-<script src="/resource/common.js" defer="defer"></script>
+<link rel="stylesheet" href="/resource/common.css" />
 
 </head>
 <style>

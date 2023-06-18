@@ -4,7 +4,7 @@
 
 <mapper namespace="com.ducks.demys.boot.repository.IssueReplyRepository">
    <select id="getIssueReplyListByISSUE_NUM" resultType="IssueReply">
-      SELECT i.*, m.MEMBER_NAME, m.MEMBER_ID
+      SELECT i.*, m.MEMBER_NAME,m.MEMBER_ID
       FROM ISSUEREPLY i, MEMBER m
       WHERE ISSUE_NUM=#{ISSUE_NUM}
         and m.member_num = i.member_num

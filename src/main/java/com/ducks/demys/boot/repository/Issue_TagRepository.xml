@@ -43,4 +43,4 @@
       FROM ISSUE_TAG
       WHERE ISSUETAG_NUM=#{ISSUETAG_NUM}
    </delete>
-</mapper>
+</mapper> 

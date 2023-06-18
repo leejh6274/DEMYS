@@ -159,7 +159,7 @@ body {
                </div>
                
                <!-- 첨부파일 -->
-               <div class="flex w-full items-center" style="height:48px; border:1px solid #aaaaaa; color:#dfdfdf; justify-content:space-between;">&nbsp;&nbsp;첨부파일이름.hwp(${mb_attach.MBAT_FILENAME })
+               <div class="flex w-full items-center" style="height:48px; border:1px solid #aaaaaa; color:#dfdfdf; justify-content:space-between; cursor:pointer;"onclick="window.location='<%=request.getContextPath()%>/resource/submitFile/${meetingBook.MB_TITLE }.hwp'">&nbsp;&nbsp;${meetingBook.MB_TITLE }.hwp
                   <span>
                      <i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>
                   </span>
@@ -168,7 +168,9 @@ body {
             </div>
  
       <div style="display:flex; justify-content:center; margin-top:10px;">
+      <c:if test="${member.MEMBER_NUM eq meetingBook.MEMBER_NUM}">
          <button class="btn btn-se" onclick="location.href='meetingbook_modify?MB_NUM=${meetingBook.MB_NUM}'" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">수 정</button>
+      </c:if>
          <button type="button" id="cancelBtn" onclick="window.close();" class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px;">닫 기</button>
       </div>
    </div>
@@ -194,7 +196,6 @@ body {
 
    </script>
 </body>
-
 
 
 

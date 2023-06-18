@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
 <html lang="ko" class="light" data-theme="light">
 <head>
 <meta charset="UTF-8">
@@ -246,7 +245,7 @@ body {
                      <td style="width:200px; font-weight:bold;">
                      <div class="filebox bs3-primary w-full font-bold flex align-center" style="margin:0 0; margin-top:10px;">
                      <span class="flex items-center"style="white-space:nowrap">파일첨부</span>
-                        <input class="upload-name" value="첨부파일을 등록하세요" disabled="disabled" style="color:#aaa; width:100%; float:right; margin-left:26px;">
+                        <input class="upload-name" value="${require.REQUIRE_TITLE }.xlsx" disabled="disabled" style="color:#aaa; width:100%; float:right; margin-left:26px;">
                            <label for="ex_filename">
                               <i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>                       
                            </label>

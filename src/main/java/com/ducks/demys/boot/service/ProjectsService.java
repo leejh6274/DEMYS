@@ -57,6 +57,28 @@ public class ProjectsService {
 			return projectsRepository.getPJListForOtherDashboard(MEMBER_NUM, PJ_IMP, SORT);
 		}
 	}
+	
+	public Map<String, Object> getPJTeamList(SearchCriteria cri, int MEMBER_NUM) {
+	      Map<String, Object> dataMap = new HashMap<String, Object>();
+	      Map<String, Object> paramMap = new HashMap<String, Object>();
+	      paramMap.put("cri", cri);
+	      paramMap.put("MEMBER_NUM", MEMBER_NUM);      
+	      List<Projects> projectsList = projectsRepository.getPJTeamList(paramMap);
+	      // 각 프로젝트의 이슈 갯수
+	      for (Projects project : projectsList) {
+	         project.setISSUE_COUNT(issueRepository.getIssuePjListCount(project.getPJ_NUM()));
+	      }
+	      dataMap.put("projects", projectsList);
+
+	      int totalCount = projectsRepository.getPJTeamListCount(cri, MEMBER_NUM);
+	      
+	      PageMaker pageMaker = new PageMaker();
+	      pageMaker.setCri(cri);
+	      pageMaker.setTotalCount(totalCount);
+	      dataMap.put("pageMaker", pageMaker);
+
+	      return dataMap;
+	   }
 
 //	public List<Projects> getPJListByMEMBER_NUM(int MEMBER_NUM){
 //		return projectsRepository.getPJListByMEMBER_NUM(MEMBER_NUM);
@@ -72,6 +94,9 @@ public class ProjectsService {
 
 	public int getPJListCount() {
 		return projectsRepository.getPJListCount();
+	}
+	public int getPJListCountForDashboard() {
+		return projectsRepository.getPJListCountForDashboard();
 	}
 
 	public int getPJListSTATUSCount(int PJ_STATUS) {

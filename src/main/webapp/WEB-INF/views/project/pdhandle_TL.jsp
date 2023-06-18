@@ -1,17 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<style>
+.btn-white {
+   width : 130px;
+   min-height:1rem;
+   border:none;
+   color:#ffffff;
+   background-color:white;
+   height:30px;
+   color:black;
+   border:1px solid black;
+   
+}
+
+</style>
+
 <script type="text/x-handlebars-template"  id="producttl-list-template" >
 {{#each .}}
    <tr class="producttl_card">
-       <td onclick="window.open('product_detail?PRODUCT_NUM={{product_NUM}}','산출물 상세','width=900px,height=480px,left=500px,top=300px');">{{product_NUM}}</td>
-        <td onclick="window.open('product_detail?PRODUCT_NUM={{product_NUM}}','산출물 상세','width=900px,height=480px,left=500px,top=300px');" style="text-align:start; cursor:pointer;">{{product_TITLE}}</td>
+       <td onclick="window.open('product_detail?PRODUCT_NUM={{product_NUM}}','산출물 상세','width=900px,height=500px,left=500px,top=300px');">{{product_NUM}}</td>
+        <td onclick="window.open('product_detail?PRODUCT_NUM={{product_NUM}}','산출물 상세','width=900px,height=500px,left=500px,top=300px');" style="text-align:start; cursor:pointer;">{{product_TITLE}}</td>
         <td><i class="fa-sharp fa-solid fa-paperclip text-2xl"></i></td>
         <td>{{member_NAME }}</td>
         <td>{{prettifyDate product_REGDATE }}</td>
-        <td class="flex items-align justify-center">
-          <button id="approveBtn" style="width:70px; font-size:10px;" class="btn btn-outline" onclick="javascript:status_on({{product_NUM}}, 1)">채&nbsp;&nbsp;택</button>
-           <button id="approveBtn" style="width:70px; font-size:5px; margin-left:5px;" class="btn btn-outline" onclick="javascript:status_on({{product_NUM}}, 0)">미채택</button>
+        <td class="flex items-align justify-center starter-template mt-1.5">
+          <button name="1" id="approveBtn1{{product_NUM}}" style="width:70px; font-size:12px;" class="btn btn-white approveBtn1 " onclick="javascript:status_on({{product_NUM}}, 1)">채&nbsp;&nbsp;택</button>
+          <button name="0" id="approveBtn2{{product_NUM}}" style="width:70px; font-size:12px; margin-left:5px;" class="btn btn-white approveBtn2" onclick="javascript:status_on({{product_NUM}}, 0)">미채택</button>
        </td>
     </tr>
 {{/each }}
@@ -39,7 +54,6 @@ function printData(productArr,target,templateObject){
    $('.producttl_card').remove();
    target.append(html);
 }
-
 
 
 $(document).ready(function() {
@@ -72,7 +86,7 @@ function showList(PJ_NUM,PRODUCT_STEP,searchType,keyword){
 }
 
 /* window.onload=function(){
-   onsole.log('${PJ_NUM}');
+   console.log('${PJ_NUM}');
    console.log(${PJ_NUM});
    test_fun();
    showList(${PJ_NUM},0,'','');

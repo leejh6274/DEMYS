@@ -62,7 +62,7 @@
             </div>
          </div>
          <div class="p-searchbar">
-            <input name="keyword" type="text" placeholder="검색어를 입력하세요." class="input input-bordered" style="width:85%;"  value="${cri.keyword }"/>
+            <input name="keyword" type="text" placeholder="검색어를 입력하세요." class="input input-bordered" style="width:85%;"  autocomplete="off" value="${cri.keyword }"/>
             <button type="button" data-card-widget="search" onclick="list_go(1);" style="width:15%;">
                <i class="fa-solid fa-magnifying-glass" style="font-size:30px;display:flex;align-items: center;justify-content: space-around;"></i>
             </button>

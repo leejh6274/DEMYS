@@ -12,6 +12,8 @@
    height: calc(930px - 65px - 63px); 
    padding:5px;
 }
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css");
+select { font-family: 'FontAwesome', Verdana }
 
 #modal1 {
    display: none;

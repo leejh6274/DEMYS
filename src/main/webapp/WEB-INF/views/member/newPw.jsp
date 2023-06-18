@@ -179,7 +179,7 @@ function updateAndClose() {
 	    type:"POST",
 	    data:JSON.stringify(data),
 	    contentType:"application/json",
-	    success: function (data) {
+	    success: function () {
 	      alert("비밀번호 수정이 완료되었습니다.");
 	      window.close();
 	      window.opener.location.reload();
