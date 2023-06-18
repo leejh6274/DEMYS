@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
+<html>
 <html lang="ko" class="light" data-theme="light">
 <head>
 <meta charset="UTF-8">
@@ -129,19 +130,19 @@ body {
          </div>
       </div>
    
-   
+   <form role="regist_form" enctype="multipart/form-data">
          <div class="flex flex-col card-body" style="padding-top:10px; padding-bottom:10px;">
             
                <!-- 제목 -->
-               <input class="flex w-25 items-center" style="height:48px; border:1px solid #aaaaaa;" value="${product.PRODUCT_TITLE }" name="title"/>
-               <input type="hidden" name="status" value="${product.PRODUCT_STATUS }" />
-               <input type="hidden" name="pdnum" value="${product.PRODUCT_NUM }" />
-               <input type="hidden" name="pjnum" value="${product.PJ_NUM }" />
-               <input type="hidden" name="membernum" value="${product.MEMBER_NUM }" />
+               <input class="flex w-25 items-center" style="height:48px; border:1px solid #aaaaaa;" value="${product.PRODUCT_TITLE }" name="PRODUCT_TITLE"/>
+               <input type="hidden" name="PRODUCT_STATUS" value="${product.PRODUCT_STATUS }" />
+               <input type="hidden" name="PRODUCT_NUM" value="${product.PRODUCT_NUM }" />
+               <input type="hidden" name="PJ_NUM" value="${product.PJ_NUM }" />
+               <input type="hidden" name="MEMBER_NUM" value="${product.MEMBER_NUM }" />
                
                <!-- 분류, 날짜, 채택 -->
                <div class="flex flex-row">
-                   <select class="w-24 h-8 text-center inline-block"  style="height:48px; border:1px solid #aaaaaa;" name="step" >
+                   <select class="w-24 h-8 text-center inline-block"  style="height:48px; border:1px solid #aaaaaa;" name="PRODUCT_STEP" >
                         <option value="step" >개발 단계</option>
                         <option value="1" ${product.PRODUCT_STEP eq '1' ? 'selected' : ""} >분석</option>
                         <option value="2" ${product.PRODUCT_STEP eq '2' ? 'selected' : ""} >설계</option>
@@ -169,16 +170,17 @@ body {
                   </div> -->
                </div>
                
-               <textarea style="width:100%; height:200px; border:1px solid #aaaaaa;" name="content">&nbsp;&nbsp;${product.PRODUCT_CONTENT }</textarea>
+               <textarea style="width:100%; height:200px; border:1px solid #aaaaaa;" name="PRODUCT_CONTENT">&nbsp;&nbsp;${product.PRODUCT_CONTENT }</textarea>
                
                <!-- 첨부파일 -->
-               <div class="flex w-full items-center" style="height:48px; border:1px solid #aaaaaa; color:#dfdfdf; justify-content:space-between;">&nbsp;&nbsp;시스템 시험 결과서 ver.1.hwp
+               <div class="flex w-full items-center" style="height:48px; border:1px solid #aaaaaa; color:#dfdfdf; justify-content:space-between;">
                   <span>
                      <i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>
                   </span>
                </div>
                
             </div>
+            </form>
  
       <div style="display:flex; justify-content:center; margin-top:10px;">
          <button class="btn btn-se" onclick="modify_go('${product.PRODUCT_NUM}');" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">수 정</button>
@@ -190,7 +192,7 @@ body {
    <script>
       
    function modify_go(PRODUCT_NUM){
-      var title = $("input[name=title]").val();
+      /* var title = $("input[name=title]").val();
       var step = $("select[name=step]").val();
       var content = $("textarea[name=content]").val();
       var membernum = $("input[name=membernum]").val();
@@ -205,18 +207,28 @@ body {
             "MEMBER_NUM":membernum,
             "PJ_NUM":pjnum,
             "PRODUCT_NUM":pdnum
-      }
+      } */
+      
+      var form = $("form[role='regist_form']")[0];
+      
+      var formData = new FormData(form);
+       
+       console.log(formData);
+      
+      
       $.ajax({
          url:"<%=request.getContextPath()%>/project/doproduct_modify",
-         type:"post",
-         data:data,
+         type : "post",
+		 data : formData,
+		 processData : false,
+		 contentType : false,
          success:function(){
             alert("수정이 완료되었습니다.");
             window.opener.location.reload();
             window.close();
          },
          error:function(){
-            alert('왜안됨?');
+            alert('수정에 실패하였습니다.');
          }
       });
    }

@@ -20,4 +20,6 @@ public interface Require_AttachRepository {
 	public void removeRequire_Attach(int RQAT_NUM);
 
 	public void removeRequire_AttachAll(int REQUIRE_NUM);
+
+	public Require_Attach getRqatByREQUIRE_NUM(int REQUIRE_NUM);
 }

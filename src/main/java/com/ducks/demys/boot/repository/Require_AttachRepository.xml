@@ -14,6 +14,14 @@
 		FROM REQUIRE_ATTACH
 		WHERE RQAT_NUM=#{RQAT_NUM}
 	</select>
+	
+	
+	<select id="getRqatByREQUIRE_NUM" resultType="Require_Attach">
+		SELECT *
+		FROM REQUIRE_ATTACH
+		WHERE REQUIRE_NUM=#{REQUIRE_NUM}
+	</select>
+	
 	<select id="selectRequire_AttachSequenceNextValue" resultType="int">
 		SELECT
 		REQUIRE_ATTACH_seq.nextVal
@@ -21,8 +29,8 @@
 	</select>
 	<insert id="registRequire_Attach">
 		INSERT INTO
-		REQUIRE_ATTACH(RQAT_FILENAME,RQAT_FILETYPE,RQAT_UPLOADPATH,REQUIRE_NUM)
-		VALUES(#{RQAT_FILENAME},#{RQAT_FILETYPE},#{RQAT_UPLOADPATH},#{REQUIRE_NUM})
+		REQUIRE_ATTACH(RQAT_NUM,RQAT_FILENAME,RQAT_FILETYPE,RQAT_UPLOADPATH,REQUIRE_NUM)
+		VALUES(REQUIRE_ATTACH_SEQ.NEXTVAL,#{RQAT_FILENAME},#{RQAT_FILETYPE},#{RQAT_UPLOADPATH},#{REQUIRE_NUM})
 	</insert>
 	<delete id="removeRequire_Attach">
 		DELETE

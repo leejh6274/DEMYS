@@ -1,5 +1,6 @@
 package com.ducks.demys.boot.controller;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,37 +8,51 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ducks.demys.boot.command.SearchCriteria;
 import com.ducks.demys.boot.service.ContactsService;
 import com.ducks.demys.boot.service.IssueReplyService;
 import com.ducks.demys.boot.service.IssueService;
+import com.ducks.demys.boot.service.Issue_AttachService;
+import com.ducks.demys.boot.service.Mb_AttachService;
 import com.ducks.demys.boot.service.MeetingBookService;
 import com.ducks.demys.boot.service.MemberService;
 import com.ducks.demys.boot.service.PjctService;
 import com.ducks.demys.boot.service.PjhrService;
 import com.ducks.demys.boot.service.ProductService;
+import com.ducks.demys.boot.service.Product_AttachService;
 import com.ducks.demys.boot.service.ProjectsService;
 import com.ducks.demys.boot.service.RequireService;
+import com.ducks.demys.boot.service.Require_AttachService;
+import com.ducks.demys.boot.utils.MakeFileName;
+import com.ducks.demys.boot.view.FileDownloadView;
 import com.ducks.demys.boot.vo.Contacts;
 import com.ducks.demys.boot.vo.Issue;
 import com.ducks.demys.boot.vo.IssueReply;
+import com.ducks.demys.boot.vo.Issue_Attach;
+import com.ducks.demys.boot.vo.Mb_Attach;
 import com.ducks.demys.boot.vo.MeetingBook;
 import com.ducks.demys.boot.vo.Member;
 import com.ducks.demys.boot.vo.Pjct;
 import com.ducks.demys.boot.vo.Pjhr;
 import com.ducks.demys.boot.vo.Product;
 import com.ducks.demys.boot.vo.ProductForSearch;
+import com.ducks.demys.boot.vo.Product_Attach;
 import com.ducks.demys.boot.vo.Projects;
 import com.ducks.demys.boot.vo.Require;
+import com.ducks.demys.boot.vo.Require_Attach;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -54,6 +69,14 @@ public class ProjectsController {
 	private ContactsService contactsService;
 	private PjctService pjctService;
 	private PjhrService pjhrService;
+	@Autowired
+	private Product_AttachService product_AttachService;
+	@Autowired
+	private Require_AttachService require_AttachService;
+	@Autowired
+	private Mb_AttachService mb_AttachService;
+	@Autowired
+	private Issue_AttachService issue_AttachService;
 
 	public ProjectsController(ProjectsService projectsService, MemberService memberService,
 			ContactsService contactsService, PjctService pjctService, PjhrService pjhrService,
@@ -302,25 +325,167 @@ public class ProjectsController {
 
 	@RequestMapping("project/product_regist")
 	@ResponseBody
-	public void showproduct_regist(String PRODUCT_TITLE, int PRODUCT_STEP, String PRODUCT_CONTENT, int PRODUCT_STATUS,
-			int MEMBER_NUM, int PJ_NUM) {
+	public void showproduct_regist(String PRODUCT_TITLE, String PRODUCT_STEP, String PRODUCT_CONTENT, String PRODUCT_STATUS,
+			String MEMBER_NUM, String PJ_NUM, MultipartFile uploadfile) throws Exception {
 		Product product = new Product();
-
+		String savePath = this.fileUploadPath;
+		System.out.println(PRODUCT_STEP);
+		Product_Attach product_attach = saveFileToProduct(uploadfile, savePath);
+		
 		product.setPRODUCT_TITLE(PRODUCT_TITLE);
-		product.setPRODUCT_STEP(PRODUCT_STEP);
+		product.setPRODUCT_STEP(Integer.parseInt(PRODUCT_STEP));
 		product.setPRODUCT_CONTENT(PRODUCT_CONTENT);
-		product.setPRODUCT_STATUS(PRODUCT_STATUS);
-		product.setMEMBER_NUM(MEMBER_NUM);
-		product.setPJ_NUM(1);
-
+		product.setPRODUCT_STATUS(Integer.parseInt(PRODUCT_STATUS));
+		product.setMEMBER_NUM(Integer.parseInt(MEMBER_NUM));
+		product.setPJ_NUM(Integer.parseInt(PJ_NUM));
+		product.setProduct_attach(product_attach);
+		
 		productService.registProduct(product);
 	}
 
-	@RequestMapping("project/product_detail")
-	public void showproduct_detail(Model model, int PRODUCT_NUM) {
-		Product product = productService.getProductByProduct_NUM(PRODUCT_NUM);
-		model.addAttribute("product", product);
-	}
+	
+	@Value("${fileUploadPath}")
+	   private String fileUploadPath;
+	
+	
+	
+	private Product_Attach saveFileToProduct(MultipartFile multiFiles, String savePath) throws Exception {
+		Product_Attach productfile = new Product_Attach();
+	      // 저장 -> attachVO -> list.add
+	      if (multiFiles != null) {
+
+	         String fileName = MakeFileName.toUUIDFileName(multiFiles.getOriginalFilename(), "$$");
+	         File target = new File(savePath, fileName);
+	         target.mkdirs();
+	         multiFiles.transferTo(target);
+	         
+	         productfile.setPDAT_UPLOADPATH(savePath);
+	         productfile.setPDAT_FILENAME(fileName);
+	         productfile.setPDAT_FILETYPE(fileName.substring(fileName.lastIndexOf('.') + 1).toUpperCase());
+
+	      }
+
+	      return productfile;
+	   }
+	
+	private Require_Attach saveFileToRequire(MultipartFile multiFiles, String savePath) throws Exception {
+		Require_Attach requirefile = new Require_Attach();
+	      // 저장 -> attachVO -> list.add
+	      if (multiFiles != null) {
+
+	         String fileName = MakeFileName.toUUIDFileName(multiFiles.getOriginalFilename(), "$$");
+	         File target = new File(savePath, fileName);
+	         target.mkdirs();
+	         multiFiles.transferTo(target);
+	         
+	         requirefile.setRQAT_UPLOADPATH(savePath);
+	         requirefile.setRQAT_FILENAME(fileName);
+	         requirefile.setRQAT_FILETYPE(fileName.substring(fileName.lastIndexOf('.') + 1).toUpperCase());
+
+	      }
+
+	      return requirefile;
+	   }
+	
+	private Mb_Attach saveFileToMeetingBook(MultipartFile multiFiles, String savePath) throws Exception {
+		Mb_Attach mbfile = new Mb_Attach();
+	      // 저장 -> attachVO -> list.add
+	      if (multiFiles != null) {
+
+	         String fileName = MakeFileName.toUUIDFileName(multiFiles.getOriginalFilename(), "$$");
+	         File target = new File(savePath, fileName);
+	         target.mkdirs();
+	         multiFiles.transferTo(target);
+	         
+	         mbfile.setMBAT_UPLOADPATH(savePath);
+	         mbfile.setMBAT_FILENAME(fileName);
+	         mbfile.setMBAT_FILETYPE(fileName.substring(fileName.lastIndexOf('.') + 1).toUpperCase());
+
+	      }
+
+	      return mbfile;
+	   }
+	
+	private Issue_Attach saveFileToIssue(MultipartFile multiFiles, String savePath) throws Exception {
+		Issue_Attach issuefile = new Issue_Attach();
+	      // 저장 -> attachVO -> list.add
+	      if (multiFiles != null) {
+
+	         String fileName = MakeFileName.toUUIDFileName(multiFiles.getOriginalFilename(), "$$");
+	         File target = new File(savePath, fileName);
+	         target.mkdirs();
+	         multiFiles.transferTo(target);
+	         
+	         issuefile.setISSUEAT_UPLOADPATH(savePath);	        
+	         issuefile.setISSUEAT_FILENAME(fileName);
+	         issuefile.setISSUEAT_FILETYPE(fileName.substring(fileName.lastIndexOf('.') + 1).toUpperCase());
+
+	      }
+
+	      return issuefile;
+	   }
+	
+	
+	
+	
+	
+	
+	   @GetMapping("project/getFile_pdat")
+	   public ModelAndView getFile_pdat(int PRODUCT_NUM, Model model) throws Exception {
+	      ModelAndView modelAndView = new ModelAndView(new FileDownloadView());
+	      Product_Attach pdat = product_AttachService.getPdatByPRODUCT_NUM(PRODUCT_NUM);
+	      
+	      model.addAttribute("savedPath", pdat.getPDAT_UPLOADPATH());
+	      model.addAttribute("fileName", pdat.getPDAT_FILENAME());
+	      
+	      return modelAndView;
+	   }
+	   
+	   @GetMapping("project/getFile_rqat")
+	   public ModelAndView getFile_rqat(int REQUIRE_NUM, Model model) throws Exception {
+		   ModelAndView modelAndView = new ModelAndView(new FileDownloadView());
+		   Require_Attach rqat = require_AttachService.getRqatByREQUIRE_NUM(REQUIRE_NUM);
+		   
+		   model.addAttribute("savedPath", rqat.getRQAT_UPLOADPATH());
+		   model.addAttribute("fileName", rqat.getRQAT_FILENAME());
+		   
+		   return modelAndView;
+	   }
+	   
+	   @GetMapping("project/getFile_mbat")
+	   public ModelAndView getFile_mbat(int MB_NUM, Model model) throws Exception {
+		   ModelAndView modelAndView = new ModelAndView(new FileDownloadView());
+		   Mb_Attach mbat = mb_AttachService.getMbatByMB_NUM(MB_NUM);
+		   
+		   model.addAttribute("savedPath", mbat.getMBAT_UPLOADPATH());
+		   model.addAttribute("fileName", mbat.getMBAT_FILENAME());
+		   
+		   return modelAndView;
+	   }
+	   
+	   @GetMapping("project/getFile_issueat")
+	   public ModelAndView getFile_issueat(int ISSUE_NUM, Model model) throws Exception {
+		   ModelAndView modelAndView = new ModelAndView(new FileDownloadView());
+		   Issue_Attach issueat = issue_AttachService.getIssueatByISSUE_NUM(ISSUE_NUM);
+		   
+		   model.addAttribute("savedPath", issueat.getISSUEAT_UPLOADPATH());
+		   model.addAttribute("fileName", issueat.getISSUEAT_FILENAME());
+		   
+		   return modelAndView;
+	   }
+	
+	
+	
+	   @RequestMapping("project/product_detail")
+		public void showproduct_detail(Model model, int PRODUCT_NUM) {
+			Product product = productService.getProductByProduct_NUM(PRODUCT_NUM);
+			
+			
+			product.setProduct_attach(product_AttachService.getPdatByPRODUCT_NUM(PRODUCT_NUM));	
+			
+			model.addAttribute("product", product);
+			
+		}
 
 	@RequestMapping("project/product_modify")
 	public void showproduct_modify(int PRODUCT_NUM, Model model) {
@@ -358,16 +523,21 @@ public class ProjectsController {
 
 	@RequestMapping("project/require_regist")
 	@ResponseBody
-	public void showrequire_regist(String REQUIRE_TITLE, int REQUIRE_LEVEL, String REQUIRE_DETAIL, int CT_NUM,
-			int MEMBER_NUM, int PJ_NUM) {
+	public void showrequire_regist(String REQUIRE_TITLE, String REQUIRE_LEVEL, String REQUIRE_DETAIL, String CT_NUM,
+			String MEMBER_NUM, String PJ_NUM, MultipartFile uploadfile) throws Exception {
 		Require require = new Require();
+		String savePath = this.fileUploadPath;
+		Require_Attach require_attach = saveFileToRequire(uploadfile, savePath);
+		
 
 		require.setREQUIRE_TITLE(REQUIRE_TITLE);
-		require.setREQUIRE_LEVEL(REQUIRE_LEVEL);
+		require.setREQUIRE_LEVEL(Integer.parseInt(REQUIRE_LEVEL));
 		require.setREQUIRE_DETAIL(REQUIRE_DETAIL);
-		require.setCT_NUM(CT_NUM);
-		require.setMEMBER_NUM(MEMBER_NUM);
-		require.setPJ_NUM(PJ_NUM);
+		require.setCT_NUM(Integer.parseInt(CT_NUM));
+		require.setMEMBER_NUM(Integer.parseInt(MEMBER_NUM));
+		require.setPJ_NUM(Integer.parseInt(PJ_NUM));
+		require.setRequire_attach(require_attach);
+		
 
 		requireService.registRequire(require);
 
@@ -376,6 +546,9 @@ public class ProjectsController {
 	@RequestMapping("project/require_detail")
 	public void showrequire_detail(Model model, int REQUIRE_NUM) {
 		Require require = requireService.getRequireByREQUIRE_NUM(REQUIRE_NUM);
+		
+		require.setRequire_attach(require_AttachService.getRqatByREQUIRE_NUM(REQUIRE_NUM));
+		
 		model.addAttribute("require", require);
 	}
 
@@ -417,15 +590,19 @@ public class ProjectsController {
 		return "project/meetingbook";
 	}
 
-	@ResponseBody
 	@RequestMapping("project/meetingbook_regist")
-	public void showmeetingbook_regist(String MB_TITLE, String MB_CONTENT, int MEMBER_NUM, int PJ_NUM) {
+	@ResponseBody
+	public void showmeetingbook_regist(String MB_TITLE, String MB_CONTENT, String MEMBER_NUM, String PJ_NUM, MultipartFile uploadfile) throws Exception {
 		MeetingBook meetingBook = new MeetingBook();
+		String savePath = this.fileUploadPath;
+		Mb_Attach mb_attach = saveFileToMeetingBook(uploadfile, savePath);
 
 		meetingBook.setMB_TITLE(MB_TITLE);
 		meetingBook.setMB_CONTENT(MB_CONTENT);
-		meetingBook.setMEMBER_NUM(MEMBER_NUM);
-		meetingBook.setPJ_NUM(PJ_NUM);
+		meetingBook.setMEMBER_NUM(Integer.parseInt(PJ_NUM));
+		meetingBook.setPJ_NUM(Integer.parseInt(PJ_NUM));
+		meetingBook.setMb_attach(mb_attach);
+
 
 		meetingBookService.registMeetingBook(meetingBook);
 	}
@@ -433,6 +610,9 @@ public class ProjectsController {
 	@RequestMapping("project/meetingbook_detail")
 	public void showmeetingbook_detail(Model model, int MB_NUM) {
 		MeetingBook meetingbook = meetingBookService.getMeetingBookByMB_NUM(MB_NUM);
+		
+		meetingbook.setMb_attach(mb_AttachService.getMbatByMB_NUM(MB_NUM));
+		
 		model.addAttribute(meetingbook);
 	}
 
@@ -456,22 +636,21 @@ public class ProjectsController {
 	}
 
 	@RequestMapping("project/issue_go")
-    public String showissue(Model model, int PJ_NUM, @RequestParam(defaultValue = "0") int ISSUE_NUM) {
-       List<Issue> issueList = issueService.getIssueListByPJ_NUM(PJ_NUM);
-       
-       if(issueList != null && issueList.size() > 0) {
-          for(Issue issue:issueList ) {
-             issue.setISSUEREPLY_COUNT(issueReplyService.gethowmanyreply(issue.getISSUE_NUM()));
-             }
-       }
-       
-       model.addAttribute("issueList", issueList);
-       model.addAttribute("PJ_NUM", PJ_NUM);
-       model.addAttribute("ISSUE_NUMM", ISSUE_NUM);
-       
-       return "project/issue";
+	   public String showissue(Model model, int PJ_NUM) {
+	      List<Issue> issueList = issueService.getIssueListByPJ_NUM(PJ_NUM);
+	      
+	      if(issueList != null && issueList.size() > 0) {
+	         for(Issue issue:issueList ) {
+	            issue.setISSUEREPLY_COUNT(issueReplyService.gethowmanyreply(issue.getISSUE_NUM()));
+	            }
+	      }
+	      
+	      model.addAttribute("issueList", issueList);
+	      model.addAttribute("PJ_NUM", PJ_NUM);
+	      
+	      return "project/issue";
 
-    }
+	   }
 
     @RequestMapping("project/issue_memberDepList")
     @ResponseBody
@@ -484,20 +663,27 @@ public class ProjectsController {
     }
 
     @RequestMapping("project/issue_detail")
-    public void showissue_detail(Model model, int ISSUE_NUM) {
-       Issue issue = issueService.getIssueByISSUE_NUM(ISSUE_NUM);
-       List<IssueReply> replyList = issueReplyService.getIssueReplyListByISSUE_NUM(ISSUE_NUM);
-       model.addAttribute("issue", issue);
-       model.addAttribute("replyList", replyList);
-    }
+	   public void showissue_detail(Model model, int ISSUE_NUM) {
+	      Issue issue = issueService.getIssueByISSUE_NUM(ISSUE_NUM);
+	      List<IssueReply> replyList = issueReplyService.getIssueReplyListByISSUE_NUM(ISSUE_NUM);
+	      
+	      issue.setIssue_attach(issue_AttachService.getIssueatByISSUE_NUM(ISSUE_NUM));
+	      
+	      model.addAttribute("issue", issue);
+	      model.addAttribute("replyList", replyList);
+	   }
 
     @RequestMapping("project/issue_regist")
-    @ResponseBody
-    public void showissue_regist(@RequestBody Issue issue) {
-       
-       issueService.registIssue(issue);
+	   @ResponseBody
+	   public void showissue_regist(Issue issue, MultipartFile uploadfile) throws Exception {
+		  String savePath = this.fileUploadPath;
+		  Issue_Attach issue_attach = saveFileToIssue(uploadfile, savePath);
+		  
+		  issue.setIssue_attach(issue_attach);
+		  
+	      issueService.registIssue(issue);
 
-    }
+	   }
     
     
     

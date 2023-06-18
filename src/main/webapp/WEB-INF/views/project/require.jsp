@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
+
 <style>
 /* p-main-body 고정 수정X, border만 씌워서 작업!! */
 .p-main-body{
@@ -12,8 +13,6 @@
    height: calc(930px - 65px - 63px); 
    padding:5px;
 }
-@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css");
-select { font-family: 'FontAwesome', Verdana }
 
 #modal1 {
    display: none;
@@ -193,20 +192,17 @@ select { font-family: 'FontAwesome', Verdana }
                <div class="navbar text-neutral-content" style="width: 100%; padding: 0px; min-height: 1rem; height: 30px; border-bottom:3px solid #016fa0;">
                   <div class="text-black mb-3" style="font-weight: bold; font-size: 1.5rem; ">
                      요구사항 등록
-                     <input type="hidden" name="ctnum" value="1"/>
-                     <input type="hidden" name="membernum" value="${member.MEMBER_NUM }" />
-                     <input type="hidden" name="pjnum" value="1" />
+                     
                   </div>
                </div>
             </div>
 
+			<form role="regist_form" enctype="multipart/form-data">
             <div class="card-body">
                   <table style="width:100%;">
-                  
-                  
                      <tr class="w-full" style="width:100%;">
                         <td class="font-bold" style="width:200px;">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목
-                           <input style="border:1px solid #aaa; width:640px; border-radius:0px; margin-left: 1.5rem;" name="title" type="text" placeholder="제목을 입력하세요." class="input input-bordered p-reg-input" />
+                           <input style="border:1px solid #aaa; width:640px; border-radius:0px; margin-left: 1.5rem;" name="REQUIRE_TITLE" type="text" placeholder="제목을 입력하세요." class="input input-bordered p-reg-input" />
                         </td>
                      </tr>
                   
@@ -220,7 +216,7 @@ select { font-family: 'FontAwesome', Verdana }
                         <td>
                            <div class="font-bold" style="padding: 10px 0;">
                               중 요 도
-                              <select class="select" style="border-radius:0px; margin-left: 1.53rem; border:1px solid #aaa" name="level">
+                              <select class="select" style="border-radius:0px; margin-left: 1.53rem; border:1px solid #aaa" name="REQUIRE_LEVEL">
                              <option disabled selected>선택</option>
                              <option value="1" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</option>
                              <option value="2" style="color:#FFD700;">&#xf005;&#xf005;&#xf005;&#xf005;</option>
@@ -228,6 +224,9 @@ select { font-family: 'FontAwesome', Verdana }
                              <option value="4" style="color:#FFD700;">&#xf005;&#xf005;</option>
                              <option value="5" style="color:#FFD700;">&#xf005;</option>
                            </select>
+                           <input type="hidden" name="CT_NUM" value="1"/>
+                     		<input type="hidden" name="MEMBER_NUM" value="${member.MEMBER_NUM }" />
+                     		<input type="hidden" name="PJ_NUM" value="${PJ_NUM }" />
                            </div>
                         </td>
                      </tr>
@@ -237,7 +236,7 @@ select { font-family: 'FontAwesome', Verdana }
                <tr>
                   <td class="flex font-bold" >
                       내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용&nbsp;
-                     <textarea class="textarea" name="detail" id="content" class="form-control" style="height:150px; width:100%; margin-left: 1.5rem; resize:none; border:1px solid #aaa; border-radius:0px;" placeholder="내용을 작성하세요."></textarea>
+                     <textarea class="textarea" name="REQUIRE_DETAIL" id="content" class="form-control" style="height:150px; width:100%; margin-left: 1.5rem; resize:none; border:1px solid #aaa; border-radius:0px;" placeholder="내용을 작성하세요."></textarea>
                   </td>
                </tr>
                         <!-- <td>내&nbsp;&nbsp;&nbsp;용</td>
@@ -258,19 +257,23 @@ select { font-family: 'FontAwesome', Verdana }
                
                <tr>
                      <td style="width:200px; font-weight:bold;">
+                     
+                     
                      <div class="filebox bs3-primary w-full font-bold flex align-center" style="margin:0 0; margin-top:10px;">
                      <span class="flex items-center"style="white-space:nowrap">파일첨부</span>
                         <input class="upload-name" value="첨부파일을 등록하세요" disabled="disabled" style="color:#aaa; width:640px; float:right; margin-left:26px;">
                            <label for="ex_filename">
                               <i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>                       
                            </label>
-                        <input type="file" id="ex_filename" class="upload-hidden">
+                        <input type="file" id="ex_filename" class="upload-hidden" name="uploadfile">
                      </div>
+                     
                   </td>
                </tr>
                      
                   </table>
                </div>
+           </form>
 
             <div style="display:flex; justify-content:center;">
                <button class="btn btn-se" onclick="regist_go();"style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">등 록</button>
@@ -284,7 +287,7 @@ select { font-family: 'FontAwesome', Verdana }
 
       <script>
          function regist_go(){
-            var title = $("input[name=title]").val();
+           /*  var title = $("input[name=title]").val();
             var level = $("select[name=level]").val();
             var detail = $("textarea[name=detail]").val();
             var ctnum = $("input[name=ctnum]").val();
@@ -299,11 +302,20 @@ select { font-family: 'FontAwesome', Verdana }
                   "CT_NUM":ctnum,
                   "MEMBER_NUM":membernum,
                   "PJ_NUM":pjnum
-            }
+            } */
+            
+            var form = $("form[role='regist_form']")[0];
+            
+            var formData = new FormData(form);
+             
+             console.log(formData);
+             
             $.ajax({
                url:"<%=request.getContextPath()%>/project/require_regist",
-               type:"post",
-               data:data,
+               type : "post",
+   			   data : formData,
+   			   processData : false,
+   			   contentType : false,
                success:function(){
                   alert("등록되었습니다.");
                   PJ_Require_go();

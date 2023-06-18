@@ -4,6 +4,7 @@
 
 
 <!DOCTYPE html>
+<html>
 <html lang="ko" class="light" data-theme="light">
 <head>
 <meta charset="UTF-8">
@@ -190,7 +191,10 @@ body {
             <tr>
                   <td style="width:250px; font-weight:bold; display:flex; width:100%; margin-top:10px; white-space: nowrap;">
                      <div class="flex items-center">파일첨부</div>
-                  <div class="flex w-full items-center justify-between" style="height:48px; border:1px solid #aaa; width:100%;; margin-left:26px; cursor:pointer;" onclick="window.location='<%=request.getContextPath()%>/resource/submitFile/${require.REQUIRE_TITLE }.xlsx'">&nbsp;&nbsp;${require.REQUIRE_TITLE }.xlsx
+                  <div class="flex w-full items-center justify-between" style="height:48px; border:1px solid #aaa; color:#dfdfdf; width:100%;; margin-left:26px; cursor:pointer;" onclick="location.href='<%=request.getContextPath() %>/project/getFile_rqat?REQUIRE_NUM=${require.REQUIRE_NUM}'">
+                  <span>
+                  &nbsp;&nbsp;${require.require_attach.RQAT_FILENAME.split("\\$\\$")[1]}
+                  </span>
                      <span>
                         <i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>
                      </span>
@@ -229,6 +233,7 @@ body {
 
    </script>
 </body>
+
 
 
 

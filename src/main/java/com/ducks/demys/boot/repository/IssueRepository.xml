@@ -52,7 +52,7 @@
    </select>
 
    <select id="getIssueListByPJ_NUM" resultType="Issue">
-      SELECT i.*, m.MEMBER_NAME,m.MEMBER_ID
+      SELECT i.*, m.MEMBER_NAME
       FROM ISSUE i, MEMBER m
       WHERE PJ_NUM = #{PJ_NUM}
       and i.MEMBER_NUM = m.MEMBER_NUM

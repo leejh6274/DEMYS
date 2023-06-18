@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
+<html>
 <html lang="ko" class="light" data-theme="light">
 <head>
 <meta charset="UTF-8">
@@ -123,7 +124,7 @@ body {
       <div class="flex card-body" style="padding-bottom:0px;">
          <div class="navbar text-neutral-content" style="width: 100%; padding: 0px; min-height: 1rem; height: 30px; border-bottom:3px solid #016fa0;">
             <div class="text-black mb-3" style="font-weight: bold; font-size: 1.5rem; ">
-               이슈 상세
+               이슈
             </div>
          </div>
       </div>
@@ -171,20 +172,23 @@ body {
                
                
                <!-- 첨부파일 -->
-                  <div class="flex items-center" style="width:650px; height:49px; border:1px solid #aaaaaa; color:#dfdfdf; justify-content:space-between; cursor:pointer;" onclick="window.location='<%=request.getContextPath()%>/resource/submitFile/${issue.ISSUE_TITLE }_20230601.zip'">&nbsp;&nbsp;${issue.ISSUE_TITLE }_20230601.zip
+                  <div class="flex items-center" style="width:650px; height:49px; border:1px solid #aaaaaa; color:#dfdfdf; justify-content:space-between; cursor:pointer;" onclick="location.href='<%=request.getContextPath() %>/project/getFile_issueat?ISSUE_NUM=${issue.ISSUE_NUM}'">
                      <span>
-                        <i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>
+                  		&nbsp;&nbsp;${issue.issue_attach.ISSUEAT_FILENAME.split("\\$\\$")[1]}
+                  	 </span>
+                     <span>
+                        <i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl text-black mr-3 " ></i>
                      </span>
                   </div>
                   <div class="flex items-center" style="width:650px; height:49px; border:1px solid #aaaaaa; justify-content:space-between;">&nbsp;&nbsp;
                   <c:forEach var="issue_tag" items="${issue.tagList}" varStatus="status">
-                     ${issue_tag.MEMBER_NAME }${issue.tagList.size() eq status.index+1 ? '' : ',' }
+                  	${issue_tag.MEMBER_NAME }${issue.tagList.size() eq status.index+1 ? '' : ',' }
                   </c:forEach>
                      <span>
                         <i class="fa-solid fa-tag text-2xl text-black mr-3 " ></i>
                      </span>
                   </div>
-               
+              
                
                </div>
                
@@ -202,12 +206,9 @@ body {
                                        <div>
                                            <div class="manPicture" style="width:25px;height:25px;display:block;margin:0 auto;border-radius:50%;" data-id="${reply.MEMBER_ID }"></div>
                                        </div>
-                                       <div style="font-size:14px;">&nbsp;${reply.MEMBER_NAME }&nbsp;&nbsp;</div>
+                                       <div style="font-size:14px;">${reply.MEMBER_NAME }&nbsp;&nbsp;</div>
                                        <div style="font-size:14px; color:#aaa; float:right;">
-                                       
                                        <fmt:formatDate value="${reply.ISSUERE_UPDATEDATE ne null && not empty reply.ISSUERE_UPDATEDATE ? reply.ISSUERE_UPDATEDATE : reply.ISSUERE_REGDATE }" pattern="yyyy-MM-dd  hh:mm"/>
-                                       
-                                       
                                        </div>
                                     </div>
                                  </div>
@@ -216,28 +217,28 @@ body {
                                  <c:if test="${member.MEMBER_NUM eq reply.MEMBER_NUM}">
                                    
                                    
-                                     <div class="dropdown dropdown-end" id="reply_modify" style="display:flex;">
-                                     <button class="btn btn-se w-12 h-5 rounded" style="font-size: 8px; height: 20px; border-radius: 8px; margin-right: 5px; width:40px; padding:0;">수 정</button>
-                                    <div class="dropdown dropdown-end" id="reply_modify_container" >
-                                  <div tabindex="0" class="flex menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box" style="position:absolute; color: black; width: 320px; height: 200px; align-items: center; border:1px solid black;">
-                                    <div id="remodi_contentbox">
-                                        <div class="flex flex-row">
-                                                <div><i class="fa-solid fa-check ml-3 mr-3 text-xl"></i><span>댓글 수정</span></div>
-                                                </div>
-                                             <div class="flex flex-row" style="height:70px; margin-top:5px;">
-                                                <div class="flex flex-row">
-                                                   <textarea class="form-control" name="issuere_content" style="width:260px; height:150px; border:1px solid #aaa; resize:none; border-radius:0px;" placeholder="내용을 작성하세요."></textarea>
-                                                   <input type="hidden" name="issuere_num" value="${reply.ISSUERE_NUM}" />
-                                                   <input type="hidden" name="issure_updatedate" value="${reply.ISSUERE_UPDATEDATE }" />
-                                                </div>
-                                                <div class="flex flex-row">
-                                                   <button class="btn btn-se" style="font-size: 12px; width: 40px; height: 150px; border-radius: 0 3px 3px 0; margin-right: 10px; padding:0;" onclick="replyModify_go();">등 록</button>
-                                                </div>
-                                             </div> 
-                                    </div>
-                                  </div>
-                              </div> 
-                                 </div>
+                                     <div class="dropdown dropdown-end" style="margin-top:-3.5px; "id="reply_modify">
+                         				<button class="btn btn-se w-12 h-5 rounded" style="font-size: 8px; height: 20px; border-radius: 8px; margin-right: 5px; width:40px; padding:0;">수 정</button>
+               							<div class="dropdown dropdown-end" id="reply_modify_container" >
+							    			<div tabindex="0" class="flex menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box" style="position:absolute; color: black; width: 320px; height: 200px; align-items: center; border:1px solid black;">
+												<div id="remodi_contentbox">
+								 					<div class="flex flex-row">
+                        								<div><i class="fa-solid fa-check ml-3 mr-3 text-xl"></i><span>댓글 수정</span></div>
+                  	   								</div>
+                  									<div class="flex flex-row" style="height:70px; margin-top:5px;">
+                     									<div class="flex flex-row">
+                        									<textarea class="form-control" name="issuere_content" style="width:260px; height:150px; border:1px solid #aaa; resize:none; border-radius:0px;" placeholder="내용을 작성하세요."></textarea>
+                        									<input type="hidden" name="issuere_num" value="${reply.ISSUERE_NUM}" />
+                        									<input type="hidden" name="issure_updatedate" value="${reply.ISSUERE_UPDATEDATE }" />
+                     									</div>
+                    									 <div class="flex flex-row">
+                        									<button class="btn btn-se" style="font-size: 12px; width: 40px; height: 150px; border-radius: 0 3px 3px 0; margin-right: 10px; padding:0;" onclick="replyModify_go();">등 록</button>
+                     									</div>
+                  									</div> 
+												</div>
+							    			</div>
+										</div> 
+                        			</div>
                                     
                                     
                                     <button class="btn btn-se w-12 h-5 rounded" style="font-size: 8px; height: 20px; border-radius: 8px; width:40px; padding:0;" onclick="replydel_go(${reply.ISSUERE_NUM});">삭 제</button>
@@ -251,7 +252,7 @@ body {
                   </div>
                   
                      <div class="flex flex-row">
-                        <div><i class="fa-solid fa-pen ml-3 mr-3 text-xl"></i><span>댓글 등록</span></div>
+                        <div><i class="fa-solid fa-pen ml-3 mr-3 text-xl"></i><span>댓글 수정</span></div>
                      </div>
                   <div class="flex flex-row" style="height:70px; margin-top:5px;">
                      <div class="flex flex-row">
@@ -264,7 +265,7 @@ body {
                </div>
                
          </div>
- 
+<%--  location.href='issue_modify?ISSUE_NUM=${issue.ISSUE_NUM}' --%>
       <div style="display:flex; justify-content:center; margin-top:20px; margin-bottom:15px;">
       <c:if test="${member.MEMBER_NUM eq issue.MEMBER_NUM}">
          <button class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;" onclick="issue_modify_go();">수 정</button>
@@ -285,20 +286,20 @@ body {
  
         function replydel_go(ISSUERE_NUM){
         var result = confirm("댓글을 삭제하시겠습니까?");
-      var data={
-            "ISSUERE_NUM":parseInt(ISSUERE_NUM)
-         }
+		var data={
+				"ISSUERE_NUM":parseInt(ISSUERE_NUM)
+			}
         if(result == true) {
-           $.ajax({
-              url:"<%=request.getContextPath()%>/project/replydel_go",
-              type:"post",
-              data:data,
-              success:function(){                 
-                 alert("댓글을 삭제하였습니다.");
-                 setTimeout(function() {   
-                  history.go(); }, 300);
-              }
-           });
+        	$.ajax({
+        		url:"<%=request.getContextPath()%>/project/replydel_go",
+        		type:"post",
+        		data:data,
+        		success:function(){        			
+		           alert("댓글을 삭제하였습니다.");
+		           setTimeout(function() {   
+        	       history.go(); }, 300);
+        		}
+        	});
         } else {
            history.go(-1);
         }
@@ -308,20 +309,20 @@ body {
         
         function issuedel_go(ISSUE_NUM){
             var result = confirm("이슈를 삭제하시겠습니까?");
-          var data={
-                "ISSUE_NUM":parseInt(ISSUE_NUM)
-             }
+    		var data={
+    				"ISSUE_NUM":parseInt(ISSUE_NUM)
+    			}
             if(result == true) {
-               $.ajax({
-                  url:"<%=request.getContextPath()%>/project/issuedel_go",
-                  type:"post",
-                  data:data,
-                  success:function(){                 
-                     alert("해당 이슈를 삭제하였습니다.");
-                     window.close();
-                     opener.ISSUE_go();
-                  }
-               });
+            	$.ajax({
+            		url:"<%=request.getContextPath()%>/project/issuedel_go",
+            		type:"post",
+            		data:data,
+            		success:function(){        			
+    		           alert("해당 이슈를 삭제하였습니다.");
+    		           window.close();
+    		           opener.ISSUE_go();
+            		}
+            	});
             } else {
                history.go(-1);
             }
@@ -329,31 +330,31 @@ body {
      
         
         function replyModify_go(ISSUERE_NUM){
-           
-            var issuerenum= parseInt($("input[name='issuere_num']").val());
-            var issuerecontent = $("textarea[name='issuere_content']").val();
-            var issuereupdatedate = $("input[name='issuere_updatedate']").val();
-           
-           
-           
-           
+        	
+        	 var issuerenum= parseInt($("input[name='issuere_num']").val());
+        	 var issuerecontent = $("textarea[name='issuere_content']").val();
+        	 var issuereupdatedate = $("input[name='issuere_updatedate']").val();
+        	
+        	
+        	
+        	
             var result = confirm("댓글을 수정하시겠습니까?");
-          var data={
-                "ISSUERE_NUM":parseInt(issuerenum),
-                "ISSUERE_CONTENT":issuerecontent,
-                "STRING_UPDATEDATE":issuereupdatedate
-             }
+    		var data={
+    				"ISSUERE_NUM":parseInt(issuerenum),
+    				"ISSUERE_CONTENT":issuerecontent,
+    				"STRING_UPDATEDATE":issuereupdatedate
+    			}
             if(result == true) {
-               $.ajax({
-                  url:"<%=request.getContextPath()%>/project/doreplymodify_go",
-                  type:"post",
-                  data:data,
-                  success:function(){                 
-                     alert("댓글을 수정하였습니다.");
-                     setTimeout(function() {   
-                      history.go(); }, 500);
-                  }
-               });
+            	$.ajax({
+            		url:"<%=request.getContextPath()%>/project/doreplymodify_go",
+            		type:"post",
+            		data:data,
+            		success:function(){        			
+    		           alert("댓글을 수정하였습니다.");
+    		           setTimeout(function() {   
+            	       history.go(); }, 500);
+            		}
+            	});
             } else {
                history.go(-1);
             }
@@ -392,21 +393,26 @@ body {
            }
         }
      
-     function issue_modify_go(){
-         location.href='issue_modify?ISSUE_NUM=${issue.ISSUE_NUM}';
-         
-         setTimeout(function(){
-            window.resizeTo(850, 700);
-         },0);
-         
-      }
       
+     
+     
+     
+     
+     function issue_modify_go(){
+    	 location.href='issue_modify?ISSUE_NUM=${issue.ISSUE_NUM}';
+    	 
+    	 setTimeout(function(){
+    		 window.resizeTo(700, 550);
+    	 },0);
+    	 
+     }
       
       
    </script>
    
 
 </body>
+
 
 
 

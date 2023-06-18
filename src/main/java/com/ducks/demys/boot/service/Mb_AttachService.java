@@ -25,6 +25,10 @@ public class Mb_AttachService {
 		return mb_AttachRepository.getMbatByMBAT_NUM(MBAT_NUM);
 	}
 	
+	public Mb_Attach getMbatByMB_NUM(int MB_NUM) {
+		return mb_AttachRepository.getMbatByMB_NUM(MB_NUM);
+	}
+	
 	public void registMb_Attach(Mb_Attach mbat) {
 		mbat.setMBAT_NUM(mb_AttachRepository.selectMb_AttachSequenceNextValue());
 		mb_AttachRepository.registMb_Attach(mbat);

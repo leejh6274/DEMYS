@@ -14,6 +14,14 @@
 		FROM MB_ATTACH
 		WHERE MBAT_NUM=#{MBAT_NUM}
 	</select>
+	
+	<select id="getMbatByMB_NUM" resultType="Mb_Attach">
+		SELECT *
+		FROM MB_ATTACH
+		WHERE MB_NUM=#{MB_NUM}
+	</select>
+	
+	
 	<select id="selectMb_AttachSequenceNextValue" resultType="int">
 		SELECT
 		MB_ATTACH_seq.nextVal
@@ -21,8 +29,8 @@
 	</select>
 	<insert id="registMb_Attach">
 		INSERT INTO
-		MB_ATTACH(MBAT_FILENAME,MBAT_FILETYPE,MBAT_UPLOADPATH,MB_NUM)
-		VALUES(#{MBAT_FILENAME},#{MBAT_FILETYPE},#{MBAT_UPLOADPATH},#{MB_NUM})
+		MB_ATTACH(MBAT_NUM,MBAT_FILENAME,MBAT_FILETYPE,MBAT_UPLOADPATH,MB_NUM)
+		VALUES(MB_ATTACH_SEQ.NEXTVAL,#{MBAT_FILENAME},#{MBAT_FILETYPE},#{MBAT_UPLOADPATH},#{MB_NUM})
 	</insert>
 	<delete id="removeMb_Attach">
 		DELETE

@@ -3,6 +3,8 @@ package com.ducks.demys.boot.vo;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -33,8 +35,12 @@ public class Issue {
    private int MYISSUE;
    private String SORT;
    private String MEMBER_ID;
-   private String memberList;
+   private String MEMBER_NUM_LIST;
    private List<Issue_Tag> tagList;
+   
+   private MultipartFile uploadfile;
+	
+   private Issue_Attach issue_attach;
    
 
 }

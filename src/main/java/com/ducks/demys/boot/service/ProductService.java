@@ -5,14 +5,17 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ducks.demys.boot.repository.ProductRepository;
+import com.ducks.demys.boot.repository.Product_AttachRepository;
 import com.ducks.demys.boot.vo.Product;
 
 @Service
 public class ProductService {
    
    private ProductRepository productRepository;
+   private Product_AttachRepository product_AttachRepository;
    
-   public ProductService(ProductRepository productRepository) {
+   public ProductService(ProductRepository productRepository, Product_AttachRepository product_AttachRepository) {
+	  this.product_AttachRepository=product_AttachRepository;
       this.productRepository= productRepository;
    }
    
@@ -38,6 +41,11 @@ public class ProductService {
    public void registProduct(Product Product) {
       Product.setPRODUCT_NUM(productRepository.selectProductSequenceNextValue());
       productRepository.registProduct(Product);
+      
+      if(Product.getProduct_attach() != null) {
+    	  Product.getProduct_attach().setPRODUCT_NUM(Product.getPRODUCT_NUM());
+    	  product_AttachRepository.registProduct_Attach(Product.getProduct_attach());
+      }
    }
    
    public void modifyProduct(Product Product) {

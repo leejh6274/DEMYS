@@ -133,7 +133,7 @@ body {
          <div class="flex flex-col card-body" style="padding-top:10px; padding-bottom:10px;">
             
                <!-- 제목 -->
-               <div class="flex w-25 items-center" style="height:48px; border:1px solid #aaaaaa;">&nbsp;&nbsp;   ${meetingBook.MB_TITLE}</div>
+               <div class="flex w-25 items-center" style="height:48px; border:1px solid #aaaaaa;">&nbsp;&nbsp;${meetingBook.MB_TITLE}</div>
                
                <!-- 분류, 날짜, 채택 -->
                <div class="flex flex-row">
@@ -159,7 +159,10 @@ body {
                </div>
                
                <!-- 첨부파일 -->
-               <div class="flex w-full items-center" style="height:48px; border:1px solid #aaaaaa; color:#dfdfdf; justify-content:space-between; cursor:pointer;"onclick="window.location='<%=request.getContextPath()%>/resource/submitFile/${meetingBook.MB_TITLE }.hwp'">&nbsp;&nbsp;${meetingBook.MB_TITLE }.hwp
+               <div class="flex w-full items-center" style="height:48px; border:1px solid #aaaaaa; color:#dfdfdf; justify-content:space-between; cursor:pointer;" onclick="location.href='<%=request.getContextPath() %>/project/getFile_mbat?MB_NUM=${meetingBook.MB_NUM}'">
+                   <span>
+                  &nbsp;&nbsp;${meetingBook.mb_attach.MBAT_FILENAME.split("\\$\\$")[1]}
+                  </span>
                   <span>
                      <i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>
                   </span>
@@ -196,6 +199,7 @@ body {
 
    </script>
 </body>
+
 
 
 

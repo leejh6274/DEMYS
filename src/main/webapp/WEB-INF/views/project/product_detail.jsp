@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
+<html>
 <html lang="ko" class="light" data-theme="light">
 <head>
 <meta charset="UTF-8">
@@ -144,19 +145,19 @@ body {
                         <option value="4" selected>시험</option>
                   </select> -->
                         <c:if test="${product.PRODUCT_STEP eq 1 }" > 
-                           <div class="flex justify-center items-center" style="border-radius:0px; 1.5rem; border:1px solid #aaa; background-color:#A9D2B4; width:13%;">분석</div>
+                           <div class="flex justify-center items-center" style="border-radius:0px; 1.5rem; border:1px solid #aaa; background-color:red; width:13%;">분석</div>
                         </c:if>
                         
                         <c:if test="${product.PRODUCT_STEP  eq 2 }">
-                           <div class="flex justify-center items-center" style="border-radius:0px; 1.5rem; border:1px solid #aaa; background-color:#A8C8F9; width:13%;">설계</div>
+                           <div class="flex justify-center items-center" style="border-radius:0px; 1.5rem; border:1px solid #aaa; background-color:blue; width:13%;">설계</div>
                         </c:if>
                         
                         <c:if test="${product.PRODUCT_STEP eq 3 }">
-                           <div class="flex justify-center items-center" style="border-radius:0px; 1.5rem; border:1px solid #aaa; background-color:#FFDDA6; width:13%;">구현</div>
+                           <div class="flex justify-center items-center" style="border-radius:0px; 1.5rem; border:1px solid #aaa; background-color:green; width:13%;">구현</div>
                         </c:if>
                         
                         <c:if test="${product.PRODUCT_STEP eq 4 }">
-                           <div class="flex justify-center items-center" style="border-radius:0px; 1.5rem; border:1px solid #aaa; background-color:#C6B3FF; width:13%;">시험</div>
+                           <div class="flex justify-center items-center" style="border-radius:0px; 1.5rem; border:1px solid #aaa; background-color:gold; width:13%;">시험</div>
                         </c:if>
          
                      
@@ -184,16 +185,23 @@ body {
                </div>
                
                <!-- 첨부파일 -->
-               <div class="flex w-full items-center" style="height:48px; border:1px solid #aaaaaa; color:#dfdfdf; justify-content:space-between; cursor:pointer;" onclick="window.location='<%=request.getContextPath()%>/resource/submitFile/${product.PRODUCT_TITLE }.hwp'">&nbsp;&nbsp;${product.PRODUCT_TITLE }.hwp
+               <div class="flex w-full items-center" style="height:48px; border:1px solid #aaaaaa; color:#dfdfdf; justify-content:space-between; cursor:pointer;" onclick="location.href='<%=request.getContextPath() %>/project/getFile_pdat?PRODUCT_NUM=${product.PRODUCT_NUM}'">
+           
+                  <span>
+                  &nbsp;&nbsp;${product.product_attach.PDAT_FILENAME.split("\\$\\$")[1]}
+                  </span>
                   <span>
                      <i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>
                   </span>
+                  
                </div>
                
             </div>
  
       <div style="display:flex; justify-content:center; margin-top:10px;">
+      <c:if test="${member.MEMBER_NUM eq product.MEMBER_NUM}">
          <button class="btn btn-se" onclick="location.href='product_modify?PRODUCT_NUM=${product.PRODUCT_NUM}'" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">수 정</button>
+      </c:if>
          <button type="button" id="cancelBtn" onclick="window.close();" class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px;">닫 기</button>
       </div>
    </div>

@@ -136,7 +136,7 @@
                     </form>               
                </div>
                      <div>
-                        <button id="modal_opne_btn" onclick="openModal(${meetingBook.PJ_NUM });"class="rq-regi-bt btn btn-se">등&nbsp;&nbsp;록</button>
+                        <button id="modal_opne_btn" onclick="openModal(${meetingBook.PJ_NUM });"class="rq-regi-bt btn btn-se">등록</button>
                         <input type="hidden" name="pjnum" value="${PJ_NUM }" /> 
                         
                      </div>
@@ -155,8 +155,8 @@
                          <tbody style="height: 45px; overflow-y:auto; overflow-x:hidden;">
                            <c:forEach var="meetingBook" items="${meetingBookList}">
                               <tr>
-                                 <td onclick="window.open('meetingbook_detail?MB_NUM=${meetingBook.MB_NUM}','회의록 상세','width=900px,height=510px,left=500px,top=300px');" style="cursor:pointer;">${meetingBook.MB_NUM}</td>
-                                 <td onclick="window.open('meetingbook_detail?MB_NUM=${meetingBook.MB_NUM}','회의록 상세','width=900px,height=510px,left=500px,top=300px');" style="text-align:start; cursor:pointer;">${meetingBook.MB_TITLE}</td>
+                                 <td onclick="window.open('meetingbook_detail?MB_NUM=${meetingBook.MB_NUM}','회의록 상세','width=900px,height=480px,left=500px,top=300px');" style="cursor:pointer;">${meetingBook.MB_NUM}</td>
+                                 <td onclick="window.open('meetingbook_detail?MB_NUM=${meetingBook.MB_NUM}','회의록 상세','width=900px,height=480px,left=500px,top=300px');" style="text-align:start; cursor:pointer;">${meetingBook.MB_TITLE}</td>
                                  <td><i class="fa-solid fa-paperclip text-2xl"></i></td>
                                  <td>${meetingBook.MEMBER_NAME }</td>
                                  <td><fmt:formatDate value="${meetingBook.MB_REGDATE }" pattern="yyyy-MM-dd"/></td>
@@ -188,21 +188,22 @@
                   <div class="text-black mb-3" style="font-weight: bold; font-size: 1.5rem; ">
                      회의록 등록
                      
-                     <input type="hidden" name="membernum" value="${member.MEMBER_NUM }" />
+                     
                   </div>
                </div>
             </div>
 
+			<form role="regist_form" enctype="multipart/form-data">
             <div class="container flex flex-col card-body" style="padding-top:10px; padding-bottom:10px;">
                <div class="flex">
-               <input type="hidden" id="pjNum" name="pjnum" value="" /> 
-                  <input type="text" name="mbtitle" placeholder="제목을 입력하세요." class="input" style="border:1px solid #aaaaaa; border-radius:0px; width:600px; justify-content:space-between;">
-                  
+               <input type="hidden" id="PJ_NUM" name="PJ_NUM" value="${PJ_NUM }" /> 
+                  <input type="text" name="MB_TITLE" placeholder="제목을 입력하세요." class="input" style="border:1px solid #aaaaaa; border-radius:0px; width:600px; justify-content:space-between;">
                   <div class="w-36 h-8 text-center" style="line-height:45px; height:48px; border:1px solid #aaa; border-left:0;">${member.MEMBER_NAME }</div>
+                  <input type="hidden" name="MEMBER_NUM" value="${member.MEMBER_NUM }" />
                </div>
                
                <!-- 내용 -->   
-               <textarea class="textarea" name="mbcontent" id="content" class="form-control" style="height:250px;width:100%; resize:none; border:1px solid #aaaaaa; border-radius:0px;" placeholder="내용을 작성하세요."></textarea>
+               <textarea class="textarea" name="MB_CONTENT" id="content" class="form-control" style="height:250px;width:100%; resize:none; border:1px solid #aaaaaa; border-radius:0px;" placeholder="내용을 작성하세요."></textarea>
                
                <!-- 첨부파일 -->
                <div class="filebox bs3-primary w-full" style="margin:0 0">
@@ -210,9 +211,10 @@
                      <label for="ex_filename">
                         <i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>                       
                      </label>
-                  <input type="file" id="ex_filename" class="upload-hidden">
+                  <input type="file" id="ex_filename" class="upload-hidden" name="uploadfile">
                </div>
             </div>
+            </form>
 
             <div style="display:flex; justify-content:center;">
                <button onclick="regist_go();"class="btn btn-se" style="font-size: 20px; width: 100px; height: 40px; border-radius: 8px; margin-right: 10px;">저장</button>
@@ -227,7 +229,7 @@
       <script>
 
       function regist_go(){
-         var mbtitle = $("input[name=mbtitle]").val();
+         /* var mbtitle = $("input[name=mbtitle]").val();
          var mbcontent = $("textarea[name=mbcontent]").val();
          var membernum = $("input[name=membernum]").val();
          var pjnum = $("input[name=pjnum]").val();
@@ -248,11 +250,21 @@
                "MB_CONTENT":mbcontent,
                "MEMBER_NUM":membernum,
                "PJ_NUM":pjnum
-         }
+         } */
+         
+         var form = $("form[role='regist_form']")[0];
+         
+         var formData = new FormData(form);
+          
+          console.log(formData);
+         
+         
          $.ajax({
             url:"<%=request.getContextPath()%>/project/meetingbook_regist",
-            type:"post",
-            data:data,      
+            type : "post",
+			data : formData,
+			processData : false,
+			contentType : false,   
             success:function(){
                alert("등록되었습니다.");
                MEETINGBOOK_go();

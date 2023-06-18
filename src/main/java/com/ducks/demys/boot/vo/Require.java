@@ -2,6 +2,8 @@ package com.ducks.demys.boot.vo;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,4 +21,7 @@ public class Require {
 	private int CT_NUM;
 	private String MEMBER_NAME;
 
+	private MultipartFile uploadfile;
+	
+	private Require_Attach require_attach;
 }

@@ -20,4 +20,6 @@ public interface Product_AttachRepository {
 	public void removeProduct_Attach(int PDAT_NUM);
 
 	public void removeProduct_AttachAll(int PRODUCT_NUM);
+
+	public Product_Attach getPdatByPRODUCT_NUM(int RRODUCT_NUM);
 }

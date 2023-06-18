@@ -199,7 +199,7 @@
                <div class="filebox bs3-primary w-full" style="margin:0 0">
                   <input class="upload-name" value="첨부파일을 등록하세요" disabled="disabled" style="color:#aaa;">
                      <label for="ex_filename">
-                        <i class="fa-sharp fa-solid fa-paperclip text-2xl text-black mr-3 " ></i>                       
+                        <i class="fa-sharp fa-solid fa-paperclip fa-flip-vertical text-2xl text-black mr-3 " ></i>                       
                      </label>
                   <input type="file" id="ex_filename" class="upload-hidden">
                </div>
@@ -219,36 +219,36 @@
 
 <script>
 
-      function regist_go(){
-          var title = $("input[name=title]").val();
-          var step = $("select[name=step]").val();
-          var content = $("textarea[name=content]").val();
-          var status = $("input[name=status]").val();
-          var membernum = $("input[name=membernum]").val();
-          var pjnum = $("input[name=pjnum]").val();
-          
-          
-          var data={
-                "PRODUCT_TITLE":title,
-                "PRODUCT_STEP":step,
-                "PRODUCT_CONTENT":content,
-                "PRODUCT_STATUS":status,
-                "MEMBER_NUM":membernum,
-                "PJ_NUM":pjnum
-          }
-          $.ajax({
-             url:"<%=request.getContextPath()%>/project/product_regist",
-             type:"post",
-             data:data,
-             success:function(){
-                alert("등록되었습니다.");
-                PRODUCT_go();
-             },
-             error:function(){
-                alert('등록에 실패하였습니다.');
-             }
-          });
-       }
+		function regist_go(){
+		    var title = $("input[name=title]").val();
+		    var step = $("select[name=step]").val();
+		    var content = $("textarea[name=content]").val();
+		    var status = $("input[name=status]").val();
+		    var membernum = $("input[name=membernum]").val();
+		    var pjnum = $("input[name=pjnum]").val();
+		    
+		    
+		    var data={
+		          "PRODUCT_TITLE":title,
+		          "PRODUCT_STEP":step,
+		          "PRODUCT_CONTENT":content,
+		          "PRODUCT_STATUS":status,
+		          "MEMBER_NUM":membernum,
+		          "PJ_NUM":pjnum
+		    }
+		    $.ajax({
+		       url:"<%=request.getContextPath()%>/project/product_regist",
+		       type:"post",
+		       data:data,
+		       success:function(){
+		          alert("등록되었습니다.");
+		          PRODUCT_go();
+		       },
+		       error:function(){
+		          alert('등록에 실패하였습니다.');
+		       }
+		    });
+		 }
 
 
 
@@ -287,7 +287,7 @@
          
          
          function status_on(PRODUCT_NUM, PRODUCT_STATUS){
-            console.log("테스트 : " + PRODUCT_NUM + "__" + PRODUCT_STATUS);
+        	 console.log("테스트 : " + PRODUCT_NUM + "__" + PRODUCT_STATUS);
       
             var data = {
                   product_num: PRODUCT_NUM,
@@ -300,13 +300,13 @@
                   data: data,
                   dataType: "text",
                   success:function(data){
-                        
+                     	
                      if (PRODUCT_STATUS == 1) {
                         $('#approveBtn1'+PRODUCT_NUM).css( 'background-color', '#016FA0' ).css( 'color', 'white' );
                         $('#approveBtn2'+PRODUCT_NUM).css('background-color', '').css( 'color', 'black' );
                      } else {
-                       $('#approveBtn1'+PRODUCT_NUM).css('background-color', '').css( 'color', 'black' );
-                       $('#approveBtn2'+PRODUCT_NUM).css( 'background-color', '#016FA0' ).css( 'color', 'white' );
+                    	$('#approveBtn1'+PRODUCT_NUM).css('background-color', '').css( 'color', 'black' );
+                    	$('#approveBtn2'+PRODUCT_NUM).css( 'background-color', '#016FA0' ).css( 'color', 'white' );
                            
                      }
                   },

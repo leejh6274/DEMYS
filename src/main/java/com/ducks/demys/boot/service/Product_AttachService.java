@@ -25,6 +25,10 @@ public class Product_AttachService {
 		return product_AttachRepository.getPdatByPDAT_NUM(PDAT_NUM);
 	}
 	
+	public Product_Attach getPdatByPRODUCT_NUM(int PRODUCT_NUM) {
+		return product_AttachRepository.getPdatByPRODUCT_NUM(PRODUCT_NUM);
+	}
+	
 	public void registProduct_Attach(Product_Attach pdat) {
 		pdat.setPDAT_NUM(product_AttachRepository.selectProduct_AttachSequenceNextValue());
 		product_AttachRepository.registProduct_Attach(pdat);

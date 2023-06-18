@@ -20,4 +20,6 @@ public interface Issue_AttachRepository {
 	public void removeIssue_Attach(int ISSUEAT_NUM);
 
 	public void removeIssue_AttachAll(int ISSUE_NUM);
+
+	public Issue_Attach getIssueatByISSUE_NUM(int ISSUE_NUM);
 }

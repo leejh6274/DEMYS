@@ -25,6 +25,10 @@ public class Issue_AttachService {
 		return issue_AttachRepository.getIssueatByISSUEAT_NUM(ISSUEAT_NUM);
 	}
 	
+	public Issue_Attach getIssueatByISSUE_NUM(int ISSUE_NUM) {
+		return issue_AttachRepository.getIssueatByISSUE_NUM(ISSUE_NUM);
+	}
+	
 	public void registIssue_Attach(Issue_Attach issueat) {
 		issueat.setISSUEAT_NUM(issue_AttachRepository.selectIssue_AttachSequenceNextValue());
 		issue_AttachRepository.registIssue_Attach(issueat);

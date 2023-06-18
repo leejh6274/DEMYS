@@ -20,5 +20,7 @@ public interface Mb_AttachRepository {
 	public void removeMb_Attach(int MBAT_NUM);
 
 	public void removeMb_AttachAll(int MB_NUM);
+
+	public Mb_Attach getMbatByMB_NUM(int MB_NUM);
 	
 }
