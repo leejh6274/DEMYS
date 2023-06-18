@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ducks.demys.boot.repository.MemberRepository">
+<<<<<<< HEAD
 
 	<sql id="search">
 		<if test="searchType == 'mn'.toString()">
@@ -20,17 +21,25 @@
 	</select>
 
 	<select id="getMemberList" resultType="member">
+=======
+	<select id="getMemberList" resultType="Member">
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 		SELECT * 
 		FROM MEMBER 
 		ORDER BY MEMBER_NUM DESC
 	</select>
+<<<<<<< HEAD
 	
 	<select id="getMemberByMEMBER_NUM" parameterType="int" resultType="member">
+=======
+	<select id="getMemberByMEMBER_NUM" resultType="Member">
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 		SELECT * 
 		FROM MEMBER 
 		WHERE MEMBER_NUM=#{MEMBER_NUM}
 	</select>
 	
+<<<<<<< HEAD
 	 <select id="findByPassword" parameterType="String"  resultType="member">
         SELECT MEMBER_PW
         FROM MEMBER
@@ -60,12 +69,15 @@
 		FROM DUAL
 	</select>
 	
+=======
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 	<select id="getMemberByMEMBER_DEP" resultType="Member">
 		SELECT * 
 		FROM MEMBER 
 		WHERE MEMBER_DEP=#{MEMBER_DEP}
 	</select>
 	
+<<<<<<< HEAD
 	
 	<!-- 인증번호 확인 -->
 	<select id="verifyVerificationCode" parameterType="String" resultType="String">
@@ -81,10 +93,14 @@
 	</update>
 	
 	<select id="idCheck" parameterType="String" resultType="member">
+=======
+	<select id="getMemberByMEMBER_ID" resultType="Member">
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 		SELECT * 
 		FROM MEMBER 
 		WHERE MEMBER_ID=#{MEMBER_ID}
 	</select>
+<<<<<<< HEAD
 	
 	<!-- 비밀번호 변경 -->
 	<update id="updatePassword">
@@ -107,6 +123,24 @@
 	</update>
 	
 	<update id="modifyForLegalMember" parameterType="member">
+=======
+	<select id="selectMemberSequenceNextValue" resultType="int">
+		SELECT MEMBER_seq.nextVal
+		FROM DUAL
+	</select>
+	<insert id="registMember">
+		INSERT INTO 
+		MEMBER(MEMBER_ID,MEMBER_PW,MEMBER_NAME,MEMBER_PIC,MEMBER_PHONE,MEMBER_EMAIL,MEMBER_AUTHRITY,MEMBER_DEP)
+		VALUES(#{MEMBER_ID},#{MEMBER_PW},#{MEMBER_NAME},#{MEMBER_PIC},#{MEMBER_PHONE},#{MEMBER_EMAIL},#{MEMBER_AUTHRITY},#{MEMBER_DEP})
+	</insert>
+	<update id="modifyMember">
+		UPDATE MEMBER 
+		SET 
+		MEMBER_PW=#{MEMBER_PW},MEMBER_PIC=#{MEMBER_PIC},MEMBER_PHONE=#{MEMBER_PHONE},MEMBER_EMAIL=#{MEMBER_EMAIL},MEMBER_DEP=#{MEMBER_DEP},UPDATEDATE=SYSDATE
+		WHERE MEMBER_NUM=#{MEMBER_NUM}
+	</update>
+	<update id="modifyForLegalMember">
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 		UPDATE MEMBER 
 		SET 
 		MEMBER_NAME=#{MEMBER_NAME},MEMBER_PIC=#{MEMBER_PIC},MEMBER_PHONE=#{MEMBER_PHONE},MEMBER_EMAIL=#{MEMBER_EMAIL},MEMBER_DEP=#{MEMBER_DEP},UPDATEDATE=SYSDATE
@@ -121,8 +155,12 @@
 		</if>
 		WHERE MEMBER_NUM=#{MEMBER_NUM}
 	</update>
+<<<<<<< HEAD
 	
 	<delete id="removeMember" parameterType="int">
+=======
+	<delete id="removeMember">
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 		DELETE 
 		FROM MEMBER 
 		WHERE MEMBER_NUM=#{MEMBER_NUM}

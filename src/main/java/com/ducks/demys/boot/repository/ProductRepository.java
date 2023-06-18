@@ -22,6 +22,8 @@ public interface ProductRepository {
 	public void registProduct(Product product);
 	
 	public void modifyProduct(Product product);
+
+	public void changeStatusProduct(Product product);
 	
 	public void changeStatusProduct(Product product);
 	

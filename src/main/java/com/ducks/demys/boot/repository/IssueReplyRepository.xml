@@ -3,6 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ducks.demys.boot.repository.IssueReplyRepository">
+<<<<<<< HEAD
    <select id="getIssueReplyListByISSUE_NUM" resultType="IssueReply">
       SELECT i.*, m.MEMBER_NAME,m.MEMBER_ID
       FROM ISSUEREPLY i, MEMBER m
@@ -41,4 +42,38 @@
       FROM ISSUEREPLY
       WHERE ISSUERE_NUM=#{ISSUERE_NUM}
    </delete>
+=======
+	<select id="getIssueReplyListByISSUE_NUM" resultType="IssueReply">
+		SELECT i.*, m.MEMBER_NAME
+		FROM ISSUEREPLY i, MEMBER m
+		WHERE ISSUERE_NUM=#{ISSUE_NUM}
+        and m.member_num = i.member_num
+	</select>
+	<select id="getIssueByISSUERE_NUM" resultType="IssueReply">
+		SELECT *
+		FROM ISSUEREPLY
+		WHERE ISSUERE_NUM=#{ISSUERE_NUM}
+	</select>
+	<select id="selectIssueReplyequenceNextValue" resultType="int">
+		SELECT
+		ISSUEREPLY_seq.nextVal
+		FROM DUAL
+	</select>
+	<insert id="registIssueReply">
+		INSERT INTO
+		ISSUEREPLY(ISSUERE_CONTENT,MEMBER_NUM,ISSUE_NUM)
+		VALUES(#{ISSUERE_CONTENT},#{MEMBER_NUM},#{ISSUE_NUM})
+	</insert>
+	<update id="modifyIssueReply">
+		UPDATE ISSUEREPLY
+		SET
+		ISSUERE_CONTENT=#{ISSUERE_CONTENT},MEMBER_NUM=#{MEMBER_NUM},ISSUE_NUM=#{ISSUE_NUM},ISSUERE_UPDATEDATE=SYSDATE
+		WHERE ISSUERE_NUM=#{ISSUERE_NUM}
+	</update>
+	<delete id="removeIssueReply">
+		DELETE
+		FROM ISSUEREPLY
+		WHERE ISSUERE_NUM=#{ISSUERE_NUM}
+	</delete>
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 </mapper>

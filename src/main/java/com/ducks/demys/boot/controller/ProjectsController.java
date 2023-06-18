@@ -1,6 +1,9 @@
 package com.ducks.demys.boot.controller;
 
+<<<<<<< HEAD
 import java.io.File;
+=======
+>>>>>>> 088cef3349305dff024cd3c2781fc2759c434825
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,6 +56,8 @@ import com.ducks.demys.boot.vo.Product_Attach;
 import com.ducks.demys.boot.vo.Projects;
 import com.ducks.demys.boot.vo.Require;
 import com.ducks.demys.boot.vo.Require_Attach;
+
+import jakarta.servlet.http.HttpSession;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -636,6 +641,7 @@ public class ProjectsController {
 	}
 
 	@RequestMapping("project/issue_go")
+<<<<<<< HEAD
 	   public String showissue(Model model, int PJ_NUM) {
 	      List<Issue> issueList = issueService.getIssueListByPJ_NUM(PJ_NUM);
 	      
@@ -743,6 +749,109 @@ public class ProjectsController {
        
        issueReplyService.registIssueReply(issuereply);
 
+=======
+    public String showissue(Model model, int PJ_NUM, @RequestParam(defaultValue = "0") int ISSUE_NUM) {
+       List<Issue> issueList = issueService.getIssueListByPJ_NUM(PJ_NUM);
+       
+       if(issueList != null && issueList.size() > 0) {
+          for(Issue issue:issueList ) {
+             issue.setISSUEREPLY_COUNT(issueReplyService.gethowmanyreply(issue.getISSUE_NUM()));
+             }
+       }
+       
+       model.addAttribute("issueList", issueList);
+       model.addAttribute("PJ_NUM", PJ_NUM);
+       model.addAttribute("ISSUE_NUMM", ISSUE_NUM);
+       
+       return "project/issue";
+
+    }
+
+    @RequestMapping("project/issue_memberDepList")
+    @ResponseBody
+    public List<Member> showissue_memberDepList(@RequestParam String MEMBER_DEP) {
+
+       List<Member> memberdeplist = memberService.getMemberByMEMBER_DEP(MEMBER_DEP);
+
+       return memberdeplist;
+
+    }
+
+    @RequestMapping("project/issue_detail")
+    public void showissue_detail(Model model, int ISSUE_NUM) {
+       Issue issue = issueService.getIssueByISSUE_NUM(ISSUE_NUM);
+       List<IssueReply> replyList = issueReplyService.getIssueReplyListByISSUE_NUM(ISSUE_NUM);
+       model.addAttribute("issue", issue);
+       model.addAttribute("replyList", replyList);
+    }
+
+    @RequestMapping("project/issue_regist")
+    @ResponseBody
+    public void showissue_regist(@RequestBody Issue issue) {
+       
+       issueService.registIssue(issue);
+
+    }
+    
+    
+    
+    @RequestMapping("project/Search_TAG")
+    @ResponseBody
+    public List<Member> issuetag(String[] arvalue) {
+       
+       List<Member> memberList = new ArrayList<Member>();
+       for(int i=0;i<arvalue.length;i++) {
+          Member member= memberService.getMemberByMEMBER_NUM(Integer.parseInt(arvalue[i]));
+          memberList.add(member);
+       }
+       
+       
+       
+       return memberList;
+    }
+    
+    
+    
+    @RequestMapping("project/issue_modify")
+    public void showissue_modify(int ISSUE_NUM, Model model) {
+       Issue issue = issueService.getIssueByISSUE_NUM(ISSUE_NUM);
+       
+       SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
+       
+       String regDate = simpleDate.format(issue.getISSUE_REGDATE());
+       String deadLine = simpleDate.format(issue.getISSUE_DEADLINE());
+       
+       model.addAttribute("regDate", regDate);
+       model.addAttribute("deadLine", deadLine);
+       model.addAttribute("issue", issue);
+
+    }
+    
+    @RequestMapping("project/doissue_modify")
+    @ResponseBody
+    public void showdoissue_modify(@RequestBody Issue issue) {
+
+
+     issueService.modifyIssue(issue);
+     
+    }
+    
+    @RequestMapping("project/issuedel_go")
+    @ResponseBody
+    public String showissue_delete(@RequestParam("ISSUE_NUM") int ISSUE_NUM) {
+       issueService.removeIssue(ISSUE_NUM);
+       
+       return "project/issue";
+    }
+    
+    
+    @RequestMapping("project/issue_reply_go")
+    @ResponseBody
+    public void showissue_reply(Model model, @RequestBody IssueReply issuereply) {
+       
+       issueReplyService.registIssueReply(issuereply);
+
+>>>>>>> 088cef3349305dff024cd3c2781fc2759c434825
     }
     
     

@@ -6,11 +6,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+<<<<<<< HEAD
 @NoArgsConstructor
 @AllArgsConstructor
+=======
+@ToString
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 public class Member {
 	
 	private int MEMBER_NUM;
@@ -27,8 +32,11 @@ public class Member {
 	private String MEMBER_DEP;
 	private int MEMBER_STATUS;
 	private int MEMBER_POSITION;
+<<<<<<< HEAD
 	private String CONFIRMPASSWORD;
 	private String NEWPASSWORD;
 	private String VERTIFICATION_CODE;
+=======
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 	
 }

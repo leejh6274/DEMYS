@@ -3,6 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ducks.demys.boot.repository.ContactsRepository">
+<<<<<<< HEAD
 	
 	<sql id="consearch">
  		<if test="CT_TYPE != null and CT_TYPE != '' ">
@@ -49,18 +50,31 @@
 		<include refid="search"/>
 	</select>
 	
+=======
+	<select id="getContactsList" resultType="Contacts">
+		SELECT *
+		FROM CONTACTS
+		ORDER BY CONTACTS_NUM DESC
+	</select>
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 	<select id="getContactsListByPJ_NUM" resultType="Contacts">
 		SELECT *
 		FROM CONTACTS
 		WHERE PJ_NUM=#{PJ_NUM}
+<<<<<<< HEAD
 		ORDER BY CT_NUM DESC
 	</select>
 	
+=======
+		ORDER BY CONTACTS_NUM DESC
+	</select>
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 	<select id="getContactsByCT_NUM" resultType="Contacts">
 		SELECT *
 		FROM CONTACTS
 		WHERE CT_NUM=#{CT_NUM}
 	</select>
+<<<<<<< HEAD
 	
 	<select id="getContactsByCT_NAME" resultType="Contacts">
 		SELECT *
@@ -68,11 +82,14 @@
 		WHERE CT_NAME=#{CT_NAME}
 	</select>
 	
+=======
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 	<select id="selectContactsSequenceNextValue" resultType="int">
 		SELECT
 		CONTACTS_seq.nextVal
 		FROM DUAL
 	</select>
+<<<<<<< HEAD
 	
 	<update id="registContacts">
 		INSERT INTO
@@ -87,11 +104,25 @@
 		WHERE CT_NUM=#{CT_NUM}
 	</update>
 	
+=======
+	<insert id="registContacts">
+		INSERT INTO
+		CONTACTS(CT_NAME,CT_TEL,CT_CEO,CT_MANAGER,CT_MG_TEL,CT_TYPE,CT_ADDR,CT_EMAIL)
+		VALUES(#{CT_NAME},#{CT_TEL},#{CT_CEO},#{CT_MANAGER},#{CT_MG_TEL},#{CT_TYPE},#{CT_ADDR},#{CT_EMAIL})
+	</insert>
+	<update id="modifyContacts">
+		UPDATE CONTACTS
+		SET
+		CT_NAME=#{CT_NAME},CT_TEL=#{CT_TEL},CT_CEO=#{CT_CEO},CT_MANAGER=#{CT_MANAGER},CT_MG_TEL=#{CT_MG_TEL},CT_TYPE=#{CT_TYPE},CT_ADDR=#{CT_ADDR},CT_EMAIL=#{CT_EMAIL},CT_UPDATEDATE=SYSDATE
+		WHERE CT_NUM=#{CT_NUM}
+	</update>
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 	<delete id="removeContacts">
 		DELETE
 		FROM CONTACTS
 		WHERE CT_NUM=#{CT_NUM}
 	</delete>
+<<<<<<< HEAD
 
 	<select id="getContactsListPjRegist" resultType="Contacts">
 		SELECT * 
@@ -115,4 +146,6 @@
 	</select>
 	
 	
+=======
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
 </mapper>

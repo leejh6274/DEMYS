@@ -16,6 +16,8 @@ public interface MemberRepository {
 	
 	public Member getMemberByMEMBER_ID(String MEMBER_ID);
 	
+	public List<Member> getMemberByMEMBER_DEP(String MEMBER_DEP);
+	
 	public int selectMemberSequenceNextValue();
 	
 	public void registMember(Member member);

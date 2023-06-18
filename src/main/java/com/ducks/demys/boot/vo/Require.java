@@ -20,8 +20,14 @@ public class Require {
 	private int PJ_NUM;
 	private int CT_NUM;
 	private String MEMBER_NAME;
+<<<<<<< HEAD
 
+<<<<<<< HEAD
 	private MultipartFile uploadfile;
 	
 	private Require_Attach require_attach;
+=======
+=======
+>>>>>>> cf242679be83e71fd573ddbb5d44b847021bb44f
+>>>>>>> 088cef3349305dff024cd3c2781fc2759c434825
 }
